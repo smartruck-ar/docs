@@ -19,6 +19,7 @@ Convenciones de trabajo compartidas (proceso, tickets, roles). Independiente del
 | [definition-of-ready.md](proceso/definition-of-ready.md) | Cuándo una task puede empezar |
 | [definition-of-done.md](proceso/definition-of-done.md) | Cuándo algo está terminado (productivo) |
 | [workflow-pr.md](proceso/workflow-pr.md) | Branches, PR, review, merge |
+| [conventional-commits.md](proceso/conventional-commits.md) | `feat` / `fix` / `refactor` + ID de task |
 
 ### Tickets
 

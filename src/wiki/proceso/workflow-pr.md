@@ -8,7 +8,15 @@ Flujo estándar para integrar cambios desde una task.
 2. Implementar la task (`D-1.2.1`, etc.)
 3. Abrir PR con descripción y checklist
 4. Review + checks en verde
-5. Merge y cerrar la task
+5. Merge y desplegar; la task solo queda Done si está en productivo ([DoD](definition-of-done.md))
+
+## Commits
+
+Usar [Conventional Commits](conventional-commits.md): solo `feat`, `fix` o `refactor`, con la task en el scope.
+
+```text
+feat(1.1.2): <descripción>
+```
 
 ## Branching (propuesta)
 

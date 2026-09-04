@@ -7,13 +7,15 @@ El contenido publicado vive en [`src/`](src/) y se genera con [mdBook](https://r
 ## Quick path
 
 ```bash
-# instalar mdbook (una vez)
-cargo install mdbook --version 0.4.37
+# Requiere mdBook >= 0.4 (el del snap v0.0.28 NO soporta subsecciones anidadas)
+# Binario alineado al CI:
+#   curl -fsSL https://github.com/rust-lang/mdBook/releases/download/v0.4.37/mdbook-v0.4.37-x86_64-unknown-linux-gnu.tar.gz \
+#     | tar -xz -C ~/.local/bin mdbook
 
-# vista local
+export PATH="$HOME/.local/bin:$PATH"
+mdbook --version   # debe mostrar v0.4.x
+
 mdbook serve --open
-
-# build estático → ./book
 mdbook build
 ```
 
