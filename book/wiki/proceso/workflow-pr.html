@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Workflow de PR - Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./Inicio.html"><strong>1.</strong> Inicio</a></li><li><a href="./proyecto.html"><strong>2.</strong> Descripción del proyecto</a></li><li><a href="./arquitectura.html"><strong>3.</strong> Arquitectura</a></li><li><a href="./requerimientos.html"><strong>4.</strong> Requerimientos</a></li><li><a href="./desarrollo.html"><strong>5.</strong> Guía de desarrollo</a></li><li><a href="./manual_usuario.html"><strong>6.</strong> Manual de usuario</a></li><li><a href="./wiki/README.html"><strong>7.</strong> Wiki</a></li><li><a href="./wiki/proceso/jerarquia.html"><strong>8.</strong> Jerarquía</a></li><li><a href="./wiki/proceso/definition-of-ready.html"><strong>9.</strong> Definition of Ready</a></li><li><a href="./wiki/proceso/definition-of-done.html"><strong>10.</strong> Definition of Done</a></li><li><a href="./wiki/proceso/definition-of-done-bug.html"><strong>11.</strong> Definition of Done (bug)</a></li><li><a href="./wiki/proceso/workflow-pr.html" class="active"><strong>12.</strong> Workflow de PR</a></li><li><a href="./wiki/tickets/plantilla-ticket.html"><strong>13.</strong> Plantilla de ticket</a></li><li><a href="./wiki/tickets/tipos-de-ticket.html"><strong>14.</strong> Tipos de ticket</a></li><li><a href="./wiki/tickets/estimacion.html"><strong>15.</strong> Estimación</a></li><li><a href="./wiki/equipo/roles.html"><strong>16.</strong> Roles</a></li><li><a href="./wiki/equipo/glosario.html"><strong>17.</strong> Glosario</a></li><li><a href="./repositories/README.html"><strong>18.</strong> Repositories</a></li><li><a href="./repositories/smartruck-backend/README.html"><strong>19.</strong> smartruck-backend</a></li><li><a href="./repositories/smartruck-backend/arquitectura.html"><strong>20.</strong> Arquitectura (backend)</a></li><li><a href="./repositories/smartruck-backend/links.html"><strong>21.</strong> Links (backend)</a></li><li><a href="./repositories/smartruck-dador/README.html"><strong>22.</strong> smartruck-dador</a></li><li><a href="./repositories/smartruck-dador/arquitectura.html"><strong>23.</strong> Arquitectura (dador)</a></li><li><a href="./repositories/smartruck-dador/links.html"><strong>24.</strong> Links (dador)</a></li><li><a href="./repositories/smartruck-transportista/README.html"><strong>25.</strong> smartruck-transportista</a></li><li><a href="./repositories/smartruck-transportista/arquitectura.html"><strong>26.</strong> Arquitectura (transportista)</a></li><li><a href="./repositories/smartruck-transportista/links.html"><strong>27.</strong> Links (transportista)</a></li><li><a href="./repositories/cloud-template/README.html"><strong>28.</strong> cloud-template</a></li><li><a href="./repositories/cloud-template/arquitectura.html"><strong>29.</strong> Arquitectura (cloud-template)</a></li><li><a href="./repositories/cloud-template/links.html"><strong>30.</strong> Links (cloud-template)</a></li><li><a href="./repositories/infra-template/README.html"><strong>31.</strong> infra-template</a></li><li><a href="./repositories/infra-template/arquitectura.html"><strong>32.</strong> Arquitectura (infra-template)</a></li><li><a href="./repositories/infra-template/links.html"><strong>33.</strong> Links (infra-template)</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="./wiki/proceso/workflow-pr.html#workflow-de-pull-request" id="workflow-de-pull-request"><h1>Workflow de Pull Request</h1></a>
+<p>Flujo estándar para integrar cambios desde una task.</p>
+<a class="header" href="./wiki/proceso/workflow-pr.html#quick-path" id="quick-path"><h2>Quick path</h2></a>
+<ol>
+<li>Crear branch desde <code>main</code> (o la branch base del equipo)</li>
+<li>Implementar la task (<code>D-1.2.1</code>, etc.)</li>
+<li>Abrir PR con descripción y checklist</li>
+<li>Review + checks en verde</li>
+<li>Merge y cerrar la task</li>
+</ol>
+<a class="header" href="./wiki/proceso/workflow-pr.html#branching-propuesta" id="branching-propuesta"><h2>Branching (propuesta)</h2></a>
+<table><thead><tr><th> Tipo </th><th> Convención sugerida </th></tr></thead><tbody>
+<tr><td> Feature / task </td><td> <code>feature/D-1.2.1-descripcion-corta</code> </td></tr>
+<tr><td> Bug </td><td> <code>fix/descripcion-corta</code> o <code>fix/D-…</code> si está ligado a un ID </td></tr>
+</tbody></table>
+<p>Ajustá nombres si el repo ya tiene otra convención; documentalo en <code>repositories/&lt;repo&gt;/README.md</code>.</p>
+<a class="header" href="./wiki/proceso/workflow-pr.html#contenido-mínimo-del-pr" id="contenido-mínimo-del-pr"><h2>Contenido mínimo del PR</h2></a>
+<ul>
+<li>Qué cambia y por qué (ID de task si aplica)</li>
+<li>Cómo probarlo</li>
+<li>Criterios de aceptación cubiertos</li>
+<li>Capturas / logs solo si aportan</li>
+</ul>
+<a class="header" href="./wiki/proceso/workflow-pr.html#checklist-de-review" id="checklist-de-review"><h2>Checklist de review</h2></a>
+<ul>
+<li>[ ] Cumple los CA de la task</li>
+<li>[ ] Tests o evidencia manual</li>
+<li>[ ] No hay secretos ni configs locales</li>
+<li>[ ] Alcance acotado a la task</li>
+</ul>
+<a class="header" href="./wiki/proceso/workflow-pr.html#merge" id="merge"><h2>Merge</h2></a>
+<ul>
+<li>Preferir squash o el método que defina cada repo</li>
+<li>Borrar branch remota si el equipo lo usa así</li>
+<li>Actualizar estado de la task a Done solo si cumple <a href="definition-of-done.md">DoD</a></li>
+</ul>
+<a class="header" href="./wiki/proceso/workflow-pr.html#next-step" id="next-step"><h2>Next step</h2></a>
+<p>Ver docs del repo en <a href="../../repositories/README.md">repositories/</a></p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="./wiki/proceso/definition-of-done-bug.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="./wiki/tickets/plantilla-ticket.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./wiki/proceso/definition-of-done-bug.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./wiki/tickets/plantilla-ticket.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+    <script type="text/javascript">
+        var socket = new WebSocket("ws://localhost:3001");
+        socket.onmessage = function (event) {
+            if (event.data === "reload") {
+                socket.close();
+                location.reload(true); // force reload from server (not from cache)
+            }
+        };
+
+        window.onbeforeunload = function() {
+            socket.close();
+        }
+    </script>
+
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </body>
+</html>
