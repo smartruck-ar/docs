@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="requerimientos.html"><strong aria-hidden="true">4.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="desarrollo.html" class="active"><strong aria-hidden="true">5.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="manual_usuario.html"><strong aria-hidden="true">6.</strong> Manual de usuario</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="requerimientos.html"><strong aria-hidden="true">4.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="desarrollo.html" class="active"><strong aria-hidden="true">5.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="manual_usuario.html"><strong aria-hidden="true">6.</strong> Manual de usuario</a></li><li class="chapter-item expanded affix "><li class="part-title">Wiki del equipo</li><li class="chapter-item expanded "><a href="wiki/index.html"><strong aria-hidden="true">7.</strong> Wiki</a></li><li class="chapter-item expanded "><a href="wiki/proceso/jerarquia.html"><strong aria-hidden="true">8.</strong> Jerarquía</a></li><li class="chapter-item expanded "><a href="wiki/proceso/definition-of-ready.html"><strong aria-hidden="true">9.</strong> Definition of Ready</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wiki/proceso/definition-of-done.html"><strong aria-hidden="true">9.1.</strong> Definition of Done</a></li><li class="chapter-item expanded "><a href="wiki/proceso/workflow-pr.html"><strong aria-hidden="true">9.2.</strong> Workflow de PR</a></li></ol></li><li class="chapter-item expanded "><a href="wiki/tickets/plantilla-ticket.html"><strong aria-hidden="true">10.</strong> Plantilla de ticket</a></li><li class="chapter-item expanded "><a href="wiki/tickets/tipos-de-ticket.html"><strong aria-hidden="true">11.</strong> Tipos de ticket</a></li><li class="chapter-item expanded "><a href="wiki/tickets/estimacion.html"><strong aria-hidden="true">12.</strong> Estimación</a></li><li class="chapter-item expanded "><a href="wiki/equipo/roles.html"><strong aria-hidden="true">13.</strong> Roles</a></li><li class="chapter-item expanded "><a href="wiki/equipo/glosario.html"><strong aria-hidden="true">14.</strong> Glosario</a></li><li class="chapter-item expanded affix "><li class="part-title">Repositories</li><li class="chapter-item expanded "><a href="repositories/index.html"><strong aria-hidden="true">15.</strong> Repositories</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backend/index.html"><strong aria-hidden="true">16.</strong> smartruck-backend</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backend/arquitectura.html"><strong aria-hidden="true">17.</strong> Arquitectura (backend)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backend/links.html"><strong aria-hidden="true">18.</strong> Links (backend)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/index.html"><strong aria-hidden="true">19.</strong> smartruck-dador</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/arquitectura.html"><strong aria-hidden="true">20.</strong> Arquitectura (dador)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/links.html"><strong aria-hidden="true">21.</strong> Links (dador)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/index.html"><strong aria-hidden="true">22.</strong> smartruck-transportista</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/arquitectura.html"><strong aria-hidden="true">23.</strong> Arquitectura (transportista)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/links.html"><strong aria-hidden="true">24.</strong> Links (transportista)</a></li><li class="chapter-item expanded "><a href="repositories/cloud-template/index.html"><strong aria-hidden="true">25.</strong> cloud-template</a></li><li class="chapter-item expanded "><a href="repositories/cloud-template/arquitectura.html"><strong aria-hidden="true">26.</strong> Arquitectura (cloud-template)</a></li><li class="chapter-item expanded "><a href="repositories/cloud-template/links.html"><strong aria-hidden="true">27.</strong> Links (cloud-template)</a></li><li class="chapter-item expanded "><a href="repositories/infra-template/index.html"><strong aria-hidden="true">28.</strong> infra-template</a></li><li class="chapter-item expanded "><a href="repositories/infra-template/arquitectura.html"><strong aria-hidden="true">29.</strong> Arquitectura (infra-template)</a></li><li class="chapter-item expanded "><a href="repositories/infra-template/links.html"><strong aria-hidden="true">30.</strong> Links (infra-template)</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -175,12 +175,29 @@
                     <main>
                         <h1 id="guía-de-desarrollo"><a class="header" href="#guía-de-desarrollo">Guía de desarrollo</a></h1>
 <h2 id="requisitos-previos"><a class="header" href="#requisitos-previos">Requisitos previos</a></h2>
-<p>Consultar el repositorio principal de Smartruck para conocer las herramientas y versiones necesarias.</p>
+<p>Dependen del repo. Resumen:</p>
+<div class="table-wrapper"><table><thead><tr><th>Repo</th><th>Stack principal</th></tr></thead><tbody>
+<tr><td><a href="./repositories/smartruck-backend/README.html">smartruck-backend</a></td><td>Python 3.12, FastAPI, Docker / Dev Containers</td></tr>
+<tr><td><a href="./repositories/smartruck-dador/README.html">smartruck-dador</a></td><td>Node 22, TanStack Start, Vite</td></tr>
+<tr><td><a href="./repositories/smartruck-transportista/README.html">smartruck-transportista</a></td><td>Node / Bun, Vite</td></tr>
+</tbody></table>
+</div>
 <h2 id="instalación"><a class="header" href="#instalación">Instalación</a></h2>
-<p>Las instrucciones para configurar el entorno local, instalar dependencias y ejecutar el proyecto se incorporarán aquí.</p>
+<p>Seguí el README de cada repositorio (comandos de setup, <code>dev_app</code>, tests y Dev Containers).</p>
 <h2 id="flujo-de-trabajo"><a class="header" href="#flujo-de-trabajo">Flujo de trabajo</a></h2>
-<p>Se documentarán las convenciones de ramas, commits, revisiones y despliegues del equipo.</p>
-
+<ol>
+<li>Trabajo en <strong>tasks</strong> con ID <code>D-x.y.z</code> / <code>T-x.y.z</code> asociadas a un repo — <a href="./wiki/proceso/jerarquia.html">Jerarquía</a></li>
+<li>DoR antes de empezar — <a href="./wiki/proceso/definition-of-ready.html">Definition of Ready</a></li>
+<li>PR y review — <a href="./wiki/proceso/workflow-pr.html">Workflow de PR</a></li>
+<li>Cierre — <a href="./wiki/proceso/definition-of-done.html">Definition of Done</a></li>
+</ol>
+<h2 id="convenciones"><a class="header" href="#convenciones">Convenciones</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Tema</th><th>Dónde está</th></tr></thead><tbody>
+<tr><td>Plantillas de ticket</td><td><a href="./wiki/tickets/plantilla-ticket.html">wiki/tickets/plantilla-ticket.md</a></td></tr>
+<tr><td>Estimación (story points)</td><td><a href="./wiki/tickets/estimacion.html">wiki/tickets/estimacion.md</a></td></tr>
+<tr><td>Glosario</td><td><a href="./wiki/equipo/glosario.html">wiki/equipo/glosario.md</a></td></tr>
+</tbody></table>
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

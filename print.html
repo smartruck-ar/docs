@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="requerimientos.html"><strong aria-hidden="true">4.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="desarrollo.html"><strong aria-hidden="true">5.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="manual_usuario.html"><strong aria-hidden="true">6.</strong> Manual de usuario</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="requerimientos.html"><strong aria-hidden="true">4.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="desarrollo.html"><strong aria-hidden="true">5.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="manual_usuario.html"><strong aria-hidden="true">6.</strong> Manual de usuario</a></li><li class="chapter-item expanded affix "><li class="part-title">Wiki del equipo</li><li class="chapter-item expanded "><a href="wiki/index.html"><strong aria-hidden="true">7.</strong> Wiki</a></li><li class="chapter-item expanded "><a href="wiki/proceso/jerarquia.html"><strong aria-hidden="true">8.</strong> Jerarquía</a></li><li class="chapter-item expanded "><a href="wiki/proceso/definition-of-ready.html"><strong aria-hidden="true">9.</strong> Definition of Ready</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wiki/proceso/definition-of-done.html"><strong aria-hidden="true">9.1.</strong> Definition of Done</a></li><li class="chapter-item expanded "><a href="wiki/proceso/workflow-pr.html"><strong aria-hidden="true">9.2.</strong> Workflow de PR</a></li></ol></li><li class="chapter-item expanded "><a href="wiki/tickets/plantilla-ticket.html"><strong aria-hidden="true">10.</strong> Plantilla de ticket</a></li><li class="chapter-item expanded "><a href="wiki/tickets/tipos-de-ticket.html"><strong aria-hidden="true">11.</strong> Tipos de ticket</a></li><li class="chapter-item expanded "><a href="wiki/tickets/estimacion.html"><strong aria-hidden="true">12.</strong> Estimación</a></li><li class="chapter-item expanded "><a href="wiki/equipo/roles.html"><strong aria-hidden="true">13.</strong> Roles</a></li><li class="chapter-item expanded "><a href="wiki/equipo/glosario.html"><strong aria-hidden="true">14.</strong> Glosario</a></li><li class="chapter-item expanded affix "><li class="part-title">Repositories</li><li class="chapter-item expanded "><a href="repositories/index.html"><strong aria-hidden="true">15.</strong> Repositories</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backend/index.html"><strong aria-hidden="true">16.</strong> smartruck-backend</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backend/arquitectura.html"><strong aria-hidden="true">17.</strong> Arquitectura (backend)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backend/links.html"><strong aria-hidden="true">18.</strong> Links (backend)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/index.html"><strong aria-hidden="true">19.</strong> smartruck-dador</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/arquitectura.html"><strong aria-hidden="true">20.</strong> Arquitectura (dador)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/links.html"><strong aria-hidden="true">21.</strong> Links (dador)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/index.html"><strong aria-hidden="true">22.</strong> smartruck-transportista</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/arquitectura.html"><strong aria-hidden="true">23.</strong> Arquitectura (transportista)</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/links.html"><strong aria-hidden="true">24.</strong> Links (transportista)</a></li><li class="chapter-item expanded "><a href="repositories/cloud-template/index.html"><strong aria-hidden="true">25.</strong> cloud-template</a></li><li class="chapter-item expanded "><a href="repositories/cloud-template/arquitectura.html"><strong aria-hidden="true">26.</strong> Arquitectura (cloud-template)</a></li><li class="chapter-item expanded "><a href="repositories/cloud-template/links.html"><strong aria-hidden="true">27.</strong> Links (cloud-template)</a></li><li class="chapter-item expanded "><a href="repositories/infra-template/index.html"><strong aria-hidden="true">28.</strong> infra-template</a></li><li class="chapter-item expanded "><a href="repositories/infra-template/arquitectura.html"><strong aria-hidden="true">29.</strong> Arquitectura (infra-template)</a></li><li class="chapter-item expanded "><a href="repositories/infra-template/links.html"><strong aria-hidden="true">30.</strong> Links (infra-template)</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -175,41 +175,842 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="smartruck"><a class="header" href="#smartruck">Smartruck</a></h1>
-<p>Documentación del proyecto <strong>Smartruck</strong>, desarrollado para la materia <strong>Trabajo Profesional</strong> de la Facultad de Ingeniería de la Universidad de Buenos Aires (FIUBA).</p>
-<p>Este sitio reúne la información funcional y técnica del proyecto: objetivos, arquitectura, requerimientos, instrucciones de desarrollo y manuales de uso.</p>
+<p>Documentación del proyecto <strong>Smartruck</strong>, desarrollado para la materia <strong>Trabajo Profesional</strong> de la Facultad de Ingeniería de la Universidad de Buenos Aires (FIUBA) — Grupo 179.</p>
+<p>Este sitio reúne información funcional y técnica: objetivos, arquitectura, requerimientos, desarrollo, manuales, <strong>proceso del equipo (wiki)</strong> y <strong>documentación por repositorio</strong>.</p>
+<h2 id="prefijos-de-trabajo"><a class="header" href="#prefijos-de-trabajo">Prefijos de trabajo</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Prefijo</th><th>Producto</th></tr></thead><tbody>
+<tr><td><code>D</code></td><td>Dador</td></tr>
+<tr><td><code>T</code></td><td>Transportista</td></tr>
+</tbody></table>
+</div>
+<h2 id="navegación-rápida"><a class="header" href="#navegación-rápida">Navegación rápida</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Sección</th><th>Para qué</th></tr></thead><tbody>
+<tr><td><a href="./proyecto.html">Descripción del proyecto</a></td><td>Objetivo y alcance</td></tr>
+<tr><td><a href="./wiki/README.html">Wiki del equipo</a></td><td>Jerarquía, DoR, DoD, tickets</td></tr>
+<tr><td><a href="./repositories/README.html">Repositories</a></td><td>Backend, dador, transportista, templates</td></tr>
+<tr><td><a href="./desarrollo.html">Guía de desarrollo</a></td><td>Setup y flujo de trabajo</td></tr>
+</tbody></table>
+</div>
 <h2 id="equipo"><a class="header" href="#equipo">Equipo</a></h2>
-<p>La información del equipo y de los roles se incorporará en esta sección.</p>
-<h2 id="navegación"><a class="header" href="#navegación">Navegación</a></h2>
-<p>Usá el índice lateral para consultar cada sección de la documentación.</p>
+<p>Roles y responsabilidades: <a href="./wiki/equipo/roles.html">wiki/equipo/roles.md</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="descripción-del-proyecto"><a class="header" href="#descripción-del-proyecto">Descripción del proyecto</a></h1>
 <h2 id="objetivo"><a class="header" href="#objetivo">Objetivo</a></h2>
-<p>Smartruck es el proyecto desarrollado en el marco de Trabajo Profesional. En esta sección se documentarán el problema abordado, los objetivos del sistema y el alcance definido para la entrega.</p>
+<p>Smartruck es una plataforma logística para la <strong>publicación, cotización, gestión y desbloqueo de ofertas de carga</strong>, con pagos integrados.</p>
+<p>Se desarrolla en el marco de Trabajo Profesional (FIUBA). En esta sección se documentan el problema, los objetivos del sistema y el alcance de la entrega.</p>
+<h2 id="productos--actores"><a class="header" href="#productos--actores">Productos / actores</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Prefijo</th><th>Producto</th><th>Repo principal de UI</th></tr></thead><tbody>
+<tr><td><code>D</code></td><td>Dador (shipper)</td><td><a href="./repositories/smartruck-dador/README.html">smartruck-dador</a></td></tr>
+<tr><td><code>T</code></td><td>Transportista</td><td><a href="./repositories/smartruck-transportista/README.html">smartruck-transportista</a></td></tr>
+</tbody></table>
+</div>
+<p>API compartida: <a href="./repositories/smartruck-backend/README.html">smartruck-backend</a>.</p>
 <h2 id="alcance"><a class="header" href="#alcance">Alcance</a></h2>
-<p>Esta documentación se actualizará junto con la evolución del producto y funcionará como referencia para el equipo, docentes y usuarios del sistema.</p>
+<p>Esta documentación se actualiza con la evolución del producto y es referencia para el equipo, docentes y usuarios.</p>
+<h2 id="cómo-se-organiza-el-trabajo"><a class="header" href="#cómo-se-organiza-el-trabajo">Cómo se organiza el trabajo</a></h2>
+<p>Épica → historia (Como/Quiero/Para + story points) → tasks (descripción + CA + repo). Detalle en <a href="./wiki/proceso/jerarquia.html">Jerarquía</a>.</p>
 <h2 id="roles"><a class="header" href="#roles">Roles</a></h2>
-<p>Los roles, actores y responsabilidades del sistema se describirán aquí cuando estén definidos.</p>
+<ul>
+<li>Roles del <strong>equipo de desarrollo</strong>: <a href="./wiki/equipo/roles.html">wiki/equipo/roles.md</a></li>
+<li>Actores del <strong>sistema</strong> (dador, transportista, etc.): completar aquí a medida que se cierren</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="arquitectura"><a class="header" href="#arquitectura">Arquitectura</a></h1>
 <h2 id="vista-general"><a class="header" href="#vista-general">Vista general</a></h2>
-<p>Esta sección documentará los componentes principales de Smartruck, sus responsabilidades y la forma en que se comunican.</p>
+<p>Smartruck se organiza en varios repositorios:</p>
+<pre><code class="language-text">[smartruck-dador] ────────┐
+                          ├──&gt; [smartruck-backend] ──&gt; PostgreSQL / integraciones
+[smartruck-transportista] ─┘
+
+[cloud-template]   → plataforma Nomad (IaC)
+[infra-template]   → template de microservicio (Docker / Nomad / GHCR)
+</code></pre>
+<p>Detalle por servicio: <a href="./repositories/README.html">Repositories</a>.</p>
 <h2 id="componentes"><a class="header" href="#componentes">Componentes</a></h2>
-<p>La descripción de los servicios, aplicaciones, bases de datos e integraciones se incorporará junto con los diagramas correspondientes.</p>
+<div class="table-wrapper"><table><thead><tr><th>Componente</th><th>Rol</th></tr></thead><tbody>
+<tr><td>smartruck-backend</td><td>API FastAPI, arquitectura hexagonal, dominio compartido</td></tr>
+<tr><td>smartruck-dador</td><td>Frontend Dador (TanStack Start + Vite)</td></tr>
+<tr><td>smartruck-transportista</td><td>Frontend Transportista</td></tr>
+<tr><td>cloud-template</td><td>Laboratorio / plataforma Nomad con Terraform (OCI)</td></tr>
+<tr><td>infra-template</td><td>Template de microservicio agnóstico de lenguaje</td></tr>
+</tbody></table>
+</div>
 <h2 id="decisiones-técnicas"><a class="header" href="#decisiones-técnicas">Decisiones técnicas</a></h2>
-<p>Las decisiones relevantes de diseño y sus fundamentos se registrarán en esta sección.</p>
+<p>Las decisiones relevantes de diseño se registran aquí y/o en la arquitectura de cada repo bajo <code>repositories/</code>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="requerimientos"><a class="header" href="#requerimientos">Requerimientos</a></h1>
+<p>Los requerimientos de producto se expresan como <strong>épicas e historias</strong> (<code>D-…</code> / <code>T-…</code>). Ver <a href="./wiki/proceso/jerarquia.html">Jerarquía</a> y <a href="./wiki/tickets/plantilla-ticket.html">plantillas</a>.</p>
 <h2 id="requerimientos-funcionales"><a class="header" href="#requerimientos-funcionales">Requerimientos funcionales</a></h2>
-<p>Los requerimientos funcionales de Smartruck se documentarán en esta sección.</p>
+<p>Los requerimientos funcionales de Smartruck se documentarán en esta sección (y/o se enlazarán a historias del board).</p>
 <h2 id="requerimientos-no-funcionales"><a class="header" href="#requerimientos-no-funcionales">Requerimientos no funcionales</a></h2>
 <p>También se describirán aquí los requisitos de seguridad, disponibilidad, rendimiento, mantenibilidad y experiencia de usuario.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="guía-de-desarrollo"><a class="header" href="#guía-de-desarrollo">Guía de desarrollo</a></h1>
 <h2 id="requisitos-previos"><a class="header" href="#requisitos-previos">Requisitos previos</a></h2>
-<p>Consultar el repositorio principal de Smartruck para conocer las herramientas y versiones necesarias.</p>
+<p>Dependen del repo. Resumen:</p>
+<div class="table-wrapper"><table><thead><tr><th>Repo</th><th>Stack principal</th></tr></thead><tbody>
+<tr><td><a href="./repositories/smartruck-backend/README.html">smartruck-backend</a></td><td>Python 3.12, FastAPI, Docker / Dev Containers</td></tr>
+<tr><td><a href="./repositories/smartruck-dador/README.html">smartruck-dador</a></td><td>Node 22, TanStack Start, Vite</td></tr>
+<tr><td><a href="./repositories/smartruck-transportista/README.html">smartruck-transportista</a></td><td>Node / Bun, Vite</td></tr>
+</tbody></table>
+</div>
 <h2 id="instalación"><a class="header" href="#instalación">Instalación</a></h2>
-<p>Las instrucciones para configurar el entorno local, instalar dependencias y ejecutar el proyecto se incorporarán aquí.</p>
+<p>Seguí el README de cada repositorio (comandos de setup, <code>dev_app</code>, tests y Dev Containers).</p>
 <h2 id="flujo-de-trabajo"><a class="header" href="#flujo-de-trabajo">Flujo de trabajo</a></h2>
-<p>Se documentarán las convenciones de ramas, commits, revisiones y despliegues del equipo.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="manual-de-usuario"><a class="header" href="#manual-de-usuario">Manual de usuario</a></h1>
+<ol>
+<li>Trabajo en <strong>tasks</strong> con ID <code>D-x.y.z</code> / <code>T-x.y.z</code> asociadas a un repo — <a href="./wiki/proceso/jerarquia.html">Jerarquía</a></li>
+<li>DoR antes de empezar — <a href="./wiki/proceso/definition-of-ready.html">Definition of Ready</a></li>
+<li>PR y review — <a href="./wiki/proceso/workflow-pr.html">Workflow de PR</a></li>
+<li>Cierre — <a href="./wiki/proceso/definition-of-done.html">Definition of Done</a></li>
+</ol>
+<h2 id="convenciones"><a class="header" href="#convenciones">Convenciones</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Tema</th><th>Dónde está</th></tr></thead><tbody>
+<tr><td>Plantillas de ticket</td><td><a href="./wiki/tickets/plantilla-ticket.html">wiki/tickets/plantilla-ticket.md</a></td></tr>
+<tr><td>Estimación (story points)</td><td><a href="./wiki/tickets/estimacion.html">wiki/tickets/estimacion.md</a></td></tr>
+<tr><td>Glosario</td><td><a href="./wiki/equipo/glosario.html">wiki/equipo/glosario.md</a></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="manual-de-usuario"><a class="header" href="#manual-de-usuario">Manual de usuario</a></h1>
 <p>Esta sección explicará cómo utilizar Smartruck, incluyendo el acceso al sistema, los flujos principales y el tratamiento de errores frecuentes.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="wiki-del-equipo"><a class="header" href="#wiki-del-equipo">Wiki del equipo</a></h1>
+<p>Convenciones de trabajo compartidas (proceso, tickets, roles). Independiente del código de cada repo.</p>
+<h2 id="quick-path"><a class="header" href="#quick-path">Quick path</a></h2>
+<ol>
+<li><a href="wiki/proceso/jerarquia.html">Jerarquía</a> — épica → historia → task</li>
+<li><a href="wiki/proceso/definition-of-ready.html">Definition of Ready</a></li>
+<li><a href="wiki/proceso/definition-of-done.html">Definition of Done</a></li>
+<li><a href="wiki/tickets/plantilla-ticket.html">Plantilla de ticket</a></li>
+</ol>
+<h2 id="secciones"><a class="header" href="#secciones">Secciones</a></h2>
+<h3 id="proceso"><a class="header" href="#proceso">Proceso</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Doc</th><th>Contenido</th></tr></thead><tbody>
+<tr><td><a href="wiki/proceso/jerarquia.html">jerarquia.md</a></td><td>IDs, niveles, completitud</td></tr>
+<tr><td><a href="wiki/proceso/definition-of-ready.html">definition-of-ready.md</a></td><td>Cuándo una task puede empezar</td></tr>
+<tr><td><a href="wiki/proceso/definition-of-done.html">definition-of-done.md</a></td><td>Cuándo algo está terminado (productivo)</td></tr>
+<tr><td><a href="wiki/proceso/workflow-pr.html">workflow-pr.md</a></td><td>Branches, PR, review, merge</td></tr>
+</tbody></table>
+</div>
+<h3 id="tickets"><a class="header" href="#tickets">Tickets</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Doc</th><th>Contenido</th></tr></thead><tbody>
+<tr><td><a href="wiki/tickets/plantilla-ticket.html">plantilla-ticket.md</a></td><td>Templates de épica, historia y task</td></tr>
+<tr><td><a href="wiki/tickets/tipos-de-ticket.html">tipos-de-ticket.md</a></td><td>Solo épica, historia y task</td></tr>
+<tr><td><a href="wiki/tickets/estimacion.html">estimacion.md</a></td><td>US points en tasks</td></tr>
+</tbody></table>
+</div>
+<h3 id="equipo-1"><a class="header" href="#equipo-1">Equipo</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Doc</th><th>Contenido</th></tr></thead><tbody>
+<tr><td><a href="wiki/equipo/roles.html">roles.md</a></td><td>Responsabilidades</td></tr>
+<tr><td><a href="wiki/equipo/glosario.html">glosario.md</a></td><td>Términos del dominio y del proceso</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="jerarquía-de-trabajo"><a class="header" href="#jerarquía-de-trabajo">Jerarquía de trabajo</a></h1>
+<p>Cómo se organizan épicas, historias de usuario y tasks en SmartTruck.</p>
+<h2 id="modelo"><a class="header" href="#modelo">Modelo</a></h2>
+<pre><code class="language-text">Épica          D-1 / T-1
+  └── Historia D-1.2 / T-1.2     (Como / Quiero / Para; sin repo)
+        └── Task D-1.2.1         (descripción + CA + US points + repo; Done = productivo)
+</code></pre>
+<h2 id="ids"><a class="header" href="#ids">IDs</a></h2>
+<p>El prefijo identifica el producto y se hereda en toda la cadena.</p>
+<div class="table-wrapper"><table><thead><tr><th>Prefijo</th><th>Producto</th></tr></thead><tbody>
+<tr><td><code>D</code></td><td>Dador</td></tr>
+<tr><td><code>T</code></td><td>Transportista</td></tr>
+</tbody></table>
+</div><div class="table-wrapper"><table><thead><tr><th>Nivel</th><th>Formato ID</th><th>Ejemplo</th></tr></thead><tbody>
+<tr><td>Épica</td><td><code>{Prefijo}-{N}</code></td><td><code>D-1</code></td></tr>
+<tr><td>Historia</td><td><code>{Prefijo}-{N}.{M}</code></td><td><code>D-1.2</code></td></tr>
+<tr><td>Task</td><td><code>{Prefijo}-{N}.{M}.{K}</code></td><td><code>D-1.2.1</code></td></tr>
+</tbody></table>
+</div>
+<ul>
+<li><code>N</code> = número de épica</li>
+<li><code>M</code> = número de historia dentro de esa épica</li>
+<li><code>K</code> = número de task dentro de esa historia</li>
+</ul>
+<h2 id="qué-lleva-cada-nivel"><a class="header" href="#qué-lleva-cada-nivel">Qué lleva cada nivel</a></h2>
+<h3 id="Épica"><a class="header" href="#Épica">Épica</a></h3>
+<ul>
+<li>Objetivo de negocio amplio.</li>
+<li>Agrupa historias.</li>
+<li><strong>No</strong> se estima en story points.</li>
+<li><strong>No</strong> tiene repositorio asociado.</li>
+</ul>
+<h3 id="historia-de-usuario"><a class="header" href="#historia-de-usuario">Historia de usuario</a></h3>
+<ul>
+<li>
+<p>Formato obligatorio:</p>
+<blockquote>
+<p><strong>Como</strong> …<br />
+<strong>Quiero</strong> …<br />
+<strong>Para</strong> …</p>
+</blockquote>
+</li>
+<li>
+<p><strong>No</strong> tiene repositorio asociado (el trabajo técnico vive en las tasks).</p>
+</li>
+<li>
+<p>Pertenece a una épica.</p>
+</li>
+</ul>
+<h3 id="task"><a class="header" href="#task">Task</a></h3>
+<ul>
+<li>Compone una historia: describe <strong>qué hay que hacer</strong>.</li>
+<li>Incluye <strong>criterios de aceptación</strong> en la descripción.</li>
+<li>Se estima en <strong>US points</strong> (requerido para <a href="wiki/proceso/definition-of-ready.html">DoR</a>).</li>
+<li>Si aplica BDD: Gherkins en <code>main</code> antes de Ready.</li>
+<li><strong>Sí</strong> se asocia a un repositorio (<code>smartruck-backend</code>, <code>smartruck-dador</code>, etc.).</li>
+<li>No usa el formato Como/Quiero/Para.</li>
+</ul>
+<h2 id="completitud-bottom-up-productivo"><a class="header" href="#completitud-bottom-up-productivo">Completitud (bottom-up, productivo)</a></h2>
+<p>Done implica <strong>ambiente productivo</strong>. Detalle en <a href="wiki/proceso/definition-of-done.html">DoD</a>.</p>
+<div class="table-wrapper"><table><thead><tr><th>Nivel</th><th>Se completa cuando…</th></tr></thead><tbody>
+<tr><td>Task</td><td>Está en <strong>productivo</strong> (y cumple DoD de task)</td></tr>
+<tr><td>Historia</td><td>Todas sus tasks están en <strong>productivo</strong></td></tr>
+<tr><td>Épica</td><td>Todas sus historias están Done (todas las tasks de esas historias en <strong>productivo</strong>)</td></tr>
+</tbody></table>
+</div>
+<h2 id="ejemplo"><a class="header" href="#ejemplo">Ejemplo</a></h2>
+<pre><code class="language-text">D-1 — Alta de viajes (épica)
+  D-1.1 — Como dador quiero crear un viaje para publicar demanda
+    D-1.1.1 — API crear viaje (repo: smartruck-backend)
+    D-1.1.2 — Pantalla alta de viaje (repo: smartruck-dador)
+  D-1.2 — Como dador quiero listar mis viajes para hacer seguimiento
+    D-1.2.1 — Endpoint listado (repo: smartruck-backend)
+    D-1.2.2 — Listado en UI (repo: smartruck-dador)
+</code></pre>
+<h2 id="checklist"><a class="header" href="#checklist">Checklist</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+El ID respeta prefijo + numeración (<code>D-1.2.1</code>)</li>
+<li><input disabled="" type="checkbox"/>
+La historia está en Como / Quiero / Para</li>
+<li><input disabled="" type="checkbox"/>
+Cada task tiene descripción, CA, US points y repo</li>
+<li><input disabled="" type="checkbox"/>
+No se estiman épicas ni se asigna repo a historias</li>
+</ul>
+<h2 id="next-step"><a class="header" href="#next-step">Next step</a></h2>
+<ul>
+<li><a href="wiki/proceso/definition-of-ready.html">Definition of Ready</a></li>
+<li><a href="wiki/proceso/../tickets/plantilla-ticket.html">Plantilla de ticket</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="definition-of-ready-dor"><a class="header" href="#definition-of-ready-dor">Definition of Ready (DoR)</a></h1>
+<p>Una task solo entra a desarrollo si cumple este checklist.</p>
+<h2 id="task--lista-para-trabajar-ready"><a class="header" href="#task--lista-para-trabajar-ready">Task — lista para trabajar (Ready)</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<strong>Criterios de aceptación</strong> definidos en la descripción</li>
+<li><input disabled="" type="checkbox"/>
+Si corresponde: <strong>Gherkins</strong> (features) ya están en <strong><code>main</code></strong></li>
+<li><input disabled="" type="checkbox"/>
+Estimada en <strong>US points</strong> (user story points)</li>
+<li><input disabled="" type="checkbox"/>
+ID correcto (<code>D-1.2.1</code> / <code>T-1.2.1</code>) e historia padre definida</li>
+<li><input disabled="" type="checkbox"/>
+Repositorio asociado</li>
+</ul>
+<h3 id="gherkins"><a class="header" href="#gherkins">Gherkins</a></h3>
+<p>Si la task tiene escenarios BDD, los <code>.feature</code> (o equivalente) deben estar mergeados en <code>main</code> <strong>antes</strong> de considerarla Ready. Si no aplica BDD, ese ítem no bloquea.</p>
+<h2 id="historia-contexto"><a class="header" href="#historia-contexto">Historia (contexto)</a></h2>
+<p>La historia sigue el formato <strong>Como / Quiero / Para</strong>, sin repo. El trabajo Ready/Done operativo vive en las <strong>tasks</strong>.</p>
+<p>Checklist útil al refinar una historia:</p>
+<ul>
+<li><input disabled="" type="checkbox"/>
+ID (<code>D-1.2</code>) y épica padre</li>
+<li><input disabled="" type="checkbox"/>
+Como / Quiero / Para completo</li>
+<li><input disabled="" type="checkbox"/>
+Tasks hijas identificadas (cada una podrá cumplir DoR de task)</li>
+</ul>
+<h2 id="qué-no-es-ready"><a class="header" href="#qué-no-es-ready">Qué no es Ready</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Señal</th><th>Acción</th></tr></thead><tbody>
+<tr><td>Task sin CA en la descripción</td><td>Completar CA o devolver a refinamiento</td></tr>
+<tr><td>Faltan Gherkins en <code>main</code> y sí aplican</td><td>Mergear features a <code>main</code> primero</td></tr>
+<tr><td>Task sin US points</td><td>Estimar antes de planificar</td></tr>
+<tr><td>Task sin repo</td><td>Asignar repo</td></tr>
+</tbody></table>
+</div>
+<h2 id="checklist-rápido-pre-sprint"><a class="header" href="#checklist-rápido-pre-sprint">Checklist rápido (pre-sprint)</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Cada task planificada cumple DoR</li>
+<li><input disabled="" type="checkbox"/>
+Gherkins en <code>main</code> cuando corresponde</li>
+<li><input disabled="" type="checkbox"/>
+Equipo alineado en alcance</li>
+</ul>
+<h2 id="next-step-1"><a class="header" href="#next-step-1">Next step</a></h2>
+<p>Cuando el trabajo termina → <a href="wiki/proceso/definition-of-done.html">Definition of Done</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="definition-of-done-dod"><a class="header" href="#definition-of-done-dod">Definition of Done (DoD)</a></h1>
+<p>Hay una <strong>jerarquía de Done</strong>: nada superior está Done si lo inferior no está en <strong>ambiente productivo</strong>.</p>
+<h2 id="regla-de-oro"><a class="header" href="#regla-de-oro">Regla de oro</a></h2>
+<p><strong>Done = en productivo</strong> (además de cumplir CA, tests y review).</p>
+<div class="table-wrapper"><table><thead><tr><th>Nivel</th><th>Done cuando…</th></tr></thead><tbody>
+<tr><td>Task</td><td>Está desplegada en <strong>productivo</strong> (y cumple el checklist de task)</td></tr>
+<tr><td>Historia</td><td><strong>Todas</strong> sus tasks asociadas están en <strong>productivo</strong></td></tr>
+<tr><td>Épica</td><td><strong>Todas</strong> sus historias asociadas están en <strong>productivo</strong></td></tr>
+</tbody></table>
+</div>
+<h2 id="task-done"><a class="header" href="#task-done">Task Done</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Cumple todos los <strong>criterios de aceptación</strong></li>
+<li><input disabled="" type="checkbox"/>
+Código mergeado en el repositorio asociado</li>
+<li><input disabled="" type="checkbox"/>
+Tests acordados en verde (incl. aceptación / Gherkin si aplica)</li>
+<li><input disabled="" type="checkbox"/>
+PR revisado y aprobado</li>
+<li><input disabled="" type="checkbox"/>
+<strong>Desplegada en ambiente productivo</strong></li>
+<li><input disabled="" type="checkbox"/>
+Documentación del repo actualizada si aplica</li>
+</ul>
+<h2 id="historia-done"><a class="header" href="#historia-done">Historia Done</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<strong>Todas</strong> las tasks de la historia están Done (por lo tanto, en productivo)</li>
+<li><input disabled="" type="checkbox"/>
+No quedan tasks abiertas ni “implícitas” fuera del tracker</li>
+</ul>
+<h2 id="Épica-done"><a class="header" href="#Épica-done">Épica Done</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<strong>Todas</strong> las historias de la épica están Done (todas sus tasks en productivo)</li>
+</ul>
+<h2 id="checklist-de-cierre"><a class="header" href="#checklist-de-cierre">Checklist de cierre</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Estado actualizado en el tracker</li>
+<li><input disabled="" type="checkbox"/>
+Evidencia de deploy en productivo (pipeline, release, URL)</li>
+<li><input disabled="" type="checkbox"/>
+ID correcto en commits/PR cuando aplique (<code>D-1.2.1</code>)</li>
+</ul>
+<h2 id="next-step-2"><a class="header" href="#next-step-2">Next step</a></h2>
+<p>PRs → <a href="wiki/proceso/workflow-pr.html">Workflow de PR</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="workflow-de-pull-request"><a class="header" href="#workflow-de-pull-request">Workflow de Pull Request</a></h1>
+<p>Flujo estándar para integrar cambios desde una task.</p>
+<h2 id="quick-path-1"><a class="header" href="#quick-path-1">Quick path</a></h2>
+<ol>
+<li>Crear branch desde <code>main</code> (o la branch base del equipo)</li>
+<li>Implementar la task (<code>D-1.2.1</code>, etc.)</li>
+<li>Abrir PR con descripción y checklist</li>
+<li>Review + checks en verde</li>
+<li>Merge y cerrar la task</li>
+</ol>
+<h2 id="branching-propuesta"><a class="header" href="#branching-propuesta">Branching (propuesta)</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Tipo</th><th>Convención sugerida</th></tr></thead><tbody>
+<tr><td>Task</td><td><code>feature/D-1.2.1-descripcion-corta</code></td></tr>
+</tbody></table>
+</div>
+<p>Ajustá nombres si el repo ya tiene otra convención; documentalo en <code>repositories/&lt;repo&gt;/README.md</code>.</p>
+<h2 id="contenido-mínimo-del-pr"><a class="header" href="#contenido-mínimo-del-pr">Contenido mínimo del PR</a></h2>
+<ul>
+<li>Qué cambia y por qué (ID de task si aplica)</li>
+<li>Cómo probarlo</li>
+<li>Criterios de aceptación cubiertos</li>
+<li>Capturas / logs solo si aportan</li>
+</ul>
+<h2 id="checklist-de-review"><a class="header" href="#checklist-de-review">Checklist de review</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Cumple los CA de la task</li>
+<li><input disabled="" type="checkbox"/>
+Tests o evidencia manual</li>
+<li><input disabled="" type="checkbox"/>
+No hay secretos ni configs locales</li>
+<li><input disabled="" type="checkbox"/>
+Alcance acotado a la task</li>
+</ul>
+<h2 id="merge"><a class="header" href="#merge">Merge</a></h2>
+<ul>
+<li>Preferir squash o el método que defina cada repo</li>
+<li>Borrar branch remota si el equipo lo usa así</li>
+<li>Actualizar estado de la task a Done solo si cumple <a href="wiki/proceso/definition-of-done.html">DoD</a></li>
+</ul>
+<h2 id="next-step-3"><a class="header" href="#next-step-3">Next step</a></h2>
+<p>Ver docs del repo en <a href="wiki/proceso/../../repositories/README.html">repositories/</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="plantillas-de-ticket"><a class="header" href="#plantillas-de-ticket">Plantillas de ticket</a></h1>
+<p>Copiá el bloque que corresponda y completá los campos.</p>
+<h2 id="Épica-1"><a class="header" href="#Épica-1">Épica</a></h2>
+<pre><code class="language-markdown">## D-1 — &lt;Título de la épica&gt;
 
+### Objetivo
+&lt;Qué problema de negocio resuelve&gt;
+
+### Alcance
+- Incluye:
+- No incluye:
+
+### Historias
+- [ ] D-1.1 — …
+- [ ] D-1.2 — …
+
+### Notas
+-
+</code></pre>
+<h2 id="historia-de-usuario-1"><a class="header" href="#historia-de-usuario-1">Historia de usuario</a></h2>
+<pre><code class="language-markdown">## D-1.2 — &lt;Título corto&gt;
+
+**Como** &lt;rol / actor&gt;
+**Quiero** &lt;capacidad&gt;
+**Para** &lt;beneficio&gt;
+
+### Épica
+D-1
+
+### Tasks
+- [ ] D-1.2.1 — … (repo: …, US points: …)
+- [ ] D-1.2.2 — … (repo: …, US points: …)
+
+### Notas / dependencias
+-
+</code></pre>
+<h2 id="task-1"><a class="header" href="#task-1">Task</a></h2>
+<pre><code class="language-markdown">## D-1.2.1 — &lt;Título corto&gt;
+
+### Historia
+D-1.2
+
+### Repositorio
+smartruck-backend | smartruck-dador | smartruck-transportista | …
+
+### US points
+&lt;N&gt;
+
+### Descripción
+&lt;Qué hay que hacer, de forma concreta&gt;
+
+### Criterios de aceptación
+- [ ] …
+- [ ] …
+
+### Gherkins
+- Aplica: sí / no
+- Si aplica: path(s) en `main` (ej. `features/...`)
+
+### Notas técnicas
+-
+</code></pre>
+<h2 id="checklist-1"><a class="header" href="#checklist-1">Checklist</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+ID y prefijo correctos</li>
+<li><input disabled="" type="checkbox"/>
+Historia en Como / Quiero / Para</li>
+<li><input disabled="" type="checkbox"/>
+Task con CA en la descripción, US points, repo</li>
+<li><input disabled="" type="checkbox"/>
+Si aplica BDD: Gherkins en <code>main</code> (DoR)</li>
+</ul>
+<h2 id="next-step-4"><a class="header" href="#next-step-4">Next step</a></h2>
+<p><a href="wiki/tickets/tipos-de-ticket.html">Tipos de ticket</a> · <a href="wiki/tickets/../proceso/definition-of-ready.html">DoR</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tipos-de-ticket"><a class="header" href="#tipos-de-ticket">Tipos de ticket</a></h1>
+<p>Solo existen tres tipos: <strong>épica</strong>, <strong>historia</strong> y <strong>task</strong>.</p>
+<div class="table-wrapper"><table><thead><tr><th>Tipo</th><th>Rol en la jerarquía</th><th>Estimación</th><th>Repo</th></tr></thead><tbody>
+<tr><td>Épica</td><td>Agrupa historias</td><td>No</td><td>No</td></tr>
+<tr><td>Historia</td><td>Valor de negocio (Como/Quiero/Para)</td><td>No (el esfuerzo vive en las tasks)</td><td>No</td></tr>
+<tr><td>Task</td><td>Trabajo técnico que compone una historia</td><td><strong>US points</strong> (DoR)</td><td>Sí</td></tr>
+</tbody></table>
+</div>
+<h2 id="reglas-rápidas"><a class="header" href="#reglas-rápidas">Reglas rápidas</a></h2>
+<ul>
+<li>Si entrega valor al usuario → <strong>historia</strong> (+ tasks).</li>
+<li>Si es implementación concreta de una historia → <strong>task</strong>.</li>
+<li>Todo el trabajo (incluido un arreglo o mejora) se modela como <strong>task</strong> bajo una historia; no hay tipo “bug”.</li>
+</ul>
+<h2 id="checklist-2"><a class="header" href="#checklist-2">Checklist</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+El tipo es épica, historia o task</li>
+<li><input disabled="" type="checkbox"/>
+Las tasks cuelgan de una historia con ID padre</li>
+</ul>
+<h2 id="next-step-5"><a class="header" href="#next-step-5">Next step</a></h2>
+<p><a href="wiki/tickets/estimacion.html">Estimación</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="estimación"><a class="header" href="#estimación">Estimación</a></h1>
+<p>Las <strong>tasks</strong> se estiman en <strong>US points</strong> (user story points). Es requisito de <a href="wiki/tickets/../proceso/definition-of-ready.html">DoR</a>.</p>
+<p>Las <strong>épicas</strong> no se estiman.</p>
+<h2 id="escala-sugerida"><a class="header" href="#escala-sugerida">Escala sugerida</a></h2>
+<p>Fibonacci acotado:</p>
+<div class="table-wrapper"><table><thead><tr><th>Puntos</th><th>Significado orientativo</th></tr></thead><tbody>
+<tr><td>1</td><td>Muy chica, poco riesgo</td></tr>
+<tr><td>2</td><td>Chica</td></tr>
+<tr><td>3</td><td>Mediana</td></tr>
+<tr><td>5</td><td>Grande</td></tr>
+<tr><td>8</td><td>Muy grande → considerar partir</td></tr>
+<tr><td>13+</td><td>Demasiado grande → partir en varias tasks</td></tr>
+</tbody></table>
+</div>
+<h2 id="qué-estimamos"><a class="header" href="#qué-estimamos">Qué estimamos</a></h2>
+<ul>
+<li>Complejidad + incertidumbre + esfuerzo relativo entre <strong>tasks</strong>.</li>
+<li>Comparar con tasks ya hechas del mismo producto (<code>D</code> / <code>T</code>) y repo.</li>
+</ul>
+<h2 id="qué-no-estimamos"><a class="header" href="#qué-no-estimamos">Qué no estimamos</a></h2>
+<ul>
+<li>Épicas (Done cuando todas sus historias están en productivo vía sus tasks).</li>
+<li>Historias (el esfuerzo se estima en las tasks).</li>
+</ul>
+<h2 id="checklist-de-refinamiento"><a class="header" href="#checklist-de-refinamiento">Checklist de refinamiento</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Task con CA en la descripción</li>
+<li><input disabled="" type="checkbox"/>
+US points asignados</li>
+<li><input disabled="" type="checkbox"/>
+Si aplica, Gherkins en camino a <code>main</code> (o ya en <code>main</code>)</li>
+<li><input disabled="" type="checkbox"/>
+Si ≥ 8, se discutió partir</li>
+</ul>
+<h2 id="next-step-6"><a class="header" href="#next-step-6">Next step</a></h2>
+<p><a href="wiki/tickets/../proceso/definition-of-ready.html">DoR</a> · <a href="wiki/tickets/plantilla-ticket.html">Plantilla</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="roles-del-equipo"><a class="header" href="#roles-del-equipo">Roles del equipo</a></h1>
+<p>Responsabilidades de alto nivel. Completá nombres y detalles según el equipo real.</p>
+<div class="table-wrapper"><table><thead><tr><th>Rol</th><th>Responsabilidad principal</th></tr></thead><tbody>
+<tr><td>Product Owner / referente de producto</td><td>Prioriza épicas e historias; valida valor de negocio</td></tr>
+<tr><td>Desarrollador</td><td>Implementa tasks en el repo asignado; PRs; DoD</td></tr>
+<tr><td>Reviewer</td><td>Revisa PRs contra CA y estándares del repo</td></tr>
+<tr><td>Tech lead (si aplica)</td><td>Criterios técnicos, arquitectura, desbloqueos</td></tr>
+</tbody></table>
+</div>
+<h2 id="por-producto"><a class="header" href="#por-producto">Por producto</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Prefijo</th><th>Producto</th><th>Quién aporta requisitos (completar)</th></tr></thead><tbody>
+<tr><td><code>D</code></td><td>Dador</td><td></td></tr>
+<tr><td><code>T</code></td><td>Transportista</td><td></td></tr>
+</tbody></table>
+</div>
+<h2 id="checklist-3"><a class="header" href="#checklist-3">Checklist</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Cada historia tiene alguien que valida el Como / Quiero / Para</li>
+<li><input disabled="" type="checkbox"/>
+Cada task tiene owner y repo</li>
+</ul>
+<h2 id="next-step-7"><a class="header" href="#next-step-7">Next step</a></h2>
+<p><a href="wiki/equipo/glosario.html">Glosario</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="glosario"><a class="header" href="#glosario">Glosario</a></h1>
+<p>Términos del proceso y del dominio.</p>
+<h2 id="proceso-1"><a class="header" href="#proceso-1">Proceso</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Término</th><th>Significado</th></tr></thead><tbody>
+<tr><td>Épica</td><td>Objetivo amplio; ID <code>D-1</code> / <code>T-1</code>; no se estima; Done = todas sus historias en productivo</td></tr>
+<tr><td>Historia</td><td>Valor de usuario en Como/Quiero/Para; ID <code>D-1.2</code>; sin repo; Done = todas sus tasks en productivo</td></tr>
+<tr><td>Task</td><td>Trabajo técnico; ID <code>D-1.2.1</code>; CA + US points + repo; Done = en productivo</td></tr>
+<tr><td>US points</td><td>Estimación relativa de <strong>tasks</strong> (DoR)</td></tr>
+<tr><td>Gherkin</td><td>Escenarios BDD; si aplican, deben estar en <code>main</code> para DoR de la task</td></tr>
+<tr><td>DoR</td><td>Definition of Ready</td></tr>
+<tr><td>DoD</td><td>Definition of Done (jerárquico; productivo)</td></tr>
+<tr><td>Prefijo <code>D</code></td><td>Producto Dador</td></tr>
+<tr><td>Prefijo <code>T</code></td><td>Producto Transportista</td></tr>
+</tbody></table>
+</div>
+<h2 id="dominio--producto"><a class="header" href="#dominio--producto">Dominio / producto</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Término</th><th>Significado</th></tr></thead><tbody>
+<tr><td>Dador (shipper)</td><td>Publica / gestiona demanda de carga</td></tr>
+<tr><td>Transportista</td><td>Opera / cotiza / gestiona el transporte</td></tr>
+<tr><td>Oferta de carga</td><td><em>(completar con el lenguaje de dominio del equipo)</em></td></tr>
+<tr><td></td><td></td></tr>
+</tbody></table>
+</div>
+<h2 id="repositorios"><a class="header" href="#repositorios">Repositorios</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Nombre</th><th>Rol breve</th></tr></thead><tbody>
+<tr><td>smartruck-backend</td><td>API FastAPI hexagonal</td></tr>
+<tr><td>smartruck-dador</td><td>Frontend Dador (TanStack Start)</td></tr>
+<tr><td>smartruck-transportista</td><td>Frontend Transportista</td></tr>
+<tr><td>cloud-template</td><td>Plataforma Nomad + Terraform OCI</td></tr>
+<tr><td>infra-template</td><td>Template de microservicio Docker/Nomad/GHCR</td></tr>
+</tbody></table>
+</div>
+<h2 id="next-step-8"><a class="header" href="#next-step-8">Next step</a></h2>
+<p><a href="wiki/equipo/../../repositories/README.html">Repositories</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="repositories"><a class="header" href="#repositories">Repositories</a></h1>
+<p>Documentación técnica por repositorio. El índice lateral del mdBook lista cada servicio.</p>
+<h2 id="Índice"><a class="header" href="#Índice">Índice</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Repositorio</th><th>Rol</th></tr></thead><tbody>
+<tr><td><a href="repositories/./smartruck-backend/README.html">smartruck-backend</a></td><td>API FastAPI (hexagonal)</td></tr>
+<tr><td><a href="repositories/./smartruck-dador/README.html">smartruck-dador</a></td><td>Frontend Dador (<code>D</code>)</td></tr>
+<tr><td><a href="repositories/./smartruck-transportista/README.html">smartruck-transportista</a></td><td>Frontend Transportista (<code>T</code>)</td></tr>
+<tr><td><a href="repositories/./cloud-template/README.html">cloud-template</a></td><td>Plataforma Nomad + Terraform (OCI)</td></tr>
+<tr><td><a href="repositories/./infra-template/README.html">infra-template</a></td><td>Template de microservicio (Docker / Nomad / GHCR)</td></tr>
+</tbody></table>
+</div>
+<h2 id="convención"><a class="header" href="#convención">Convención</a></h2>
+<p>Cada carpeta incluye <code>README.md</code>, <code>arquitectura.md</code> y <code>links.md</code>.</p>
+<p>Las <strong>tasks</strong> se asocian a uno de estos repos; las historias y épicas no. Ver <a href="repositories/../wiki/proceso/jerarquia.html">Jerarquía</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="smartruck-backend"><a class="header" href="#smartruck-backend">smartruck-backend</a></h1>
+<p>Backend del sistema Smartruck: publicación, cotización, gestión y desbloqueo de ofertas de carga, con pagos integrados.</p>
+<h2 id="quick-path-2"><a class="header" href="#quick-path-2">Quick path</a></h2>
+<pre><code class="language-bash"># ver guía completa en el repo
+# Dev Containers / docker-compose disponibles
+</code></pre>
+<p>Repo: <a href="https://github.com/smartruck-ar/smartruck-backend">smartruck-ar/smartruck-backend</a></p>
+<h2 id="stack"><a class="header" href="#stack">Stack</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Área</th><th>Tecnología</th></tr></thead><tbody>
+<tr><td>Lenguaje</td><td>Python 3.12</td></tr>
+<tr><td>Framework</td><td>FastAPI</td></tr>
+<tr><td>Arquitectura</td><td>Hexagonal + Clean + DDD táctico</td></tr>
+<tr><td>Persistencia</td><td>PostgreSQL 16, SQLModel, Alembic</td></tr>
+<tr><td>Hosting DB</td><td>Supabase</td></tr>
+<tr><td>Compute</td><td>Google Cloud Run + API Gateway</td></tr>
+<tr><td>Contenedores</td><td>Docker / Dev Containers</td></tr>
+</tbody></table>
+</div>
+<h2 id="ambientes"><a class="header" href="#ambientes">Ambientes</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Ambiente</th><th>Rama</th><th>Notas</th></tr></thead><tbody>
+<tr><td>Local / CI</td><td><code>main</code></td><td>Pipeline en GitHub Actions</td></tr>
+<tr><td>Test</td><td><code>test</code></td><td>Gateway GCP test</td></tr>
+<tr><td>Prod</td><td><code>prod</code></td><td>Gateway GCP prod</td></tr>
+</tbody></table>
+</div>
+<h2 id="docs-de-este-repo"><a class="header" href="#docs-de-este-repo">Docs de este repo</a></h2>
+<ul>
+<li><a href="repositories/smartruck-backend/./arquitectura.html">Arquitectura</a></li>
+<li><a href="repositories/smartruck-backend/./links.html">Links</a></li>
+</ul>
+<h2 id="checklist-4"><a class="header" href="#checklist-4">Checklist</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Comandos locales de run/test copiados del README del repo si cambian</li>
+<li><input disabled="" type="checkbox"/>
+Links de ambientes actualizados</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="arquitectura--smartruck-backend"><a class="header" href="#arquitectura--smartruck-backend">Arquitectura — smartruck-backend</a></h1>
+<h2 id="responsabilidades"><a class="header" href="#responsabilidades">Responsabilidades</a></h2>
+<ul>
+<li>API REST del dominio Smartruck (cargas, oferentes, pagos, etc.)</li>
+<li>Reglas de negocio en capa de dominio (sin acoplar frameworks)</li>
+<li>Persistencia PostgreSQL e integraciones externas (p. ej. MercadoPago)</li>
+</ul>
+<h2 id="organización-del-código"><a class="header" href="#organización-del-código">Organización del código</a></h2>
+<pre><code class="language-text">src/
+  domain/           # modelos, puertos, excepciones
+  application/      # casos de uso, DTOs
+  infrastructure/   # FastAPI, HTTP, persistence, gateways
+</code></pre>
+<h2 id="límites"><a class="header" href="#límites">Límites</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Hace</th><th>No hace</th></tr></thead><tbody>
+<tr><td>Lógica de negocio y API</td><td>UI Dador / Transportista</td></tr>
+</tbody></table>
+</div>
+<h2 id="dependencias"><a class="header" href="#dependencias">Dependencias</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Depende de</th><th>Consumido por</th></tr></thead><tbody>
+<tr><td>PostgreSQL / Supabase, pasarelas de pago</td><td>smartruck-dador, smartruck-transportista</td></tr>
+</tbody></table>
+</div>
+<h2 id="diagrama"><a class="header" href="#diagrama">Diagrama</a></h2>
+<pre><code class="language-text">[dador] ──┐
+           ├──&gt; [smartruck-backend] ──&gt; [PostgreSQL / externos]
+[transp.] ─┘
+</code></pre>
+<p>Fuente detallada: README del repositorio.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="links--smartruck-backend"><a class="header" href="#links--smartruck-backend">Links — smartruck-backend</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>Recurso</th><th>URL</th></tr></thead><tbody>
+<tr><td>Repositorio Git</td><td>https://github.com/smartruck-ar/smartruck-backend</td></tr>
+<tr><td>Pipeline CI/CD</td><td>https://github.com/smartruck-ar/smartruck-backend/actions/workflows/pipeline.yml</td></tr>
+<tr><td>API Gateway (test)</td><td>https://smartruck-gw-test-62i9xl74.uc.gateway.dev</td></tr>
+<tr><td>API Gateway (prod)</td><td>https://smartruck-gw-prod-7meogdxg.uc.gateway.dev</td></tr>
+<tr><td>Uptime</td><td>https://stats.uptimerobot.com/va3iPyWDVg</td></tr>
+<tr><td>API docs (Swagger)</td><td><em>(completar ruta <code>/docs</code> del ambiente)</em></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="smartruck-dador"><a class="header" href="#smartruck-dador">smartruck-dador</a></h1>
+<p>Frontend del <strong>Dador</strong> / shipper (prefijo de trabajo <code>D</code>).</p>
+<p>TanStack Start + Vite. Arquitectura hexagonal bajo <code>src/</code> (<code>domain</code> / <code>application</code> / <code>infrastructure</code>). Pantallas en <code>src/views/</code>.</p>
+<h2 id="quick-path-3"><a class="header" href="#quick-path-3">Quick path</a></h2>
+<pre><code class="language-bash">nvm use 22
+npm install
+npm run dev
+</code></pre>
+<p>Variables: ver <code>.env.example</code> (<code>VITE_SMARTRUCK_BACKEND_API</code>, <code>VITE_USE_STUB</code>, etc.).</p>
+<p>Repo: <a href="https://github.com/smartruck-ar/smartruck-dador">smartruck-ar/smartruck-dador</a></p>
+<h2 id="stack-1"><a class="header" href="#stack-1">Stack</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Área</th><th>Tecnología</th></tr></thead><tbody>
+<tr><td>Runtime</td><td>Node 22</td></tr>
+<tr><td>Framework</td><td>TanStack Start + Vite</td></tr>
+<tr><td>UI</td><td>React + Radix / shadcn-style</td></tr>
+<tr><td>Tests</td><td>Vitest + Playwright</td></tr>
+<tr><td>Contenedores</td><td>Docker / Dev Containers</td></tr>
+</tbody></table>
+</div>
+<h2 id="scripts-útiles"><a class="header" href="#scripts-útiles">Scripts útiles</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Comando</th><th>Qué hace</th></tr></thead><tbody>
+<tr><td><code>./scripts/dev_app</code></td><td>Dev con hot reload (Compose: host <code>5174</code>)</td></tr>
+<tr><td><code>./scripts/run_lint</code></td><td>ESLint + Prettier + tsc + Vitest</td></tr>
+<tr><td><code>./scripts/run_all_tests</code></td><td>Lint + Playwright</td></tr>
+<tr><td><code>./scripts/start_dev_containers</code></td><td>Compose + shell en <code>app</code></td></tr>
+</tbody></table>
+</div>
+<h2 id="docs-de-este-repo-1"><a class="header" href="#docs-de-este-repo-1">Docs de este repo</a></h2>
+<ul>
+<li><a href="repositories/smartruck-dador/./arquitectura.html">Arquitectura</a></li>
+<li><a href="repositories/smartruck-dador/./links.html">Links</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="arquitectura--smartruck-dador"><a class="header" href="#arquitectura--smartruck-dador">Arquitectura — smartruck-dador</a></h1>
+<h2 id="responsabilidades-1"><a class="header" href="#responsabilidades-1">Responsabilidades</a></h2>
+<ul>
+<li>UI y flujos del actor <strong>Dador</strong> (<code>D-x.y.z</code> en tasks de este repo)</li>
+<li>Orquestación de pantallas y llamadas al backend</li>
+</ul>
+<h2 id="organización"><a class="header" href="#organización">Organización</a></h2>
+<p>Arquitectura hexagonal:</p>
+<pre><code class="language-text">src/
+  domain/
+  application/
+  infrastructure/
+  views/            # pantallas
+</code></pre>
+<h2 id="límites-1"><a class="header" href="#límites-1">Límites</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Hace</th><th>No hace</th></tr></thead><tbody>
+<tr><td>Experiencia Dador</td><td>Persistencia / reglas centrales del backend</td></tr>
+</tbody></table>
+</div>
+<h2 id="dependencias-1"><a class="header" href="#dependencias-1">Dependencias</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Depende de</th><th>Notas</th></tr></thead><tbody>
+<tr><td>smartruck-backend</td><td><code>VITE_SMARTRUCK_BACKEND_API</code>; stub con <code>VITE_USE_STUB=true</code></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="links--smartruck-dador"><a class="header" href="#links--smartruck-dador">Links — smartruck-dador</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>Recurso</th><th>URL</th></tr></thead><tbody>
+<tr><td>Repositorio Git</td><td>https://github.com/smartruck-ar/smartruck-dador</td></tr>
+<tr><td>Issues / board</td><td><em>(completar)</em></td></tr>
+<tr><td>CI</td><td><em>(completar workflow en Actions)</em></td></tr>
+<tr><td>Deploy (Render / etc.)</td><td><em>(completar)</em></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="smartruck-transportista"><a class="header" href="#smartruck-transportista">smartruck-transportista</a></h1>
+<p>Frontend del <strong>Transportista</strong> (prefijo de trabajo <code>T</code>).</p>
+<p>Vite + Nitro; scripts alineados con dador (<code>run_lint</code>, <code>dev_app</code>, Dev Containers, releases <code>test</code>/<code>prod</code>).</p>
+<h2 id="quick-path-4"><a class="header" href="#quick-path-4">Quick path</a></h2>
+<pre><code class="language-bash">nvm use 22   # o Bun
+npm install
+npm run dev
+</code></pre>
+<p>Dev por defecto en puerto <code>5173</code> (dador usa <code>5174</code> en Compose).</p>
+<p>Repo: <a href="https://github.com/smartruck-ar/smartruck-transportista">smartruck-ar/smartruck-transportista</a></p>
+<h2 id="stack-2"><a class="header" href="#stack-2">Stack</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Área</th><th>Tecnología</th></tr></thead><tbody>
+<tr><td>Runtime</td><td>Node 20+ / Bun</td></tr>
+<tr><td>Framework</td><td>Vite (+ Nitro para serve)</td></tr>
+<tr><td>Tests</td><td>Vitest + Playwright</td></tr>
+<tr><td>Secrets CI</td><td>Infisical (<code>VITE_*</code> en build)</td></tr>
+<tr><td>Deploy</td><td>Render (hook post-<code>package</code>)</td></tr>
+</tbody></table>
+</div>
+<h2 id="scripts-útiles-1"><a class="header" href="#scripts-útiles-1">Scripts útiles</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Comando</th><th>Qué hace</th></tr></thead><tbody>
+<tr><td><code>./scripts/dev_app</code></td><td>Dev hot reload</td></tr>
+<tr><td><code>./scripts/run_lint</code></td><td>Lint + types + Vitest</td></tr>
+<tr><td><code>./scripts/run_all_tests</code></td><td>Lint + Playwright</td></tr>
+<tr><td><code>./scripts/start_dev_containers</code></td><td>Compose + shell</td></tr>
+</tbody></table>
+</div>
+<h2 id="docs-de-este-repo-2"><a class="header" href="#docs-de-este-repo-2">Docs de este repo</a></h2>
+<ul>
+<li><a href="repositories/smartruck-transportista/./arquitectura.html">Arquitectura</a></li>
+<li><a href="repositories/smartruck-transportista/./links.html">Links</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="arquitectura--smartruck-transportista"><a class="header" href="#arquitectura--smartruck-transportista">Arquitectura — smartruck-transportista</a></h1>
+<h2 id="responsabilidades-2"><a class="header" href="#responsabilidades-2">Responsabilidades</a></h2>
+<ul>
+<li>UI y flujos del actor <strong>Transportista</strong> (<code>T-x.y.z</code> en tasks de este repo)</li>
+</ul>
+<h2 id="límites-2"><a class="header" href="#límites-2">Límites</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Hace</th><th>No hace</th></tr></thead><tbody>
+<tr><td>Experiencia Transportista</td><td>Lógica de negocio central del backend</td></tr>
+</tbody></table>
+</div>
+<h2 id="dependencias-2"><a class="header" href="#dependencias-2">Dependencias</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Depende de</th><th>Notas</th></tr></thead><tbody>
+<tr><td>smartruck-backend</td><td><code>VITE_SMARTRUCK_BACKEND_API</code> (inyectada en build vía Infisical en CI)</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="links--smartruck-transportista"><a class="header" href="#links--smartruck-transportista">Links — smartruck-transportista</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>Recurso</th><th>URL</th></tr></thead><tbody>
+<tr><td>Repositorio Git</td><td>https://github.com/smartruck-ar/smartruck-transportista</td></tr>
+<tr><td>Issues / board</td><td><em>(completar)</em></td></tr>
+<tr><td>CI</td><td><em>(completar)</em></td></tr>
+<tr><td>Deploy (Render)</td><td><em>(completar)</em></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="cloud-template"><a class="header" href="#cloud-template">cloud-template</a></h1>
+<p>Template de <strong>plataforma cloud</strong>: laboratorio Nomad mínimo con Infrastructure as Code (Terraform) sobre <strong>Oracle Cloud Infrastructure (OCI)</strong>.</p>
+<h2 id="quick-path-5"><a class="header" href="#quick-path-5">Quick path</a></h2>
+<p>Ver README del repo: preparar <code>terraform.tfvars</code>, elegir backend, <code>terraform init/plan/apply</code>.</p>
+<p>Repo: <a href="https://github.com/Mriat30/cloud-template">Mriat30/cloud-template</a><br />
+Estructura: <code>docs/estructura.md</code> en el repo.</p>
+<h2 id="stack-3"><a class="header" href="#stack-3">Stack</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Área</th><th>Tecnología</th></tr></thead><tbody>
+<tr><td>IaC</td><td>Terraform ≥ 1.5</td></tr>
+<tr><td>Cloud</td><td>OCI</td></tr>
+<tr><td>Runtime de jobs</td><td>Nomad</td></tr>
+<tr><td>Catálogo</td><td><code>catalog/services.yaml</code> (schema JSON)</td></tr>
+</tbody></table>
+</div>
+<h2 id="docs-de-este-repo-3"><a class="header" href="#docs-de-este-repo-3">Docs de este repo</a></h2>
+<ul>
+<li><a href="repositories/cloud-template/./arquitectura.html">Arquitectura</a></li>
+<li><a href="repositories/cloud-template/./links.html">Links</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="arquitectura--cloud-template"><a class="header" href="#arquitectura--cloud-template">Arquitectura — cloud-template</a></h1>
+<h2 id="responsabilidades-3"><a class="header" href="#responsabilidades-3">Responsabilidades</a></h2>
+<ul>
+<li>Infraestructura OCI declarada con Terraform</li>
+<li>Nodo Ubuntu con Nomad e ingreso HTTP del laboratorio</li>
+<li>Scripts post-apply (token ACL Nomad, GitHub Environments)</li>
+<li>Catálogo validable de servicios</li>
+</ul>
+<h2 id="relación-con-el-resto"><a class="header" href="#relación-con-el-resto">Relación con el resto</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Relación</th><th>Detalle</th></tr></thead><tbody>
+<tr><td>Complementa</td><td><a href="repositories/cloud-template/../infra-template/README.html">infra-template</a> (microservicios que despliegan en Nomad)</td></tr>
+<tr><td>No es</td><td>Un microservicio de negocio Smartruck</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="links--cloud-template"><a class="header" href="#links--cloud-template">Links — cloud-template</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>Recurso</th><th>URL</th></tr></thead><tbody>
+<tr><td>Repositorio Git</td><td>https://github.com/Mriat30/cloud-template</td></tr>
+<tr><td>Estructura</td><td>https://github.com/Mriat30/cloud-template/blob/main/docs/estructura.md</td></tr>
+<tr><td>Issues</td><td><em>(completar)</em></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="infra-template"><a class="header" href="#infra-template">infra-template</a></h1>
+<p>Template de <strong>microservicio</strong> (agnóstico de lenguaje y cloud): build con Docker, publicación en GHCR y deploy en Nomad vía GitHub Environments.</p>
+<p>Pipeline: <code>build → security → deploy → smoke</code>.</p>
+<h2 id="quick-path-6"><a class="header" href="#quick-path-6">Quick path</a></h2>
+<ol>
+<li>Crear repo desde el template</li>
+<li>Ramas <code>main</code> / <code>test</code> / <code>prod</code></li>
+<li>Adaptar <code>Dockerfile</code> (stages <code>build</code> + <code>runtime</code>) y <code>scripts/ci-test.sh</code></li>
+<li>Configurar Environments <code>test</code> / <code>production</code></li>
+</ol>
+<p>Repo: <a href="https://github.com/Mriat30/infra-template">Mriat30/infra-template</a></p>
+<h2 id="stack-4"><a class="header" href="#stack-4">Stack</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Área</th><th>Tecnología</th></tr></thead><tbody>
+<tr><td>Build / runtime</td><td>Docker</td></tr>
+<tr><td>Registry</td><td>GHCR</td></tr>
+<tr><td>Orquestación</td><td>Nomad</td></tr>
+<tr><td>CI</td><td>GitHub Actions</td></tr>
+<tr><td>Versión</td><td>archivo <code>VERSION</code> (SemVer)</td></tr>
+</tbody></table>
+</div>
+<h2 id="docs-de-este-repo-4"><a class="header" href="#docs-de-este-repo-4">Docs de este repo</a></h2>
+<ul>
+<li><a href="repositories/infra-template/./arquitectura.html">Arquitectura</a></li>
+<li><a href="repositories/infra-template/./links.html">Links</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="arquitectura--infra-template"><a class="header" href="#arquitectura--infra-template">Arquitectura — infra-template</a></h1>
+<h2 id="responsabilidades-4"><a class="header" href="#responsabilidades-4">Responsabilidades</a></h2>
+<ul>
+<li>Plantilla de CI/CD para microservicios: tests en Docker, gitleaks, deploy Nomad, smoke <code>GET /health</code></li>
+<li>No asume lenguaje ni cloud concreto</li>
+</ul>
+<h2 id="stages"><a class="header" href="#stages">Stages</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Stage</th><th>Qué hace</th></tr></thead><tbody>
+<tr><td>build</td><td>Tests + linter (<code>docker build --target build</code>)</td></tr>
+<tr><td>security</td><td>Escaneo de secretos</td></tr>
+<tr><td>deploy</td><td>Tag, push GHCR, <code>nomad job run</code></td></tr>
+<tr><td>smoke</td><td>Health hasta OK</td></tr>
+</tbody></table>
+</div>
+<h2 id="relación-con-el-resto-1"><a class="header" href="#relación-con-el-resto-1">Relación con el resto</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Relación</th><th>Detalle</th></tr></thead><tbody>
+<tr><td>Despliega sobre</td><td>Plataforma Nomad tipicamente levantada con <a href="repositories/infra-template/../cloud-template/README.html">cloud-template</a></td></tr>
+<tr><td>No es</td><td>El backend/frontends de negocio Smartruck</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="links--infra-template"><a class="header" href="#links--infra-template">Links — infra-template</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>Recurso</th><th>URL</th></tr></thead><tbody>
+<tr><td>Repositorio Git</td><td>https://github.com/Mriat30/infra-template</td></tr>
+<tr><td>Estructura</td><td>https://github.com/Mriat30/infra-template/blob/main/docs/estructura.md</td></tr>
+<tr><td>Issues</td><td><em>(completar)</em></td></tr>
+</tbody></table>
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
