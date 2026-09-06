@@ -6,7 +6,9 @@ Solo existen tres tipos: **épica**, **historia** y **task**.
 |------|---------------------|------------|------|
 | Épica | Agrupa historias | No | No |
 | Historia | Valor de negocio (Como/Quiero/Para) | No (el esfuerzo vive en las tasks) | No |
-| Task | Trabajo técnico que compone una historia | **US points** (DoR) | Sí |
+| Task | Trabajo técnico que compone una historia | **US points** (DoR) + horas al inicio/cierre | Sí |
+
+Cada **task** además requiere: **tag**, **prioridad** (`low` / `medium` / `high` / `urgent`), horas estimadas al comenzar y horas hombre insumidas al Done.
 
 ## Reglas rápidas
 

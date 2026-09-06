@@ -54,6 +54,8 @@ El prefijo identifica el producto y se hereda en toda la cadena.
 - Compone una historia: describe **qué hay que hacer**.
 - Incluye **criterios de aceptación** en la descripción.
 - Se estima en **US points** (requerido para [DoR](definition-of-ready.md)).
+- Tiene **tag** y **prioridad** (`low` | `medium` | `high` | `urgent`).
+- Al comenzar: **horas estimadas**. Al cerrar: **horas hombre insumidas** ([DoD](definition-of-done.md)).
 - Si aplica BDD: Gherkins en `main` antes de Ready.
 - **Sí** se asocia a un repositorio (`smartruck-backend`, `smartruck-dador`, etc.).
 - No usa el formato Como/Quiero/Para.
@@ -84,7 +86,7 @@ D-1 — Alta de viajes (épica)
 
 - [ ] El ID respeta prefijo + numeración (`D-1.2.1`)
 - [ ] La historia está en Como / Quiero / Para
-- [ ] Cada task tiene descripción, CA, US points y repo
+- [ ] Cada task tiene descripción, CA, US points, tag, prioridad y repo
 - [ ] No se estiman épicas ni se asigna repo a historias
 
 ## Next step

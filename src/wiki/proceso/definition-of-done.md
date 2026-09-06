@@ -19,7 +19,17 @@ Hay una **jerarquía de Done**: nada superior está Done si lo inferior no está
 - [ ] Tests acordados en verde (incl. aceptación / Gherkin si aplica)
 - [ ] PR revisado y aprobado
 - [ ] **Desplegada en ambiente productivo**
+- [ ] Registradas las **horas hombre insumidas** (tiempo real al finalizar)
 - [ ] Documentación del repo actualizada si aplica
+
+### Horas
+
+| Momento | Campo | Qué es |
+|---------|-------|--------|
+| Al comenzar | Horas estimadas | Previsión en horas hombre |
+| Al finalizar (Done) | Horas insumidas | Tiempo real dedicado en horas hombre |
+
+Sin horas insumidas cargadas, la task **no** se considera Done.
 
 ## Historia Done
 
@@ -34,6 +44,7 @@ Hay una **jerarquía de Done**: nada superior está Done si lo inferior no está
 
 - [ ] Estado actualizado en el tracker
 - [ ] Evidencia de deploy en productivo (pipeline, release, URL)
+- [ ] Horas estimadas (al inicio) e insumidas (al cierre) registradas
 - [ ] ID correcto en commits/PR cuando aplique (`D-1.2.1`)
 
 ## Next step

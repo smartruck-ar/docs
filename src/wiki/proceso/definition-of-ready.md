@@ -7,12 +7,35 @@ Una task solo entra a desarrollo si cumple este checklist.
 - [ ] **Criterios de aceptación** definidos en la descripción
 - [ ] Si corresponde: **Gherkins** (features) ya están en **`main`**
 - [ ] Estimada en **US points** (user story points)
+- [ ] Tiene su **tag** (producto / área)
+- [ ] **Prioridad** asignada: `low` | `medium` | `high` | `urgent`
 - [ ] ID correcto (`D-1.2.1` / `T-1.2.1`) e historia padre definida
 - [ ] Repositorio asociado
+
+### Tag
+
+Toda task lleva un tag que la clasifica (producto, módulo o área). Ejemplos a completar por el equipo: `dador`, `transportista`, `backend`, etc.
+
+### Prioridad
+
+| Valor | Uso |
+|-------|-----|
+| `low` | Puede esperar |
+| `medium` | Prioridad normal |
+| `high` | Debe hacerse pronto |
+| `urgent` | Bloquea o es crítico ahora |
 
 ### Gherkins
 
 Si la task tiene escenarios BDD, los `.feature` (o equivalente) deben estar mergeados en `main` **antes** de considerarla Ready. Si no aplica BDD, ese ítem no bloquea.
+
+## Al comenzar la task
+
+Antes de implementar (o en el momento de tomar la task):
+
+- [ ] Registrar **horas estimadas** (horas hombre previstas)
+
+Eso es distinto de los US points: los puntos son esfuerzo relativo; las **horas** son la estimación temporal al arrancar.
 
 ## Historia (contexto)
 
@@ -31,11 +54,13 @@ Checklist útil al refinar una historia:
 | Task sin CA en la descripción | Completar CA o devolver a refinamiento |
 | Faltan Gherkins en `main` y sí aplican | Mergear features a `main` primero |
 | Task sin US points | Estimar antes de planificar |
+| Task sin tag | Asignar tag |
+| Task sin prioridad | Asignar `low` / `medium` / `high` / `urgent` |
 | Task sin repo | Asignar repo |
 
 ## Checklist rápido (pre-sprint)
 
-- [ ] Cada task planificada cumple DoR
+- [ ] Cada task planificada cumple DoR (incl. tag y prioridad)
 - [ ] Gherkins en `main` cuando corresponde
 - [ ] Equipo alineado en alcance
 

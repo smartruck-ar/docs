@@ -35,8 +35,8 @@ Copiá el bloque que corresponda y completá los campos.
 D-1
 
 ### Tasks
-- [ ] D-1.2.1 — … (repo: …, US points: …)
-- [ ] D-1.2.2 — … (repo: …, US points: …)
+- [ ] D-1.2.1 — … (repo: …, tag: …, prioridad: …, US points: …)
+- [ ] D-1.2.2 — … (repo: …, tag: …, prioridad: …, US points: …)
 
 ### Notas / dependencias
 -
@@ -53,8 +53,20 @@ D-1.2
 ### Repositorio
 smartruck-backend | smartruck-dador | smartruck-transportista | …
 
+### Tag
+<dador | transportista | backend | …>
+
+### Prioridad
+low | medium | high | urgent
+
 ### US points
 <N>
+
+### Horas estimadas
+<N> h  *(completar al comenzar la task)*
+
+### Horas hombre insumidas
+<N> h  *(completar al finalizar / Done)*
 
 ### Descripción
 <Qué hay que hacer, de forma concreta>
@@ -75,7 +87,8 @@ smartruck-backend | smartruck-dador | smartruck-transportista | …
 
 - [ ] ID y prefijo correctos
 - [ ] Historia en Como / Quiero / Para
-- [ ] Task con CA en la descripción, US points, repo
+- [ ] Task con CA, US points, tag, prioridad y repo
+- [ ] Al comenzar: horas estimadas; al Done: horas insumidas
 - [ ] Si aplica BDD: Gherkins en `main` (DoR)
 
 ## Next step
