@@ -21,6 +21,7 @@ Convenciones de trabajo compartidas (proceso, tickets, roles). Independiente del
 | [workflow-pr.md](proceso/workflow-pr.md) | Branches, PR, review, merge |
 | [conventional-commits.md](proceso/conventional-commits.md) | `feat` / `fix` / `refactor` + ID de task |
 | [logging.md](proceso/logging.md) | Dónde loguear: controladores y repositorios |
+| [gherkin.md](proceso/gherkin.md) | Forma de los `.feature`: Antecedentes, Regla, Dado/Cuando/Entonces |
 
 ### Tickets
 

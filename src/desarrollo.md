@@ -29,4 +29,5 @@ Seguí el README de cada repositorio (comandos de setup, `dev_app`, tests y Dev 
 | Plantillas de ticket | [wiki/tickets/plantilla-ticket.md](./wiki/tickets/plantilla-ticket.md) |
 | Estimación (story points) | [wiki/tickets/estimacion.md](./wiki/tickets/estimacion.md) |
 | Logging (hexagonal) | [wiki/proceso/logging.md](./wiki/proceso/logging.md) |
+| Gherkin (BDD) | [wiki/proceso/gherkin.md](./wiki/proceso/gherkin.md) |
 | Glosario | [wiki/equipo/glosario.md](./wiki/equipo/glosario.md) |

@@ -5,7 +5,8 @@ Una task solo entra a desarrollo si cumple este checklist.
 ## Task — lista para trabajar (Ready)
 
 - [ ] **Criterios de aceptación** definidos en la descripción
-- [ ] Si corresponde: **Gherkins** (features) ya están en **`main`**
+- [ ] **Descripción** y **Alcance** presentes en el ticket
+- [ ] Si corresponde: **Gherkins** en **`main`** con **link/path** al archivo en el repo
 - [ ] Estimada en **US points** (user story points)
 - [ ] Tiene su **tag** (producto / área)
 - [ ] **Prioridad** asignada: `low` | `medium` | `high` | `urgent`
@@ -27,7 +28,7 @@ Toda task lleva un tag que la clasifica (producto, módulo o área). Ejemplos a 
 
 ### Gherkins
 
-Si la task tiene escenarios BDD, los `.feature` (o equivalente) deben estar mergeados en `main` **antes** de considerarla Ready. Si no aplica BDD, ese ítem no bloquea.
+Si la task tiene escenarios BDD, los `.feature` (o equivalente) deben estar mergeados en `main` **antes** de considerarla Ready, y el ticket debe incluir el **link o path** al archivo en el repositorio. El formato del feature sigue [Convención de Gherkin](gherkin.md). Si no aplica BDD, indicar `Gherkins: no aplica`.
 
 ## Al comenzar la task
 

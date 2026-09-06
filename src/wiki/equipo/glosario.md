@@ -15,7 +15,7 @@ Términos del proceso y del dominio.
 | Horas estimadas | Horas hombre previstas; se cargan **al comenzar** la task |
 | Horas insumidas | Horas hombre reales; se cargan **al finalizar** (DoD) |
 | Logging | En controladores (entrada + errores) y repositorios (salida); ver [logging](../proceso/logging.md) |
-| Gherkin | Escenarios BDD; si aplican, deben estar en `main` para DoR de la task |
+| Gherkin | BDD en español; **Cuando** contra la app; en `main` + link en el ticket si aplica; [gherkin](../proceso/gherkin.md) |
 | DoR | Definition of Ready |
 | DoD | Definition of Done (jerárquico; productivo) |
 | Prefijo `D` | Producto Dador |

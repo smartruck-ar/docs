@@ -44,3 +44,7 @@ Convención del equipo (entradas/salidas del hexágono): [Logging](../../wiki/pr
 - Salida a stdout → [smartruck-audit](../smartruck-audit/README.md).
 
 Fuente detallada: README del repositorio.
+
+## Acceptance / Gherkin
+
+Features en `test/acceptance/features/`. Convención del equipo: [Gherkin](../../wiki/proceso/gherkin.md).
