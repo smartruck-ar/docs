@@ -15,6 +15,7 @@
   - [Definition of Done](./wiki/proceso/definition-of-done.md)
   - [Workflow de PR](./wiki/proceso/workflow-pr.md)
   - [Conventional Commits](./wiki/proceso/conventional-commits.md)
+  - [Logging (hexagonal)](./wiki/proceso/logging.md)
   - [Plantilla de ticket](./wiki/tickets/plantilla-ticket.md)
   - [Tipos de ticket](./wiki/tickets/tipos-de-ticket.md)
   - [Estimación](./wiki/tickets/estimacion.md)

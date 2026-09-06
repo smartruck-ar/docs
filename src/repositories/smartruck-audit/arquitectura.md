@@ -17,6 +17,8 @@
 
 Las apps **no** hablan con Grafana: solo loguean a stdout. Promtail filtra por nombre `smartruck-*` y excluye los propios containers de audit.
 
+**Dónde loguear en el código** (controladores + repositorios): [Convención de logging](../../wiki/proceso/logging.md).
+
 ## Organización
 
 ```text

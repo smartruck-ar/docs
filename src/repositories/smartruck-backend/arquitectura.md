@@ -35,4 +35,12 @@ src/
 [transp.] ─┘
 ```
 
+## Logging
+
+Convención del equipo (entradas/salidas del hexágono): [Logging](../../wiki/proceso/logging.md).
+
+- **Controladores:** `info` + log de excepciones/errores (burbujean hasta acá).
+- **Repositorios:** `info` de operaciones de salida.
+- Salida a stdout → [smartruck-audit](../smartruck-audit/README.md).
+
 Fuente detallada: README del repositorio.

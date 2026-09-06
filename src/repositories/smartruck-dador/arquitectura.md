@@ -28,3 +28,7 @@ src/
 | Depende de | Notas |
 |------------|-------|
 | smartruck-backend | `VITE_SMARTRUCK_BACKEND_API`; stub con `VITE_USE_STUB=true` |
+
+## Logging
+
+Misma convención hexagonal: [Logging](../../wiki/proceso/logging.md) — `info` en entradas/salidas (adapters); errores en el borde de entrada.

@@ -14,7 +14,7 @@ docker compose --profile demo up -d   # opcional
 - Grafana: http://localhost:3001 (`admin` / `admin` por defecto)
 - Query demo: `{container="smartruck-audit-log-demo"}`
 
-Repo: [smartruck-ar/smartruck-audit](https://github.com/smartruck-ar/smartruck-audit) *(al publicar)*
+Repo: [smartruck-ar/audit](https://github.com/smartruck-ar/audit)
 
 ## Stack
 
@@ -42,4 +42,4 @@ Repo: [smartruck-ar/smartruck-audit](https://github.com/smartruck-ar/smartruck-a
 
 - [ ] Password Grafana distinta de default en entornos compartidos
 - [ ] Usuarios del equipo en Grafana
-- [ ] URL del repo actualizada tras el push
+- [ ] Deploy GCP documentado cuando exista

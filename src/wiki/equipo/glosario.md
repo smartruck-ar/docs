@@ -14,6 +14,7 @@ Términos del proceso y del dominio.
 | Prioridad | `low` \| `medium` \| `high` \| `urgent` |
 | Horas estimadas | Horas hombre previstas; se cargan **al comenzar** la task |
 | Horas insumidas | Horas hombre reales; se cargan **al finalizar** (DoD) |
+| Logging | En controladores (entrada + errores) y repositorios (salida); ver [logging](../proceso/logging.md) |
 | Gherkin | Escenarios BDD; si aplican, deben estar en `main` para DoR de la task |
 | DoR | Definition of Ready |
 | DoD | Definition of Done (jerárquico; productivo) |
