@@ -9,6 +9,7 @@ Documentación técnica por repositorio. El índice lateral del mdBook lista cad
 | [smartruck-backend](./smartruck-backend/README.md) | API FastAPI (hexagonal) |
 | [smartruck-dador](./smartruck-dador/README.md) | Frontend Dador (`D`) |
 | [smartruck-transportista](./smartruck-transportista/README.md) | Frontend Transportista (`T`) |
+| [smartruck-audit](./smartruck-audit/README.md) | Logs: Promtail → Loki → Grafana |
 | [cloud-template](./cloud-template/README.md) | Plataforma Nomad + Terraform (OCI) |
 | [infra-template](./infra-template/README.md) | Template de microservicio (Docker / Nomad / GHCR) |
 

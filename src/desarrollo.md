@@ -9,6 +9,7 @@ Dependen del repo. Resumen:
 | [smartruck-backend](./repositories/smartruck-backend/README.md) | Python 3.12, FastAPI, Docker / Dev Containers |
 | [smartruck-dador](./repositories/smartruck-dador/README.md) | Node 22, TanStack Start, Vite |
 | [smartruck-transportista](./repositories/smartruck-transportista/README.md) | Node / Bun, Vite |
+| [smartruck-audit](./repositories/smartruck-audit/README.md) | Grafana + Loki + Promtail (Docker Compose) |
 
 ## Instalación
 

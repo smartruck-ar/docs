@@ -8,6 +8,8 @@ Smartruck se organiza en varios repositorios:
 [smartruck-dador] ────────┐
                           ├──> [smartruck-backend] ──> PostgreSQL / integraciones
 [smartruck-transportista] ─┘
+         │
+         └── stdout (y otros smartruck-*) ──> [smartruck-audit: Promtail → Loki → Grafana]
 
 [cloud-template]   → plataforma Nomad (IaC)
 [infra-template]   → template de microservicio (Docker / Nomad / GHCR)
@@ -22,6 +24,7 @@ Detalle por servicio: [Repositories](./repositories/README.md).
 | smartruck-backend | API FastAPI, arquitectura hexagonal, dominio compartido |
 | smartruck-dador | Frontend Dador (TanStack Start + Vite) |
 | smartruck-transportista | Frontend Transportista |
+| smartruck-audit | Auditoría / logs (Promtail, Loki, Grafana) |
 | cloud-template | Laboratorio / plataforma Nomad con Terraform (OCI) |
 | infra-template | Template de microservicio agnóstico de lenguaje |
 
