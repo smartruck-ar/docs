@@ -173,7 +173,57 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="logging-hexagonal"><a class="header" href="#logging-hexagonal">Logging (hexagonal)</a></h1>
+                        <h1 id="convención-de-logging-arquitectura-hexagonal"><a class="header" href="#convención-de-logging-arquitectura-hexagonal">Convención de logging (arquitectura hexagonal)</a></h1>
+<p>Dónde y qué loguear en los servicios SmartTruck (backend y fronts con capas hexagonales).</p>
+<p>Los logs van a <strong>stdout</strong> y los recolecta <a href="../../repositories/smartruck-audit/README.html">smartruck-audit</a> (Promtail → Loki → Grafana).</p>
+<h2 id="dónde-loguear"><a class="header" href="#dónde-loguear">Dónde loguear</a></h2>
+<p>Solo en los <strong>bordes</strong> del hexágono: <strong>entradas</strong> y <strong>salidas</strong>.</p>
+<div class="table-wrapper"><table><thead><tr><th>Lugar</th><th>Rol en el hexágono</th><th>Qué loguea</th></tr></thead><tbody>
+<tr><td><strong>Controladores</strong> (adapters de entrada / HTTP)</td><td>Entrada</td><td><code>info</code> de lo que se está haciendo (request / caso) y <strong>todas</strong> las excepciones/errores</td></tr>
+<tr><td><strong>Repositorios</strong> (adapters de salida / persistencia u otros gateways)</td><td>Salida</td><td><code>info</code> de lo que se está haciendo hacia afuera (query, save, call externo)</td></tr>
+</tbody></table>
+</div>
+<pre><code class="language-text">[HTTP] → Controlador ──info + errores──┐
+              │                        │
+              ▼                        ├──&gt; stdout → audit
+         Caso de uso                   │
+         (dominio / application)       │
+              │                        │
+              ▼                        │
+         Repositorio ──info────────────┘
+</code></pre>
+<h2 id="errores-y-excepciones"><a class="header" href="#errores-y-excepciones">Errores y excepciones</a></h2>
+<ul>
+<li>Las excepciones <strong>burbujean</strong> hacia el <strong>controlador</strong>.</li>
+<li>El <strong>controlador</strong> es quien <strong>loguea</strong> excepciones/errores (nivel <code>error</code> / <code>warning</code> según corresponda).</li>
+<li>Los repositorios (y el dominio) <strong>lanzan</strong> o propagan; no tragan el error en silencio ni duplican el log de error si ya va a subir.</li>
+</ul>
+<h2 id="info--qué-se-está-haciendo"><a class="header" href="#info--qué-se-está-haciendo">Info / “qué se está haciendo”</a></h2>
+<ul>
+<li><strong>Controlador:</strong> entrada al caso (ej. “crear viaje”, IDs relevantes, sin secretos).</li>
+<li><strong>Repositorio:</strong> operación de salida (ej. “persistir load”, “buscar oferente por email”).</li>
+<li>Preferir mensajes estructurados (JSON) con <code>service</code>, <code>env</code>, <code>level</code>, y contexto útil (<code>request_id</code> si existe).</li>
+</ul>
+<h2 id="qué-no-loguear-ahí"><a class="header" href="#qué-no-loguear-ahí">Qué no loguear ahí</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Evitar</th><th>Motivo</th></tr></thead><tbody>
+<tr><td>Loguear en cada línea del caso de uso / dominio</td><td>Ruido; el dominio queda limpio</td></tr>
+<tr><td>Loguear el mismo error en repo <strong>y</strong> controlador</td><td>Duplicado; el error se loguea al burbujear en el controlador</td></tr>
+<tr><td>Passwords, tokens, PII innecesaria</td><td>Seguridad</td></tr>
+</tbody></table>
+</div>
+<h2 id="checklist"><a class="header" href="#checklist">Checklist</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<code>info</code> en controlador (entrada) y repositorio (salida)</li>
+<li><input disabled="" type="checkbox"/>
+Errores/excepciones logueados en el controlador tras burbujear</li>
+<li><input disabled="" type="checkbox"/>
+Sin logs de negocio ruidosos en application/domain</li>
+<li><input disabled="" type="checkbox"/>
+Salida a stdout (compatible con audit)</li>
+</ul>
+<h2 id="next-step"><a class="header" href="#next-step">Next step</a></h2>
+<p>Stack de recolección: <a href="../../repositories/smartruck-audit/README.html">smartruck-audit</a> · <a href="../../repositories/smartruck-audit/arquitectura.html">Arquitectura audit</a></p>
 
                     </main>
 
