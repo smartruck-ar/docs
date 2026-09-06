@@ -802,13 +802,13 @@ Link/path del feature en el ticket (DoR) si aplica BDD</li>
 <h2 id="next-step-6"><a class="header" href="#next-step-6">Next step</a></h2>
 <p><a href="wiki/proceso/../tickets/plantilla-ticket.html">Plantilla de ticket</a> · <a href="wiki/proceso/definition-of-ready.html">DoR</a> · <a href="wiki/proceso/logging.html">Logging</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="plantillas-de-ticket"><a class="header" href="#plantillas-de-ticket">Plantillas de ticket</a></h1>
-<p>Copiá el bloque que corresponda y completá los campos.</p>
+<p>Los campos del tracker (título, historia padre, repositorio, tag, prioridad, US points, horas) van <strong>fuera</strong> de la descripción. Acá solo se define el <strong>cuerpo</strong> que se pega en la descripción del ticket.</p>
 <h2 id="cuerpo-obligatorio-de-una-task"><a class="header" href="#cuerpo-obligatorio-de-una-task">Cuerpo obligatorio de una <strong>task</strong></a></h2>
-<p>En la descripción del ticket (tracker) deben figurar, como mínimo, estos títulos:</p>
 <div class="table-wrapper"><table><thead><tr><th>Sección</th><th>Contenido</th></tr></thead><tbody>
-<tr><td><strong>Descripción</strong></td><td>Qué hay que hacer y por qué (contexto breve)</td></tr>
-<tr><td><strong>Alcance</strong></td><td>Qué incluye y qué <strong>no</strong> incluye esta task</td></tr>
-<tr><td><strong>Criterios de aceptación</strong></td><td>Checklist verificable (testeable)</td></tr>
+<tr><td>Párrafo inicial</td><td>Contexto del problema o necesidad y qué se debe hacer</td></tr>
+<tr><td><strong>Objetivo</strong></td><td>Qué se busca lograr con esta entrega</td></tr>
+<tr><td><strong>Alcance</strong></td><td>Qué incluye y qué <strong>no</strong> incluye (usar <em>Fuera de alcance</em>)</td></tr>
+<tr><td><strong>Criterios de aceptación</strong></td><td>Condiciones verificables numeradas (<code>CA1</code>, <code>CA2</code>, …) — no checklist</td></tr>
 <tr><td><strong>Gherkins</strong> (si aplica)</td><td>Link/path a los <code>.feature</code> en el <strong>repositorio</strong> (rama <code>main</code>)</td></tr>
 </tbody></table>
 </div>
@@ -848,88 +848,113 @@ D-1
 ### Notas / dependencias
 -
 </code></pre>
-<h2 id="task-1"><a class="header" href="#task-1">Task</a></h2>
-<pre><code class="language-markdown">## T-7.1.2 — &lt;Título corto&gt;
+<h2 id="descripción-de-task-pegar-en-el-tracker"><a class="header" href="#descripción-de-task-pegar-en-el-tracker">Descripción de task (pegar en el tracker)</a></h2>
+<pre><code class="language-markdown">&lt;Párrafo inicial: contexto del problema o necesidad y qué se debe hacer.&gt;
 
-### Historia
-T-7.1
+---
 
-### Repositorio
-smartruck-backend | smartruck-dador | smartruck-transportista | smartruck-audit | …
+## Objetivo
 
-### Tag
-&lt;dador | transportista | backend | audit | …&gt;
+&lt;Qué se busca lograr con esta entrega, en una o dos oraciones.&gt;
 
-### Prioridad
-low | medium | high | urgent
+---
 
-### US points
-&lt;N&gt;
+## Alcance
 
-### Horas estimadas
-&lt;N&gt; h  *(completar al comenzar la task)*
+- &lt;Ítem incluido&gt;
+- &lt;Ítem incluido&gt;
 
-### Horas hombre insumidas
-&lt;N&gt; h  *(completar al finalizar / Done)*
+### Fuera de alcance
 
-### Descripción
-&lt;Qué hay que hacer, de forma concreta, y contexto breve&gt;
+- &lt;Qué no incluye esta task&gt;
 
-### Alcance
-- Incluye:
-- No incluye:
+---
 
-### Criterios de aceptación
-- [ ] …
-- [ ] …
+## Criterios de aceptación
 
-### Gherkins
-- Aplica: sí / no
-- Si aplica: link o path en el repo (en `main`), ej.
-  - `https://github.com/smartruck-ar/&lt;repo&gt;/blob/main/test/acceptance/features/....feature`
-  - o path: `test/acceptance/features/....feature`
-- Formato del feature: ver [Convención de Gherkin](../proceso/gherkin.md)
+**CA1 - &lt;Título corto&gt;:** &lt;Condición verificable.&gt;
 
-### Notas técnicas
--
+**CA2 - &lt;Título corto&gt;:** &lt;Condición verificable.&gt;
+
+**CA3 - &lt;Título corto&gt;:** &lt;Condición verificable.&gt;
+
+---
+
+## Gherkins
+
+No aplica.
+</code></pre>
+<h3 id="variante-con-ca-más-detallados"><a class="header" href="#variante-con-ca-más-detallados">Variante con CA más detallados</a></h3>
+<p>Si un criterio necesita detalle (pasos, contrato, notas), usar encabezado <code>###</code> y cuerpo debajo:</p>
+<pre><code class="language-markdown">## Criterios de aceptación
+
+### CA1 — &lt;Título corto&gt;
+
+&lt;Detalle del criterio. Puede incluir listas, tablas o ejemplos.&gt;
+
+---
+
+### CA2 — &lt;Título corto&gt;
+
+&lt;Detalle del criterio.&gt;
 </code></pre>
 <h2 id="ejemplo-mínimo-task-técnica"><a class="header" href="#ejemplo-mínimo-task-técnica">Ejemplo mínimo (task técnica)</a></h2>
-<pre><code class="language-markdown">## T-7.1.2 — Implementar un log manager que loguee a stdout
+<pre><code class="language-markdown">Implementar un LogManager que escriba logs estructurados a stdout, como base para auditar acciones del transportista. Esta task no audita aún todas las acciones: eso será en tasks posteriores que usen el manager en controllers/repos.
 
-### Historia
-T-7.1
+---
 
-### Repositorio
-smartruck-backend
+## Objetivo
 
-### Descripción
-Implementar un LogManager que escriba logs estructurados a stdout,
-como base para auditar acciones del transportista.
+Disponer de un mecanismo de logging reutilizable en el backend que emita a stdout en formato estructurado, verificable por tests unitarios y listo para consumo por el stack de auditoría.
 
-### Alcance
-- Incluye: puerto/adapter, niveles info/error, formato JSON, tests unitarios
-- No incluye: cablear todos los controllers/repos ni dashboards en Grafana
+---
 
-### Criterios de aceptación
-- [ ] LogManager usable desde infrastructure
-- [ ] info y error escriben a stdout en JSON (level, message, service, env)
-- [ ] Tests unitarios verifican la emisión del log
+## Alcance
 
-### Gherkins
-- Aplica: no
+- Puerto/adapter de LogManager usable desde infrastructure (controllers/repos).
+- Niveles `info` y `error` (como mínimo).
+- Formato JSON a stdout.
+- Tests unitarios que verifiquen la emisión del log.
+
+### Fuera de alcance
+
+- Cablear todos los controllers/repos.
+- Dashboards o configuración en Grafana/Loki.
+
+---
+
+## Criterios de aceptación
+
+**CA1 - LogManager disponible:** Existe un LogManager (puerto/adapter) usable desde infrastructure (controllers/repos).
+
+**CA2 - Emisión a stdout:** `info` y `error` (como mínimo) escriben a stdout.
+
+**CA3 - Formato estructurado:** El log es JSON e incluye al menos: `level`, `message`, `service` (ej. `smartruck-backend`), `env`.
+
+**CA4 - Verificación por tests:** Tests unitarios verifican que al invocar el manager se emite el log esperado (nivel + mensaje / campos).
+
+**CA5 - Sin secretos:** No loguea secretos (documentado / sin campos de password/token en la API del manager).
+
+**CA6 - Alineación a convención:** Queda alineado a la convención de logging (controllers y repositorios); el cableado en esos bordes puede ser otra task.
+
+---
+
+## Gherkins
+
+No aplica.
 </code></pre>
 <h2 id="checklist-3"><a class="header" href="#checklist-3">Checklist</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"/>
-ID y prefijo correctos</li>
+ID y prefijo correctos (en el tracker)</li>
 <li><input disabled="" type="checkbox"/>
 Historia en Como / Quiero / Para</li>
 <li><input disabled="" type="checkbox"/>
-Task con <strong>Descripción</strong>, <strong>Alcance</strong>, <strong>Criterios de aceptación</strong></li>
+Descripción con Objetivo, Alcance y Criterios (<code>CA1</code>, <code>CA2</code>, …)</li>
 <li><input disabled="" type="checkbox"/>
 Gherkins: link en el repo o “no aplica”</li>
 <li><input disabled="" type="checkbox"/>
-US points, tag, prioridad y repo</li>
+US points, tag, prioridad y repo (en el tracker)</li>
 <li><input disabled="" type="checkbox"/>
 Al comenzar: horas estimadas; al Done: horas insumidas</li>
 </ul>
@@ -1484,6 +1509,22 @@ Estructura: <code>docs/estructura.md</code> en el repo.</p>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

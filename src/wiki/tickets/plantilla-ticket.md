@@ -1,16 +1,15 @@
 # Plantillas de ticket
 
-Copiá el bloque que corresponda y completá los campos.
+Los campos del tracker (título, historia padre, repositorio, tag, prioridad, US points, horas) van **fuera** de la descripción. Acá solo se define el **cuerpo** que se pega en la descripción del ticket.
 
 ## Cuerpo obligatorio de una **task**
 
-En la descripción del ticket (tracker) deben figurar, como mínimo, estos títulos:
-
 | Sección | Contenido |
 |---------|-----------|
-| **Descripción** | Qué hay que hacer y por qué (contexto breve) |
-| **Alcance** | Qué incluye y qué **no** incluye esta task |
-| **Criterios de aceptación** | Checklist verificable (testeable) |
+| Párrafo inicial | Contexto del problema o necesidad y qué se debe hacer |
+| **Objetivo** | Qué se busca lograr con esta entrega |
+| **Alcance** | Qué incluye y qué **no** incluye (usar *Fuera de alcance*) |
+| **Criterios de aceptación** | Condiciones verificables numeradas (`CA1`, `CA2`, …) — no checklist |
 | **Gherkins** (si aplica) | Link/path a los `.feature` en el **repositorio** (rama `main`) |
 
 Si no aplica BDD: indicar explícitamente `Gherkins: no aplica`.
@@ -57,89 +56,118 @@ D-1
 -
 ```
 
-## Task
+## Descripción de task (pegar en el tracker)
 
 ```markdown
-## T-7.1.2 — <Título corto>
+<Párrafo inicial: contexto del problema o necesidad y qué se debe hacer.>
 
-### Historia
-T-7.1
+---
 
-### Repositorio
-smartruck-backend | smartruck-dador | smartruck-transportista | smartruck-audit | …
+## Objetivo
 
-### Tag
-<dador | transportista | backend | audit | …>
+<Qué se busca lograr con esta entrega, en una o dos oraciones.>
 
-### Prioridad
-low | medium | high | urgent
+---
 
-### US points
-<N>
+## Alcance
 
-### Horas estimadas
-<N> h  *(completar al comenzar la task)*
+- <Ítem incluido>
+- <Ítem incluido>
 
-### Horas hombre insumidas
-<N> h  *(completar al finalizar / Done)*
+### Fuera de alcance
 
-### Descripción
-<Qué hay que hacer, de forma concreta, y contexto breve>
+- <Qué no incluye esta task>
 
-### Alcance
-- Incluye:
-- No incluye:
+---
 
-### Criterios de aceptación
-- [ ] …
-- [ ] …
+## Criterios de aceptación
 
-### Gherkins
-- Aplica: sí / no
-- Si aplica: link o path en el repo (en `main`), ej.
-  - `https://github.com/smartruck-ar/<repo>/blob/main/test/acceptance/features/....feature`
-  - o path: `test/acceptance/features/....feature`
-- Formato del feature: ver [Convención de Gherkin](../proceso/gherkin.md)
+**CA1 - <Título corto>:** <Condición verificable.>
 
-### Notas técnicas
--
+**CA2 - <Título corto>:** <Condición verificable.>
+
+**CA3 - <Título corto>:** <Condición verificable.>
+
+---
+
+## Gherkins
+
+No aplica.
+```
+
+### Variante con CA más detallados
+
+Si un criterio necesita detalle (pasos, contrato, notas), usar encabezado `###` y cuerpo debajo:
+
+```markdown
+## Criterios de aceptación
+
+### CA1 — <Título corto>
+
+<Detalle del criterio. Puede incluir listas, tablas o ejemplos.>
+
+---
+
+### CA2 — <Título corto>
+
+<Detalle del criterio.>
 ```
 
 ## Ejemplo mínimo (task técnica)
 
 ```markdown
-## T-7.1.2 — Implementar un log manager que loguee a stdout
+Implementar un LogManager que escriba logs estructurados a stdout, como base para auditar acciones del transportista. Esta task no audita aún todas las acciones: eso será en tasks posteriores que usen el manager en controllers/repos.
 
-### Historia
-T-7.1
+---
 
-### Repositorio
-smartruck-backend
+## Objetivo
 
-### Descripción
-Implementar un LogManager que escriba logs estructurados a stdout,
-como base para auditar acciones del transportista.
+Disponer de un mecanismo de logging reutilizable en el backend que emita a stdout en formato estructurado, verificable por tests unitarios y listo para consumo por el stack de auditoría.
 
-### Alcance
-- Incluye: puerto/adapter, niveles info/error, formato JSON, tests unitarios
-- No incluye: cablear todos los controllers/repos ni dashboards en Grafana
+---
 
-### Criterios de aceptación
-- [ ] LogManager usable desde infrastructure
-- [ ] info y error escriben a stdout en JSON (level, message, service, env)
-- [ ] Tests unitarios verifican la emisión del log
+## Alcance
 
-### Gherkins
-- Aplica: no
+- Puerto/adapter de LogManager usable desde infrastructure (controllers/repos).
+- Niveles `info` y `error` (como mínimo).
+- Formato JSON a stdout.
+- Tests unitarios que verifiquen la emisión del log.
+
+### Fuera de alcance
+
+- Cablear todos los controllers/repos.
+- Dashboards o configuración en Grafana/Loki.
+
+---
+
+## Criterios de aceptación
+
+**CA1 - LogManager disponible:** Existe un LogManager (puerto/adapter) usable desde infrastructure (controllers/repos).
+
+**CA2 - Emisión a stdout:** `info` y `error` (como mínimo) escriben a stdout.
+
+**CA3 - Formato estructurado:** El log es JSON e incluye al menos: `level`, `message`, `service` (ej. `smartruck-backend`), `env`.
+
+**CA4 - Verificación por tests:** Tests unitarios verifican que al invocar el manager se emite el log esperado (nivel + mensaje / campos).
+
+**CA5 - Sin secretos:** No loguea secretos (documentado / sin campos de password/token en la API del manager).
+
+**CA6 - Alineación a convención:** Queda alineado a la convención de logging (controllers y repositorios); el cableado en esos bordes puede ser otra task.
+
+---
+
+## Gherkins
+
+No aplica.
 ```
 
 ## Checklist
 
-- [ ] ID y prefijo correctos
+- [ ] ID y prefijo correctos (en el tracker)
 - [ ] Historia en Como / Quiero / Para
-- [ ] Task con **Descripción**, **Alcance**, **Criterios de aceptación**
+- [ ] Descripción con Objetivo, Alcance y Criterios (`CA1`, `CA2`, …)
 - [ ] Gherkins: link en el repo o “no aplica”
-- [ ] US points, tag, prioridad y repo
+- [ ] US points, tag, prioridad y repo (en el tracker)
 - [ ] Al comenzar: horas estimadas; al Done: horas insumidas
 
 ## Next step
