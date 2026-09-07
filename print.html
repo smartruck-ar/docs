@@ -619,7 +619,13 @@ Descripción clara y acotada al cambio</li>
 <p><a href="wiki/proceso/workflow-pr.html">Workflow de PR</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="convención-de-logging-arquitectura-hexagonal"><a class="header" href="#convención-de-logging-arquitectura-hexagonal">Convención de logging (arquitectura hexagonal)</a></h1>
 <p>Dónde y qué loguear en los servicios SmartTruck (backend y fronts con capas hexagonales).</p>
-<p>Los logs van a <strong>stdout</strong> y los recolecta <a href="wiki/proceso/../../repositories/smartruck-audit/README.html">smartruck-audit</a> (Promtail → Loki → Grafana).</p>
+<p>Los logs se emiten con <strong>LogManager</strong> (<code>application/logger/</code>): JSON a <strong>stdout</strong>. La recolección (Datadog, Loki, etc.) es responsabilidad de la infraestructura, no de un provider en la app. Convención de carpetas: <a href="wiki/proceso/../../repositories/smartruck-backend/arquitectura.html">Arquitectura backend</a>.</p>
+<p>En <strong>smartruck-backend</strong>, los controllers/repos de infrastructure <strong>inyectan</strong> <code>LogManager</code> (desde <code>application.logger</code>). El cableado de cada borde es por task; este módulo solo provee el mecanismo.</p>
+<h3 id="api-sin-secretos"><a class="header" href="#api-sin-secretos">API (sin secretos)</a></h3>
+<pre><code class="language-python">LogManager(service="smartruck-backend", env="test").info("…")
+LogManager(service="smartruck-backend", env="test").error("…")
+</code></pre>
+<p>Solo <code>message: str</code>. <strong>No</strong> hay parámetros <code>password</code>, <code>token</code> ni similares: no loguear secretos en el mensaje.</p>
 <h2 id="dónde-loguear"><a class="header" href="#dónde-loguear">Dónde loguear</a></h2>
 <p>Solo en los <strong>bordes</strong> del hexágono: <strong>entradas</strong> y <strong>salidas</strong>.</p>
 <div class="table-wrapper"><table><thead><tr><th>Lugar</th><th>Rol en el hexágono</th><th>Qué loguea</th></tr></thead><tbody>
@@ -664,10 +670,12 @@ Errores/excepciones logueados en el controlador tras burbujear</li>
 <li><input disabled="" type="checkbox"/>
 Sin logs de negocio ruidosos en application/domain</li>
 <li><input disabled="" type="checkbox"/>
-Salida a stdout (compatible con audit)</li>
+Salida a stdout (JSON vía LogManager)</li>
+<li><input disabled="" type="checkbox"/>
+Sin passwords/tokens en la API ni en el contenido del mensaje</li>
 </ul>
 <h2 id="next-step-5"><a class="header" href="#next-step-5">Next step</a></h2>
-<p>Stack de recolección: <a href="wiki/proceso/../../repositories/smartruck-audit/README.html">smartruck-audit</a> · <a href="wiki/proceso/../../repositories/smartruck-audit/arquitectura.html">Arquitectura audit</a></p>
+<p>Recolección: Datadog (Student Pack / Agent) o <a href="wiki/proceso/../../repositories/smartruck-audit/README.html">smartruck-audit</a> · <a href="wiki/proceso/../../repositories/smartruck-backend/arquitectura.html">Arquitectura backend</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="convención-de-gherkin-bdd"><a class="header" href="#convención-de-gherkin-bdd">Convención de Gherkin (BDD)</a></h1>
 <p>Formato de los archivos <code>.feature</code> en SmartTruck, alineado a lo usado en <a href="wiki/proceso/../../repositories/smartruck-backend/README.html">smartruck-backend</a> (<code>test/acceptance/features/</code>).</p>
 <p>Siempre en <strong>español</strong>: <code># language: es</code> al inicio.</p>
@@ -1158,10 +1166,24 @@ Links de ambientes actualizados</li>
 </ul>
 <h2 id="organización-del-código"><a class="header" href="#organización-del-código">Organización del código</a></h2>
 <pre><code class="language-text">src/
-  domain/           # modelos, puertos, excepciones
-  application/      # casos de uso, DTOs
-  infrastructure/   # FastAPI, HTTP, persistence, gateways
+  domain/              # modelos, puertos de dominio, excepciones
+  application/         # casos de uso, DTOs, LogManager (JSON → stdout)
+  infrastructure/
+    api.py             # fábrica FastAPI / lifespan
+    inbound/           # adaptadores de entrada
+      http_controllers/
+      dto/             # schemas HTTP (Pydantic)
+      mappers/         # HTTP ↔ application
+    outbound/          # adaptadores de salida
+      persistence/     # PostgreSQL / SQLModel
+      gateways/        # integraciones externas (p. ej. MercadoPago)
 </code></pre>
+<div class="table-wrapper"><table><thead><tr><th>Carpeta</th><th>Rol</th></tr></thead><tbody>
+<tr><td><code>inbound/</code></td><td>Todo lo que <strong>entra</strong> al hexágono (HTTP)</td></tr>
+<tr><td><code>outbound/</code></td><td>Todo lo que <strong>sale</strong> del hexágono (DB, APIs)</td></tr>
+<tr><td><code>application/logger/</code></td><td><code>LogManager</code>: arma el log y escribe a <strong>stdout</strong></td></tr>
+</tbody></table>
+</div>
 <h2 id="límites"><a class="header" href="#límites">Límites</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Hace</th><th>No hace</th></tr></thead><tbody>
 <tr><td>Lógica de negocio y API</td><td>UI Dador / Transportista</td></tr>
@@ -1180,11 +1202,12 @@ Links de ambientes actualizados</li>
 <h2 id="logging"><a class="header" href="#logging">Logging</a></h2>
 <p>Convención del equipo (entradas/salidas del hexágono): <a href="repositories/smartruck-backend/../../wiki/proceso/logging.html">Logging</a>.</p>
 <ul>
-<li><strong>Controladores:</strong> <code>info</code> + log de excepciones/errores (burbujean hasta acá).</li>
-<li><strong>Repositorios:</strong> <code>info</code> de operaciones de salida.</li>
-<li>Salida a stdout → <a href="repositories/smartruck-backend/../smartruck-audit/README.html">smartruck-audit</a>.</li>
+<li><strong>Controladores</strong> (<code>inbound/</code>): <code>info</code> + log de excepciones/errores (burbujean hasta acá).</li>
+<li><strong>Repositorios</strong> (<code>outbound/persistence/</code>): <code>info</code> de operaciones de salida.</li>
+<li>Emisión: <code>LogManager</code> (<code>application/logger</code>) → <strong>stdout</strong> (JSON: <code>level</code>, <code>message</code>, <code>service</code>, <code>env</code>).</li>
+<li>Recolección afuera (p. ej. Datadog Agent / Cloud Run). Cablear controllers/repos: tasks posteriores.</li>
+<li>API: solo <code>info</code>/<code>error(message)</code> — sin campos de secretos.</li>
 </ul>
-<p>Fuente detallada: README del repositorio.</p>
 <h2 id="acceptance--gherkin"><a class="header" href="#acceptance--gherkin">Acceptance / Gherkin</a></h2>
 <p>Features en <code>test/acceptance/features/</code>. Convención del equipo: <a href="repositories/smartruck-backend/../../wiki/proceso/gherkin.html">Gherkin</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="links--smartruck-backend"><a class="header" href="#links--smartruck-backend">Links — smartruck-backend</a></h1>

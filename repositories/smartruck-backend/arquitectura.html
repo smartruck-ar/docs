@@ -182,10 +182,24 @@
 </ul>
 <h2 id="organización-del-código"><a class="header" href="#organización-del-código">Organización del código</a></h2>
 <pre><code class="language-text">src/
-  domain/           # modelos, puertos, excepciones
-  application/      # casos de uso, DTOs
-  infrastructure/   # FastAPI, HTTP, persistence, gateways
+  domain/              # modelos, puertos de dominio, excepciones
+  application/         # casos de uso, DTOs, LogManager (JSON → stdout)
+  infrastructure/
+    api.py             # fábrica FastAPI / lifespan
+    inbound/           # adaptadores de entrada
+      http_controllers/
+      dto/             # schemas HTTP (Pydantic)
+      mappers/         # HTTP ↔ application
+    outbound/          # adaptadores de salida
+      persistence/     # PostgreSQL / SQLModel
+      gateways/        # integraciones externas (p. ej. MercadoPago)
 </code></pre>
+<div class="table-wrapper"><table><thead><tr><th>Carpeta</th><th>Rol</th></tr></thead><tbody>
+<tr><td><code>inbound/</code></td><td>Todo lo que <strong>entra</strong> al hexágono (HTTP)</td></tr>
+<tr><td><code>outbound/</code></td><td>Todo lo que <strong>sale</strong> del hexágono (DB, APIs)</td></tr>
+<tr><td><code>application/logger/</code></td><td><code>LogManager</code>: arma el log y escribe a <strong>stdout</strong></td></tr>
+</tbody></table>
+</div>
 <h2 id="límites"><a class="header" href="#límites">Límites</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Hace</th><th>No hace</th></tr></thead><tbody>
 <tr><td>Lógica de negocio y API</td><td>UI Dador / Transportista</td></tr>
@@ -204,11 +218,12 @@
 <h2 id="logging"><a class="header" href="#logging">Logging</a></h2>
 <p>Convención del equipo (entradas/salidas del hexágono): <a href="../../wiki/proceso/logging.html">Logging</a>.</p>
 <ul>
-<li><strong>Controladores:</strong> <code>info</code> + log de excepciones/errores (burbujean hasta acá).</li>
-<li><strong>Repositorios:</strong> <code>info</code> de operaciones de salida.</li>
-<li>Salida a stdout → <a href="../smartruck-audit/README.html">smartruck-audit</a>.</li>
+<li><strong>Controladores</strong> (<code>inbound/</code>): <code>info</code> + log de excepciones/errores (burbujean hasta acá).</li>
+<li><strong>Repositorios</strong> (<code>outbound/persistence/</code>): <code>info</code> de operaciones de salida.</li>
+<li>Emisión: <code>LogManager</code> (<code>application/logger</code>) → <strong>stdout</strong> (JSON: <code>level</code>, <code>message</code>, <code>service</code>, <code>env</code>).</li>
+<li>Recolección afuera (p. ej. Datadog Agent / Cloud Run). Cablear controllers/repos: tasks posteriores.</li>
+<li>API: solo <code>info</code>/<code>error(message)</code> — sin campos de secretos.</li>
 </ul>
-<p>Fuente detallada: README del repositorio.</p>
 <h2 id="acceptance--gherkin"><a class="header" href="#acceptance--gherkin">Acceptance / Gherkin</a></h2>
 <p>Features en <code>test/acceptance/features/</code>. Convención del equipo: <a href="../../wiki/proceso/gherkin.html">Gherkin</a>.</p>
 
