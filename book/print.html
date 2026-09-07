@@ -620,6 +620,7 @@ Descripción clara y acotada al cambio</li>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="convención-de-logging-arquitectura-hexagonal"><a class="header" href="#convención-de-logging-arquitectura-hexagonal">Convención de logging (arquitectura hexagonal)</a></h1>
 <p>Dónde y qué loguear en los servicios SmartTruck (backend y fronts con capas hexagonales).</p>
 <p>Los logs van a <strong>stdout</strong> y los recolecta <a href="wiki/proceso/../../repositories/smartruck-audit/README.html">smartruck-audit</a> (Promtail → Loki → Grafana).</p>
+<p>En <strong>smartruck-backend</strong>, los adapters de logging viven bajo <code>infrastructure/outbound/logger/</code> (salida del hexágono). Detalle de carpetas: <a href="wiki/proceso/../../repositories/smartruck-backend/arquitectura.html">Arquitectura backend</a>.</p>
 <h2 id="dónde-loguear"><a class="header" href="#dónde-loguear">Dónde loguear</a></h2>
 <p>Solo en los <strong>bordes</strong> del hexágono: <strong>entradas</strong> y <strong>salidas</strong>.</p>
 <div class="table-wrapper"><table><thead><tr><th>Lugar</th><th>Rol en el hexágono</th><th>Qué loguea</th></tr></thead><tbody>
@@ -1158,10 +1159,24 @@ Links de ambientes actualizados</li>
 </ul>
 <h2 id="organización-del-código"><a class="header" href="#organización-del-código">Organización del código</a></h2>
 <pre><code class="language-text">src/
-  domain/           # modelos, puertos, excepciones
-  application/      # casos de uso, DTOs
-  infrastructure/   # FastAPI, HTTP, persistence, gateways
+  domain/              # modelos, puertos, excepciones
+  application/         # casos de uso, DTOs
+  infrastructure/
+    api.py             # fábrica FastAPI / lifespan
+    inbound/           # adaptadores de entrada
+      http_controllers/
+      dto/             # schemas HTTP (Pydantic)
+      mappers/         # HTTP ↔ application
+    outbound/          # adaptadores de salida
+      persistence/     # PostgreSQL / SQLModel
+      gateways/        # integraciones externas (p. ej. MercadoPago)
+      logger/          # salida de logs (p. ej. stdout → audit)
 </code></pre>
+<div class="table-wrapper"><table><thead><tr><th>Carpeta</th><th>Rol</th></tr></thead><tbody>
+<tr><td><code>inbound/</code></td><td>Todo lo que <strong>entra</strong> al hexágono (HTTP)</td></tr>
+<tr><td><code>outbound/</code></td><td>Todo lo que <strong>sale</strong> del hexágono (DB, APIs, logs)</td></tr>
+</tbody></table>
+</div>
 <h2 id="límites"><a class="header" href="#límites">Límites</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Hace</th><th>No hace</th></tr></thead><tbody>
 <tr><td>Lógica de negocio y API</td><td>UI Dador / Transportista</td></tr>
@@ -1180,11 +1195,10 @@ Links de ambientes actualizados</li>
 <h2 id="logging"><a class="header" href="#logging">Logging</a></h2>
 <p>Convención del equipo (entradas/salidas del hexágono): <a href="repositories/smartruck-backend/../../wiki/proceso/logging.html">Logging</a>.</p>
 <ul>
-<li><strong>Controladores:</strong> <code>info</code> + log de excepciones/errores (burbujean hasta acá).</li>
-<li><strong>Repositorios:</strong> <code>info</code> de operaciones de salida.</li>
-<li>Salida a stdout → <a href="repositories/smartruck-backend/../smartruck-audit/README.html">smartruck-audit</a>.</li>
+<li><strong>Controladores</strong> (<code>inbound/</code>): <code>info</code> + log de excepciones/errores (burbujean hasta acá).</li>
+<li><strong>Repositorios</strong> (<code>outbound/persistence/</code>): <code>info</code> de operaciones de salida.</li>
+<li>Adapter de emisión: <code>outbound/logger/</code> → stdout → <a href="repositories/smartruck-backend/../smartruck-audit/README.html">smartruck-audit</a>.</li>
 </ul>
-<p>Fuente detallada: README del repositorio.</p>
 <h2 id="acceptance--gherkin"><a class="header" href="#acceptance--gherkin">Acceptance / Gherkin</a></h2>
 <p>Features en <code>test/acceptance/features/</code>. Convención del equipo: <a href="repositories/smartruck-backend/../../wiki/proceso/gherkin.html">Gherkin</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="links--smartruck-backend"><a class="header" href="#links--smartruck-backend">Links — smartruck-backend</a></h1>

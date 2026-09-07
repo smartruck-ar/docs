@@ -10,10 +10,24 @@
 
 ```text
 src/
-  domain/           # modelos, puertos, excepciones
-  application/      # casos de uso, DTOs
-  infrastructure/   # FastAPI, HTTP, persistence, gateways
+  domain/              # modelos, puertos de dominio, excepciones
+  application/         # casos de uso, DTOs, LogManager (JSON → stdout)
+  infrastructure/
+    api.py             # fábrica FastAPI / lifespan
+    inbound/           # adaptadores de entrada
+      http_controllers/
+      dto/             # schemas HTTP (Pydantic)
+      mappers/         # HTTP ↔ application
+    outbound/          # adaptadores de salida
+      persistence/     # PostgreSQL / SQLModel
+      gateways/        # integraciones externas (p. ej. MercadoPago)
 ```
+
+| Carpeta | Rol |
+|---------|-----|
+| `inbound/` | Todo lo que **entra** al hexágono (HTTP) |
+| `outbound/` | Todo lo que **sale** del hexágono (DB, APIs) |
+| `application/logger/` | `LogManager`: arma el log y escribe a **stdout** |
 
 ## Límites
 
@@ -39,11 +53,11 @@ src/
 
 Convención del equipo (entradas/salidas del hexágono): [Logging](../../wiki/proceso/logging.md).
 
-- **Controladores:** `info` + log de excepciones/errores (burbujean hasta acá).
-- **Repositorios:** `info` de operaciones de salida.
-- Salida a stdout → [smartruck-audit](../smartruck-audit/README.md).
-
-Fuente detallada: README del repositorio.
+- **Controladores** (`inbound/`): `info` + log de excepciones/errores (burbujean hasta acá).
+- **Repositorios** (`outbound/persistence/`): `info` de operaciones de salida.
+- Emisión: `LogManager` (`application/logger`) → **stdout** (JSON: `level`, `message`, `service`, `env`).
+- Recolección afuera (p. ej. Datadog Agent / Cloud Run). Cablear controllers/repos: tasks posteriores.
+- API: solo `info`/`error(message)` — sin campos de secretos.
 
 ## Acceptance / Gherkin
 

@@ -176,6 +176,7 @@
                         <h1 id="convención-de-logging-arquitectura-hexagonal"><a class="header" href="#convención-de-logging-arquitectura-hexagonal">Convención de logging (arquitectura hexagonal)</a></h1>
 <p>Dónde y qué loguear en los servicios SmartTruck (backend y fronts con capas hexagonales).</p>
 <p>Los logs van a <strong>stdout</strong> y los recolecta <a href="../../repositories/smartruck-audit/README.html">smartruck-audit</a> (Promtail → Loki → Grafana).</p>
+<p>En <strong>smartruck-backend</strong>, los adapters de logging viven bajo <code>infrastructure/outbound/logger/</code> (salida del hexágono). Detalle de carpetas: <a href="../../repositories/smartruck-backend/arquitectura.html">Arquitectura backend</a>.</p>
 <h2 id="dónde-loguear"><a class="header" href="#dónde-loguear">Dónde loguear</a></h2>
 <p>Solo en los <strong>bordes</strong> del hexágono: <strong>entradas</strong> y <strong>salidas</strong>.</p>
 <div class="table-wrapper"><table><thead><tr><th>Lugar</th><th>Rol en el hexágono</th><th>Qué loguea</th></tr></thead><tbody>
