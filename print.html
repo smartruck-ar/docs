@@ -225,6 +225,8 @@
 [cloud-template]   → plataforma Nomad (IaC)
 [infra-template]   → template de microservicio (Docker / Nomad / GHCR)
 </code></pre>
+<p>Diagrama interactivo (Archify): <a href="./arquitectura/diagrams/smartruck-architecture.html">Arquitectura SmartTruck</a><br />
+(en local: <code>mdbook serve --open</code> y abrí ese link, o el HTML directo con el browser).</p>
 <p>Detalle por servicio: <a href="./repositories/README.html">Repositories</a>.</p>
 <h2 id="componentes"><a class="header" href="#componentes">Componentes</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Componente</th><th>Rol</th></tr></thead><tbody>
@@ -626,27 +628,36 @@ Descripción clara y acotada al cambio</li>
 LogManager(service="smartruck-backend", env="test").error("…")
 </code></pre>
 <p>Solo <code>message: str</code>. <strong>No</strong> hay parámetros <code>password</code>, <code>token</code> ni similares: no loguear secretos en el mensaje.</p>
+<h3 id="correlation-id"><a class="header" href="#correlation-id">Correlation ID</a></h3>
+<ul>
+<li>Header: <code>X-Correlation-Id</code></li>
+<li>Middleware: reutiliza el header o genera un UUID; lo refleja en la response.</li>
+<li><code>LogManager</code> lo incluye en el JSON cuando está disponible (<code>correlation_id</code>).</li>
+</ul>
 <h2 id="dónde-loguear"><a class="header" href="#dónde-loguear">Dónde loguear</a></h2>
 <p>Solo en los <strong>bordes</strong> del hexágono: <strong>entradas</strong> y <strong>salidas</strong>.</p>
 <div class="table-wrapper"><table><thead><tr><th>Lugar</th><th>Rol en el hexágono</th><th>Qué loguea</th></tr></thead><tbody>
-<tr><td><strong>Controladores</strong> (adapters de entrada / HTTP)</td><td>Entrada</td><td><code>info</code> de lo que se está haciendo (request / caso) y <strong>todas</strong> las excepciones/errores</td></tr>
-<tr><td><strong>Repositorios</strong> (adapters de salida / persistencia u otros gateways)</td><td>Salida</td><td><code>info</code> de lo que se está haciendo hacia afuera (query, save, call externo)</td></tr>
+<tr><td><strong>Controladores</strong> (adapters de entrada / HTTP)</td><td>Entrada</td><td><code>info</code> de lo que se está haciendo (request / caso, sin secretos)</td></tr>
+<tr><td><strong>Repositorios</strong> (adapters de salida / persistencia u otros gateways)</td><td>Salida</td><td><code>info</code> de operaciones hacia afuera</td></tr>
+<tr><td><strong>GlobalExceptionHandler</strong></td><td>Borde HTTP</td><td><code>error</code>/<code>warning</code> de excepciones burbujeadas + response HTTP</td></tr>
 </tbody></table>
 </div>
-<pre><code class="language-text">[HTTP] → Controlador ──info + errores──┐
+<pre><code class="language-text">[HTTP] → Controlador ──info────────────┐
               │                        │
-              ▼                        ├──&gt; stdout → audit
+              ▼                        ├──&gt; stdout → Datadog / audit
          Caso de uso                   │
-         (dominio / application)       │
               │                        │
               ▼                        │
-         Repositorio ──info────────────┘
+         Repositorio ──info────────────┤
+              │                        │
+              └── excepciones ──► GlobalExceptionHandler ──error─┘
 </code></pre>
 <h2 id="errores-y-excepciones"><a class="header" href="#errores-y-excepciones">Errores y excepciones</a></h2>
 <ul>
-<li>Las excepciones <strong>burbujean</strong> hacia el <strong>controlador</strong>.</li>
-<li>El <strong>controlador</strong> es quien <strong>loguea</strong> excepciones/errores (nivel <code>error</code> / <code>warning</code> según corresponda).</li>
-<li>Los repositorios (y el dominio) <strong>lanzan</strong> o propagan; no tragan el error en silencio ni duplican el log de error si ya va a subir.</li>
+<li>Las excepciones <strong>burbujean</strong> hasta un <strong>GlobalExceptionHandler</strong> (capa HTTP / inbound).</li>
+<li>El handler centraliza: log <code>error</code>/<code>warning</code>, mapeo a response HTTP. Los controllers <strong>no</strong> atrapan para relanzar.</li>
+<li>Controllers: solo <code>info</code> de entrada (y datos seguros). Repos: <code>info</code> de salida; propagan errores hacia arriba.</li>
+<li>No duplicar el log de error en repo <strong>y</strong> controller <strong>y</strong> handler.</li>
 </ul>
 <h2 id="info--qué-se-está-haciendo"><a class="header" href="#info--qué-se-está-haciendo">Info / “qué se está haciendo”</a></h2>
 <ul>
@@ -657,7 +668,7 @@ LogManager(service="smartruck-backend", env="test").error("…")
 <h2 id="qué-no-loguear-ahí"><a class="header" href="#qué-no-loguear-ahí">Qué no loguear ahí</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Evitar</th><th>Motivo</th></tr></thead><tbody>
 <tr><td>Loguear en cada línea del caso de uso / dominio</td><td>Ruido; el dominio queda limpio</td></tr>
-<tr><td>Loguear el mismo error en repo <strong>y</strong> controlador</td><td>Duplicado; el error se loguea al burbujear en el controlador</td></tr>
+<tr><td>Loguear el mismo error en repo <strong>y</strong> controller <strong>y</strong> handler</td><td>Duplicado; el error se loguea una sola vez en el GlobalExceptionHandler</td></tr>
 <tr><td>Passwords, tokens, PII innecesaria</td><td>Seguridad</td></tr>
 </tbody></table>
 </div>
@@ -666,7 +677,7 @@ LogManager(service="smartruck-backend", env="test").error("…")
 <li><input disabled="" type="checkbox"/>
 <code>info</code> en controlador (entrada) y repositorio (salida)</li>
 <li><input disabled="" type="checkbox"/>
-Errores/excepciones logueados en el controlador tras burbujear</li>
+Errores/excepciones logueados en el <strong>GlobalExceptionHandler</strong> (no catch/rethrow en controllers)</li>
 <li><input disabled="" type="checkbox"/>
 Sin logs de negocio ruidosos en application/domain</li>
 <li><input disabled="" type="checkbox"/>
@@ -675,7 +686,27 @@ Salida a stdout (JSON vía LogManager)</li>
 Sin passwords/tokens en la API ni en el contenido del mensaje</li>
 </ul>
 <h2 id="next-step-5"><a class="header" href="#next-step-5">Next step</a></h2>
-<p>Recolección: Datadog (Student Pack / Agent) o <a href="wiki/proceso/../../repositories/smartruck-audit/README.html">smartruck-audit</a> · <a href="wiki/proceso/../../repositories/smartruck-backend/arquitectura.html">Arquitectura backend</a></p>
+<h3 id="recolección-local-con-datadog-student-pack"><a class="header" href="#recolección-local-con-datadog-student-pack">Recolección local con Datadog (Student Pack)</a></h3>
+<p>La app <strong>no</strong> envía a Datadog: solo escribe JSON a stdout. En local, el Agent lee el stdout del container <code>app</code>.</p>
+<ol>
+<li>En <code>.env</code> (no commitear): <code>DD_API_KEY=&lt;tu-api-key&gt;</code>, opcional <code>DD_SITE=us5.datadoghq.com</code>, y <code>DD_MIRROR_LOGS_TO_DOCKER=true</code>.</li>
+<li>Recrear <code>app</code> (para inyectar el flag) y levantar el Agent: <code>docker compose up -d --force-recreate app &amp;&amp; docker compose --profile datadog up -d datadog-agent</code>.</li>
+<li>Dentro del container, <code>./scripts/run_app</code> (espeja stdout al log del container para que el Agent lo lea; JetBrains/exec no alcanza solo).</li>
+<li>Generar tráfico (p. ej. <code>POST /transporters</code> con header <code>X-Correlation-Id</code>).</li>
+<li>En <a href="https://us5.datadoghq.com/logs">Log Explorer</a>: filtro <code>service:smartruck-backend</code> y el <code>correlation_id</code>.</li>
+</ol>
+<p>El servicio <code>app</code> declara labels <code>com.datadoghq.ad.logs</code> / tags <code>service</code>+<code>env</code>.</p>
+<h3 id="recolección-en-cloud-run-testprod--smartruck-infra"><a class="header" href="#recolección-en-cloud-run-testprod--smartruck-infra">Recolección en Cloud Run (test/prod) — <code>smartruck-infra</code></a></h3>
+<p>La app <strong>no</strong> usa Infisical para Datadog. En GCP, Cloud Run ya manda stdout a Cloud Logging; la infra reenvía esos logs a Datadog:</p>
+<p><code>Cloud Run → Logging sink → Pub/Sub → Dataflow (Cloud_PubSub_to_Datadog) → us5</code></p>
+<p>En <code>smartruck-infra</code> (entorno <strong>test</strong> primero):</p>
+<ol>
+<li>Agregar el secret de GitHub <code>DATADOG_API_KEY</code> en el repo <code>smartruck-infra</code> (<strong>Repository secret</strong>). No poner la key en <code>terraform.tfvars</code> (pisa <code>TF_VAR_*</code>).</li>
+<li>Tag/release para que el pipeline haga <code>terraform apply</code> en test (<code>TF_VAR_datadog_api_key</code>).</li>
+<li>Generar tráfico en la API de test y verificar en <a href="https://us5.datadoghq.com/logs">Log Explorer</a>.</li>
+</ol>
+<p>Módulo: <code>modules/datadog_log_forwarding</code>. Prod: mismo módulo cuando test esté validado. Si <code>DATADOG_API_KEY</code> está vacío, el módulo no se crea.</p>
+<p>Alternativa local: <a href="wiki/proceso/../../repositories/smartruck-audit/README.html">smartruck-audit</a> (Loki/Grafana) · <a href="wiki/proceso/../../repositories/smartruck-backend/arquitectura.html">Arquitectura backend</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="convención-de-gherkin-bdd"><a class="header" href="#convención-de-gherkin-bdd">Convención de Gherkin (BDD)</a></h1>
 <p>Formato de los archivos <code>.feature</code> en SmartTruck, alineado a lo usado en <a href="wiki/proceso/../../repositories/smartruck-backend/README.html">smartruck-backend</a> (<code>test/acceptance/features/</code>).</p>
 <p>Siempre en <strong>español</strong>: <code># language: es</code> al inicio.</p>
