@@ -90,11 +90,11 @@ El servicio `app` declara labels `com.datadoghq.ad.logs` / tags `service`+`env`.
 
 La app **no** usa Infisical para Datadog. En GCP, Cloud Run ya manda stdout a Cloud Logging; la infra reenvía esos logs a Datadog:
 
-`Cloud Run → Logging sink → Pub/Sub → Cloud Function Gen2 (Python) → us5`
+`Cloud Run → Logging sink → Pub/Sub → Dataflow (Cloud_PubSub_to_Datadog) → us5`
 
 En `smartruck-infra` (entorno **test** primero):
 
-1. Agregar el secret de GitHub `DATADOG_API_KEY` en el repo `smartruck-infra` (**Repository secret**).
+1. Agregar el secret de GitHub `DATADOG_API_KEY` en el repo `smartruck-infra` (**Repository secret**). No poner la key en `terraform.tfvars` (pisa `TF_VAR_*`).
 2. Tag/release para que el pipeline haga `terraform apply` en test (`TF_VAR_datadog_api_key`).
 3. Generar tráfico en la API de test y verificar en [Log Explorer](https://us5.datadoghq.com/logs).
 
