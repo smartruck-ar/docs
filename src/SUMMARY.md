@@ -22,6 +22,7 @@
   - [Estimación](./wiki/tickets/estimacion.md)
   - [Roles](./wiki/equipo/roles.md)
   - [Glosario](./wiki/equipo/glosario.md)
+  - [Restyling de UI](./wiki/ui/restyling.md)
 
 # Repositories
 
