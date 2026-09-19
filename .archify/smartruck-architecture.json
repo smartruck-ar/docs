@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitectura SmartTruck",
+    "quality_profile": "showcase",
+    "output": "smartruck-architecture.html",
+    "viewBox": [1180, 820],
+    "views": [
+      {
+        "id": "request-path",
+        "label": "Camino principal de API",
+        "focus": ["users", "dador", "transportista", "api_gateway", "backend", "postgres"],
+        "note": "Dador y Transportista en Render llaman al backend privado vía Google API Gateway."
+      },
+      {
+        "id": "identity",
+        "label": "Identidad",
+        "focus": ["supabase_auth", "dador", "backend"],
+        "note": "Dador usa Supabase Auth; el backend valida JWT ES256 por JWKS."
+      },
+      {
+        "id": "observability",
+        "label": "Observabilidad",
+        "focus": ["backend", "log_export", "datadog"],
+        "note": "stdout JSON → Cloud Logging sink → Pub/Sub → Dataflow → Datadog us5."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "users",
+      "type": "external",
+      "label": "Usuarios",
+      "sublabel": "roles de negocio",
+      "pos": [40, 360],
+      "size": [130, 64]
+    },
+    {
+      "id": "dador",
+      "type": "frontend",
+      "label": "smartruck-dador",
+      "sublabel": "ofertas de carga",
+      "tag": "Render",
+      "brand": "render",
+      "pos": [240, 250],
+      "size": [160, 64]
+    },
+    {
+      "id": "transportista",
+      "type": "frontend",
+      "label": "smartruck-transportista",
+      "sublabel": "mapa y desbloqueo",
+      "tag": "Render",
+      "brand": "render",
+      "pos": [240, 470],
+      "size": [160, 64]
+    },
+    {
+      "id": "supabase_auth",
+      "type": "security",
+      "label": "Supabase Auth",
+      "sublabel": "JWT ES256 / JWKS",
+      "brand": "supabase",
+      "pos": [240, 70],
+      "size": [160, 64]
+    },
+    {
+      "id": "api_gateway",
+      "type": "cloud",
+      "label": "API Gateway",
+      "sublabel": "*.gateway.dev",
+      "brand": "google-cloud",
+      "pos": [490, 360],
+      "size": [150, 64]
+    },
+    {
+      "id": "backend",
+      "type": "backend",
+      "label": "smartruck-backend",
+      "sublabel": "FastAPI · Cloud Run",
+      "pos": [720, 360],
+      "size": [160, 64]
+    },
+    {
+      "id": "postgres",
+      "type": "database",
+      "label": "PostgreSQL",
+      "sublabel": "Supabase · RLS",
+      "brand": "supabase",
+      "pos": [970, 360],
+      "size": [140, 64]
+    },
+    {
+      "id": "cloudflare_routes",
+      "type": "cloud",
+      "label": "Cloudflare Workers",
+      "sublabel": "/routes*",
+      "brand": "cloudflare",
+      "pos": [540, 70],
+      "size": [150, 64]
+    },
+    {
+      "id": "mercadopago",
+      "type": "external",
+      "label": "MercadoPago",
+      "sublabel": "Checkout Pro",
+      "pos": [970, 70],
+      "size": [140, 64]
+    },
+    {
+      "id": "log_export",
+      "type": "messagebus",
+      "label": "Export de logs",
+      "sublabel": "sink · Pub/Sub · Dataflow",
+      "pos": [720, 580],
+      "size": [160, 64]
+    },
+    {
+      "id": "datadog",
+      "type": "external",
+      "label": "Datadog",
+      "sublabel": "us5 · Log Management",
+      "brand": "datadog",
+      "pos": [970, 580],
+      "size": [140, 64]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "GCP (test / prod)",
+      "wraps": ["api_gateway", "backend", "log_export"]
+    }
+  ],
+  "connections": [
+    {
+      "id": "users-to-dador",
+      "from": "users",
+      "to": "dador",
+      "variant": "emphasis",
+      "fromSide": "top",
+      "toSide": "left"
+    },
+    {
+      "id": "users-to-transportista",
+      "from": "users",
+      "to": "transportista",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "left"
+    },
+    {
+      "id": "dador-to-gateway",
+      "from": "dador",
+      "to": "api_gateway",
+      "label": "REST + JWT",
+      "fromSide": "right",
+      "toSide": "left",
+      "labelDy": -36
+    },
+    {
+      "id": "transportista-to-gateway",
+      "from": "transportista",
+      "to": "api_gateway",
+      "label": "REST",
+      "fromSide": "right",
+      "toSide": "left",
+      "labelDy": 36
+    },
+    {
+      "id": "gateway-to-backend",
+      "from": "api_gateway",
+      "to": "backend",
+      "label": "run.invoker",
+      "labelDy": 56
+    },
+    {
+      "id": "backend-to-postgres",
+      "from": "backend",
+      "to": "postgres",
+      "label": "SQL",
+      "labelDy": 56
+    },
+    {
+      "id": "dador-auth",
+      "from": "dador",
+      "to": "supabase_auth",
+      "label": "sesión Auth",
+      "variant": "security",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelDx": 50
+    },
+    {
+      "id": "dador-routes",
+      "from": "dador",
+      "to": "cloudflare_routes",
+      "label": "/routes",
+      "variant": "dashed",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "auth-jwks",
+      "from": "supabase_auth",
+      "to": "backend",
+      "label": "JWKS",
+      "variant": "security",
+      "fromSide": "top",
+      "toSide": "top",
+      "labelDy": -28
+    },
+    {
+      "id": "payments",
+      "from": "backend",
+      "to": "mercadopago",
+      "label": "Checkout",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelDx": 50
+    },
+    {
+      "id": "stdout-export",
+      "from": "backend",
+      "to": "log_export",
+      "label": "stdout JSON",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 40
+    },
+    {
+      "id": "export-to-datadog",
+      "from": "log_export",
+      "to": "datadog",
+      "label": "Dataflow → us5",
+      "labelDy": 56
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Clientes",
+      "items": [
+        "smartruck-dador: publica cargas y completa perfil (Render)",
+        "smartruck-transportista: consulta mapa y desbloquea contactos (Render)"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "API",
+      "items": [
+        "Google API Gateway → Cloud Run smartruck-backend (FastAPI hexagonal)",
+        "PostgreSQL en Supabase con RLS; pagos vía MercadoPago"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Observabilidad",
+      "items": [
+        "LogManager escribe JSON a stdout; no hay SDK Datadog en la app",
+        "En test: sink → Pub/Sub → Dataflow → Datadog us5"
+      ]
+    }
+  ]
+}

@@ -15,6 +15,9 @@ Smartruck se organiza en varios repositorios:
 [infra-template]   → template de microservicio (Docker / Nomad / GHCR)
 ```
 
+Diagrama interactivo (Archify): [Arquitectura SmartTruck](./arquitectura/diagrams/smartruck-architecture.html)  
+(en local: `mdbook serve --open` y abrí ese link, o el HTML directo con el browser).
+
 Detalle por servicio: [Repositories](./repositories/README.md).
 
 ## Componentes
