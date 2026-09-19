@@ -25,7 +25,7 @@ Se extrae un paquete (`@smartruck/design-tokens`) **solo si aparece una tercera 
 | Tokens de color | Siempre `oklch()` como custom property en `:root` / `.dark`, mapeados en `@theme inline`. |
 | Componentes UI | `src/components/ui/` (shadcn). El portado va archivo por archivo. |
 | Primitivas de layout | `src/components/layout/` — `PageContainer`, `PageHeader`, `PageSection`. |
-| Shell | `src/views/layout/`. **transportista ya usa esta carpeta; dador todavía renderiza el shell dentro de `smartruck-app.tsx`.** El restyling del dador debe converger a `src/views/layout/`. |
+| Shell | `src/views/layout/` — `app-shell.tsx` (chrome + `<Outlet/>` + drawer + dialog), `topbar.tsx` y `app-shell-context.ts` (contexto + `useAppShell()`). El dador ya convergió: las rutas autenticadas son hijas de un layout route sin path (`src/routes/_app.tsx`). El transportista todavía renderiza el shell por ruta y usa `src/views/layout/appbar.tsx`. |
 | Helpers | `src/lib/` en ambos repos. **No** se usa `src/utils/`. |
 | Iconos | Wrapper propio antes de cualquier migración de librería. |
 | Escala tipográfica | **Un solo valor**: `html { font-size: 142.9% }` en `@layer base` de `src/styles.css`. Como Tailwind v4 es rem-based, escala texto, espaciados, alturas de control y contenedores de forma proporcional. Con eso `text-sm` pasa de 14px a ~20px. Recalibrar = cambiar ese único número. |
@@ -65,6 +65,9 @@ Detectada al planificar el restyling. Debe converger durante el pase del transpo
 - **El modo claro pasa a beige cálido** (h≈85) con el verde como primario; el oscuro mantiene el azul petróleo + oliva del logo y resuelve la elevación por capas de superficie en vez de sombras.
 - **Se activan las animaciones base de shadcn** importando `tw-animate-css`, que estaba instalado pero nunca importado.
 - **El `theme-color` sigue al modo activo**: el hook de tema actualiza el meta al togglear, en vez de quedar fijo en `#ffffff`.
+- **La vista activa se deriva del pathname**, no de estado local. `NavKey` perdió el miembro `myLoadDetail`: con rutas reales, `/my-loads/$loadId` ilumina solo el tab `myLoads`.
+- **El guard de sesión vive en el root, no en el layout autenticado.** Se evaluó moverlo al layout route y se descartó: el layout solo ve sus hijos, así que una visita sin sesión a una ruta desconocida terminaría en 404 en vez de redirigir a login. El guard necesita ver todas las rutas. Lección para el portado: no reubicar un guard sin comprobar que sigue cubriendo lo mismo.
+- **El shell ya no se re-monta al navegar.** Ese era el objetivo, pero trae una consecuencia de ciclo de vida a tener en cuenta al portar: la campana de notificaciones y el estado del drawer persisten entre tabs en vez de reiniciarse.
 
 ## Decisiones abiertas
 
