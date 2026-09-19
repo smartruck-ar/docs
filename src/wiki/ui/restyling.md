@@ -76,6 +76,11 @@ Detectada al planificar el restyling. Debe converger durante el pase del transpo
 - **La vista activa se deriva del pathname**, no de estado local. `NavKey` perdió el miembro `myLoadDetail`: con rutas reales, `/my-loads/$loadId` ilumina solo el tab `myLoads`.
 - **El guard de sesión vive en el root, no en el layout autenticado.** Se evaluó moverlo al layout route y se descartó: el layout solo ve sus hijos, así que una visita sin sesión a una ruta desconocida terminaría en 404 en vez de redirigir a login. El guard necesita ver todas las rutas. Lección para el portado: no reubicar un guard sin comprobar que sigue cubriendo lo mismo.
 - **El shell ya no se re-monta al navegar.** Ese era el objetivo, pero trae una consecuencia de ciclo de vida a tener en cuenta al portar: la campana de notificaciones y el estado del drawer persisten entre tabs en vez de reiniciarse.
+- **Tres roles de radio, y nada más.** Pill (`rounded-full`) para todo lo que se *acciona*: botones, icon buttons, inputs, selects, badges, avatares, chips, pills de nav, tabs, progreso, slider. Panel (`rounded-2xl`, 16px) para todo lo que *contiene*: cards, dialogs, drawers, sheets, popovers, dropdowns, paneles de vista. Inset (`rounded-xl`, 12px) para lo que va *dentro* de un panel: tiles de icono, sub-paneles, empty states. Reglas: un elemento un rol, sin overrides de radio en el call site, y **un hijo nunca puede quedar más redondo que su contenedor**. `rounded-3xl` ya no existe en el código.
+- **Los items de menú son la excepción deliberada:** van en `rounded-lg` (8px), no pill. Son filas de ancho completo con icono y estado seleccionado full-bleed, y una cápsula les come el padding lateral de forma despareja.
+- **El `Textarea` es el único control que no es pill:** toma el radio Inset (12px) para que **nunca pueda quedar más redondo que la card que lo contiene**. Fue la única inversión real que apareció en el pase, y salió de que el contrato original le daba radio Panel.
+- **Regla de superficies.** El fondo de página es beige (`--background`, hoy `oklch(0.968 0.014 85)` = `#f9f4ea`). Toda superficie que contiene campos va en `--card` (blanco, `#fefbf6`), y **ningún campo interactivo puede resolver al fondo de página**. En el pase el beige venía de tres lados distintos: contenedores con `bg-background`, selects nativos con `bg-background` hardcodeado, y —el menos obvio— el variant `outline` de `Button`, que fija `bg-background` y es justo el que usan los triggers de autocomplete y date picker. Se corrigió agregando `bg-card` al `className` del trigger (twMerge lo respeta, porque `cn(buttonVariants({ ...className }))` deja el `className` último), **sin tocar el variant global**.
+- **Ojo con los px fijos, no solo en tipografía.** El knob del `142.9%` escala todo lo que es rem, pero un ancho en px queda clavado: el campo de hora tenía `w-[95px]` y por eso se veía diminuto al lado de campos que sí crecían. Es la misma trampa que los `text-[Npx]`, aplicada a anchos. Al portar, buscar `w-[`, `h-[`, `max-w-[` y `text-[` con valores en px.
 
 ## Decisiones abiertas
 
@@ -86,10 +91,12 @@ Detectada al planificar el restyling. Debe converger durante el pase del transpo
 ## Checklist de portado al transportista
 
 - [ ] **Decidir el mecanismo de escala** (knob de raíz vs tokens `--text-*` explícitos) y aplicar `html { font-size: 142.9% }` o su equivalente.
-- [ ] Cargar Figtree (interfaz) y Archivo (wordmark) con Fontsource. **No** usar `<link>` a Google.
+- [ ] Cargar Figtree (interfaz) y **Chakra Petch 700 italic** (wordmark) con Fontsource. **No** usar `<link>` a Google.
 - [ ] Importar `tw-animate-css` en el CSS global.
 - [ ] Aplicar `--success` / `--warning` / `--danger` con sus `-foreground` y verificar contraste AA en los dos modos.
-- [ ] Convertir a rem o a la escala todo `text-[Npx]` y todo `font-size` en px.
+- [ ] Aplicar los tres roles de radio y **verificar que ningún hijo quede más redondo que su contenedor**.
+- [ ] Aplicar la regla de superficies: fondo beige, superficies con campos en `--card`, y ningún campo interactivo resolviendo al fondo de página.
+- [ ] Convertir a rem o a la escala todo `text-[Npx]`, `font-size` en px, **y todo ancho/alto en px** (`w-[`, `h-[`, `max-w-[`): los px fijos no escalan con el knob.
 - [ ] Aplicar `src/styles.css` completo y verificar que los nombres de token coincidan 1:1.
 - [ ] Converger los cuatro tokens de superficie del modo claro al beige.
 - [ ] Alinear `button.tsx` y el resto de los componentes UI a la versión del contrato.
