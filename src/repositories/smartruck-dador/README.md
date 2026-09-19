@@ -23,7 +23,7 @@ Repo: [smartruck-ar/smartruck-dador](https://github.com/smartruck-ar/smartruck-d
 | Runtime | Node 22 |
 | Framework | TanStack Start + Vite |
 | UI | React + Radix / shadcn-style |
-| Tests | Vitest + Playwright |
+| Tests | Vitest (unit + integración) |
 | Contenedores | Docker / Dev Containers |
 
 ## Scripts útiles
@@ -32,7 +32,7 @@ Repo: [smartruck-ar/smartruck-dador](https://github.com/smartruck-ar/smartruck-d
 |---------|----------|
 | `./scripts/dev_app` | Dev con hot reload (Compose: host `5174`) |
 | `./scripts/run_lint` | ESLint + Prettier + tsc + Vitest |
-| `./scripts/run_all_tests` | Lint + Playwright |
+| `./scripts/run_all_tests` | Gate completo (lint + typecheck + tests) |
 | `./scripts/start_dev_containers` | Compose + shell en `app` |
 
 ## Docs de este repo
