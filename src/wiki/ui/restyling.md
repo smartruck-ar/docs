@@ -17,6 +17,8 @@ Se extrae un paquete (`@smartruck/design-tokens`) **solo si aparece una tercera 
 
 ## Contrato de portado
 
+Esta tabla es el **contrato objetivo**, no un inventario de lo que existe. Las filas marcadas **PENDIENTE** todavía no están construidas en el dador: describen algo que hay que construir **antes** de poder portarlo, y llevan anotado a qué historia pertenecen. Las filas sin marca ya existen y se copian tal cual.
+
 | Qué | Regla |
 |-----|-------|
 | Nombres de token | **Idénticos** en los dos repos. Es la razón por la que el portado es casi 1:1. |
@@ -24,10 +26,10 @@ Se extrae un paquete (`@smartruck/design-tokens`) **solo si aparece una tercera 
 | `src/styles.css` | Único origen de verdad visual. Sin `tailwind.config.js` (Tailwind v4 es CSS-first). |
 | Tokens de color | Siempre `oklch()` como custom property en `:root` / `.dark`, mapeados en `@theme inline`. |
 | Componentes UI | `src/components/ui/` (shadcn). El portado va archivo por archivo. |
-| Primitivas de layout | `src/components/layout/` — `PageContainer`, `PageHeader`, `PageSection`. |
+| Primitivas de layout | **PENDIENTE — sin historia asignada.** `src/components/layout/` debe llegar a tener `PageContainer`, `PageHeader`, `PageSection`. Hoy solo existe `wordmark.tsx`. Ojo: esto nació en el plan original y **no quedó dentro de ninguna de las tres tasks de D.X.1**, así que hay que asignarlo a alguna historia antes de portar. |
 | Shell | `src/views/layout/` — `app-shell.tsx` (chrome + `<Outlet/>` + drawer + dialog), `topbar.tsx` y `app-shell-context.ts` (contexto + `useAppShell()`). El dador ya convergió: las rutas autenticadas son hijas de un layout route sin path (`src/routes/_app.tsx`). El transportista todavía renderiza el shell por ruta y usa `src/views/layout/appbar.tsx`. |
 | Helpers | `src/lib/` en ambos repos. **No** se usa `src/utils/`. |
-| Iconos | Wrapper propio antes de cualquier migración de librería. |
+| Iconos | **PENDIENTE (D.X.3).** Wrapper propio antes de cualquier migración de librería. Hoy no existe. |
 | Escala tipográfica | **Un solo valor**: `html { font-size: 142.9% }` en `@layer base` de `src/styles.css`. Como Tailwind v4 es rem-based, escala texto, espaciados, alturas de control y contenedores de forma proporcional. Con eso `text-sm` pasa de 14px a ~20px. Recalibrar = cambiar ese único número. |
 | Fuentes | Autoalojadas con Fontsource, **nunca** `<link>` a Google. Interfaz: **Figtree** (`--font-sans`). Wordmark: **Archivo** (`--font-wordmark`). |
 | Tokens semánticos | `--success`, `--warning`, `--danger` con sus `-foreground`, en `:root` y `.dark`, registrados en `@theme inline` como `--color-*`. |
@@ -101,7 +103,7 @@ Detectada al planificar el restyling. Debe converger durante el pase del transpo
 - [ ] Converger los cuatro tokens de superficie del modo claro al beige.
 - [ ] Alinear `button.tsx` y el resto de los componentes UI a la versión del contrato.
 - [ ] Portar `src/components/layout/` y migrar las vistas a las primitivas.
-- [ ] Portar `src/components/ui/loader.tsx` y montar `defaultPendingComponent` en el router.
+- [ ] **PENDIENTE (D.X.2):** crear `src/components/ui/loader.tsx` y montar `defaultPendingComponent` en el router — hoy no existen en el dador.
 - [ ] Portar el shell a `src/views/layout/` y la estructura de outlet.
 - [ ] Quitar los iconos decorativos de headers.
 - [ ] Reemplazar `Loader2` inline por el loader compartido.
