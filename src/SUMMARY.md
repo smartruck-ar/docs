@@ -20,6 +20,7 @@
   - [Plantilla de ticket](./wiki/tickets/plantilla-ticket.md)
   - [Tipos de ticket](./wiki/tickets/tipos-de-ticket.md)
   - [Estimación](./wiki/tickets/estimacion.md)
+  - [Automatización de historias (roadmap)](./wiki/tickets/automatizacion-historias.md)
   - [Roles](./wiki/equipo/roles.md)
   - [Glosario](./wiki/equipo/glosario.md)
 

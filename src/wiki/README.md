@@ -30,6 +30,7 @@ Convenciones de trabajo compartidas (proceso, tickets, roles). Independiente del
 | [plantilla-ticket.md](tickets/plantilla-ticket.md) | Templates de épica, historia y task |
 | [tipos-de-ticket.md](tickets/tipos-de-ticket.md) | Solo épica, historia y task |
 | [estimacion.md](tickets/estimacion.md) | US points en tasks |
+| [automatizacion-historias.md](tickets/automatizacion-historias.md) | Cómo crear una historia en `roadmap`: numeración automática, tags `front+back`/`crear front`/`crear back`, spikes y sub-issues |
 
 ### Equipo
 
