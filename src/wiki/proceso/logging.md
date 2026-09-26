@@ -13,6 +13,14 @@ LogManager(service="smartruck-backend", env="test").info("…")
 LogManager(service="smartruck-backend", env="test").error("…")
 ```
 
+Niveles disponibles: **`fatal`**, **`error`**, **`warn`**, **`info`**, **`debug`**, **`trace`**.
+
+| Nivel | Uso |
+|-------|-----|
+| `info` | Qué se está haciendo en bordes (entrada/salida, datos salientes seguros) |
+| `error` / `warn` / `fatal` | Fallos y advertencias (p. ej. GlobalExceptionHandler) |
+| `debug` / `trace` | Solo para depurar; no para flujo de negocio habitual |
+
 Solo `message: str`. **No** hay parámetros `password`, `token` ni similares: no loguear secretos en el mensaje.
 
 ### Correlation ID
@@ -99,5 +107,17 @@ En `smartruck-infra` (entorno **test** primero):
 3. Generar tráfico en la API de test y verificar en [Log Explorer](https://us5.datadoghq.com/logs).
 
 Módulo: `modules/datadog_log_forwarding`. Prod: mismo módulo cuando test esté validado. Si `DATADOG_API_KEY` está vacío, el módulo no se crea.
+
+### Recolección en Render (dador / transportista) — `smartruck-infra`
+
+Las apps solo escriben JSON a stdout. Render reenvía el default log stream del workspace a Datadog (IaC; no configurar en la UI):
+
+`Web Service → Render Log Stream → us5 (/api/v2/logs)`
+
+1. Repository secrets en `smartruck-infra`: `RENDER_API_KEY`, `RENDER_OWNER_ID` (`usr-…`/`tea-…`), además de `DATADOG_API_KEY`.
+2. Tag/release → `apply_test` crea `modules/render_datadog_log_stream` (`render_log_stream`).
+3. Generar tráfico en dador/transportista y filtrar en Datadog por `ddsource:render` (o el `service` que Render asigne).
+
+Si falta algún secret, el módulo no se crea. Preview instances: `drop` por defecto.
 
 Alternativa local: [smartruck-audit](../../repositories/smartruck-audit/README.md) (Loki/Grafana) · [Arquitectura backend](../../repositories/smartruck-backend/arquitectura.md)
