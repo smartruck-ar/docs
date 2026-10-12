@@ -281,7 +281,7 @@
 <p>Convenciones de trabajo compartidas (proceso, tickets, roles). Independiente del código de cada repo.</p>
 <h2 id="quick-path"><a class="header" href="#quick-path">Quick path</a></h2>
 <ol>
-<li><a href="wiki/proceso/jerarquia.html">Jerarquía</a> — épica → historia → task</li>
+<li><a href="wiki/proceso/jerarquia.html">Jerarquía</a> — épicas (milestones) e historias de <code>roadmap</code></li>
 <li><a href="wiki/proceso/definition-of-ready.html">Definition of Ready</a></li>
 <li><a href="wiki/proceso/definition-of-done.html">Definition of Done</a></li>
 <li><a href="wiki/tickets/plantilla-ticket.html">Plantilla de ticket</a></li>
@@ -291,21 +291,21 @@
 <h2 id="secciones"><a class="header" href="#secciones">Secciones</a></h2>
 <h3 id="proceso"><a class="header" href="#proceso">Proceso</a></h3>
 <div class="table-wrapper"><table><thead><tr><th>Doc</th><th>Contenido</th></tr></thead><tbody>
-<tr><td><a href="wiki/proceso/jerarquia.html">jerarquia.md</a></td><td>IDs, niveles, completitud</td></tr>
-<tr><td><a href="wiki/proceso/definition-of-ready.html">definition-of-ready.md</a></td><td>Cuándo una task puede empezar</td></tr>
+<tr><td><a href="wiki/proceso/jerarquia.html">jerarquia.md</a></td><td>Épicas, historias, prefijos, IDs y completitud</td></tr>
+<tr><td><a href="wiki/proceso/definition-of-ready.html">definition-of-ready.md</a></td><td>Cuándo una historia puede empezar</td></tr>
 <tr><td><a href="wiki/proceso/definition-of-done.html">definition-of-done.md</a></td><td>Cuándo algo está terminado (productivo)</td></tr>
 <tr><td><a href="wiki/proceso/workflow-entrega.html">workflow-entrega.md</a></td><td>Trabajo en <code>main</code>, release a <code>test</code> y a <code>prod</code>, estados del Board</td></tr>
 <tr><td><a href="wiki/proceso/desarrollo-con-agentes.html">desarrollo-con-agentes.md</a></td><td>Cómo arrancar una feature con un agente: <code>/nueva-feature</code> y sus fases</td></tr>
-<tr><td><a href="wiki/proceso/conventional-commits.html">conventional-commits.md</a></td><td><code>feat</code> / <code>fix</code> / <code>refactor</code> + ID de task</td></tr>
+<tr><td><a href="wiki/proceso/conventional-commits.html">conventional-commits.md</a></td><td><code>feat</code> / <code>fix</code> / <code>refactor</code> + número de historia; commits atómicos a <code>main</code></td></tr>
 <tr><td><a href="wiki/proceso/logging.html">logging.md</a></td><td>Dónde loguear: controladores y repositorios</td></tr>
 <tr><td><a href="wiki/proceso/gherkin.html">gherkin.md</a></td><td>Forma de los <code>.feature</code>: Antecedentes, Regla, Dado/Cuando/Entonces</td></tr>
 </tbody></table>
 </div>
 <h3 id="tickets"><a class="header" href="#tickets">Tickets</a></h3>
 <div class="table-wrapper"><table><thead><tr><th>Doc</th><th>Contenido</th></tr></thead><tbody>
-<tr><td><a href="wiki/tickets/plantilla-ticket.html">plantilla-ticket.md</a></td><td>Templates de épica, historia y task</td></tr>
-<tr><td><a href="wiki/tickets/tipos-de-ticket.html">tipos-de-ticket.md</a></td><td>Solo épica, historia y task</td></tr>
-<tr><td><a href="wiki/tickets/estimacion.html">estimacion.md</a></td><td>US points en tasks</td></tr>
+<tr><td><a href="wiki/tickets/plantilla-ticket.html">plantilla-ticket.md</a></td><td>Cuerpo de una user story: backend con Gherkins, UI y spike</td></tr>
+<tr><td><a href="wiki/tickets/tipos-de-ticket.html">tipos-de-ticket.md</a></td><td>Épica, historia de backend, historia de UI y spike</td></tr>
+<tr><td><a href="wiki/tickets/estimacion.html">estimacion.md</a></td><td><code>US Points</code>, <code>Estimate (hs)</code> y <code>Spent (hs)</code> de las historias</td></tr>
 <tr><td><a href="wiki/tickets/automatizacion-historias.html">automatizacion-historias.md</a></td><td>Cómo crear una historia en <code>roadmap</code>: numeración automática, tags <code>front+back</code>/<code>crear front</code>/<code>crear back</code>, spikes y sub-issues</td></tr>
 </tbody></table>
 </div>
@@ -571,11 +571,11 @@ Sin secretos ni configs locales en los commits</li>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="conventional-commits"><a class="header" href="#conventional-commits">Conventional Commits</a></h1>
 <p>Convención de mensajes de commit del equipo, basada en <a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits 1.0.0</a>.</p>
 <h2 id="formato"><a class="header" href="#formato">Formato</a></h2>
-<pre><code class="language-text">&lt;type&gt;(&lt;id-task&gt;): &lt;descripción&gt;
+<pre><code class="language-text">&lt;type&gt;(&lt;historia&gt;): &lt;descripción&gt;
 </code></pre>
 <ul>
 <li><strong>type:</strong> solo <code>feat</code>, <code>fix</code> o <code>refactor</code></li>
-<li><strong>scope:</strong> ID de la <strong>task</strong> asociada (ej. <code>1.1.2</code> → task <code>D-1.1.2</code> / <code>T-1.1.2</code>)</li>
+<li><strong>scope:</strong> número de la <strong>historia</strong> de <code>roadmap</code> (ej. <code>D.2.8</code>, <code>T.3.12</code>, <code>B.5</code>). La contraparte de UI usa el mismo número, sin <code>UI-</code></li>
 <li><strong>descripción:</strong> resumen corto en imperativo / presente</li>
 </ul>
 <h2 id="tipos-permitidos"><a class="header" href="#tipos-permitidos">Tipos permitidos</a></h2>
@@ -587,14 +587,11 @@ Sin secretos ni configs locales en los commits</li>
 </div>
 <p>No usamos otros types (<code>chore</code>, <code>docs</code>, <code>test</code>, etc.) en este proyecto.</p>
 <h2 id="ejemplos"><a class="header" href="#ejemplos">Ejemplos</a></h2>
-<pre><code class="language-text">feat(1.1.2): agregar endpoint de alta de viaje
+<pre><code class="language-text">feat(D.2.8): agregar caso de uso para eliminar una carga
 
-fix(1.1.2): corregir validación de fecha de carga
+fix(T.2.11): corregir el camión asignado en el detalle de la carga
 
-refactor(1.1.2): extraer mapper de oferta de carga
-</code></pre>
-<p>Con prefijo de producto en el scope (si el equipo lo prefiere de forma explícita):</p>
-<pre><code class="language-text">feat(D-1.1.2): agregar endpoint de alta de viaje
+refactor(B.5): extraer el mapeo de estado del transportista
 </code></pre>
 <h2 id="commits-atómicos-y-push"><a class="header" href="#commits-atómicos-y-push">Commits atómicos y push</a></h2>
 <ul>
@@ -603,14 +600,14 @@ refactor(1.1.2): extraer mapper de oferta de carga
 <li>Cada commit se pushea apenas se crea. No se acumulan commits locales.</li>
 <li>Todo se pushea a <code>main</code>: no hay ramas de feature ni pull requests. <code>test</code> y <code>prod</code> solo se mueven con los scripts de release (<a href="wiki/proceso/workflow-entrega.html">Workflow de entrega</a>).</li>
 <li>Sin cuerpo ni trailers (<code>Co-authored-by</code>, <code>Signed-off-by</code>), sin <code>--no-verify</code> y sin force-push.</li>
-<li>En los repos sin tasks (<code>smartruck-ai</code>), el mensaje va sin scope: <code>feat: &lt;descripción&gt;</code>.</li>
+<li>En los repos sin historias (<code>smartruck-ai</code>, <code>docs</code>) o sin historia asociada, el mensaje va sin scope: <code>feat: &lt;descripción&gt;</code>.</li>
 </ul>
 <h2 id="checklist"><a class="header" href="#checklist">Checklist</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"/>
 Type es <code>feat</code>, <code>fix</code> o <code>refactor</code></li>
 <li><input disabled="" type="checkbox"/>
-Scope es el ID de la task</li>
+Scope es el número de la historia</li>
 <li><input disabled="" type="checkbox"/>
 Descripción clara y acotada al cambio</li>
 <li><input disabled="" type="checkbox"/>
@@ -1092,20 +1089,24 @@ Cada task tiene owner y repo</li>
 <p>Términos del proceso y del dominio.</p>
 <h2 id="proceso-1"><a class="header" href="#proceso-1">Proceso</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Término</th><th>Significado</th></tr></thead><tbody>
-<tr><td>Épica</td><td>Objetivo amplio; ID <code>D-1</code> / <code>T-1</code>; no se estima; Done = todas sus historias en productivo</td></tr>
-<tr><td>Historia</td><td>Valor de usuario en Como/Quiero/Para; ID <code>D-1.2</code>; sin repo; Done = todas sus tasks en productivo</td></tr>
-<tr><td>Task</td><td>Trabajo técnico; ID <code>D-1.2.1</code>; CA + US points + tag + prioridad + repo; horas estimadas al inicio e insumidas al Done; Done = en productivo</td></tr>
-<tr><td>US points</td><td>Estimación relativa de <strong>tasks</strong> (DoR)</td></tr>
-<tr><td>Tag</td><td>Clasificación de la task (producto/área); obligatorio en DoR</td></tr>
-<tr><td>Prioridad</td><td><code>low</code> | <code>medium</code> | <code>high</code> | <code>urgent</code></td></tr>
-<tr><td>Horas estimadas</td><td>Horas hombre previstas; se cargan <strong>al comenzar</strong> la task</td></tr>
-<tr><td>Horas insumidas</td><td>Horas hombre reales; se cargan <strong>al finalizar</strong> (DoD)</td></tr>
+<tr><td>Épica</td><td>Milestone de <code>roadmap</code> que agrupa historias (<code>D.2 - Gestión de carga</code>); no se estima; Done = todas sus historias en productivo</td></tr>
+<tr><td>Historia (user story)</td><td>Issue de <code>roadmap</code> con label <code>user story</code>, título Como/Quiero/Para y número <code>&lt;épica&gt;.&lt;n&gt;</code> (<code>D.2.8</code>); Done = en productivo</td></tr>
+<tr><td>Historia de UI</td><td>Contraparte de pantalla de una historia de backend; mismo número con prefijo <code>UI-</code> (<code>UI-D.2.8</code>)</td></tr>
+<tr><td>Sub-historia</td><td>Sub-issue de una historia; hereda su número (<code>T.1.1.1</code>)</td></tr>
+<tr><td>Spike</td><td>Historia de investigación o decisión; milestone <code>SPIKES</code>, número <code>S.&lt;n&gt;</code>; sin Gherkins</td></tr>
+<tr><td>Board</td><td>Proyecto de GitHub de la organización con las historias del sprint y sus campos</td></tr>
+<tr><td>Status</td><td>Estado en el Board: <code>Backlog</code>, <code>Ready</code>, <code>In progress</code>, <code>In review</code> (en <code>test</code>), <code>Done</code> (en <code>prod</code>)</td></tr>
+<tr><td>US Points</td><td>Estimación relativa de una historia; requerida en DoR</td></tr>
+<tr><td>Priority</td><td>Prioridad de la historia en el Board</td></tr>
+<tr><td>Estimate (hs)</td><td>Horas hombre previstas; se cargan al pasar a <code>In progress</code></td></tr>
+<tr><td>Spent (hs)</td><td>Horas hombre reales; se cargan al liberar a <code>test</code> (<code>In review</code>)</td></tr>
+<tr><td>Release a test</td><td><code>./scripts/release_to_test patch|minor|major</code> al terminar una feature</td></tr>
+<tr><td>Release a prod</td><td><code>./scripts/release_to_prod</code>, a mano, con el equipo, al final del sprint</td></tr>
 <tr><td>Logging</td><td>En controladores (entrada + errores) y repositorios (salida); ver <a href="wiki/equipo/../proceso/logging.html">logging</a></td></tr>
 <tr><td>Gherkin</td><td>BDD en español; <strong>Cuando</strong> contra la app; en <code>main</code> + link en el ticket si aplica; <a href="wiki/equipo/../proceso/gherkin.html">gherkin</a></td></tr>
 <tr><td>DoR</td><td>Definition of Ready</td></tr>
 <tr><td>DoD</td><td>Definition of Done (jerárquico; productivo)</td></tr>
-<tr><td>Prefijo <code>D</code></td><td>Producto Dador</td></tr>
-<tr><td>Prefijo <code>T</code></td><td>Producto Transportista</td></tr>
+<tr><td>Prefijo <code>D</code> / <code>T</code> / <code>R</code> / <code>B</code> / <code>S</code></td><td>Dador / Transportista / Servicio de rutas / Backoffice / Spikes</td></tr>
 </tbody></table>
 </div>
 <h2 id="dominio--producto"><a class="header" href="#dominio--producto">Dominio / producto</a></h2>
@@ -1142,7 +1143,7 @@ Cada task tiene owner y repo</li>
 </div>
 <h2 id="convención"><a class="header" href="#convención">Convención</a></h2>
 <p>Cada carpeta incluye <code>README.md</code>, <code>arquitectura.md</code> y <code>links.md</code>.</p>
-<p>Las <strong>tasks</strong> se asocian a uno de estos repos; las historias y épicas no. Ver <a href="repositories/../wiki/proceso/jerarquia.html">Jerarquía</a>.</p>
+<p>Las historias viven en <code>roadmap</code> y se trabajan en el repo que corresponde: backend en <code>smartruck-backend</code>, pantallas (<code>UI-</code>) en <code>smartruck-dador</code> o <code>smartruck-transportista</code>. Ver <a href="repositories/../wiki/proceso/jerarquia.html">Jerarquía</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="smartruck-backend"><a class="header" href="#smartruck-backend">smartruck-backend</a></h1>
 <p>Backend del sistema Smartruck: publicación, cotización, gestión y desbloqueo de ofertas de carga, con pagos integrados.</p>
 <h2 id="quick-path-3"><a class="header" href="#quick-path-3">Quick path</a></h2>

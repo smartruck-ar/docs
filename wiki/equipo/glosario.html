@@ -177,20 +177,24 @@
 <p>Términos del proceso y del dominio.</p>
 <h2 id="proceso"><a class="header" href="#proceso">Proceso</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Término</th><th>Significado</th></tr></thead><tbody>
-<tr><td>Épica</td><td>Objetivo amplio; ID <code>D-1</code> / <code>T-1</code>; no se estima; Done = todas sus historias en productivo</td></tr>
-<tr><td>Historia</td><td>Valor de usuario en Como/Quiero/Para; ID <code>D-1.2</code>; sin repo; Done = todas sus tasks en productivo</td></tr>
-<tr><td>Task</td><td>Trabajo técnico; ID <code>D-1.2.1</code>; CA + US points + tag + prioridad + repo; horas estimadas al inicio e insumidas al Done; Done = en productivo</td></tr>
-<tr><td>US points</td><td>Estimación relativa de <strong>tasks</strong> (DoR)</td></tr>
-<tr><td>Tag</td><td>Clasificación de la task (producto/área); obligatorio en DoR</td></tr>
-<tr><td>Prioridad</td><td><code>low</code> | <code>medium</code> | <code>high</code> | <code>urgent</code></td></tr>
-<tr><td>Horas estimadas</td><td>Horas hombre previstas; se cargan <strong>al comenzar</strong> la task</td></tr>
-<tr><td>Horas insumidas</td><td>Horas hombre reales; se cargan <strong>al finalizar</strong> (DoD)</td></tr>
+<tr><td>Épica</td><td>Milestone de <code>roadmap</code> que agrupa historias (<code>D.2 - Gestión de carga</code>); no se estima; Done = todas sus historias en productivo</td></tr>
+<tr><td>Historia (user story)</td><td>Issue de <code>roadmap</code> con label <code>user story</code>, título Como/Quiero/Para y número <code>&lt;épica&gt;.&lt;n&gt;</code> (<code>D.2.8</code>); Done = en productivo</td></tr>
+<tr><td>Historia de UI</td><td>Contraparte de pantalla de una historia de backend; mismo número con prefijo <code>UI-</code> (<code>UI-D.2.8</code>)</td></tr>
+<tr><td>Sub-historia</td><td>Sub-issue de una historia; hereda su número (<code>T.1.1.1</code>)</td></tr>
+<tr><td>Spike</td><td>Historia de investigación o decisión; milestone <code>SPIKES</code>, número <code>S.&lt;n&gt;</code>; sin Gherkins</td></tr>
+<tr><td>Board</td><td>Proyecto de GitHub de la organización con las historias del sprint y sus campos</td></tr>
+<tr><td>Status</td><td>Estado en el Board: <code>Backlog</code>, <code>Ready</code>, <code>In progress</code>, <code>In review</code> (en <code>test</code>), <code>Done</code> (en <code>prod</code>)</td></tr>
+<tr><td>US Points</td><td>Estimación relativa de una historia; requerida en DoR</td></tr>
+<tr><td>Priority</td><td>Prioridad de la historia en el Board</td></tr>
+<tr><td>Estimate (hs)</td><td>Horas hombre previstas; se cargan al pasar a <code>In progress</code></td></tr>
+<tr><td>Spent (hs)</td><td>Horas hombre reales; se cargan al liberar a <code>test</code> (<code>In review</code>)</td></tr>
+<tr><td>Release a test</td><td><code>./scripts/release_to_test patch|minor|major</code> al terminar una feature</td></tr>
+<tr><td>Release a prod</td><td><code>./scripts/release_to_prod</code>, a mano, con el equipo, al final del sprint</td></tr>
 <tr><td>Logging</td><td>En controladores (entrada + errores) y repositorios (salida); ver <a href="../proceso/logging.html">logging</a></td></tr>
 <tr><td>Gherkin</td><td>BDD en español; <strong>Cuando</strong> contra la app; en <code>main</code> + link en el ticket si aplica; <a href="../proceso/gherkin.html">gherkin</a></td></tr>
 <tr><td>DoR</td><td>Definition of Ready</td></tr>
 <tr><td>DoD</td><td>Definition of Done (jerárquico; productivo)</td></tr>
-<tr><td>Prefijo <code>D</code></td><td>Producto Dador</td></tr>
-<tr><td>Prefijo <code>T</code></td><td>Producto Transportista</td></tr>
+<tr><td>Prefijo <code>D</code> / <code>T</code> / <code>R</code> / <code>B</code> / <code>S</code></td><td>Dador / Transportista / Servicio de rutas / Backoffice / Spikes</td></tr>
 </tbody></table>
 </div>
 <h2 id="dominio--producto"><a class="header" href="#dominio--producto">Dominio / producto</a></h2>
