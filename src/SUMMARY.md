@@ -14,6 +14,7 @@
   - [Definition of Ready](./wiki/proceso/definition-of-ready.md)
   - [Definition of Done](./wiki/proceso/definition-of-done.md)
   - [Workflow de entrega](./wiki/proceso/workflow-entrega.md)
+  - [Desarrollo con agentes](./wiki/proceso/desarrollo-con-agentes.md)
   - [Conventional Commits](./wiki/proceso/conventional-commits.md)
   - [Logging (hexagonal)](./wiki/proceso/logging.md)
   - [Gherkin (BDD)](./wiki/proceso/gherkin.md)
