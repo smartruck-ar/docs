@@ -893,164 +893,58 @@ Link/path del feature en el ticket (DoR) si aplica BDD</li>
 <h2 id="next-step-6"><a class="header" href="#next-step-6">Next step</a></h2>
 <p><a href="wiki/proceso/../tickets/plantilla-ticket.html">Plantilla de ticket</a> · <a href="wiki/proceso/definition-of-ready.html">DoR</a> · <a href="wiki/proceso/logging.html">Logging</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="plantillas-de-ticket"><a class="header" href="#plantillas-de-ticket">Plantillas de ticket</a></h1>
-<p>Los campos del tracker (título, historia padre, repositorio, tag, prioridad, US points, horas) van <strong>fuera</strong> de la descripción. Acá solo se define el <strong>cuerpo</strong> que se pega en la descripción del ticket.</p>
-<h2 id="cuerpo-obligatorio-de-una-task"><a class="header" href="#cuerpo-obligatorio-de-una-task">Cuerpo obligatorio de una <strong>task</strong></a></h2>
-<div class="table-wrapper"><table><thead><tr><th>Sección</th><th>Contenido</th></tr></thead><tbody>
-<tr><td>Párrafo inicial</td><td>Contexto del problema o necesidad y qué se debe hacer</td></tr>
-<tr><td><strong>Objetivo</strong></td><td>Qué se busca lograr con esta entrega</td></tr>
-<tr><td><strong>Alcance</strong></td><td>Qué incluye y qué <strong>no</strong> incluye (usar <em>Fuera de alcance</em>)</td></tr>
-<tr><td><strong>Criterios de aceptación</strong></td><td>Condiciones verificables numeradas (<code>CA1</code>, <code>CA2</code>, …) — no checklist</td></tr>
-<tr><td><strong>Gherkins</strong> (si aplica)</td><td>Link/path a los <code>.feature</code> en el <strong>repositorio</strong> (rama <code>main</code>)</td></tr>
+<p>Los campos del Board (<code>Status</code>, <code>Sprint</code>, <code>US Points</code>, <code>Priority</code>, <code>Estimate (hs)</code>, <code>Spent (hs)</code>) y el milestone van <strong>fuera</strong> de la descripción. Acá solo se define el <strong>cuerpo</strong> que se pega en la descripción del ticket.</p>
+<h2 id="descripción-de-una-user-story-en-roadmap-formato-vigente"><a class="header" href="#descripción-de-una-user-story-en-roadmap-formato-vigente">Descripción de una user story en <code>roadmap</code> (formato vigente)</a></h2>
+<p>Todo el trabajo se modela como <strong>user story en <code>smartruck-ar/roadmap</code></strong>. El título va sin numeración (<code>Como …, Quiero …, Para …</code>): la numeración, el label <code>user story</code>, la contraparte de UI y el sprint los asigna la <a href="wiki/tickets/automatizacion-historias.html">automatización</a> al asignar la épica (milestone).</p>
+<h3 id="historia-de-backend"><a class="header" href="#historia-de-backend">Historia de backend</a></h3>
+<pre><code class="language-markdown">&lt;Contexto en una o dos oraciones: qué hay hoy y qué cambia.&gt;
+
+Bloqueado por #&lt;N&gt; &lt;(opcional) escenario o motivo&gt;
+
+&lt;Gherkins: ver ciclo de vida abajo&gt;
+</code></pre>
+<p>Los <strong>criterios de aceptación de una historia de backend son sus escenarios Gherkin</strong>. No se escribe una lista de CA aparte.</p>
+<h3 id="ciclo-de-vida-de-los-gherkins-en-la-descripción"><a class="header" href="#ciclo-de-vida-de-los-gherkins-en-la-descripción">Ciclo de vida de los Gherkins en la descripción</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Momento</th><th>Qué va en la descripción</th></tr></thead><tbody>
+<tr><td><strong>Al crear la historia</strong> (refinamiento)</td><td>Los escenarios escritos directamente en la descripción, en un bloque <code>gherkin</code>, con la ruta del <code>.feature</code> donde se van a pushear</td></tr>
+<tr><td><strong>Antes de pasar a Ready</strong></td><td>Los escenarios se pushean a <code>main</code> del repositorio correspondiente (<a href="wiki/tickets/../proceso/definition-of-ready.html">DoR</a>)</td></tr>
+<tr><td><strong>Una vez en <code>main</code></strong></td><td>El bloque se <strong>reemplaza</strong> por el link al archivo: <code>[Link a los Gherkins asociados](https://github.com/smartruck-ar/&lt;repo&gt;/blob/main/test/acceptance/features/&lt;archivo&gt;.feature)</code></td></tr>
 </tbody></table>
 </div>
-<p>Si no aplica BDD: indicar explícitamente <code>Gherkins: no aplica</code>.</p>
-<hr />
-<h2 id="Épica"><a class="header" href="#Épica">Épica</a></h2>
-<pre><code class="language-markdown">## D-1 — &lt;Título de la épica&gt;
+<p>Bloque a usar mientras los escenarios no están en <code>main</code>:</p>
+<pre><code class="language-markdown">**Gherkins** — pendientes de pushear a `&lt;repo&gt;/test/acceptance/features/&lt;archivo&gt;.feature`. Una vez en `main`, reemplazar este bloque por el link al archivo.
 
-### Objetivo
-&lt;Qué problema de negocio resuelve&gt;
-
-### Alcance
-- Incluye:
-- No incluye:
-
-### Historias
-- [ ] D-1.1 — …
-- [ ] D-1.2 — …
-
-### Notas
--
+```gherkin
+# language: es
+Escenario: &lt;ID&gt;: &lt;descripción&gt;
+  Dado …
+  Cuando …
+  Entonces …
+```
 </code></pre>
-<h2 id="historia-de-usuario"><a class="header" href="#historia-de-usuario">Historia de usuario</a></h2>
-<pre><code class="language-markdown">## D-1.2 — &lt;Título corto&gt;
-
-**Como** &lt;rol / actor&gt;
-**Quiero** &lt;capacidad&gt;
-**Para** &lt;beneficio&gt;
-
-### Épica
-D-1
-
-### Tasks
-- [ ] D-1.2.1 — … (repo: …, tag: …, prioridad: …, US points: …)
-- [ ] D-1.2.2 — … (repo: …, tag: …, prioridad: …, US points: …)
-
-### Notas / dependencias
--
+<p>Los escenarios siguen la <a href="wiki/tickets/../proceso/gherkin.html">convención de Gherkin</a>. Los IDs nuevos continúan la numeración del <code>.feature</code> donde se agregan; se confirman al pushear.</p>
+<h3 id="historia-de-frontend-ui-"><a class="header" href="#historia-de-frontend-ui-">Historia de frontend (<code>UI-</code>)</a></h3>
+<p>Basta con referenciar la historia de backend asociada:</p>
+<pre><code class="language-markdown">Contraparte de UI del ticket backend #&lt;N&gt;.
 </code></pre>
-<h2 id="descripción-de-task-pegar-en-el-tracker"><a class="header" href="#descripción-de-task-pegar-en-el-tracker">Descripción de task (pegar en el tracker)</a></h2>
-<pre><code class="language-markdown">&lt;Párrafo inicial: contexto del problema o necesidad y qué se debe hacer.&gt;
-
----
-
-## Objetivo
-
-&lt;Qué se busca lograr con esta entrega, en una o dos oraciones.&gt;
-
----
-
-## Alcance
-
-- &lt;Ítem incluido&gt;
-- &lt;Ítem incluido&gt;
-
-### Fuera de alcance
-
-- &lt;Qué no incluye esta task&gt;
-
----
-
-## Criterios de aceptación
-
-**CA1 - &lt;Título corto&gt;:** &lt;Condición verificable.&gt;
-
-**CA2 - &lt;Título corto&gt;:** &lt;Condición verificable.&gt;
-
-**CA3 - &lt;Título corto&gt;:** &lt;Condición verificable.&gt;
-
----
-
-## Gherkins
-
-No aplica.
-</code></pre>
-<h3 id="variante-con-ca-más-detallados"><a class="header" href="#variante-con-ca-más-detallados">Variante con CA más detallados</a></h3>
-<p>Si un criterio necesita detalle (pasos, contrato, notas), usar encabezado <code>###</code> y cuerpo debajo:</p>
-<pre><code class="language-markdown">## Criterios de aceptación
-
-### CA1 — &lt;Título corto&gt;
-
-&lt;Detalle del criterio. Puede incluir listas, tablas o ejemplos.&gt;
-
----
-
-### CA2 — &lt;Título corto&gt;
-
-&lt;Detalle del criterio.&gt;
-</code></pre>
-<h2 id="ejemplo-mínimo-task-técnica"><a class="header" href="#ejemplo-mínimo-task-técnica">Ejemplo mínimo (task técnica)</a></h2>
-<pre><code class="language-markdown">Implementar un LogManager que escriba logs estructurados a stdout, como base para auditar acciones del transportista. Esta task no audita aún todas las acciones: eso será en tasks posteriores que usen el manager en controllers/repos.
-
----
-
-## Objetivo
-
-Disponer de un mecanismo de logging reutilizable en el backend que emita a stdout en formato estructurado, verificable por tests unitarios y listo para consumo por el stack de auditoría.
-
----
-
-## Alcance
-
-- Puerto/adapter de LogManager usable desde infrastructure (controllers/repos).
-- Niveles `info` y `error` (como mínimo).
-- Formato JSON a stdout.
-- Tests unitarios que verifiquen la emisión del log.
-
-### Fuera de alcance
-
-- Cablear todos los controllers/repos.
-- Dashboards o configuración en Grafana/Loki.
-
----
-
-## Criterios de aceptación
-
-**CA1 - LogManager disponible:** Existe un LogManager (puerto/adapter) usable desde infrastructure (controllers/repos).
-
-**CA2 - Emisión a stdout:** `info` y `error` (como mínimo) escriben a stdout.
-
-**CA3 - Formato estructurado:** El log es JSON e incluye al menos: `level`, `message`, `service` (ej. `smartruck-backend`), `env`.
-
-**CA4 - Verificación por tests:** Tests unitarios verifican que al invocar el manager se emite el log esperado (nivel + mensaje / campos).
-
-**CA5 - Sin secretos:** No loguea secretos (documentado / sin campos de password/token en la API del manager).
-
-**CA6 - Alineación a convención:** Queda alineado a la convención de logging (controllers y repositorios); el cableado en esos bordes puede ser otra task.
-
----
-
-## Gherkins
-
-No aplica.
-</code></pre>
+<p>La contraparte que crea la automatización con el tag <code>front+back</code> ya trae esta referencia. Si la historia de frontend no tiene contraparte directa, referenciar la historia de backend de la que depende.</p>
+<h3 id="spike-1"><a class="header" href="#spike-1">Spike</a></h3>
+<p>Contexto, qué hay que investigar o decidir y cuál es el entregable esperado. <code>Gherkins: no aplica</code>.</p>
 <h2 id="checklist-2"><a class="header" href="#checklist-2">Checklist</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"/>
-ID y prefijo correctos (en el tracker)</li>
+Título <code>Como …, Quiero …, Para …</code> (con <code>UI-</code> si es de pantalla), sin numeración</li>
 <li><input disabled="" type="checkbox"/>
-Historia en Como / Quiero / Para</li>
+Milestone asignado (la automatización numera y agrega <code>user story</code>)</li>
 <li><input disabled="" type="checkbox"/>
-Descripción con Objetivo, Alcance y Criterios (<code>CA1</code>, <code>CA2</code>, …)</li>
+Backend: escenarios Gherkin en la descripción o link al <code>.feature</code> en <code>main</code></li>
 <li><input disabled="" type="checkbox"/>
-Gherkins: link en el repo o “no aplica”</li>
+UI: referencia a la historia de backend</li>
 <li><input disabled="" type="checkbox"/>
-US points, tag, prioridad y repo (en el tracker)</li>
-<li><input disabled="" type="checkbox"/>
-Al comenzar: horas estimadas; al Done: horas insumidas</li>
+<code>Bloqueado por #&lt;N&gt;</code> si depende de otra historia</li>
 </ul>
 <h2 id="next-step-7"><a class="header" href="#next-step-7">Next step</a></h2>
-<p><a href="wiki/tickets/tipos-de-ticket.html">Tipos de ticket</a> · <a href="wiki/tickets/../proceso/definition-of-ready.html">DoR</a></p>
+<p><a href="wiki/tickets/automatizacion-historias.html">Automatización de historias</a> · <a href="wiki/tickets/../proceso/definition-of-ready.html">Definition of Ready</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tipos-de-ticket"><a class="header" href="#tipos-de-ticket">Tipos de ticket</a></h1>
 <p>Todo ticket es una issue de <a href="https://github.com/smartruck-ar/roadmap"><code>smartruck-ar/roadmap</code></a>. Hay un solo tipo de trabajo, la <strong>user story</strong>, con tres variantes, más las épicas que las agrupan.</p>
 <div class="table-wrapper"><table><thead><tr><th>Tipo</th><th>Qué es</th><th>Cómo se crea</th><th>Label</th></tr></thead><tbody>
@@ -1080,14 +974,14 @@ Tiene el label que le corresponde</li>
 <h2 id="next-step-8"><a class="header" href="#next-step-8">Next step</a></h2>
 <p><a href="wiki/tickets/estimacion.html">Estimación</a> · <a href="wiki/tickets/automatizacion-historias.html">Automatización de historias</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="estimación"><a class="header" href="#estimación">Estimación</a></h1>
-<p>Las <strong>tasks</strong> se estiman en dos capas:</p>
-<div class="table-wrapper"><table><thead><tr><th>Qué</th><th>Cuándo</th><th>Unidad</th></tr></thead><tbody>
-<tr><td><strong>US points</strong></td><td>DoR (antes de planificar)</td><td>Puntos relativos</td></tr>
-<tr><td><strong>Horas estimadas</strong></td><td>Al <strong>comenzar</strong> la task</td><td>Horas hombre</td></tr>
-<tr><td><strong>Horas insumidas</strong></td><td>Al <strong>finalizar</strong> (DoD)</td><td>Horas hombre reales</td></tr>
+<p>Las <strong>historias</strong> se estiman en el Board del sprint, en tres campos:</p>
+<div class="table-wrapper"><table><thead><tr><th>Campo del Board</th><th>Cuándo</th><th>Unidad</th></tr></thead><tbody>
+<tr><td><code>US Points</code></td><td>En refinamiento, antes de <code>Ready</code> (<a href="wiki/tickets/../proceso/definition-of-ready.html">DoR</a>)</td><td>Puntos relativos</td></tr>
+<tr><td><code>Estimate (hs)</code></td><td>Al pasar la historia a <code>In progress</code></td><td>Horas hombre</td></tr>
+<tr><td><code>Spent (hs)</code></td><td>Al liberar a <code>test</code> (<code>In review</code>)</td><td>Horas hombre reales</td></tr>
 </tbody></table>
 </div>
-<p>Las <strong>épicas</strong> no se estiman.</p>
+<p>Las <strong>épicas</strong> (milestones) no se estiman.</p>
 <h2 id="us-points-escala-sugerida"><a class="header" href="#us-points-escala-sugerida">US points (escala sugerida)</a></h2>
 <p>Fibonacci acotado:</p>
 <div class="table-wrapper"><table><thead><tr><th>Puntos</th><th>Significado orientativo</th></tr></thead><tbody>
@@ -1096,35 +990,31 @@ Tiene el label que le corresponde</li>
 <tr><td>3</td><td>Mediana</td></tr>
 <tr><td>5</td><td>Grande</td></tr>
 <tr><td>8</td><td>Muy grande → considerar partir</td></tr>
-<tr><td>13+</td><td>Demasiado grande → partir en varias tasks</td></tr>
+<tr><td>13+</td><td>Demasiado grande → partir en sub-historias</td></tr>
 </tbody></table>
 </div>
 <h2 id="horas-hombre"><a class="header" href="#horas-hombre">Horas hombre</a></h2>
 <ul>
-<li>Al tomar/arrancar la task: cargar <strong>horas estimadas</strong>.</li>
-<li>Al cerrar (productivo + DoD): cargar <strong>horas insumidas</strong>.</li>
-<li>Sirve para comparar estimado vs real; no reemplaza a los US points.</li>
+<li>Al arrancar la historia: cargar <code>Estimate (hs)</code>.</li>
+<li>Al liberarla a <code>test</code>: cargar <code>Spent (hs)</code> con las horas reales.</li>
+<li>Sirve para comparar estimado contra real; no reemplaza a los US points.</li>
 </ul>
 <h2 id="qué-estimamos-en-puntos"><a class="header" href="#qué-estimamos-en-puntos">Qué estimamos en puntos</a></h2>
 <ul>
-<li>Complejidad + incertidumbre + esfuerzo relativo entre <strong>tasks</strong>.</li>
-<li>Comparar con tasks ya hechas del mismo producto (<code>D</code> / <code>T</code>) y repo.</li>
-</ul>
-<h2 id="qué-no-estimamos"><a class="header" href="#qué-no-estimamos">Qué no estimamos</a></h2>
-<ul>
-<li>Épicas (Done cuando todas sus historias están en productivo vía sus tasks).</li>
-<li>Historias (el esfuerzo se estima en las tasks).</li>
+<li>Complejidad, incertidumbre y esfuerzo relativo entre <strong>historias</strong>.</li>
+<li>La historia de backend y su contraparte de UI se estiman por separado.</li>
+<li>Comparar con historias ya hechas del mismo producto (<code>D</code>, <code>T</code>, <code>R</code>, <code>B</code>).</li>
 </ul>
 <h2 id="checklist-de-refinamiento"><a class="header" href="#checklist-de-refinamiento">Checklist de refinamiento</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"/>
-Task con CA, tag y prioridad</li>
+Historia con criterios (Gherkin en backend) y prioridad</li>
 <li><input disabled="" type="checkbox"/>
-US points asignados</li>
+<code>US Points</code> cargados</li>
 <li><input disabled="" type="checkbox"/>
 Si aplica, Gherkins en camino a <code>main</code> (o ya en <code>main</code>)</li>
 <li><input disabled="" type="checkbox"/>
-Si ≥ 8, se discutió partir</li>
+Si son 8 o más, se discutió partirla</li>
 </ul>
 <h2 id="next-step-9"><a class="header" href="#next-step-9">Next step</a></h2>
 <p><a href="wiki/tickets/../proceso/definition-of-ready.html">DoR</a> · <a href="wiki/tickets/plantilla-ticket.html">Plantilla</a></p>
