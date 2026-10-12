@@ -18,7 +18,7 @@ Convenciones de trabajo compartidas (proceso, tickets, roles). Independiente del
 | [jerarquia.md](proceso/jerarquia.md) | IDs, niveles, completitud |
 | [definition-of-ready.md](proceso/definition-of-ready.md) | Cuándo una task puede empezar |
 | [definition-of-done.md](proceso/definition-of-done.md) | Cuándo algo está terminado (productivo) |
-| [workflow-pr.md](proceso/workflow-pr.md) | Branches, PR, review, merge |
+| [workflow-entrega.md](proceso/workflow-entrega.md) | Trabajo en `main`, release a `test` y a `prod`, estados del Board |
 | [conventional-commits.md](proceso/conventional-commits.md) | `feat` / `fix` / `refactor` + ID de task |
 | [logging.md](proceso/logging.md) | Dónde loguear: controladores y repositorios |
 | [gherkin.md](proceso/gherkin.md) | Forma de los `.feature`: Antecedentes, Regla, Dado/Cuando/Entonces |

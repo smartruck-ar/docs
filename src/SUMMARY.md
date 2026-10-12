@@ -13,7 +13,7 @@
   - [Jerarquía](./wiki/proceso/jerarquia.md)
   - [Definition of Ready](./wiki/proceso/definition-of-ready.md)
   - [Definition of Done](./wiki/proceso/definition-of-done.md)
-  - [Workflow de PR](./wiki/proceso/workflow-pr.md)
+  - [Workflow de entrega](./wiki/proceso/workflow-entrega.md)
   - [Conventional Commits](./wiki/proceso/conventional-commits.md)
   - [Logging (hexagonal)](./wiki/proceso/logging.md)
   - [Gherkin (BDD)](./wiki/proceso/gherkin.md)

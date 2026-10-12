@@ -19,7 +19,7 @@ Seguí el README de cada repositorio (comandos de setup, `dev_app`, tests y Dev 
 
 1. Trabajo en **tasks** con ID `D-x.y.z` / `T-x.y.z` asociadas a un repo — [Jerarquía](./wiki/proceso/jerarquia.md)
 2. DoR antes de empezar — [Definition of Ready](./wiki/proceso/definition-of-ready.md)
-3. PR y review — [Workflow de PR](./wiki/proceso/workflow-pr.md)
+3. PR y review — [Workflow de entrega](./wiki/proceso/workflow-entrega.md)
 4. Cierre — [Definition of Done](./wiki/proceso/definition-of-done.md)
 
 ## Convenciones

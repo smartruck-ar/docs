@@ -50,4 +50,4 @@ Especificación completa: [Conventional Commits v1.0.0](https://www.conventional
 
 ## Next step
 
-[Workflow de PR](workflow-pr.md)
+[Workflow de entrega](workflow-entrega.md)

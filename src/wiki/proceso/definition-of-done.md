@@ -49,4 +49,4 @@ Sin horas insumidas cargadas, la task **no** se considera Done.
 
 ## Next step
 
-PRs → [Workflow de PR](workflow-pr.md)
+PRs → [Workflow de entrega](workflow-entrega.md)
