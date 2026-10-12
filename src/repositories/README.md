@@ -17,4 +17,4 @@ Documentación técnica por repositorio. El índice lateral del mdBook lista cad
 
 Cada carpeta incluye `README.md`, `arquitectura.md` y `links.md`.
 
-Las **tasks** se asocian a uno de estos repos; las historias y épicas no. Ver [Jerarquía](../wiki/proceso/jerarquia.md).
+Las historias viven en `roadmap` y se trabajan en el repo que corresponde: backend en `smartruck-backend`, pantallas (`UI-`) en `smartruck-dador` o `smartruck-transportista`. Ver [Jerarquía](../wiki/proceso/jerarquia.md).
