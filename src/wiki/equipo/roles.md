@@ -19,7 +19,7 @@ Responsabilidades de alto nivel. Completá nombres y detalles según el equipo r
 ## Checklist
 
 - [ ] Cada historia tiene alguien que valida el Como / Quiero / Para
-- [ ] Cada task tiene owner y repo
+- [ ] Cada historia del sprint tiene responsable y repo
 
 ## Next step
 
