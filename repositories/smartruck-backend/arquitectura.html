@@ -221,7 +221,7 @@
 <li><strong>Controladores</strong> (<code>inbound/</code>): <code>info</code> + log de excepciones/errores (burbujean hasta acá).</li>
 <li><strong>Repositorios</strong> (<code>outbound/persistence/</code>): <code>info</code> de operaciones de salida.</li>
 <li>Emisión: <code>LogManager</code> (<code>application/logger</code>) → <strong>stdout</strong> (JSON: <code>level</code>, <code>message</code>, <code>service</code>, <code>env</code>).</li>
-<li>Recolección afuera (p. ej. Datadog Agent / Cloud Run). Controllers y repositorios ya reciben <code>LogManager</code> por <code>Depends</code>.</li>
+<li>Recolección afuera (p. ej. Datadog Agent / Cloud Run). Cablear controllers/repos: tasks posteriores.</li>
 <li>API: solo <code>info</code>/<code>error(message)</code> — sin campos de secretos.</li>
 </ul>
 <h2 id="acceptance--gherkin"><a class="header" href="#acceptance--gherkin">Acceptance / Gherkin</a></h2>
