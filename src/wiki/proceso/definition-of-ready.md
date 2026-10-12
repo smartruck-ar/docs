@@ -28,7 +28,7 @@ Toda task lleva un tag que la clasifica (producto, módulo o área). Ejemplos a 
 
 ### Gherkins
 
-Si la task tiene escenarios BDD, los `.feature` (o equivalente) deben estar mergeados en `main` **antes** de considerarla Ready, y el ticket debe incluir el **link o path** al archivo en el repositorio. El formato del feature sigue [Convención de Gherkin](gherkin.md). Si no aplica BDD, indicar `Gherkins: no aplica`.
+Si la task tiene escenarios BDD, los `.feature` (o equivalente) deben estar pusheados a `main` **antes** de considerarla Ready, y el ticket debe incluir el **link o path** al archivo en el repositorio. El formato del feature sigue [Convención de Gherkin](gherkin.md). Si no aplica BDD, indicar `Gherkins: no aplica`.
 
 ## Al comenzar la task
 
@@ -53,7 +53,7 @@ Checklist útil al refinar una historia:
 | Señal | Acción |
 |-------|--------|
 | Task sin CA en la descripción | Completar CA o devolver a refinamiento |
-| Faltan Gherkins en `main` y sí aplican | Mergear features a `main` primero |
+| Faltan Gherkins en `main` y sí aplican | Pushear los `.feature` a `main` primero |
 | Task sin US points | Estimar antes de planificar |
 | Task sin tag | Asignar tag |
 | Task sin prioridad | Asignar `low` / `medium` / `high` / `urgent` |
