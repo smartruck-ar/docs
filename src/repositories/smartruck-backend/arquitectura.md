@@ -56,7 +56,7 @@ Convención del equipo (entradas/salidas del hexágono): [Logging](../../wiki/pr
 - **Controladores** (`inbound/`): `info` + log de excepciones/errores (burbujean hasta acá).
 - **Repositorios** (`outbound/persistence/`): `info` de operaciones de salida.
 - Emisión: `LogManager` (`application/logger`) → **stdout** (JSON: `level`, `message`, `service`, `env`).
-- Recolección afuera (p. ej. Datadog Agent / Cloud Run). Cablear controllers/repos: tasks posteriores.
+- Recolección afuera (p. ej. Datadog Agent / Cloud Run). Controllers y repositorios ya reciben `LogManager` por `Depends`.
 - API: solo `info`/`error(message)` — sin campos de secretos.
 
 ## Acceptance / Gherkin
