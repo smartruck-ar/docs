@@ -4,7 +4,7 @@ Dónde y qué loguear en los servicios SmartTruck (backend y fronts con capas he
 
 Los logs se emiten con **LogManager** (`application/logger/`): JSON a **stdout**. La recolección (Datadog, Loki, etc.) es responsabilidad de la infraestructura, no de un provider en la app. Convención de carpetas: [Arquitectura backend](../../repositories/smartruck-backend/arquitectura.md).
 
-En **smartruck-backend**, los controllers/repos de infrastructure **inyectan** `LogManager` (desde `application.logger`). El cableado de cada borde es por task; este módulo solo provee el mecanismo.
+En **smartruck-backend**, los controllers/repos de infrastructure **inyectan** `LogManager` (desde `application.logger`). Cada controller y cada repositorio lo recibe por `Depends` (por ejemplo `trucks_controller.py` y `PostgreSQLTruckRepository`); este módulo solo provee el mecanismo.
 
 ### API (sin secretos)
 
