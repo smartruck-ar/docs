@@ -176,7 +176,7 @@
                         <h1 id="convención-de-logging-arquitectura-hexagonal"><a class="header" href="#convención-de-logging-arquitectura-hexagonal">Convención de logging (arquitectura hexagonal)</a></h1>
 <p>Dónde y qué loguear en los servicios SmartTruck (backend y fronts con capas hexagonales).</p>
 <p>Los logs se emiten con <strong>LogManager</strong> (<code>application/logger/</code>): JSON a <strong>stdout</strong>. La recolección (Datadog, Loki, etc.) es responsabilidad de la infraestructura, no de un provider en la app. Convención de carpetas: <a href="../../repositories/smartruck-backend/arquitectura.html">Arquitectura backend</a>.</p>
-<p>En <strong>smartruck-backend</strong>, los controllers/repos de infrastructure <strong>inyectan</strong> <code>LogManager</code> (desde <code>application.logger</code>). El cableado de cada borde es por task; este módulo solo provee el mecanismo.</p>
+<p>En <strong>smartruck-backend</strong>, los controllers/repos de infrastructure <strong>inyectan</strong> <code>LogManager</code> (desde <code>application.logger</code>). Cada controller y cada repositorio lo recibe por <code>Depends</code> (por ejemplo <code>trucks_controller.py</code> y <code>PostgreSQLTruckRepository</code>); este módulo solo provee el mecanismo.</p>
 <h3 id="api-sin-secretos"><a class="header" href="#api-sin-secretos">API (sin secretos)</a></h3>
 <pre><code class="language-python">LogManager(service="smartruck-backend", env="test").info("…")
 LogManager(service="smartruck-backend", env="test").error("…")
