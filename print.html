@@ -428,7 +428,7 @@ Equipo alineado en alcance</li>
 <h2 id="next-step-1"><a class="header" href="#next-step-1">Next step</a></h2>
 <p>Cuando el trabajo termina → <a href="wiki/proceso/definition-of-done.html">Definition of Done</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="definition-of-done-dod"><a class="header" href="#definition-of-done-dod">Definition of Done (DoD)</a></h1>
-<p>Hay una <strong>jerarquía de Done</strong>: nada superior está Done si lo inferior no está en <strong>ambiente productivo</strong>.</p>
+<p>Una historia está Done cuando está en <strong>ambiente productivo</strong>. Una épica está Done cuando todas sus historias lo están.</p>
 <h2 id="regla-de-oro"><a class="header" href="#regla-de-oro">Regla de oro</a></h2>
 <p><strong>Done = en productivo</strong> (además de cumplir CA y tests). Productivo se libera a mano, con el equipo, al final del sprint (<a href="wiki/proceso/workflow-entrega.html">Workflow de entrega</a>).</p>
 <div class="table-wrapper"><table><thead><tr><th>Estado en el Board</th><th>Significa</th></tr></thead><tbody>
@@ -437,15 +437,14 @@ Equipo alineado en alcance</li>
 <tr><td><code>Done</code></td><td>Liberado a <code>prod</code> con <code>release_to_prod</code> al final del sprint</td></tr>
 </tbody></table>
 </div><div class="table-wrapper"><table><thead><tr><th>Nivel</th><th>Done cuando…</th></tr></thead><tbody>
-<tr><td>Task</td><td>Está desplegada en <strong>productivo</strong> (y cumple el checklist de task)</td></tr>
-<tr><td>Historia</td><td><strong>Todas</strong> sus tasks asociadas están en <strong>productivo</strong></td></tr>
-<tr><td>Épica</td><td><strong>Todas</strong> sus historias asociadas están en <strong>productivo</strong></td></tr>
+<tr><td>Historia</td><td>Está desplegada en <strong>productivo</strong> y cumple el checklist de abajo</td></tr>
+<tr><td>Épica (milestone)</td><td><strong>Todas</strong> sus historias están Done</td></tr>
 </tbody></table>
 </div>
-<h2 id="task-done"><a class="header" href="#task-done">Task Done</a></h2>
+<h2 id="historia-done"><a class="header" href="#historia-done">Historia Done</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"/>
-Cumple todos los <strong>criterios de aceptación</strong></li>
+Cumple todos los <strong>criterios de aceptación</strong> (escenarios Gherkin en verde, sin <code>@wip</code>)</li>
 <li><input disabled="" type="checkbox"/>
 Código pusheado a <code>main</code> del repositorio asociado</li>
 <li><input disabled="" type="checkbox"/>
@@ -455,7 +454,7 @@ Validada en <code>test</code> (historia en <code>In review</code>)</li>
 <li><input disabled="" type="checkbox"/>
 <strong>Desplegada en ambiente productivo</strong> con el release del sprint</li>
 <li><input disabled="" type="checkbox"/>
-Registradas las <strong>horas hombre insumidas</strong> (tiempo real al finalizar)</li>
+<code>Spent (hs)</code> cargado con las horas hombre insumidas</li>
 <li><input disabled="" type="checkbox"/>
 README del repo y <code>docs</code> actualizados si aplica</li>
 </ul>
@@ -465,19 +464,7 @@ README del repo y <code>docs</code> actualizados si aplica</li>
 <tr><td>Al liberar a <code>test</code> (<code>In review</code>)</td><td><code>Spent (hs)</code> en el Board</td><td>Tiempo real dedicado en horas hombre</td></tr>
 </tbody></table>
 </div>
-<p>Sin horas insumidas cargadas, la task <strong>no</strong> se considera Done.</p>
-<h2 id="historia-done"><a class="header" href="#historia-done">Historia Done</a></h2>
-<ul>
-<li><input disabled="" type="checkbox"/>
-<strong>Todas</strong> las tasks de la historia están Done (por lo tanto, en productivo)</li>
-<li><input disabled="" type="checkbox"/>
-No quedan tasks abiertas ni “implícitas” fuera del tracker</li>
-</ul>
-<h2 id="Épica-done"><a class="header" href="#Épica-done">Épica Done</a></h2>
-<ul>
-<li><input disabled="" type="checkbox"/>
-<strong>Todas</strong> las historias de la épica están Done (todas sus tasks en productivo)</li>
-</ul>
+<p>Sin <code>Spent (hs)</code> cargado, la historia <strong>no</strong> se considera Done.</p>
 <h2 id="checklist-de-cierre"><a class="header" href="#checklist-de-cierre">Checklist de cierre</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"/>
@@ -487,7 +474,7 @@ Evidencia de deploy en productivo (pipeline de <code>prod</code> en verde, versi
 <li><input disabled="" type="checkbox"/>
 Horas estimadas (al inicio) e insumidas (al cierre) registradas</li>
 <li><input disabled="" type="checkbox"/>
-ID correcto en los commits cuando aplique (<a href="wiki/proceso/conventional-commits.html">Conventional Commits</a>)</li>
+Número de la historia en el scope de los commits (<a href="wiki/proceso/conventional-commits.html">Conventional Commits</a>)</li>
 </ul>
 <h2 id="next-step-2"><a class="header" href="#next-step-2">Next step</a></h2>
 <p>Releases y estados → <a href="wiki/proceso/workflow-entrega.html">Workflow de entrega</a></p>
@@ -584,11 +571,11 @@ Sin secretos ni configs locales en los commits</li>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="conventional-commits"><a class="header" href="#conventional-commits">Conventional Commits</a></h1>
 <p>Convención de mensajes de commit del equipo, basada en <a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits 1.0.0</a>.</p>
 <h2 id="formato"><a class="header" href="#formato">Formato</a></h2>
-<pre><code class="language-text">&lt;type&gt;(&lt;id-task&gt;): &lt;descripción&gt;
+<pre><code class="language-text">&lt;type&gt;(&lt;historia&gt;): &lt;descripción&gt;
 </code></pre>
 <ul>
 <li><strong>type:</strong> solo <code>feat</code>, <code>fix</code> o <code>refactor</code></li>
-<li><strong>scope:</strong> ID de la <strong>task</strong> asociada (ej. <code>1.1.2</code> → task <code>D-1.1.2</code> / <code>T-1.1.2</code>)</li>
+<li><strong>scope:</strong> número de la <strong>historia</strong> de <code>roadmap</code> (ej. <code>D.2.8</code>, <code>T.3.12</code>, <code>B.5</code>). La contraparte de UI usa el mismo número, sin <code>UI-</code></li>
 <li><strong>descripción:</strong> resumen corto en imperativo / presente</li>
 </ul>
 <h2 id="tipos-permitidos"><a class="header" href="#tipos-permitidos">Tipos permitidos</a></h2>
@@ -600,14 +587,11 @@ Sin secretos ni configs locales en los commits</li>
 </div>
 <p>No usamos otros types (<code>chore</code>, <code>docs</code>, <code>test</code>, etc.) en este proyecto.</p>
 <h2 id="ejemplos"><a class="header" href="#ejemplos">Ejemplos</a></h2>
-<pre><code class="language-text">feat(1.1.2): agregar endpoint de alta de viaje
+<pre><code class="language-text">feat(D.2.8): agregar caso de uso para eliminar una carga
 
-fix(1.1.2): corregir validación de fecha de carga
+fix(T.2.11): corregir el camión asignado en el detalle de la carga
 
-refactor(1.1.2): extraer mapper de oferta de carga
-</code></pre>
-<p>Con prefijo de producto en el scope (si el equipo lo prefiere de forma explícita):</p>
-<pre><code class="language-text">feat(D-1.1.2): agregar endpoint de alta de viaje
+refactor(B.5): extraer el mapeo de estado del transportista
 </code></pre>
 <h2 id="commits-atómicos-y-push"><a class="header" href="#commits-atómicos-y-push">Commits atómicos y push</a></h2>
 <ul>
@@ -616,14 +600,14 @@ refactor(1.1.2): extraer mapper de oferta de carga
 <li>Cada commit se pushea apenas se crea. No se acumulan commits locales.</li>
 <li>Todo se pushea a <code>main</code>: no hay ramas de feature ni pull requests. <code>test</code> y <code>prod</code> solo se mueven con los scripts de release (<a href="wiki/proceso/workflow-entrega.html">Workflow de entrega</a>).</li>
 <li>Sin cuerpo ni trailers (<code>Co-authored-by</code>, <code>Signed-off-by</code>), sin <code>--no-verify</code> y sin force-push.</li>
-<li>En los repos sin tasks (<code>smartruck-ai</code>), el mensaje va sin scope: <code>feat: &lt;descripción&gt;</code>.</li>
+<li>En los repos sin historias (<code>smartruck-ai</code>, <code>docs</code>) o sin historia asociada, el mensaje va sin scope: <code>feat: &lt;descripción&gt;</code>.</li>
 </ul>
 <h2 id="checklist"><a class="header" href="#checklist">Checklist</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"/>
 Type es <code>feat</code>, <code>fix</code> o <code>refactor</code></li>
 <li><input disabled="" type="checkbox"/>
-Scope es el ID de la task</li>
+Scope es el número de la historia</li>
 <li><input disabled="" type="checkbox"/>
 Descripción clara y acotada al cambio</li>
 <li><input disabled="" type="checkbox"/>

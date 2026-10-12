@@ -176,11 +176,11 @@
                         <h1 id="conventional-commits"><a class="header" href="#conventional-commits">Conventional Commits</a></h1>
 <p>Convención de mensajes de commit del equipo, basada en <a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits 1.0.0</a>.</p>
 <h2 id="formato"><a class="header" href="#formato">Formato</a></h2>
-<pre><code class="language-text">&lt;type&gt;(&lt;id-task&gt;): &lt;descripción&gt;
+<pre><code class="language-text">&lt;type&gt;(&lt;historia&gt;): &lt;descripción&gt;
 </code></pre>
 <ul>
 <li><strong>type:</strong> solo <code>feat</code>, <code>fix</code> o <code>refactor</code></li>
-<li><strong>scope:</strong> ID de la <strong>task</strong> asociada (ej. <code>1.1.2</code> → task <code>D-1.1.2</code> / <code>T-1.1.2</code>)</li>
+<li><strong>scope:</strong> número de la <strong>historia</strong> de <code>roadmap</code> (ej. <code>D.2.8</code>, <code>T.3.12</code>, <code>B.5</code>). La contraparte de UI usa el mismo número, sin <code>UI-</code></li>
 <li><strong>descripción:</strong> resumen corto en imperativo / presente</li>
 </ul>
 <h2 id="tipos-permitidos"><a class="header" href="#tipos-permitidos">Tipos permitidos</a></h2>
@@ -192,14 +192,11 @@
 </div>
 <p>No usamos otros types (<code>chore</code>, <code>docs</code>, <code>test</code>, etc.) en este proyecto.</p>
 <h2 id="ejemplos"><a class="header" href="#ejemplos">Ejemplos</a></h2>
-<pre><code class="language-text">feat(1.1.2): agregar endpoint de alta de viaje
+<pre><code class="language-text">feat(D.2.8): agregar caso de uso para eliminar una carga
 
-fix(1.1.2): corregir validación de fecha de carga
+fix(T.2.11): corregir el camión asignado en el detalle de la carga
 
-refactor(1.1.2): extraer mapper de oferta de carga
-</code></pre>
-<p>Con prefijo de producto en el scope (si el equipo lo prefiere de forma explícita):</p>
-<pre><code class="language-text">feat(D-1.1.2): agregar endpoint de alta de viaje
+refactor(B.5): extraer el mapeo de estado del transportista
 </code></pre>
 <h2 id="commits-atómicos-y-push"><a class="header" href="#commits-atómicos-y-push">Commits atómicos y push</a></h2>
 <ul>
@@ -208,14 +205,14 @@ refactor(1.1.2): extraer mapper de oferta de carga
 <li>Cada commit se pushea apenas se crea. No se acumulan commits locales.</li>
 <li>Todo se pushea a <code>main</code>: no hay ramas de feature ni pull requests. <code>test</code> y <code>prod</code> solo se mueven con los scripts de release (<a href="workflow-entrega.html">Workflow de entrega</a>).</li>
 <li>Sin cuerpo ni trailers (<code>Co-authored-by</code>, <code>Signed-off-by</code>), sin <code>--no-verify</code> y sin force-push.</li>
-<li>En los repos sin tasks (<code>smartruck-ai</code>), el mensaje va sin scope: <code>feat: &lt;descripción&gt;</code>.</li>
+<li>En los repos sin historias (<code>smartruck-ai</code>, <code>docs</code>) o sin historia asociada, el mensaje va sin scope: <code>feat: &lt;descripción&gt;</code>.</li>
 </ul>
 <h2 id="checklist"><a class="header" href="#checklist">Checklist</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"/>
 Type es <code>feat</code>, <code>fix</code> o <code>refactor</code></li>
 <li><input disabled="" type="checkbox"/>
-Scope es el ID de la task</li>
+Scope es el número de la historia</li>
 <li><input disabled="" type="checkbox"/>
 Descripción clara y acotada al cambio</li>
 <li><input disabled="" type="checkbox"/>
