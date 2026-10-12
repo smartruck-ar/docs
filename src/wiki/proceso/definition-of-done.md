@@ -1,6 +1,6 @@
 # Definition of Done (DoD)
 
-Hay una **jerarquía de Done**: nada superior está Done si lo inferior no está en **ambiente productivo**.
+Una historia está Done cuando está en **ambiente productivo**. Una épica está Done cuando todas sus historias lo están.
 
 ## Regla de oro
 
@@ -14,18 +14,17 @@ Hay una **jerarquía de Done**: nada superior está Done si lo inferior no está
 
 | Nivel | Done cuando… |
 |-------|----------------|
-| Task | Está desplegada en **productivo** (y cumple el checklist de task) |
-| Historia | **Todas** sus tasks asociadas están en **productivo** |
-| Épica | **Todas** sus historias asociadas están en **productivo** |
+| Historia | Está desplegada en **productivo** y cumple el checklist de abajo |
+| Épica (milestone) | **Todas** sus historias están Done |
 
-## Task Done
+## Historia Done
 
-- [ ] Cumple todos los **criterios de aceptación**
+- [ ] Cumple todos los **criterios de aceptación** (escenarios Gherkin en verde, sin `@wip`)
 - [ ] Código pusheado a `main` del repositorio asociado
 - [ ] Tests acordados en verde (incl. aceptación / Gherkin si aplica)
 - [ ] Validada en `test` (historia en `In review`)
 - [ ] **Desplegada en ambiente productivo** con el release del sprint
-- [ ] Registradas las **horas hombre insumidas** (tiempo real al finalizar)
+- [ ] `Spent (hs)` cargado con las horas hombre insumidas
 - [ ] README del repo y `docs` actualizados si aplica
 
 ### Horas
@@ -35,23 +34,14 @@ Hay una **jerarquía de Done**: nada superior está Done si lo inferior no está
 | Al comenzar | `Estimate (hs)` en el Board | Previsión en horas hombre |
 | Al liberar a `test` (`In review`) | `Spent (hs)` en el Board | Tiempo real dedicado en horas hombre |
 
-Sin horas insumidas cargadas, la task **no** se considera Done.
-
-## Historia Done
-
-- [ ] **Todas** las tasks de la historia están Done (por lo tanto, en productivo)
-- [ ] No quedan tasks abiertas ni “implícitas” fuera del tracker
-
-## Épica Done
-
-- [ ] **Todas** las historias de la épica están Done (todas sus tasks en productivo)
+Sin `Spent (hs)` cargado, la historia **no** se considera Done.
 
 ## Checklist de cierre
 
 - [ ] Estado actualizado en el Board (`In review` al liberar a `test`, `Done` al liberar a `prod`)
 - [ ] Evidencia de deploy en productivo (pipeline de `prod` en verde, versión `vX.Y.Z`)
 - [ ] Horas estimadas (al inicio) e insumidas (al cierre) registradas
-- [ ] ID correcto en los commits cuando aplique ([Conventional Commits](conventional-commits.md))
+- [ ] Número de la historia en el scope de los commits ([Conventional Commits](conventional-commits.md))
 
 ## Next step
 
