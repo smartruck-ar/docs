@@ -1,14 +1,14 @@
 # Estimación
 
-Las **tasks** se estiman en dos capas:
+Las **historias** se estiman en el Board del sprint, en tres campos:
 
-| Qué | Cuándo | Unidad |
-|-----|--------|--------|
-| **US points** | DoR (antes de planificar) | Puntos relativos |
-| **Horas estimadas** | Al **comenzar** la task | Horas hombre |
-| **Horas insumidas** | Al **finalizar** (DoD) | Horas hombre reales |
+| Campo del Board | Cuándo | Unidad |
+|-----------------|--------|--------|
+| `US Points` | En refinamiento, antes de `Ready` ([DoR](../proceso/definition-of-ready.md)) | Puntos relativos |
+| `Estimate (hs)` | Al pasar la historia a `In progress` | Horas hombre |
+| `Spent (hs)` | Al liberar a `test` (`In review`) | Horas hombre reales |
 
-Las **épicas** no se estiman.
+Las **épicas** (milestones) no se estiman.
 
 ## US points (escala sugerida)
 
@@ -21,30 +21,26 @@ Fibonacci acotado:
 | 3 | Mediana |
 | 5 | Grande |
 | 8 | Muy grande → considerar partir |
-| 13+ | Demasiado grande → partir en varias tasks |
+| 13+ | Demasiado grande → partir en sub-historias |
 
 ## Horas hombre
 
-- Al tomar/arrancar la task: cargar **horas estimadas**.
-- Al cerrar (productivo + DoD): cargar **horas insumidas**.
-- Sirve para comparar estimado vs real; no reemplaza a los US points.
+- Al arrancar la historia: cargar `Estimate (hs)`.
+- Al liberarla a `test`: cargar `Spent (hs)` con las horas reales.
+- Sirve para comparar estimado contra real; no reemplaza a los US points.
 
 ## Qué estimamos en puntos
 
-- Complejidad + incertidumbre + esfuerzo relativo entre **tasks**.
-- Comparar con tasks ya hechas del mismo producto (`D` / `T`) y repo.
-
-## Qué no estimamos
-
-- Épicas (Done cuando todas sus historias están en productivo vía sus tasks).
-- Historias (el esfuerzo se estima en las tasks).
+- Complejidad, incertidumbre y esfuerzo relativo entre **historias**.
+- La historia de backend y su contraparte de UI se estiman por separado.
+- Comparar con historias ya hechas del mismo producto (`D`, `T`, `R`, `B`).
 
 ## Checklist de refinamiento
 
-- [ ] Task con CA, tag y prioridad
-- [ ] US points asignados
+- [ ] Historia con criterios (Gherkin en backend) y prioridad
+- [ ] `US Points` cargados
 - [ ] Si aplica, Gherkins en camino a `main` (o ya en `main`)
-- [ ] Si ≥ 8, se discutió partir
+- [ ] Si son 8 o más, se discutió partirla
 
 ## Next step
 
