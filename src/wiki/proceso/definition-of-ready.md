@@ -1,67 +1,43 @@
 # Definition of Ready (DoR)
 
-Una task solo entra a desarrollo si cumple este checklist.
+Una historia solo entra a desarrollo si cumple este checklist. Recién ahí pasa a `Ready` en el Board.
 
-## Task — lista para trabajar (Ready)
+## Historia lista para trabajar (Ready)
 
-- [ ] **Criterios de aceptación** definidos en la descripción
-- [ ] **Descripción** y **Alcance** presentes en el ticket
-- [ ] Si corresponde: **Gherkins** en **`main`** con **link/path** al archivo en el repo
-- [ ] Estimada en **US points** (user story points)
-- [ ] Tiene su **tag** (producto / área)
-- [ ] **Prioridad** asignada: `low` | `medium` | `high` | `urgent`
-- [ ] ID correcto (`D-1.2.1` / `T-1.2.1`) e historia padre definida
-- [ ] Repositorio asociado
-
-### Tag
-
-Toda task lleva un tag que la clasifica (producto, módulo o área). Ejemplos a completar por el equipo: `dador`, `transportista`, `backend`, etc.
-
-### Prioridad
-
-| Valor | Uso |
-|-------|-----|
-| `low` | Puede esperar |
-| `medium` | Prioridad normal |
-| `high` | Debe hacerse pronto |
-| `urgent` | Bloquea o es crítico ahora |
+- [ ] Issue en `roadmap` con milestone y número asignado por la [automatización](../tickets/automatizacion-historias.md)
+- [ ] Título `Como …, Quiero …, Para …` y contexto en la descripción ([Plantilla de ticket](../tickets/plantilla-ticket.md))
+- [ ] Backend: **Gherkins** pusheados a `main` del repo y link al `.feature` en la descripción
+- [ ] UI: referencia a la historia de backend asociada
+- [ ] `US Points` cargados ([Estimación](../tickets/estimacion.md))
+- [ ] `Priority` asignada
+- [ ] Dependencias declaradas (`Bloqueado por #<N>`) y desbloqueadas
 
 ### Gherkins
 
-Si la task tiene escenarios BDD, los `.feature` (o equivalente) deben estar pusheados a `main` **antes** de considerarla Ready, y el ticket debe incluir el **link o path** al archivo en el repositorio. El formato del feature sigue [Convención de Gherkin](gherkin.md). Si no aplica BDD, indicar `Gherkins: no aplica`.
+En una historia de backend, los criterios de aceptación son sus escenarios Gherkin. Los `.feature` tienen que estar pusheados a `main` **antes** de considerarla Ready, y la descripción tiene que tener el link al archivo. El formato del feature sigue la [Convención de Gherkin](gherkin.md). Si no aplica (spike), indicar `Gherkins: no aplica`.
 
-## Al comenzar la task
+Ciclo de vida en la descripción de una user story de backend: al crearla, los escenarios van escritos en la descripción; antes de Ready se pushean a `main`; una vez en `main`, el bloque se reemplaza por el link al `.feature`. Detalle en [Plantilla de ticket](../tickets/plantilla-ticket.md#descripción-de-una-user-story-en-roadmap-formato-vigente).
 
-Antes de implementar (o en el momento de tomar la task):
+## Al comenzar la historia
 
-- [ ] Registrar **horas estimadas** (horas hombre previstas)
+- [ ] Pasarla a `In progress` en el Board
+- [ ] Cargar `Estimate (hs)` (horas hombre previstas)
 
-Eso es distinto de los US points: los puntos son esfuerzo relativo; las **horas** son la estimación temporal al arrancar.
-
-## Historia (contexto)
-
-La historia sigue el formato **Como / Quiero / Para**, sin repo. El trabajo Ready/Done operativo vive en las **tasks**.
-
-Checklist útil al refinar una historia:
-
-- [ ] ID (`D-1.2`) y épica padre
-- [ ] Como / Quiero / Para completo
-- [ ] Tasks hijas identificadas (cada una podrá cumplir DoR de task)
+Eso es distinto de los US points: los puntos son esfuerzo relativo; las horas son la estimación temporal al arrancar.
 
 ## Qué no es Ready
 
 | Señal | Acción |
 |-------|--------|
-| Task sin CA en la descripción | Completar CA o devolver a refinamiento |
-| Faltan Gherkins en `main` y sí aplican | Pushear los `.feature` a `main` primero |
-| Task sin US points | Estimar antes de planificar |
-| Task sin tag | Asignar tag |
-| Task sin prioridad | Asignar `low` / `medium` / `high` / `urgent` |
-| Task sin repo | Asignar repo |
+| Historia de backend sin Gherkins | Escribirlos y devolverla a refinamiento |
+| Gherkins solo en la descripción, no en `main` | Pushear el `.feature` a `main` y reemplazar el bloque por el link |
+| Sin `US Points` | Estimar antes de planificar |
+| Sin `Priority` | Asignarla |
+| Bloqueada por otra historia abierta | Esperar o replanificar |
 
 ## Checklist rápido (pre-sprint)
 
-- [ ] Cada task planificada cumple DoR (incl. tag y prioridad)
+- [ ] Cada historia planificada cumple DoR
 - [ ] Gherkins en `main` cuando corresponde
 - [ ] Equipo alineado en alcance
 
