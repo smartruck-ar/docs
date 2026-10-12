@@ -38,11 +38,21 @@ Con prefijo de producto en el scope (si el equipo lo prefiere de forma explícit
 feat(D-1.1.2): agregar endpoint de alta de viaje
 ```
 
+## Commits atómicos y push
+
+- Un commit es la unidad más chica que tiene sentido sola y deja el repo funcionando: un ciclo de TDD, un script, una página.
+- El test va en el mismo commit que el código que verifica.
+- Cada commit se pushea apenas se crea. No se acumulan commits locales.
+- Todo se pushea a `main`: no hay ramas de feature ni pull requests. `test` y `prod` solo se mueven con los scripts de release ([Workflow de entrega](workflow-entrega.md)).
+- Sin cuerpo ni trailers (`Co-authored-by`, `Signed-off-by`), sin `--no-verify` y sin force-push.
+- En los repos sin tasks (`smartruck-ai`), el mensaje va sin scope: `feat: <descripción>`.
+
 ## Checklist
 
 - [ ] Type es `feat`, `fix` o `refactor`
 - [ ] Scope es el ID de la task
 - [ ] Descripción clara y acotada al cambio
+- [ ] Commit atómico y pusheado a `main`
 
 ## Referencia
 
