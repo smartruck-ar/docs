@@ -8,6 +8,8 @@ Convenciones de trabajo compartidas (proceso, tickets, roles). Independiente del
 2. [Definition of Ready](proceso/definition-of-ready.md)
 3. [Definition of Done](proceso/definition-of-done.md)
 4. [Plantilla de ticket](tickets/plantilla-ticket.md)
+5. [Workflow de entrega](proceso/workflow-entrega.md) — `main`, release a `test` y a `prod`, estados del Board
+6. [Desarrollo con agentes](proceso/desarrollo-con-agentes.md) — `/nueva-feature`
 
 ## Secciones
 
