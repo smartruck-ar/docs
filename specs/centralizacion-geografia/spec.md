@@ -115,7 +115,23 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 
 ## Historias derivadas
 
-_Lo completa `/to-tickets`. No lo escribas a mano._
+Cada historia lleva la línea `Spec:` que apunta a este documento.
 
 | Historia | Cubre (de este spec) |
 | --- | --- |
+| #140 R.1.1 · base propia del servicio | 6, 14 |
+| #168 R.1.8 · provincia de las 150 localidades (Georef) | 6, 14 |
+| #169 R.1.9 · rutas que faltan entre las 150 localidades | 11, 14 |
+| #144 R.1.5 · ruta identificada por el par de localidades | 7, 8 |
+| #141 R.1.2 · proveedor externo como respaldo, sin guardar | 9 |
+| #142 R.1.3 · rutas en lote con tope de llamadas | 12 |
+| #143 R.1.4 · autenticación de usuarios y servicios | 13 |
+| #170 R.1.10 · recursos bajo `/geo` y health check | 15, 25 |
+| #163 R.1.7 / #164 UI-R.1.7 · localidades y pin | 1, 2, 4, 5, 18, 21 |
+| #166 S.5 · spike del proveedor de direcciones | 3, 4, 20 |
+| #172 R.1.12 / #175 UI-R.1.12 · direcciones y dirección sugerida del pin | 3, 4, 20 |
+| #145 R.1.6 / #152 UI-R.1.6 · único dueño de rutas y distancias | 8, 10, 16, 17, 18, 22, 24 |
+| #171 R.1.11 / #174 UI-R.1.11 · catálogo embebido y caché de rutas | 21, 22, 23 |
+| #165 D.2.10 · el backend guarda la localidad del geo-service | 19 |
+| #173 D.2.11 · backfill de la localidad en cargas y centros | 19 |
+| #167 S.6 · spike de ampliación del catálogo | 26 |
