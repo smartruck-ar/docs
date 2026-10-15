@@ -120,7 +120,7 @@ Cada historia lleva la línea `Spec:` que apunta a este documento.
 | Historia | Cubre (de este spec) |
 | --- | --- |
 | #140 R.1.1 · base propia del servicio | 6, 14 |
-| #168 R.1.8 · provincia de las 150 localidades (Georef) | 6, 14 |
+| #168 R.1.8 · carga inicial de las 150 localidades con provincia (Georef) y de las rutas precargadas | 6, 14 |
 | #169 R.1.9 · rutas que faltan entre las 150 localidades | 11, 14 |
 | #144 R.1.5 · ruta identificada por el par de localidades | 7, 8 |
 | #141 R.1.2 · proveedor externo como respaldo, sin guardar | 9 |
