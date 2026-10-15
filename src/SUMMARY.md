@@ -24,6 +24,8 @@
   - [Automatización de historias (roadmap)](./wiki/tickets/automatizacion-historias.md)
   - [Roles](./wiki/equipo/roles.md)
   - [Glosario](./wiki/equipo/glosario.md)
+  - [ADR 0001 · Geo-service dueño de la geografía](./wiki/adr/0001-geo-service-dueno-de-la-geografia.md)
+  - [ADR 0002 · Geo-service de solo lectura y catálogo cerrado](./wiki/adr/0002-geo-service-solo-lectura-y-catalogo-cerrado.md)
 
 # Repositories
 
