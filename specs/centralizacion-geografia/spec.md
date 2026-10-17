@@ -30,7 +30,7 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 
 **Backend**
 
-16. Como dador, quiero que cotizar y publicar usen la misma distancia del geo-service y que publicar reutilice la distancia cotizada sin recalcularla, para ver el mismo valor en todo el flujo.
+16. Como dador, quiero que la carga no guarde la distancia y que cada pantalla la consulte al geo-service a partir de las localidades de la carga, para ver siempre el mismo valor que al cotizar.
 17. Como dador, quiero un error claro si el geo-service no responde al cotizar, para saber que debo reintentar.
 18. Como desarrollador, quiero que el backend deje de exponer localidades, geocodificación y rutas y elimine su copia del motor y de la estimación, para que exista una sola implementación.
 19. Como desarrollador, quiero que las cargas y los centros de carga guarden la localidad del geo-service (id y nombre), con un backfill de lo existente, para que usen el mismo identificador.
@@ -83,7 +83,7 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 
 **Resiliencia**
 - Los frontends embeben el catálogo (150 localidades, provincia y coordenadas) generado desde el geo-service en cada build, y cachean en el navegador las geometrías ya vistas. Nunca calculan distancias ni estimaciones.
-- El backend responde 503 al cotizar si el geo-service no responde; publicar usa la distancia cotizada.
+- El backend responde 503 al cotizar si el geo-service no responde. Publicar no consulta ni guarda la distancia, así que funciona aunque el geo-service esté caído; la distancia de una carga la piden los frontends al geo-service (en las listas, con el lote).
 - No hay segundo deploy. Se reevalúa si hay caídas repetidas, un SLO de disponibilidad incumplido, consultas espaciales (PostGIS) que no entren en PostgREST, límites de CPU en el batch o un motor de ruteo propio.
 
 ## Decisiones de testing
