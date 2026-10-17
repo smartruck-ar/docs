@@ -26,14 +26,14 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 12. Como desarrollador, quiero resolver varias rutas en una sola llamada (en el orden pedido, sin duplicados, con coordenadas de las localidades y geometría opcional, con un tope configurable de llamadas al proveedor externo), para que el motor de recomendaciones calcule tramos vacíos rápido.
 13. Como desarrollador, quiero que el servicio exija autenticación de usuarios y de servicios internos, para que solo la plataforma lo consuma.
 14. Como desarrollador, quiero que el geo-service no tenga ningún endpoint de escritura y que la carga inicial sea un script idempotente, para que sea un servicio de consulta.
-15. Como desarrollador, quiero endpoints en inglés bajo `/geo/*` y que `/routes*` se retire cuando deje de usarse, para tener una API clara sin romper a nadie.
+15. Como desarrollador, quiero endpoints en inglés bajo `/geo/*`, y que `/routes*` y la consulta de rutas por nombre de ciudad se retiren cuando dejen de usarse, para tener una API clara sin romper a nadie.
 
 **Backend**
 
 16. Como dador, quiero que la carga no guarde la distancia y que cada pantalla la consulte al geo-service a partir de las localidades de la carga, para ver siempre el mismo valor que al cotizar.
 17. Como dador, quiero un error claro si el geo-service no responde al cotizar, para saber que debo reintentar.
 18. Como desarrollador, quiero que el backend deje de exponer localidades, geocodificación y rutas y elimine su copia del motor y de la estimación, para que exista una sola implementación.
-19. Como desarrollador, quiero que las cargas y los centros de carga guarden la localidad del geo-service (id y nombre), con un backfill de lo existente, para que usen el mismo identificador.
+19. Como desarrollador, quiero que las cargas y los centros de carga guarden solo el id de la localidad del geo-service y que el backend valide ese id contra una tabla local de ids válidos, con un backfill de lo existente, para no duplicar datos geográficos.
 20. Como dador, quiero que el backend guarde solo el pin y el texto de dirección que yo confirmé, para no almacenar datos de un proveedor que no lo permite.
 
 **Frontends**
@@ -48,12 +48,22 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 25. Como equipo, quiero un health check del geo-service en la herramienta de monitoreo que usemos, para enterarnos de una caída antes que los usuarios.
 26. Como equipo, quiero un plan para ampliar el catálogo según la frecuencia de uso y no según la población, con un script idempotente que reciba la lista de localidades, para crecer sin rehacer datos.
 
+**Consulta por id**
+
+27. Como desarrollador, quiero consultar una localidad (con su provincia) y una ruta por id de localidad, para que los consumidores guarden y pidan solo ids.
+
 ## Decisiones de implementación
 
 **Dueño y límites**
 - El geo-service es dueño de provincias, localidades, direcciones, geocodificación inversa, rutas y estimación. No llama a otros servicios del producto y no tiene endpoints de escritura. Corre como Cloudflare Worker.
 - Esquema y rol propios (`geo`, `geo_service`) en el mismo proyecto de Supabase; ningún servicio lee ni escribe tablas de otro.
-- Las cargas y los centros de carga guardan una foto de su localidad (id y nombre). El pin y la dirección confirmados por el usuario los guarda el backend.
+- Las cargas y los centros de carga guardan solo el id de su localidad del geo-service, sin nombre ni distancia: son referencias, no copias. El backend tiene una tabla local con los ids válidos (solo ids) y la usa para validar al guardar; cómo se mantiene al día cuando el catálogo crece queda por decidir. El pin y la dirección confirmados por el usuario los guarda el backend.
+
+**Flujo de una carga**
+- El frontend busca y normaliza origen y destino contra el geo-service y obtiene el id de cada localidad.
+- Al publicar manda esos ids; el backend valida que existan en su tabla local y guarda la carga.
+- Al mostrarla, el frontend toma las cargas del backend y le pide al geo-service, por id, el nombre y la provincia (el catálogo embebido los resuelve sin llamar) y la distancia y el trazado (en las listas, con el lote).
+- Los ids de localidad no se reasignan ni se borran: el geo-service no tiene endpoints de escritura y su catálogo es cerrado.
 
 **Catálogo y datos**
 - Catálogo cerrado de 150 localidades (las de las rutas precargadas). A cada una se le asigna su provincia desde el dump de Georef (CC BY 4.0), con un archivo de mapeo revisado a mano donde el nombre sea ambiguo. Una localidad fuera del catálogo se responde como no soportada.
@@ -65,6 +75,7 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 - Endpoints bajo `/geo/*`: localidades, direcciones, geocodificación inversa, ruta por par y batch. Las respuestas de ruta vienen orientadas origen → destino. El batch devuelve resultados en el orden pedido, deduplicados, con coordenadas de las localidades y geometría opcional.
 - Errores: 404 localidad o ruta no encontrada o no soportada, 400/422 parámetros inválidos, 401 sin credenciales. "Fuera de cobertura" es un resultado distinto de "no soportada".
 - Una ruta se identifica por el par de ids de localidad; la normalización de nombres solo sirve para encontrar la localidad.
+- La localidad y la ruta se consultan por id. La consulta de rutas por nombre de ciudad se retira al final de la migración; la búsqueda de localidades por texto (autocompletado) se mantiene.
 
 **Resolución de rutas**
 - Orden: caché → ruta guardada → proveedor externo (Mapbox Directions, sin guardar) → estimación. La estimación (`is_estimation`) usa un factor vial y una velocidad media configurables y nunca se guarda ni se cachea.
@@ -132,6 +143,12 @@ Cada historia lleva la línea `Spec:` que apunta a este documento.
 | #172 R.1.12 / #175 UI-R.1.12 · direcciones y dirección sugerida del pin | 3, 4, 20 |
 | #145 R.1.6 / #152 UI-R.1.6 · único dueño de rutas y distancias | 8, 10, 16, 17, 18, 22, 24 |
 | #171 R.1.11 / #174 UI-R.1.11 · catálogo embebido y caché de rutas | 21, 22, 23 |
-| #165 D.2.10 · el backend guarda la localidad del geo-service | 19 |
-| #173 D.2.11 · backfill de la localidad en cargas y centros | 19 |
+| #165 D.2.10 · las cargas y los centros de carga guardan solo el id de la localidad, validado contra una tabla local | 19 |
+| #173 D.2.11 · backfill del id de localidad en cargas y centros | 19 |
 | #167 S.6 · spike de ampliación del catálogo | 26 |
+| #178 R.1.13 · cuentas de servicio de Supabase entre servicios | 13 |
+| #179 R.1.14 · configurar en prod la cuenta de servicio y las credenciales | 13 |
+| #180 R.1.15 · encender la autenticación en prod y retirar el interruptor | 13 |
+| #181 R.1.16 · monitor y badges apuntando a `/geo` | 25 |
+| #182 R.1.17 · consultar localidad y ruta por id | 27 |
+| #183 R.1.18 · retirar la consulta de rutas por nombre | 15, 27 |

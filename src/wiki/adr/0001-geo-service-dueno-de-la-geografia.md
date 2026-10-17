@@ -12,8 +12,9 @@
 `microservice-routes` pasa a ser el **geo-service** (servicio geográfico). Es el único dueño de: provincias, localidades, búsqueda de localidades y direcciones, geocodificación inversa, rutas entre localidades y estimación.
 
 - Los demás sistemas piden, nunca calculan ni copian. El backend consume el geo-service con una credencial interna; los frontends, con la sesión del usuario.
-- Los endpoints se exponen en inglés bajo `/geo/*` (`/geo/localities`, `/geo/routes`, `/geo/routes/batch`). `/routes*` y los endpoints en español del backend se retiran cuando dejan de usarse.
-- Las cargas y los centros de carga guardan una foto de su localidad (id y nombre). El pin exacto y la dirección que el usuario confirmó los guarda el backend.
+- Los endpoints se exponen en inglés bajo `/geo/*` (`/geo/localities`, `/geo/routes`, `/geo/routes/batch`). `/routes*`, la consulta de rutas por nombre de ciudad y los endpoints en español del backend se retiran cuando dejan de usarse.
+- Las cargas y los centros de carga guardan solo el id de su localidad, sin nombre ni distancia: son referencias, no copias. El backend valida el id contra una tabla local de ids válidos. Los frontends piden al geo-service, por id, el nombre, la provincia, la distancia y el trazado. El pin exacto y la dirección que el usuario confirmó los guarda el backend.
+- Los ids de localidad no se reasignan ni se borran.
 - El geo-service no llama a otros servicios del producto.
 
 ## Consecuencias
