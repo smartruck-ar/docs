@@ -23,6 +23,7 @@
   - [Roles](./wiki/equipo/roles.md)
   - [Glosario](./wiki/equipo/glosario.md)
   - [Restyling de UI](./wiki/ui/restyling.md)
+  - [Handoff restyling del dador (D.X.2/D.X.3 + backend)](./wiki/ui/restyling-dador-handoff.md)
 
 # Repositories
 
