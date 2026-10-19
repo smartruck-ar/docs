@@ -2,7 +2,7 @@
 
 ## Responsabilidades
 
-- UI y flujos del actor **Dador** (`D-x.y.z` en tasks de este repo)
+- UI y flujos del actor **Dador** (historias `UI-D.x.y` de `roadmap`)
 - Orquestación de pantallas y llamadas al backend
 
 ## Organización

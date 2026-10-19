@@ -1,0 +1,16 @@
+change: geo-service
+artifact_store: docs   # plan kept in smartruck-ar/docs, not in the service repository
+execution_mode: auto
+delivery_strategy: single-pr   # trunk cadence: atomic always-green commits to main, no PR chain
+created: "2026-10-10"
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done    # D1-D7 decided 2026-10-10 (D1 harness confirmed by the RUT 01 spike, task 0.1)
+  tasks: done
+  apply: pending
+  verify: pending
+  archive: pending
+blocked_reasons: []
+next_recommended: apply   # start with tasks group 0 (enabler) inside R.1.1 #140

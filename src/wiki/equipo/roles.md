@@ -5,8 +5,8 @@ Responsabilidades de alto nivel. Completá nombres y detalles según el equipo r
 | Rol | Responsabilidad principal |
 |-----|---------------------------|
 | Product Owner / referente de producto | Prioriza épicas e historias; valida valor de negocio |
-| Desarrollador | Implementa tasks en el repo asignado; PRs; DoD |
-| Reviewer | Revisa PRs contra CA y estándares del repo |
+| Desarrollador | Implementa historias en `main` del repo asignado y las libera a `test`; DoD |
+| Reviewer | Valida en `test` las historias en `In review` contra sus CA y los estándares del repo |
 | Tech lead (si aplica) | Criterios técnicos, arquitectura, desbloqueos |
 
 ## Por producto
@@ -19,7 +19,7 @@ Responsabilidades de alto nivel. Completá nombres y detalles según el equipo r
 ## Checklist
 
 - [ ] Cada historia tiene alguien que valida el Como / Quiero / Para
-- [ ] Cada task tiene owner y repo
+- [ ] Cada historia del sprint tiene responsable y repo
 
 ## Next step
 
