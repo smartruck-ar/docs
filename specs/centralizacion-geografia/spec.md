@@ -40,7 +40,7 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 
 21. Como dador o transportista, quiero que el autocompletado de localidades, la búsqueda de direcciones y el pin del mapa usen el geo-service con mi sesión, para ver siempre la misma geografía.
 22. Como dador o transportista, quiero ver las rutas que informa el geo-service, y que una ruta estimada se muestre como estimada, sin que la app calcule nada.
-23. Como dador o transportista, quiero poder elegir localidades aunque el geo-service esté caído (catálogo embebido en el build) y ver las rutas que ya miré (caché), para seguir trabajando; si falta el trazado, quiero ver el mapa sin trazado y "distancia no disponible".
+23. Como dador o transportista, quiero que el geo-service siga respondiendo el catálogo y las rutas ya guardadas aunque falle su base o Supabase Auth, para seguir trabajando; si de verdad no hay respuesta, quiero ver el mapa sin trazado y "distancia no disponible". Los frontends no embeben el catálogo ni cachean geografía propia ([ADR 0003](../../adr/0003-resiliencia-en-el-geo-service-y-no-en-los-frontends.md)).
 24. Como desarrollador, quiero eliminar la vista `/map` del dador, el `haversine × 1,25` repetido y las constantes de rutas hardcodeadas, para que no queden copias.
 
 **Operación**
@@ -93,9 +93,9 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 - Orden: geo-service con datos propios y autenticación → backend consumidor (cotizar y publicar) → frontends → retiro de los endpoints viejos (`GET /routes` y los de localidades del backend, `/routes*` del geo-service). Nunca hay dos fuentes distintas respondiendo a la vez.
 
 **Resiliencia**
-- Los frontends embeben el catálogo (150 localidades, provincia y coordenadas) generado desde el geo-service en cada build, y cachean en el navegador las geometrías ya vistas. Nunca calculan distancias ni estimaciones.
+- La resiliencia vive en el geo-service ([ADR 0003](../../adr/0003-resiliencia-en-el-geo-service-y-no-en-los-frontends.md)): el catálogo y las rutas guardadas se sirven desde una copia en el borde ante una falla de la base (*stale-if-error*), las claves de verificación de sesión (JWKS) se guardan con vigencia larga y las rutas precargadas cubren todas las combinaciones. Los frontends nunca calculan distancias ni estimaciones, ni embeben el catálogo.
 - El backend responde 503 al cotizar si el geo-service no responde. Publicar no consulta ni guarda la distancia, así que funciona aunque el geo-service esté caído; la distancia de una carga la piden los frontends al geo-service (en las listas, con el lote).
-- No hay segundo deploy. Se reevalúa si hay caídas repetidas, un SLO de disponibilidad incumplido, consultas espaciales (PostGIS) que no entren en PostgREST, límites de CPU en el batch o un motor de ruteo propio.
+- No hay segundo deploy. Se reevalúa (ver ADR 0003) si hay caídas repetidas, un SLO de disponibilidad incumplido, consultas espaciales (PostGIS) que no entren en PostgREST, límites de CPU en el batch o un motor de ruteo propio.
 
 ## Decisiones de testing
 
@@ -120,7 +120,7 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 ## Notas
 
 - **Spike de cumplimiento de direcciones (abierto):** el backend guarda el pin y la dirección de cada carga. Si la dirección viene del geocoding temporal de Mapbox, guardarla viola los términos, y la documentación de Mapbox además exige usar su mapa; los frontends dibujan con MapLibre. El spike decide el proveedor de direcciones (Mapbox permanente, Geoapify u otro que permita guardar). Fuentes en [fuentes-datos-geograficos](../../research/fuentes-datos-geograficos.md).
-- **Sin verificar:** si Mapbox Directions permite guardar resultados (por eso no se guardan); la licencia de las capas SIG del IGN; que el backend y los frontends salgan por la zona de Cloudflare, que afecta cuánto ayuda el fallback.
+- **Sin verificar:** si Mapbox Directions permite guardar resultados (por eso no se guardan); la licencia de las capas SIG del IGN; qué copia en el borde (Cache API por centro de datos o KV global) da la garantía de *stale-if-error* que pide el ADR 0003; se decide en #171.
 - **Este spec reemplaza** `plan-centralizacion-routes.md` §4.3 y el write-through de R4. `plan-geo-service/` queda como el detalle del lado del Worker; su tarea 1.B.7 pasa a usar el dump de Georef para las provincias de las 150 localidades.
 - **Historias existentes que probablemente se ajustan:** #137 (S.3), #140, #141, #144 a #145, #152, #163, #164 y #165. Se confirma en `/to-tickets`.
 
@@ -142,7 +142,7 @@ Cada historia lleva la línea `Spec:` que apunta a este documento.
 | #166 S.5 · spike del proveedor de direcciones | 3, 4, 20 |
 | #172 R.1.12 / #175 UI-R.1.12 · direcciones y dirección sugerida del pin | 3, 4, 20 |
 | #145 R.1.6 / #152 UI-R.1.6 · único dueño de rutas y distancias | 8, 10, 16, 17, 18, 22, 24 |
-| #171 R.1.11 / #174 UI-R.1.11 · catálogo embebido y caché de rutas | 21, 22, 23 |
+| #171 R.1.11 / #174 UI-R.1.11 · el servicio responde con lo último que supo cuando falla su base | 22, 23 |
 | #165 D.2.10 · las cargas y los centros de carga guardan solo el id de la localidad, validado contra una tabla local | 19 |
 | #173 D.2.11 · backfill del id de localidad en cargas y centros | 19 |
 | #167 S.6 · spike de ampliación del catálogo | 26 |
