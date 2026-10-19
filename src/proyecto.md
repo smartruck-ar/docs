@@ -21,7 +21,7 @@ Esta documentación se actualiza con la evolución del producto y es referencia 
 
 ## Cómo se organiza el trabajo
 
-Épica → historia (Como/Quiero/Para + story points) → tasks (descripción + CA + repo). Detalle en [Jerarquía](./wiki/proceso/jerarquia.md).
+Épica (milestone de `roadmap`) → historia (Como/Quiero/Para, con criterios en Gherkin y `US Points`), trabajada en el repo que corresponde. Detalle en [Jerarquía](./wiki/proceso/jerarquia.md).
 
 ## Roles
 

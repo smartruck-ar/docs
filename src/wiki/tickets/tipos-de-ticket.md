@@ -1,26 +1,28 @@
 # Tipos de ticket
 
-Solo existen tres tipos: **épica**, **historia** y **task**.
+Todo ticket es una issue de [`smartruck-ar/roadmap`](https://github.com/smartruck-ar/roadmap). Hay un solo tipo de trabajo, la **user story**, con tres variantes, más las épicas que las agrupan.
 
-| Tipo | Rol en la jerarquía | Estimación | Repo |
-|------|---------------------|------------|------|
-| Épica | Agrupa historias | No | No |
-| Historia | Valor de negocio (Como/Quiero/Para) | No (el esfuerzo vive en las tasks) | No |
-| Task | Trabajo técnico que compone una historia | **US points** (DoR) + horas al inicio/cierre | Sí |
-
-Cada **task** además requiere: **tag**, **prioridad** (`low` / `medium` / `high` / `urgent`), horas estimadas al comenzar y horas hombre insumidas al Done.
+| Tipo | Qué es | Cómo se crea | Label |
+|------|--------|--------------|-------|
+| Épica | Milestone que agrupa historias | Milestone en `roadmap` | — |
+| Historia de backend | Valor de negocio (Como/Quiero/Para) con criterios en Gherkin | Título sin prefijo + milestone | `user story` |
+| Historia de UI | Contraparte de pantalla de una historia de backend | Título con `UI-`, o tags `front+back` / `crear front` | `user story` |
+| Spike | Investigación o decisión con entregable | Milestone `SPIKES` | `user story` (lo pone la automatización) y `spike` |
 
 ## Reglas rápidas
 
-- Si entrega valor al usuario → **historia** (+ tasks).
-- Si es implementación concreta de una historia → **task**.
-- Todo el trabajo (incluido un arreglo o mejora) se modela como **task** bajo una historia; no hay tipo “bug”.
+- Si entrega valor al usuario o habilita una capacidad técnica → **historia** (`Como desarrollador, Quiero …` vale para trabajo técnico).
+- Si necesita pantalla y backend → dos historias con el mismo número (`T.2.9` y `UI-T.2.9`), creadas con `front+back`.
+- Si hay que investigar antes de decidir → **spike**.
+- Un arreglo o mejora también es una historia; no hay tipo "bug" ni "task".
+- Si una historia es grande, se parte en sub-historias (sub-issues nativas de GitHub), que heredan su número.
 
 ## Checklist
 
-- [ ] El tipo es épica, historia o task
-- [ ] Las tasks cuelgan de una historia con ID padre
+- [ ] Es una issue de `roadmap` con milestone
+- [ ] El título sigue `Como …, Quiero …, Para …` (o `UI-…`)
+- [ ] Tiene el label que le corresponde
 
 ## Next step
 
-[Estimación](estimacion.md)
+[Estimación](estimacion.md) · [Automatización de historias](automatizacion-historias.md)

@@ -2,7 +2,7 @@
 
 ## Responsabilidades
 
-- UI y flujos del actor **Transportista** (`T-x.y.z` en tasks de este repo)
+- UI y flujos del actor **Transportista** (historias `UI-T.x.y` de `roadmap`)
 
 ## Límites
 

@@ -1,175 +1,69 @@
 # Plantillas de ticket
 
-Los campos del tracker (título, historia padre, repositorio, tag, prioridad, US points, horas) van **fuera** de la descripción. Acá solo se define el **cuerpo** que se pega en la descripción del ticket.
+Los campos del Board (`Status`, `Sprint`, `US Points`, `Priority`, `Estimate (hs)`, `Spent (hs)`) y el milestone van **fuera** de la descripción. Acá solo se define el **cuerpo** que se pega en la descripción del ticket.
 
-## Cuerpo obligatorio de una **task**
+## Descripción de una user story en `roadmap` (formato vigente)
 
-| Sección | Contenido |
-|---------|-----------|
-| Párrafo inicial | Contexto del problema o necesidad y qué se debe hacer |
-| **Objetivo** | Qué se busca lograr con esta entrega |
-| **Alcance** | Qué incluye y qué **no** incluye (usar *Fuera de alcance*) |
-| **Criterios de aceptación** | Condiciones verificables numeradas (`CA1`, `CA2`, …) — no checklist |
-| **Gherkins** (si aplica) | Link/path a los `.feature` en el **repositorio** (rama `main`) |
+Todo el trabajo se modela como **user story en `smartruck-ar/roadmap`**. El título va sin numeración (`Como …, Quiero …, Para …`): la numeración, el label `user story`, la contraparte de UI y el sprint los asigna la [automatización](automatizacion-historias.md) al asignar la épica (milestone).
 
-Si no aplica BDD: indicar explícitamente `Gherkins: no aplica`.
-
----
-
-## Épica
+### Historia de backend
 
 ```markdown
-## D-1 — <Título de la épica>
+<Contexto en una o dos oraciones: qué hay hoy y qué cambia.>
 
-### Objetivo
-<Qué problema de negocio resuelve>
+Bloqueado por #<N> <(opcional) escenario o motivo>
 
-### Alcance
-- Incluye:
-- No incluye:
-
-### Historias
-- [ ] D-1.1 — …
-- [ ] D-1.2 — …
-
-### Notas
--
+<Gherkins: ver ciclo de vida abajo>
 ```
 
-## Historia de usuario
+Los **criterios de aceptación de una historia de backend son sus escenarios Gherkin**. No se escribe una lista de CA aparte.
+
+### Ciclo de vida de los Gherkins en la descripción
+
+| Momento | Qué va en la descripción |
+|---------|--------------------------|
+| **Al crear la historia** (refinamiento) | Los escenarios escritos directamente en la descripción, en un bloque `gherkin`, con la ruta del `.feature` donde se van a pushear |
+| **Antes de pasar a Ready** | Los escenarios se pushean a `main` del repositorio correspondiente ([DoR](../proceso/definition-of-ready.md)) |
+| **Una vez en `main`** | El bloque se **reemplaza** por el link al archivo: `[Link a los Gherkins asociados](https://github.com/smartruck-ar/<repo>/blob/main/test/acceptance/features/<archivo>.feature)` |
+
+Bloque a usar mientras los escenarios no están en `main`:
+
+````markdown
+**Gherkins** — pendientes de pushear a `<repo>/test/acceptance/features/<archivo>.feature`. Una vez en `main`, reemplazar este bloque por el link al archivo.
+
+```gherkin
+# language: es
+Escenario: <ID>: <descripción>
+  Dado …
+  Cuando …
+  Entonces …
+```
+````
+
+Los escenarios siguen la [convención de Gherkin](../proceso/gherkin.md). Los IDs nuevos continúan la numeración del `.feature` donde se agregan; se confirman al pushear.
+
+### Historia de frontend (`UI-`)
+
+Basta con referenciar la historia de backend asociada:
 
 ```markdown
-## D-1.2 — <Título corto>
-
-**Como** <rol / actor>
-**Quiero** <capacidad>
-**Para** <beneficio>
-
-### Épica
-D-1
-
-### Tasks
-- [ ] D-1.2.1 — … (repo: …, tag: …, prioridad: …, US points: …)
-- [ ] D-1.2.2 — … (repo: …, tag: …, prioridad: …, US points: …)
-
-### Notas / dependencias
--
+Contraparte de UI del ticket backend #<N>.
 ```
 
-## Descripción de task (pegar en el tracker)
+La contraparte que crea la automatización con el tag `front+back` ya trae esta referencia. Si la historia de frontend no tiene contraparte directa, referenciar la historia de backend de la que depende.
 
-```markdown
-<Párrafo inicial: contexto del problema o necesidad y qué se debe hacer.>
+### Spike
 
----
-
-## Objetivo
-
-<Qué se busca lograr con esta entrega, en una o dos oraciones.>
-
----
-
-## Alcance
-
-- <Ítem incluido>
-- <Ítem incluido>
-
-### Fuera de alcance
-
-- <Qué no incluye esta task>
-
----
-
-## Criterios de aceptación
-
-**CA1 - <Título corto>:** <Condición verificable.>
-
-**CA2 - <Título corto>:** <Condición verificable.>
-
-**CA3 - <Título corto>:** <Condición verificable.>
-
----
-
-## Gherkins
-
-No aplica.
-```
-
-### Variante con CA más detallados
-
-Si un criterio necesita detalle (pasos, contrato, notas), usar encabezado `###` y cuerpo debajo:
-
-```markdown
-## Criterios de aceptación
-
-### CA1 — <Título corto>
-
-<Detalle del criterio. Puede incluir listas, tablas o ejemplos.>
-
----
-
-### CA2 — <Título corto>
-
-<Detalle del criterio.>
-```
-
-## Ejemplo mínimo (task técnica)
-
-```markdown
-Implementar un LogManager que escriba logs estructurados a stdout, como base para auditar acciones del transportista. Esta task no audita aún todas las acciones: eso será en tasks posteriores que usen el manager en controllers/repos.
-
----
-
-## Objetivo
-
-Disponer de un mecanismo de logging reutilizable en el backend que emita a stdout en formato estructurado, verificable por tests unitarios y listo para consumo por el stack de auditoría.
-
----
-
-## Alcance
-
-- Puerto/adapter de LogManager usable desde infrastructure (controllers/repos).
-- Niveles `info` y `error` (como mínimo).
-- Formato JSON a stdout.
-- Tests unitarios que verifiquen la emisión del log.
-
-### Fuera de alcance
-
-- Cablear todos los controllers/repos.
-- Dashboards o configuración en Grafana/Loki.
-
----
-
-## Criterios de aceptación
-
-**CA1 - LogManager disponible:** Existe un LogManager (puerto/adapter) usable desde infrastructure (controllers/repos).
-
-**CA2 - Emisión a stdout:** `info` y `error` (como mínimo) escriben a stdout.
-
-**CA3 - Formato estructurado:** El log es JSON e incluye al menos: `level`, `message`, `service` (ej. `smartruck-backend`), `env`.
-
-**CA4 - Verificación por tests:** Tests unitarios verifican que al invocar el manager se emite el log esperado (nivel + mensaje / campos).
-
-**CA5 - Sin secretos:** No loguea secretos (documentado / sin campos de password/token en la API del manager).
-
-**CA6 - Alineación a convención:** Queda alineado a la convención de logging (controllers y repositorios); el cableado en esos bordes puede ser otra task.
-
----
-
-## Gherkins
-
-No aplica.
-```
+Contexto, qué hay que investigar o decidir y cuál es el entregable esperado. `Gherkins: no aplica`.
 
 ## Checklist
 
-- [ ] ID y prefijo correctos (en el tracker)
-- [ ] Historia en Como / Quiero / Para
-- [ ] Descripción con Objetivo, Alcance y Criterios (`CA1`, `CA2`, …)
-- [ ] Gherkins: link en el repo o “no aplica”
-- [ ] US points, tag, prioridad y repo (en el tracker)
-- [ ] Al comenzar: horas estimadas; al Done: horas insumidas
+- [ ] Título `Como …, Quiero …, Para …` (con `UI-` si es de pantalla), sin numeración
+- [ ] Milestone asignado (la automatización numera y agrega `user story`)
+- [ ] Backend: escenarios Gherkin en la descripción o link al `.feature` en `main`
+- [ ] UI: referencia a la historia de backend
+- [ ] `Bloqueado por #<N>` si depende de otra historia
 
 ## Next step
 
-[Tipos de ticket](tipos-de-ticket.md) · [DoR](../proceso/definition-of-ready.md)
+[Automatización de historias](automatizacion-historias.md) · [Definition of Ready](../proceso/definition-of-ready.md)

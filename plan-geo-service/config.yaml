@@ -1,0 +1,65 @@
+schema: spec-driven
+
+context: |
+  Tech stack: TypeScript 5 (strict), Cloudflare Workers (wrangler 4), @supabase/supabase-js 2 (the `postgres` package is listed but unused)
+  Architecture: Hexagonal (Ports & Adapters) + Clean Architecture: src/domain (pure), src/application (use cases, DTOs), src/infrastructure (controllers, mappers, adapters, cors); manual routing and per-request composition in src/index.ts
+  Testing: vitest 2.1.8 with @cloudflare/vitest-pool-workers (tests run inside workerd); hand-written fakes implement domain ports (no Supabase mocks)
+  Acceptance: Spanish Gherkin in test/acceptance/features/*.feature is documentation only (no Gherkin runner, no step definitions); each scenario is mirrored by hand as an `it("RUT NN: ...")` in test/acceptance/*.spec.ts; scripts/acceptance_test.sh is a post-deploy curl check against the live environment
+  Style: English identifiers; Spanish Gherkin and user-facing messages; commits in first-person present-tense Spanish tied to the exact test (team convention)
+  Delivery: trunk-based on main; scripts/release_to_test bumps VERSION.txt and pushes main:test; scripts/release_to_prod promotes test:prod
+
+strict_tdd: true
+
+testing:
+  strict_tdd_mode: enabled
+  detected: "2026-10-10"
+  test_command: "./scripts/run_all_tests"
+  unit:
+    available: true
+    command: "npx vitest run"
+    tool: "vitest + @cloudflare/vitest-pool-workers"
+  acceptance_bdd:
+    available: partial
+    command: "npx vitest run (hand-written mirror specs in test/acceptance)"
+    tool: "none: .feature files are not executed by a Gherkin runner"
+    wip_exclusion: "NOT AVAILABLE - see design decision D1"
+  typecheck:
+    available: true
+    command: "npx tsc --noEmit"
+  lint:
+    available: false
+  post_deploy:
+    smoke: "./scripts/smoke_test.sh <base_url> <version>"
+    acceptance: "./scripts/acceptance_test.sh <base_url>"
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+    - Reference the roadmap user story (#N) that owns each capability
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+    - Acceptance criteria are the Gherkin scenarios in the roadmap story; do not restate them with different wording
+  design:
+    - Include sequence diagrams for complex flows
+    - Document architecture decisions with rationale, alternatives and risks
+    - STOP and ask the user when a decision needs risk/alternatives analysis (user instruction, 2026-10-10)
+  tasks:
+    - Outside-in BDD->TDD cadence per acceptance scenario (see apply.guidelines)
+    - One task group per acceptance scenario; never a final "acceptance phase"
+  apply:
+    guidelines:
+      - "BDD red: write ONE acceptance scenario (Gherkin + executable mirror) marked work-in-progress so the pipeline stays green; commit + push"
+      - "TDD inward: ONE unit test at a time; it MUST fail first for a real reason (unit/integration tests are never born green); minimal code; ./scripts/run_all_tests green; commit + push immediately"
+      - "Refactor: if the green step introduced duplication (test or production code) remove it ALWAYS, in a SEPARATE commit + push after the green push"
+      - "BDD green: when the scenario passes for real, remove the work-in-progress marker, run ./scripts/run_all_tests, commit + push"
+      - "One test per commit; never push a red state other than the work-in-progress acceptance scenario"
+      - "Commit message: first-person present-tense Spanish tied to the test, e.g. feat(R.1.1): hago pasar el test de aceptacion RUT 20: ..."
+    tdd: true
+    test_command: "./scripts/run_all_tests"
+  verify:
+    test_command: "./scripts/run_all_tests"
+    build_command: "npx tsc --noEmit"
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas
