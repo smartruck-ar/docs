@@ -10,38 +10,64 @@
       "url": "https://github.com/smartruck-ar/docs.git",
       "provider": "github",
       "link_mode": "web",
-      "revision": "4e4dc7bf4afa7eecd4bb4244e1d3785eb0841776"
+      "revision": "b05ade60a0d0a961dbde8640db0edadd12e8e3ac"
     },
     "views": [
       {
         "id": "camino-api",
         "label": "Portales → API",
-        "focus": ["usuarios", "portales", "api_gateway", "backend"],
+        "focus": [
+          "usuarios",
+          "portales",
+          "api_gateway",
+          "backend"
+        ],
         "note": "Los portales llegan al backend privado por HTTPS y API Gateway."
       },
       {
         "id": "geografia",
         "label": "Ruteo geográfico",
-        "focus": ["portales", "api_gateway", "backend", "geo_worker", "supabase_data"],
+        "focus": [
+          "portales",
+          "api_gateway",
+          "backend",
+          "geo_worker",
+          "supabase_data"
+        ],
         "note": "Frontend consulta /routes directo; backend consume Geoservice al cotizar."
       },
       {
         "id": "pagos",
         "label": "Pagos",
-        "focus": ["api_gateway", "backend", "mercadopago"],
+        "focus": [
+          "api_gateway",
+          "backend",
+          "mercadopago"
+        ],
         "note": "El backend crea y consulta pagos; MercadoPago envía el webhook firmado."
       },
       {
         "id": "identidad-datos",
         "label": "Identidad y datos",
-        "focus": ["portales", "supabase_auth", "backend", "supabase_data", "geo_worker"],
+        "focus": [
+          "portales",
+          "supabase_auth",
+          "backend",
+          "supabase_data",
+          "geo_worker"
+        ],
         "note": "Auth se consume desde los portales; negocio y geografía usan PostgreSQL/Supabase."
       },
       {
-        "id": "despliegue",
-        "label": "Despliegue",
-        "focus": ["portales", "api_gateway", "backend", "geo_worker", "supabase_data", "mercadopago"],
-        "note": "Render, GCP, Cloudflare y Supabase alojan responsabilidades diferentes."
+        "id": "observabilidad",
+        "label": "Observabilidad",
+        "focus": [
+          "backend",
+          "log_export",
+          "datadog",
+          "portales"
+        ],
+        "note": "stdout JSON → Cloud Logging → Pub/Sub → Dataflow → Datadog."
       }
     ]
   },
@@ -52,10 +78,21 @@
       "label": "Usuarios",
       "sublabel": "dadores - transportistas - admins",
       "icon": "person",
-      "pos": [35, 282],
-      "size": [142, 76],
+      "pos": [
+        20,
+        274
+      ],
+      "size": [
+        150,
+        76
+      ],
       "sources": [
-        { "path": "src/arquitectura.md", "line": 13, "end_line": 17, "label": "roles" }
+        {
+          "path": "src/arquitectura.md",
+          "line": 18,
+          "end_line": 18,
+          "label": "roles"
+        }
       ]
     },
     {
@@ -65,10 +102,21 @@
       "sublabel": "4 portales - Render",
       "tag": "Render",
       "brand": "render",
-      "pos": [230, 278],
-      "size": [196, 84],
+      "pos": [
+        230,
+        270
+      ],
+      "size": [
+        180,
+        84
+      ],
       "sources": [
-        { "path": "src/arquitectura.md", "line": 21, "end_line": 28, "label": "portales" }
+        {
+          "path": "src/arquitectura.md",
+          "line": 28,
+          "end_line": 33,
+          "label": "portales"
+        }
       ]
     },
     {
@@ -77,11 +125,27 @@
       "label": "Supabase Auth",
       "sublabel": "JWT ES256 - JWKS",
       "brand": "supabase",
-      "pos": [220, 82],
-      "size": [178, 76],
+      "pos": [
+        230,
+        40
+      ],
+      "size": [
+        180,
+        76
+      ],
       "sources": [
-        { "path": "src/arquitectura.md", "line": 55, "end_line": 55, "label": "identidad" },
-        { "path": "src/arquitectura.md", "line": 83, "end_line": 88, "label": "validación" }
+        {
+          "path": "src/arquitectura.md",
+          "line": 62,
+          "end_line": 62,
+          "label": "identidad"
+        },
+        {
+          "path": "src/arquitectura.md",
+          "line": 90,
+          "end_line": 95,
+          "label": "autorización"
+        }
       ]
     },
     {
@@ -90,10 +154,21 @@
       "label": "API Gateway",
       "sublabel": "entrada HTTPS pública",
       "brand": "google-cloud",
-      "pos": [530, 278],
-      "size": [172, 84],
+      "pos": [
+        540,
+        270
+      ],
+      "size": [
+        150,
+        84
+      ],
       "sources": [
-        { "path": "src/arquitectura.md", "line": 38, "end_line": 38, "label": "entrada" }
+        {
+          "path": "src/arquitectura.md",
+          "line": 43,
+          "end_line": 43,
+          "label": "entrada"
+        }
       ]
     },
     {
@@ -102,10 +177,21 @@
       "label": "Backend",
       "sublabel": "FastAPI - monolito hexagonal",
       "tag": "Cloud Run privado",
-      "pos": [800, 278],
-      "size": [194, 84],
+      "pos": [
+        790,
+        270
+      ],
+      "size": [
+        160,
+        84
+      ],
       "sources": [
-        { "path": "src/arquitectura.md", "line": 42, "end_line": 51, "label": "núcleo" }
+        {
+          "path": "src/arquitectura.md",
+          "line": 49,
+          "end_line": 58,
+          "label": "núcleo"
+        }
       ]
     },
     {
@@ -115,11 +201,27 @@
       "sublabel": "rutas - localidades - /routes - /geo/*",
       "tag": "Cloudflare Worker",
       "brand": "cloudflare",
-      "pos": [230, 500],
-      "size": [194, 86],
+      "pos": [
+        250,
+        545
+      ],
+      "size": [
+        200,
+        86
+      ],
       "sources": [
-        { "path": "src/arquitectura.md", "line": 33, "end_line": 37, "label": "servicio geográfico" },
-        { "path": "src/arquitectura.md", "line": 72, "end_line": 72, "label": "despliegue" }
+        {
+          "path": "src/arquitectura.md",
+          "line": 38,
+          "end_line": 42,
+          "label": "Geoservice"
+        },
+        {
+          "path": "src/arquitectura.md",
+          "line": 79,
+          "end_line": 79,
+          "label": "despliegue"
+        }
       ]
     },
     {
@@ -128,10 +230,21 @@
       "label": "Supabase",
       "sublabel": "PostgreSQL - Storage - schema geo",
       "brand": "supabase",
-      "pos": [856, 500],
-      "size": [190, 86],
+      "pos": [
+        700,
+        545
+      ],
+      "size": [
+        200,
+        86
+      ],
       "sources": [
-        { "path": "src/arquitectura.md", "line": 56, "end_line": 57, "label": "persistencia" }
+        {
+          "path": "src/arquitectura.md",
+          "line": 63,
+          "end_line": 64,
+          "label": "persistencia"
+        }
       ]
     },
     {
@@ -140,30 +253,192 @@
       "label": "MercadoPago",
       "sublabel": "Checkout Pro - pagos",
       "tag": "Pagos",
-      "pos": [1060, 82],
-      "size": [178, 84],
+      "brand": {
+        "url": "https://www.mercadopago.com/",
+        "sha256": "459a443da98d04c24222243b8cb79c14d5aa9fde5783b0b19096bbad32da8ffc"
+      },
+      "pos": [
+        1045,
+        40
+      ],
+      "size": [
+        170,
+        84
+      ],
       "sources": [
-        { "path": "src/arquitectura.md", "line": 58, "end_line": 58, "label": "proveedor" },
-        { "path": "src/arquitectura.md", "line": 110, "end_line": 117, "label": "integración" }
+        {
+          "path": "src/arquitectura.md",
+          "line": 65,
+          "end_line": 65,
+          "label": "proveedor"
+        },
+        {
+          "path": "src/arquitectura.md",
+          "line": 119,
+          "end_line": 122,
+          "label": "integración"
+        }
+      ]
+    },
+    {
+      "id": "log_export",
+      "type": "messagebus",
+      "label": "Export de logs",
+      "sublabel": "sink - Pub/Sub - Dataflow",
+      "pos": [
+        1045,
+        270
+      ],
+      "size": [
+        170,
+        84
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 72,
+          "end_line": 72,
+          "label": "pipeline de logs"
+        }
+      ]
+    },
+    {
+      "id": "datadog",
+      "type": "external",
+      "label": "Datadog",
+      "sublabel": "us5 - Log Management",
+      "brand": "datadog",
+      "pos": [
+        1045,
+        545
+      ],
+      "size": [
+        170,
+        84
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 71,
+          "end_line": 72,
+          "label": "observabilidad"
+        }
       ]
     }
   ],
   "boundaries": [
-    { "kind": "region", "label": "Render - portales", "wraps": ["portales"], "pad": 16 },
-    { "kind": "region", "label": "Google Cloud Platform", "wraps": ["api_gateway", "backend"], "pad": 16 },
-    { "kind": "region", "label": "Cloudflare Workers", "wraps": ["geo_worker"], "pad": 16 }
+    {
+      "kind": "region",
+      "label": "Render - portales",
+      "wraps": [
+        "portales"
+      ],
+      "pad": 16
+    },
+    {
+      "kind": "region",
+      "label": "Google Cloud Platform",
+      "wraps": [
+        "api_gateway",
+        "backend",
+        "log_export"
+      ],
+      "pad": 16
+    },
+    {
+      "kind": "region",
+      "label": "Cloudflare Workers",
+      "wraps": [
+        "geo_worker"
+      ],
+      "pad": 16
+    }
   ],
   "connections": [
-    { "id": "users-portals", "from": "usuarios", "to": "portales", "label": "usa", "variant": "emphasis" },
-    { "id": "portals-gateway", "from": "portales", "to": "api_gateway", "label": "HTTPS - JWT", "variant": "security" },
-    { "id": "gateway-backend", "from": "api_gateway", "to": "backend", "label": "run.invoker", "variant": "emphasis" },
-    { "id": "portals-auth", "from": "portales", "to": "supabase_auth", "label": "inicio de sesión", "variant": "security", "fromSide": "top", "toSide": "bottom" },
-    { "id": "portals-geoservice", "from": "portales", "to": "geo_worker", "label": "GET /routes - Cloudflare", "variant": "default", "fromSide": "bottom", "toSide": "top" },
-    { "id": "backend-geo", "from": "backend", "to": "geo_worker", "label": "cotización", "fromSide": "bottom", "toSide": "right" },
-    { "id": "geo-supabase", "from": "geo_worker", "to": "supabase_data", "label": "PostgREST - schema geo", "variant": "default", "fromSide": "right", "toSide": "left" },
-    { "id": "backend-supabase", "from": "backend", "to": "supabase_data", "label": "PostgreSQL - Storage", "fromSide": "bottom", "toSide": "top" },
-    { "id": "backend-mercadopago", "from": "backend", "to": "mercadopago", "label": "Checkout - consulta", "variant": "emphasis" },
-    { "id": "mercadopago-webhook", "from": "mercadopago", "to": "backend", "label": "webhook firmado", "variant": "security" }
+    {
+      "id": "users-portals",
+      "from": "usuarios",
+      "to": "portales",
+      "label": "usa",
+      "variant": "emphasis"
+    },
+    {
+      "id": "portals-gateway",
+      "from": "portales",
+      "to": "api_gateway",
+      "label": "HTTPS - JWT",
+      "variant": "security"
+    },
+    {
+      "id": "gateway-backend",
+      "from": "api_gateway",
+      "to": "backend",
+      "label": "run.invoker",
+      "variant": "emphasis"
+    },
+    {
+      "id": "portals-auth",
+      "from": "portales",
+      "to": "supabase_auth",
+      "label": "inicio de sesión",
+      "variant": "security",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "portals-geoservice",
+      "from": "portales",
+      "to": "geo_worker",
+      "label": "GET /routes",
+      "variant": "default"
+    },
+    {
+      "id": "backend-geo",
+      "from": "backend",
+      "to": "geo_worker",
+      "label": "cotización"
+    },
+    {
+      "id": "geo-supabase",
+      "from": "geo_worker",
+      "to": "supabase_data",
+      "label": "PostgREST",
+      "variant": "default"
+    },
+    {
+      "id": "backend-supabase",
+      "from": "backend",
+      "to": "supabase_data",
+      "label": "PostgreSQL"
+    },
+    {
+      "id": "backend-mercadopago",
+      "from": "backend",
+      "to": "mercadopago",
+      "label": "Checkout",
+      "variant": "emphasis"
+    },
+    {
+      "id": "mercadopago-webhook",
+      "from": "mercadopago",
+      "to": "backend",
+      "label": "webhook",
+      "variant": "security"
+    },
+    {
+      "id": "backend-logs",
+      "from": "backend",
+      "to": "log_export",
+      "label": "stdout JSON",
+      "variant": "dashed"
+    },
+    {
+      "id": "logs-datadog",
+      "from": "log_export",
+      "to": "datadog",
+      "label": "Dataflow - us5",
+      "variant": "default"
+    }
   ],
   "cards": [
     {
@@ -171,7 +446,7 @@
       "title": "Entrada a la API",
       "items": [
         "Los portales autenticados llaman al backend por API Gateway con HTTPS y JWT.",
-        "API Gateway invoca Cloud Run privado; no es la puerta de entrada del Worker geográfico."
+        "API Gateway invoca Cloud Run privado; no es la puerta de entrada de Geoservice."
       ]
     },
     {
@@ -186,8 +461,16 @@
       "dot": "emerald",
       "title": "Datos y proveedores",
       "items": [
-        "El Worker lee el schema geo de Supabase por PostgREST.",
+        "Geoservice lee el schema geo de Supabase por PostgREST.",
         "Mapbox atiende geocoding y Directions; Nominatim es fallback de geocodificación."
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Observabilidad",
+      "items": [
+        "El backend emite JSON a stdout con correlation ID; Cloud Logging lo exporta por Pub/Sub y Dataflow a Datadog us5.",
+        "Los portales en Render envían sus logs a Datadog por un log stream de workspace."
       ]
     }
   ]

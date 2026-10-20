@@ -5,7 +5,7 @@ Esta página describe la arquitectura de Smartruck a octubre de 2026. Se apoya e
 ## Vista general
 
 <iframe
-  src="arquitectura/diagrams/smartruck-architecture.html"
+  src="arquitectura/diagrams/smartruck-architecture.html?theme=light"
   title="Diagrama interactivo de la arquitectura de Smartruck"
   loading="lazy"
   style="display: block; width: 100%; height: 820px; border: 1px solid #d9e0ea; border-radius: 12px;"
