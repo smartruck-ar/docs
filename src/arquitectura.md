@@ -4,9 +4,14 @@ Esta página describe la arquitectura **implementada** de Smartruck a octubre de
 
 ## Vista general
 
-![Figura 1 — Arquitectura de la solución](arquitectura/diagrams/arquitectura-solucion.png)
+<iframe
+  src="arquitectura/diagrams/smartruck-architecture.html"
+  title="Diagrama interactivo de la arquitectura implementada de Smartruck"
+  loading="lazy"
+  style="display: block; width: 100%; height: 820px; border: 1px solid #d9e0ea; border-radius: 12px;"
+></iframe>
 
-*Figura 1. Componentes desplegados por banda. Versión editable: [SVG](arquitectura/diagrams/arquitectura-solucion.svg).*
+*Figura 1. Diagrama interactivo generado con Archify. [Abrir en una pestaña nueva](arquitectura/diagrams/smartruck-architecture.html) · [PNG estático de respaldo](arquitectura/diagrams/arquitectura-solucion.png).*
 
 | Banda | Componentes | Responsabilidad |
 |-------|-------------|-----------------|
@@ -36,6 +41,8 @@ Los tres portales autenticados usan TanStack Start + React y consumen el backend
   - Los proveedores y las estimaciones no se cachean (`no-store`).
   - `AUTH_REQUIRED=true` exige un JWT de Supabase (ES256, JWKS, `audience=authenticated`); los healthchecks y `/version` quedan públicos.
 - **API Gateway** (GCP): expone el backend en HTTPS y lo invoca con `run.invoker` sobre Cloud Run privado.
+
+En el código actual los portales no llaman directamente al Worker geográfico: la cotización sigue el camino **Portal → API Gateway → backend → `microservice-routes`**. El API Gateway sólo es la entrada del backend; no está delante del Worker.
 
 ### Núcleo
 
@@ -152,4 +159,14 @@ El ADR-001 está en estado **Propuesto**. Esta tabla contrasta lo decidido con l
 - Convenciones de logging: [Logging (hexagonal)](./wiki/proceso/logging.md).
 - Detalle por repositorio: [Repositories](./repositories/README.md).
 
-> **Diagrama anterior (Archify).** El archivo `arquitectura/diagrams/smartruck-architecture.html` se conserva como referencia histórica. No refleja el estado actual y no debe usarse como fuente.
+## Vistas para la presentación
+
+Estas vistas se prepararon a partir del modelo de arquitectura validado en Archify, como PNGs individuales de 3200 × 1800 y con tipografía grande para proyectarlas y recorrer la arquitectura por partes. La imagen de geografía muestra el flujo vigente: el frontend llega al Worker a través del backend, y no mediante una llamada directa.
+
+- [01 · Vista de despliegue](arquitectura/diagrams/presentacion/01-despliegue-general.png)
+- [02 · Portales y API Gateway](arquitectura/diagrams/presentacion/02-portales-y-gateway.png)
+- [03 · Camino geográfico](arquitectura/diagrams/presentacion/03-ruteo-geografico.png)
+- [04 · Backend e integraciones](arquitectura/diagrams/presentacion/04-backend-integraciones.png)
+- [05 · Pagos con MercadoPago](arquitectura/diagrams/presentacion/05-pagos-mercadopago.png)
+- [06 · Identidad, datos y archivos](arquitectura/diagrams/presentacion/06-datos-y-archivos.png)
+- [07 · Observabilidad](arquitectura/diagrams/presentacion/07-observabilidad.png)

@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Smartruck · identidad, datos y archivos",
+    "locale": "es",
+    "output": ".archify/architecture-smartruck-demo-20261019-2321/preview/06-datos-y-archivos.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/smartruck-ar/docs.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "4e4dc7bf4afa7eecd4bb4244e1d3785eb0841776"
+    }
+  },
+  "components": [
+    {
+      "id": "portals",
+      "type": "frontend",
+      "label": "Portales",
+      "sublabel": "Dador · Transportista · Backoffice",
+      "pos": [
+        10,
+        248
+      ],
+      "size": [
+        250,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 21,
+          "end_line": 28,
+          "label": "portales"
+        }
+      ],
+      "tag": "Render",
+      "brand": "render"
+    },
+    {
+      "id": "auth",
+      "type": "security",
+      "label": "Supabase Auth",
+      "sublabel": "sesiones · JWT ES256",
+      "pos": [
+        360,
+        60
+      ],
+      "size": [
+        230,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 55,
+          "end_line": 55,
+          "label": "identidad"
+        },
+        {
+          "path": "src/arquitectura.md",
+          "line": 83,
+          "end_line": 88,
+          "label": "autorización"
+        }
+      ],
+      "brand": "supabase"
+    },
+    {
+      "id": "gateway",
+      "type": "cloud",
+      "label": "API Gateway",
+      "sublabel": "entrada HTTPS pública",
+      "pos": [
+        360,
+        248
+      ],
+      "size": [
+        230,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 38,
+          "end_line": 38,
+          "label": "entrada"
+        }
+      ],
+      "brand": "google-cloud"
+    },
+    {
+      "id": "backend",
+      "type": "backend",
+      "label": "smartruck-backend",
+      "sublabel": "API · reglas de negocio",
+      "pos": [
+        700,
+        248
+      ],
+      "size": [
+        240,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 42,
+          "end_line": 51,
+          "label": "núcleo"
+        }
+      ]
+    },
+    {
+      "id": "geo",
+      "type": "cloud",
+      "label": "microservice-routes",
+      "sublabel": "lee el catálogo geográfico",
+      "pos": [
+        700,
+        450
+      ],
+      "size": [
+        250,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 33,
+          "end_line": 37,
+          "label": "Worker y datos geo"
+        }
+      ],
+      "tag": "Cloudflare Worker",
+      "brand": "cloudflare"
+    },
+    {
+      "id": "supabase",
+      "type": "database",
+      "label": "Supabase",
+      "sublabel": "PostgreSQL · schema geo · Storage",
+      "pos": [
+        1070,
+        338
+      ],
+      "size": [
+        260,
+        110
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 56,
+          "end_line": 57,
+          "label": "persistencia"
+        }
+      ],
+      "brand": "supabase"
+    }
+  ],
+  "connections": [
+    {
+      "id": "portals-auth",
+      "from": "portals",
+      "to": "auth",
+      "label": "sesión",
+      "variant": "security",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "portals-gateway",
+      "from": "portals",
+      "to": "gateway",
+      "label": "API · HTTPS/JWT",
+      "variant": "security",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "gateway-backend",
+      "from": "gateway",
+      "to": "backend",
+      "label": "run.invoker",
+      "variant": "emphasis"
+    },
+    {
+      "id": "backend-supabase",
+      "from": "backend",
+      "to": "supabase",
+      "label": "PostgreSQL · URLs firmadas",
+      "variant": "default"
+    },
+    {
+      "id": "backend-geo",
+      "from": "backend",
+      "to": "geo",
+      "label": "cotización",
+      "variant": "default",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "geo-supabase",
+      "from": "geo",
+      "to": "supabase",
+      "label": "PostgREST · schema geo",
+      "variant": "default",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Archivos privados",
+      "items": [
+        "El backend firma las URLs de carga y lectura.",
+        "El cliente sube el archivo directamente al bucket privado documents."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Auth y autorización",
+      "items": [
+        "Los portales obtienen sesiones de Supabase Auth.",
+        "El backend valida JWT; Backoffice exige rol ADMIN."
+      ]
+    }
+  ]
+}

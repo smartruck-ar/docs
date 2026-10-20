@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\overview.json",
+    "sha256": "b5271caf5e064c175546593a3dd973271f1b09600756a4ee7bd7dc95b348c424",
+    "bytes": 8306
+  },
+  "artifact": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\src\\arquitectura\\diagrams\\smartruck-architecture.html",
+    "sha256": "cf86502e16f26a3444b89b6a267a531143737f80c51ee1231fddfd315d1cb8fa",
+    "bytes": 846159
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-overview-2\\smartruck-architecture.finalize.json",
+    "summaryReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-overview-2\\smartruck-architecture.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-overview-2\\smartruck-architecture.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-20T02:35:23.561Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 3392,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  },
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 2,
+      "routesOverSuggestedBends": 5
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "backend-supabase",
+            "from": "backend",
+            "to": "supabase_data",
+            "label": "PostgreSQL · Storage",
+            "collectionIndex": 6,
+            "artifactIndex": 7
+          },
+          "right": {
+            "id": "mercadopago-webhook",
+            "from": "mercadopago",
+            "to": "backend",
+            "label": "webhook firmado",
+            "collectionIndex": 8,
+            "artifactIndex": 9
+          },
+          "point": [
+            946.0666666666667,
+            334
+          ],
+          "sharedNode": "backend"
+        },
+        {
+          "left": {
+            "id": "backend-supabase",
+            "from": "backend",
+            "to": "supabase_data",
+            "label": "PostgreSQL · Storage",
+            "collectionIndex": 6,
+            "artifactIndex": 7
+          },
+          "right": {
+            "id": "geo-mapbox",
+            "from": "geo_worker",
+            "to": "mapbox",
+            "label": "Directions · fallback",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "point": [
+            967,
+            390
+          ]
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "portals-gateway",
+            "from": "portales",
+            "to": "api_gateway",
+            "label": "HTTPS · JWT",
+            "collectionIndex": 1,
+            "artifactIndex": 2
+          },
+          "bends": 3,
+          "stretch": 1.264
+        },
+        {
+          "relationship": {
+            "id": "backend-supabase",
+            "from": "backend",
+            "to": "supabase_data",
+            "label": "PostgreSQL · Storage",
+            "collectionIndex": 6,
+            "artifactIndex": 7
+          },
+          "bends": 3,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "id": "backend-mercadopago",
+            "from": "backend",
+            "to": "mercadopago",
+            "label": "Checkout · consulta",
+            "collectionIndex": 7,
+            "artifactIndex": 8
+          },
+          "bends": 3,
+          "stretch": 1.261
+        },
+        {
+          "relationship": {
+            "id": "mercadopago-webhook",
+            "from": "mercadopago",
+            "to": "backend",
+            "label": "webhook firmado",
+            "collectionIndex": 8,
+            "artifactIndex": 9
+          },
+          "bends": 3,
+          "stretch": 1.249
+        },
+        {
+          "relationship": {
+            "id": "geo-mapbox",
+            "from": "geo_worker",
+            "to": "mapbox",
+            "label": "Directions · fallback",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "bends": 4,
+          "stretch": 1.288
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "backend → supabase_data and mercadopago → backend cross next to backend: move node supabase_data or mercadopago so the two reach backend from different sides (for example one level with it, one directly above or below it).",
+      "backend → supabase_data crosses geo_worker → mapbox: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "portales → api_gateway needs 3 bends: move node portales or api_gateway so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "backend → supabase_data needs 3 bends: move node backend or supabase_data so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "backend → mercadopago needs 3 bends: move node backend or mercadopago so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "mercadopago → backend needs 3 bends: move node mercadopago or backend so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "geo_worker → mapbox needs 4 bends: move node geo_worker or mapbox so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

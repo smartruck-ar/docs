@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitectura implementada de Smartruck",
+    "locale": "es",
+    "output": "src/arquitectura/diagrams/smartruck-architecture.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/smartruck-ar/docs.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "4e4dc7bf4afa7eecd4bb4244e1d3785eb0841776"
+    },
+    "views": [
+      {
+        "id": "camino-api",
+        "label": "Portales → API",
+        "focus": ["usuarios", "portales", "api_gateway", "backend"],
+        "note": "Los portales llegan al backend privado por HTTPS y API Gateway."
+      },
+      {
+        "id": "geografia",
+        "label": "Ruteo geográfico",
+        "focus": ["portales", "api_gateway", "backend", "geo_worker", "supabase_data", "mapbox", "nominatim"],
+        "note": "La cotización usa el Worker; publicar una carga conserva el motor local."
+      },
+      {
+        "id": "pagos",
+        "label": "Pagos",
+        "focus": ["api_gateway", "backend", "mercadopago"],
+        "note": "El backend crea y consulta pagos; MercadoPago envía el webhook firmado."
+      },
+      {
+        "id": "identidad-datos",
+        "label": "Identidad y datos",
+        "focus": ["portales", "supabase_auth", "backend", "supabase_data", "geo_worker"],
+        "note": "Auth se consume desde los portales; negocio y geografía usan PostgreSQL/Supabase."
+      },
+      {
+        "id": "despliegue",
+        "label": "Despliegue",
+        "focus": ["portales", "api_gateway", "backend", "geo_worker", "supabase_data", "mercadopago"],
+        "note": "Render, GCP, Cloudflare y Supabase alojan responsabilidades diferentes."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "usuarios",
+      "type": "external",
+      "label": "Usuarios",
+      "sublabel": "dadores · transportistas · admins",
+      "icon": "person",
+      "pos": [35, 282],
+      "size": [142, 76],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 13, "end_line": 17, "label": "roles" }
+      ]
+    },
+    {
+      "id": "portales",
+      "type": "frontend",
+      "label": "Portales web",
+      "sublabel": "Dador · Transportista · Backoffice · Landing",
+      "tag": "Render",
+      "brand": "render",
+      "pos": [230, 278],
+      "size": [196, 84],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 21, "end_line": 28, "label": "portales" }
+      ]
+    },
+    {
+      "id": "supabase_auth",
+      "type": "security",
+      "label": "Supabase Auth",
+      "sublabel": "JWT ES256 · JWKS",
+      "brand": "supabase",
+      "pos": [220, 82],
+      "size": [178, 76],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 55, "end_line": 55, "label": "identidad" },
+        { "path": "src/arquitectura.md", "line": 83, "end_line": 88, "label": "validación" }
+      ]
+    },
+    {
+      "id": "api_gateway",
+      "type": "cloud",
+      "label": "API Gateway",
+      "sublabel": "entrada HTTPS pública",
+      "brand": "google-cloud",
+      "pos": [530, 278],
+      "size": [172, 84],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 38, "end_line": 38, "label": "entrada" }
+      ]
+    },
+    {
+      "id": "backend",
+      "type": "backend",
+      "label": "smartruck-backend",
+      "sublabel": "FastAPI · monolito hexagonal",
+      "tag": "Cloud Run privado",
+      "pos": [800, 278],
+      "size": [194, 84],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 42, "end_line": 51, "label": "núcleo" }
+      ]
+    },
+    {
+      "id": "geo_worker",
+      "type": "cloud",
+      "label": "microservice-routes",
+      "sublabel": "rutas · localidades · /geo/*",
+      "tag": "Cloudflare Worker",
+      "brand": "cloudflare",
+      "pos": [500, 500],
+      "size": [194, 86],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 33, "end_line": 37, "label": "servicio geográfico" },
+        { "path": "src/arquitectura.md", "line": 72, "end_line": 72, "label": "despliegue" }
+      ]
+    },
+    {
+      "id": "supabase_data",
+      "type": "database",
+      "label": "Supabase",
+      "sublabel": "PostgreSQL · Storage · schema geo",
+      "brand": "supabase",
+      "pos": [830, 500],
+      "size": [190, 86],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 56, "end_line": 57, "label": "persistencia" }
+      ]
+    },
+    {
+      "id": "mercadopago",
+      "type": "external",
+      "label": "MercadoPago",
+      "sublabel": "Checkout Pro · pagos",
+      "pos": [1060, 82],
+      "size": [178, 84],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 58, "end_line": 58, "label": "proveedor" },
+        { "path": "src/arquitectura.md", "line": 110, "end_line": 117, "label": "integración" }
+      ]
+    },
+    {
+      "id": "mapbox",
+      "type": "external",
+      "label": "Mapbox",
+      "sublabel": "geocoding · Directions",
+      "pos": [180, 500],
+      "size": [178, 76],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 35, "end_line": 36, "label": "ruteo" },
+        { "path": "src/arquitectura.md", "line": 59, "end_line": 59, "label": "geocoding" }
+      ]
+    },
+    {
+      "id": "nominatim",
+      "type": "external",
+      "label": "Nominatim",
+      "sublabel": "fallback de geocodificación",
+      "pos": [800, 82],
+      "size": [194, 76],
+      "sources": [
+        { "path": "src/arquitectura.md", "line": 59, "end_line": 59, "label": "proveedor" }
+      ]
+    }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Render · portales", "wraps": ["portales"], "pad": 16 },
+    { "kind": "region", "label": "Google Cloud Platform", "wraps": ["api_gateway", "backend"], "pad": 16 },
+    { "kind": "region", "label": "Cloudflare Workers", "wraps": ["geo_worker"], "pad": 16 }
+  ],
+  "connections": [
+    { "id": "users-portals", "from": "usuarios", "to": "portales", "label": "usa", "variant": "emphasis" },
+    { "id": "portals-gateway", "from": "portales", "to": "api_gateway", "label": "HTTPS · JWT", "variant": "security" },
+    { "id": "gateway-backend", "from": "api_gateway", "to": "backend", "label": "run.invoker", "variant": "emphasis" },
+    { "id": "portals-auth", "from": "portales", "to": "supabase_auth", "label": "inicio de sesión", "variant": "security", "fromSide": "top", "toSide": "bottom" },
+    { "id": "backend-geo", "from": "backend", "to": "geo_worker", "label": "cotización · /geo/routes", "fromSide": "bottom", "toSide": "top" },
+    { "id": "geo-supabase", "from": "geo_worker", "to": "supabase_data", "label": "PostgREST · schema geo", "variant": "default" },
+    { "id": "backend-supabase", "from": "backend", "to": "supabase_data", "label": "PostgreSQL · Storage", "fromSide": "right", "toSide": "top" },
+    { "id": "backend-mercadopago", "from": "backend", "to": "mercadopago", "label": "Checkout · consulta", "variant": "emphasis" },
+    { "id": "mercadopago-webhook", "from": "mercadopago", "to": "backend", "label": "webhook firmado", "variant": "security" },
+    { "id": "backend-mapbox", "from": "backend", "to": "mapbox", "label": "geocodificación", "fromSide": "top", "toSide": "bottom" },
+    { "id": "backend-nominatim", "from": "backend", "to": "nominatim", "label": "fallback", "fromSide": "top", "toSide": "bottom" },
+    { "id": "geo-mapbox", "from": "geo_worker", "to": "mapbox", "label": "Directions · fallback", "fromSide": "top", "toSide": "bottom" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Entrada a la API",
+      "items": [
+        "Los portales autenticados llaman al backend por API Gateway con HTTPS y JWT.",
+        "API Gateway invoca Cloud Run privado; no es la puerta de entrada del Worker geográfico."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Dos caminos de rutas",
+      "items": [
+        "La cotización del backend consume microservice-routes.",
+        "La publicación y GET /routes todavía usan el motor local del backend."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Datos y proveedores",
+      "items": [
+        "El Worker lee el schema geo de Supabase por PostgREST.",
+        "Mapbox atiende geocoding y Directions; Nominatim es fallback de geocodificación."
+      ]
+    }
+  ]
+}
