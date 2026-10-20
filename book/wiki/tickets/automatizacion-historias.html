@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html lang="es" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Automatización de historias (roadmap) - Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="../../proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="../../arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../requerimientos.html"><strong aria-hidden="true">4.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="../../desarrollo.html"><strong aria-hidden="true">5.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="../../manual_usuario.html"><strong aria-hidden="true">6.</strong> Manual de usuario</a></li><li class="chapter-item expanded affix "><li class="part-title">Wiki del equipo</li><li class="chapter-item expanded "><a href="../../wiki/index.html"><strong aria-hidden="true">7.</strong> Wiki</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../wiki/proceso/jerarquia.html"><strong aria-hidden="true">7.1.</strong> Jerarquía</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/definition-of-ready.html"><strong aria-hidden="true">7.2.</strong> Definition of Ready</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/definition-of-done.html"><strong aria-hidden="true">7.3.</strong> Definition of Done</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/workflow-entrega.html"><strong aria-hidden="true">7.4.</strong> Workflow de entrega</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/desarrollo-con-agentes.html"><strong aria-hidden="true">7.5.</strong> Desarrollo con agentes</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/conventional-commits.html"><strong aria-hidden="true">7.6.</strong> Conventional Commits</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/logging.html"><strong aria-hidden="true">7.7.</strong> Logging (hexagonal)</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/gherkin.html"><strong aria-hidden="true">7.8.</strong> Gherkin (BDD)</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/plantilla-ticket.html"><strong aria-hidden="true">7.9.</strong> Plantilla de ticket</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/tipos-de-ticket.html"><strong aria-hidden="true">7.10.</strong> Tipos de ticket</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/estimacion.html"><strong aria-hidden="true">7.11.</strong> Estimación</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/automatizacion-historias.html" class="active"><strong aria-hidden="true">7.12.</strong> Automatización de historias (roadmap)</a></li><li class="chapter-item expanded "><a href="../../wiki/equipo/roles.html"><strong aria-hidden="true">7.13.</strong> Roles</a></li><li class="chapter-item expanded "><a href="../../wiki/equipo/glosario.html"><strong aria-hidden="true">7.14.</strong> Glosario</a></li><li class="chapter-item expanded "><a href="../../wiki/ui/restyling.html"><strong aria-hidden="true">7.15.</strong> Restyling de UI</a></li><li class="chapter-item expanded "><a href="../../wiki/ui/restyling-dador-handoff.html"><strong aria-hidden="true">7.16.</strong> Handoff restyling del dador (D.X.2/D.X.3 + backend)</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Repositories</li><li class="chapter-item expanded "><a href="../../repositories/index.html"><strong aria-hidden="true">8.</strong> Repositories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/index.html"><strong aria-hidden="true">8.1.</strong> smartruck-backend</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/arquitectura.html"><strong aria-hidden="true">8.1.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/links.html"><strong aria-hidden="true">8.1.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/index.html"><strong aria-hidden="true">8.2.</strong> smartruck-dador</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/arquitectura.html"><strong aria-hidden="true">8.2.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/links.html"><strong aria-hidden="true">8.2.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/index.html"><strong aria-hidden="true">8.3.</strong> smartruck-transportista</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/arquitectura.html"><strong aria-hidden="true">8.3.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/links.html"><strong aria-hidden="true">8.3.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/index.html"><strong aria-hidden="true">8.4.</strong> smartruck-audit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/arquitectura.html"><strong aria-hidden="true">8.4.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/links.html"><strong aria-hidden="true">8.4.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/cloud-template/index.html"><strong aria-hidden="true">8.5.</strong> cloud-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/cloud-template/arquitectura.html"><strong aria-hidden="true">8.5.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/cloud-template/links.html"><strong aria-hidden="true">8.5.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/infra-template/index.html"><strong aria-hidden="true">8.6.</strong> infra-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/infra-template/arquitectura.html"><strong aria-hidden="true">8.6.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/infra-template/links.html"><strong aria-hidden="true">8.6.2.</strong> Links</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="automatización-de-historias-roadmap"><a class="header" href="#automatización-de-historias-roadmap">Automatización de historias (roadmap)</a></h1>
+<p>Cómo crear una historia de usuario y qué formas hay de que el propio repositorio la numere, la etiquete y arme la contraparte de front/back automáticamente.</p>
+<blockquote>
+<p><strong>Repo:</strong> todo esto pasa en <strong><code>smartruck-ar/roadmap</code></strong>. Nunca en <code>smartruck-backend</code>, <code>smartruck-dador</code>, <code>smartruck-transportista</code> ni ningún otro repo de producto — esos repos no tienen esta automatización.</p>
+<p>Implementación: <code>.github/workflows/auto-number-issues.yml</code> + <code>scripts/auto_number_issues.py</code>, corriendo en el runner self-hosted del repo.</p>
+</blockquote>
+<h2 id="qué-dispara-la-automatización"><a class="header" href="#qué-dispara-la-automatización">Qué dispara la automatización</a></h2>
+<p>Dos eventos de GitHub sobre una issue de <code>roadmap</code>:</p>
+<div class="table-wrapper"><table><thead><tr><th>Evento</th><th>Cuándo pasa</th><th>Qué hace</th></tr></thead><tbody>
+<tr><td><code>milestoned</code></td><td>Se le asigna un milestone a la issue</td><td>Numera, etiqueta y evalúa si hay que crear una contraparte</td></tr>
+<tr><td><code>labeled</code></td><td>Se agrega uno de los tags <code>front+back</code>, <code>crear front</code> o <code>crear back</code></td><td>Solo reacciona a esos tres; cualquier otro label (<code>bug</code>, <code>user story</code>, etc.) se ignora</td></tr>
+</tbody></table>
+</div>
+<p>Nada de esto pasa si la issue no tiene milestone asignado.</p>
+<h2 id="comportamiento-por-defecto-una-sola-historia"><a class="header" href="#comportamiento-por-defecto-una-sola-historia">Comportamiento por defecto (una sola historia)</a></h2>
+<p>Al milestonear una historia <strong>sin ningún tag especial</strong>, la automatización:</p>
+<ol>
+<li>La numera: <code>&lt;Prefijo del milestone&gt;.&lt;siguiente número&gt; - &lt;título&gt;</code> (ej. <code>T.2.9 - Como transportista...</code>).</li>
+<li>Le agrega el label <code>user story</code>.</li>
+<li>La agrega al proyecto <strong>Board</strong> (#4) y le asigna el <strong>sprint actual</strong> (según fecha de Argentina).</li>
+</ol>
+<p>Esto es todo. <strong>No crea ninguna otra historia.</strong> Si querés una contraparte de front o de back, tenés que pedirla explícitamente con los tags de la sección siguiente.</p>
+<blockquote>
+<p>El item queda con <code>Status: Backlog</code> (el default de GitHub para un item nuevo). Movelo vos a <code>Ready</code>/<code>In progress</code> en el Board — la automatización no lo hace.</p>
+</blockquote>
+<h3 id="cómo-indico-si-la-historia-es-de-backend-o-de-ui"><a class="header" href="#cómo-indico-si-la-historia-es-de-backend-o-de-ui">¿Cómo indico si la historia es de backend o de UI?</a></h3>
+<p>No hay un tag para esto: se define <strong>con el título</strong>, antes de milestonear.</p>
+<ul>
+<li><strong>Backend</strong> (default): título normal, sin prefijo. Ej: <code>Como transportista, Quiero filtrar cargas...</code> → queda <code>T.2.9 - Como transportista...</code>.</li>
+<li><strong>UI</strong>: escribí el título arrancando con <strong><code>UI-</code></strong>. Ej: <code>UI-Como transportista, Quiero filtrar cargas...</code> → queda <code>UI-T.2.9 - Como transportista...</code>.</li>
+</ul>
+<p>El número (<code>T.2.9</code>) sale de un <strong>contador compartido</strong> por milestone: da lo mismo si la última historia numerada en ese milestone fue de backend o de UI, la siguiente sigue la secuencia.</p>
+<h2 id="crear-las-dos-historias-back--ui-de-una"><a class="header" href="#crear-las-dos-historias-back--ui-de-una">Crear las dos historias (back + UI) de una</a></h2>
+<p>Si de entrada sabés que la historia necesita pantalla y backend:</p>
+<ol>
+<li>Escribí el título (con o sin <code>UI-</code>, según cuál de las dos querés que sea "la original").</li>
+<li>Agregале el label <strong><code>front+back</code></strong> (antes o después de milestonear, da igual el orden).</li>
+<li>Milestoneala.</li>
+</ol>
+<p>Resultado: la historia original queda numerada, y se crea <strong>una segunda issue</strong> con el mismo número y el prefijo que le falta (si la original era de backend, la nueva es <code>UI-T.2.9 - ...</code>; si la original ya era <code>UI-</code>, la nueva es la de backend). Quedan <strong>linkeadas entre sí</strong> con un comentario cruzado (<code>🔗 Relacionado con el ticket de UI/backend: #N</code>).</p>
+<p>Al terminar, el tag <code>front+back</code> se <strong>saca automáticamente</strong> de la historia original. Las dos terminan solo con <code>user story</code>.</p>
+<h2 id="agregar-la-contraparte-más-tarde"><a class="header" href="#agregar-la-contraparte-más-tarde">Agregar la contraparte más tarde</a></h2>
+<p>Si ya tenés una historia numerada (de backend o de UI) y <strong>después</strong> decidís que también necesita la otra mitad, no hace falta recrear nada: agregale el tag correspondiente a la historia que ya existe.</p>
+<div class="table-wrapper"><table><thead><tr><th>Tengo...</th><th>Le pongo el tag...</th><th>Y se crea...</th></tr></thead><tbody>
+<tr><td>Una historia de backend (<code>T.2.9 - ...</code>)</td><td><code>crear front</code></td><td>Su contraparte de UI (<code>UI-T.2.9 - ...</code>), mismo milestone, sprint actual</td></tr>
+<tr><td>Una historia de UI (<code>UI-T.2.9 - ...</code>)</td><td><code>crear back</code></td><td>Su contraparte de backend (<code>T.2.9 - ...</code>), mismo milestone, sprint actual</td></tr>
+</tbody></table>
+</div>
+<p>El tag usado se saca solo al terminar. Si lo ponés en el lado que no corresponde (ej. <code>crear front</code> sobre una historia que ya es de UI), no hace nada más que sacarse el tag — no rompe nada ni duplica.</p>
+<p>Si la historia todavía no tiene milestone asignado, el tag no dispara nada (no hay de dónde sacar el número); hay que milestonearla primero.</p>
+<h2 id="milestones-de-spike-spikes-tspike"><a class="header" href="#milestones-de-spike-spikes-tspike">Milestones de spike (<code>SPIKES</code>, <code>T.SPIKE</code>)</a></h2>
+<p>Los spikes son un caso aparte: <strong>no</strong> se separan por producto (transportista/dador) y <strong>nunca</strong> generan contraparte, tengan o no alguno de los tags anteriores.</p>
+<ul>
+<li>Prefijo fijo: <strong><code>S</code></strong>, con un contador único compartido por <em>todos</em> los milestones de spike (no hay <code>S</code> para transportista y otro para dador).</li>
+<li>Se numeran igual que cualquier historia (<code>S.1 - ...</code>, <code>S.2 - ...</code>, …), reciben <code>user story</code> y sprint actual.</li>
+<li>Los tags <code>front+back</code>, <code>crear front</code> y <code>crear back</code> se ignoran por completo en un milestone de spike.</li>
+</ul>
+<h2 id="sub-issues-una-historia-que-cuelga-de-otra"><a class="header" href="#sub-issues-una-historia-que-cuelga-de-otra">Sub-issues (una historia que cuelga de otra)</a></h2>
+<p>Si la historia que estás milestoneando es <strong>sub-issue</strong> de otra issue del propio repo <code>roadmap</code> (relación nativa de GitHub, no un link a mano), hereda el prefijo del padre en vez de calcular uno nuevo a partir del milestone:</p>
+<pre><code class="language-text">Padre  T.1.1  (ya numerada)
+  └── Hijo  T.1.1.1, T.1.1.2, …   (siguiente número dentro del padre)
+</code></pre>
+<p>Si el padre todavía no tiene un prefijo numerado (por ejemplo, no fue milestoneado todavía), el hijo se numera como una historia normal a partir del milestone.</p>
+<h2 id="una-vez-numerada-el-título-queda-fijo"><a class="header" href="#una-vez-numerada-el-título-queda-fijo">Una vez numerada, el título queda fijo</a></h2>
+<p>Si el título <strong>ya tiene</strong> un prefijo numerado (con o sin <code>UI-</code> adelante), la automatización <strong>nunca lo recalcula ni lo renombra</strong>, sin importar cuántas veces se vuelva a milestonear o etiquetar la issue. Esto es lo que hace seguro:</p>
+<ul>
+<li>Re-milestonear por error una historia ya numerada (no la duplica ni le cambia el número).</li>
+<li>Agregar <code>crear front</code>/<code>crear back</code> sobre algo que ya tiene su contraparte (<code>find_existing_companion</code> la detecta por un marcador oculto en el body y no crea una segunda).</li>
+</ul>
+<h2 id="resumen-rápido"><a class="header" href="#resumen-rápido">Resumen rápido</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Quiero...</th><th>Qué hago</th><th>Tag a usar</th></tr></thead><tbody>
+<tr><td>Una sola historia de backend</td><td>Título normal + milestone</td><td>—</td></tr>
+<tr><td>Una sola historia de UI</td><td>Título con <code>UI-</code> + milestone</td><td>—</td></tr>
+<tr><td>Backend y UI juntas desde el arranque</td><td>Título + milestone</td><td><code>front+back</code></td></tr>
+<tr><td>Agregar el UI a una historia de backend que ya existe</td><td>Sobre la historia ya numerada</td><td><code>crear front</code></td></tr>
+<tr><td>Agregar el backend a una historia de UI que ya existe</td><td>Sobre la historia ya numerada</td><td><code>crear back</code></td></tr>
+<tr><td>Un spike</td><td>Milestone <code>SPIKES</code> o <code>T.SPIKE</code></td><td>— (los tags de arriba no aplican)</td></tr>
+</tbody></table>
+</div>
+<h2 id="next-step"><a class="header" href="#next-step">Next step</a></h2>
+<p><a href="../proceso/jerarquia.html">Jerarquía</a> · <a href="plantilla-ticket.html">Plantilla de ticket</a> · <a href="tipos-de-ticket.html">Tipos de ticket</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../wiki/tickets/estimacion.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../wiki/equipo/roles.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../wiki/tickets/estimacion.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../wiki/equipo/roles.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
