@@ -6,7 +6,7 @@ La geografía de Smartruck está repartida. El backend tiene el catálogo de loc
 
 ## Solución
 
-Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo geográfico: provincias, localidades, direcciones, geocodificación inversa, rutas y estimación. El backend y los frontends solo piden; nadie más calcula ni copia. Cotizar y publicar devuelven la misma distancia. Si el geo-service cae, el sistema degrada sin inventar números. Ver [ADR 0001](../../src/wiki/adr/0001-geo-service-dueno-de-la-geografia.md) y [ADR 0002](../../src/wiki/adr/0002-geo-service-solo-lectura-y-catalogo-cerrado.md).
+Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo geográfico: provincias, localidades, direcciones, geocodificación inversa, rutas y estimación. El backend y los frontends solo piden; nadie más calcula ni copia. Cotizar y publicar devuelven la misma distancia. Si el geo-service cae, el sistema degrada sin inventar números. Ver [ADR 0001](../../adr/0001-geoservice-dueno-de-la-geografia.md) y [ADR 0002](../../adr/0002-geoservice-solo-lectura-y-catalogo-cerrado.md).
 
 ## Comportamientos
 

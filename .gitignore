@@ -3,3 +3,11 @@
 .idea/
 .codegraph/
 .claude/worktrees/
+
+# Archify: sólo se versiona la fuente del diagrama, no la evidencia de revisión
+.archify/**/review*/
+.archify/**/preview/
+.archify/**/slides/
+.archify/**/large-source/
+.archify/**/build-*.mjs
+.archify/**/export-png.mjs

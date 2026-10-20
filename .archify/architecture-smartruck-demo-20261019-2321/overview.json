@@ -2,7 +2,7 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "Arquitectura implementada de Smartruck",
+    "title": "Arquitectura de Smartruck",
     "locale": "es",
     "output": "src/arquitectura/diagrams/smartruck-architecture.html",
     "quality_profile": "showcase",
@@ -22,8 +22,8 @@
       {
         "id": "geografia",
         "label": "Ruteo geográfico",
-        "focus": ["portales", "api_gateway", "backend", "geo_worker", "supabase_data", "mapbox", "nominatim"],
-        "note": "La cotización usa el Worker; publicar una carga conserva el motor local."
+        "focus": ["portales", "api_gateway", "backend", "geo_worker", "supabase_data"],
+        "note": "Frontend consulta /routes directo; backend consume Geoservice al cotizar."
       },
       {
         "id": "pagos",
@@ -50,7 +50,7 @@
       "id": "usuarios",
       "type": "external",
       "label": "Usuarios",
-      "sublabel": "dadores · transportistas · admins",
+      "sublabel": "dadores - transportistas - admins",
       "icon": "person",
       "pos": [35, 282],
       "size": [142, 76],
@@ -62,7 +62,7 @@
       "id": "portales",
       "type": "frontend",
       "label": "Portales web",
-      "sublabel": "Dador · Transportista · Backoffice · Landing",
+      "sublabel": "4 portales - Render",
       "tag": "Render",
       "brand": "render",
       "pos": [230, 278],
@@ -75,7 +75,7 @@
       "id": "supabase_auth",
       "type": "security",
       "label": "Supabase Auth",
-      "sublabel": "JWT ES256 · JWKS",
+      "sublabel": "JWT ES256 - JWKS",
       "brand": "supabase",
       "pos": [220, 82],
       "size": [178, 76],
@@ -99,8 +99,8 @@
     {
       "id": "backend",
       "type": "backend",
-      "label": "smartruck-backend",
-      "sublabel": "FastAPI · monolito hexagonal",
+      "label": "Backend",
+      "sublabel": "FastAPI - monolito hexagonal",
       "tag": "Cloud Run privado",
       "pos": [800, 278],
       "size": [194, 84],
@@ -111,11 +111,11 @@
     {
       "id": "geo_worker",
       "type": "cloud",
-      "label": "microservice-routes",
-      "sublabel": "rutas · localidades · /geo/*",
+      "label": "Geoservice",
+      "sublabel": "rutas - localidades - /routes - /geo/*",
       "tag": "Cloudflare Worker",
       "brand": "cloudflare",
-      "pos": [500, 500],
+      "pos": [230, 500],
       "size": [194, 86],
       "sources": [
         { "path": "src/arquitectura.md", "line": 33, "end_line": 37, "label": "servicio geográfico" },
@@ -126,9 +126,9 @@
       "id": "supabase_data",
       "type": "database",
       "label": "Supabase",
-      "sublabel": "PostgreSQL · Storage · schema geo",
+      "sublabel": "PostgreSQL - Storage - schema geo",
       "brand": "supabase",
-      "pos": [830, 500],
+      "pos": [856, 500],
       "size": [190, 86],
       "sources": [
         { "path": "src/arquitectura.md", "line": 56, "end_line": 57, "label": "persistencia" }
@@ -136,58 +136,34 @@
     },
     {
       "id": "mercadopago",
-      "type": "external",
+      "type": "cloud",
       "label": "MercadoPago",
-      "sublabel": "Checkout Pro · pagos",
+      "sublabel": "Checkout Pro - pagos",
+      "tag": "Pagos",
       "pos": [1060, 82],
       "size": [178, 84],
       "sources": [
         { "path": "src/arquitectura.md", "line": 58, "end_line": 58, "label": "proveedor" },
         { "path": "src/arquitectura.md", "line": 110, "end_line": 117, "label": "integración" }
       ]
-    },
-    {
-      "id": "mapbox",
-      "type": "external",
-      "label": "Mapbox",
-      "sublabel": "geocoding · Directions",
-      "pos": [180, 500],
-      "size": [178, 76],
-      "sources": [
-        { "path": "src/arquitectura.md", "line": 35, "end_line": 36, "label": "ruteo" },
-        { "path": "src/arquitectura.md", "line": 59, "end_line": 59, "label": "geocoding" }
-      ]
-    },
-    {
-      "id": "nominatim",
-      "type": "external",
-      "label": "Nominatim",
-      "sublabel": "fallback de geocodificación",
-      "pos": [800, 82],
-      "size": [194, 76],
-      "sources": [
-        { "path": "src/arquitectura.md", "line": 59, "end_line": 59, "label": "proveedor" }
-      ]
     }
   ],
   "boundaries": [
-    { "kind": "region", "label": "Render · portales", "wraps": ["portales"], "pad": 16 },
+    { "kind": "region", "label": "Render - portales", "wraps": ["portales"], "pad": 16 },
     { "kind": "region", "label": "Google Cloud Platform", "wraps": ["api_gateway", "backend"], "pad": 16 },
     { "kind": "region", "label": "Cloudflare Workers", "wraps": ["geo_worker"], "pad": 16 }
   ],
   "connections": [
     { "id": "users-portals", "from": "usuarios", "to": "portales", "label": "usa", "variant": "emphasis" },
-    { "id": "portals-gateway", "from": "portales", "to": "api_gateway", "label": "HTTPS · JWT", "variant": "security" },
+    { "id": "portals-gateway", "from": "portales", "to": "api_gateway", "label": "HTTPS - JWT", "variant": "security" },
     { "id": "gateway-backend", "from": "api_gateway", "to": "backend", "label": "run.invoker", "variant": "emphasis" },
     { "id": "portals-auth", "from": "portales", "to": "supabase_auth", "label": "inicio de sesión", "variant": "security", "fromSide": "top", "toSide": "bottom" },
-    { "id": "backend-geo", "from": "backend", "to": "geo_worker", "label": "cotización · /geo/routes", "fromSide": "bottom", "toSide": "top" },
-    { "id": "geo-supabase", "from": "geo_worker", "to": "supabase_data", "label": "PostgREST · schema geo", "variant": "default" },
-    { "id": "backend-supabase", "from": "backend", "to": "supabase_data", "label": "PostgreSQL · Storage", "fromSide": "right", "toSide": "top" },
-    { "id": "backend-mercadopago", "from": "backend", "to": "mercadopago", "label": "Checkout · consulta", "variant": "emphasis" },
-    { "id": "mercadopago-webhook", "from": "mercadopago", "to": "backend", "label": "webhook firmado", "variant": "security" },
-    { "id": "backend-mapbox", "from": "backend", "to": "mapbox", "label": "geocodificación", "fromSide": "top", "toSide": "bottom" },
-    { "id": "backend-nominatim", "from": "backend", "to": "nominatim", "label": "fallback", "fromSide": "top", "toSide": "bottom" },
-    { "id": "geo-mapbox", "from": "geo_worker", "to": "mapbox", "label": "Directions · fallback", "fromSide": "top", "toSide": "bottom" }
+    { "id": "portals-geoservice", "from": "portales", "to": "geo_worker", "label": "GET /routes - Cloudflare", "variant": "default", "fromSide": "bottom", "toSide": "top" },
+    { "id": "backend-geo", "from": "backend", "to": "geo_worker", "label": "cotización", "fromSide": "bottom", "toSide": "right" },
+    { "id": "geo-supabase", "from": "geo_worker", "to": "supabase_data", "label": "PostgREST - schema geo", "variant": "default", "fromSide": "right", "toSide": "left" },
+    { "id": "backend-supabase", "from": "backend", "to": "supabase_data", "label": "PostgreSQL - Storage", "fromSide": "bottom", "toSide": "top" },
+    { "id": "backend-mercadopago", "from": "backend", "to": "mercadopago", "label": "Checkout - consulta", "variant": "emphasis" },
+    { "id": "mercadopago-webhook", "from": "mercadopago", "to": "backend", "label": "webhook firmado", "variant": "security" }
   ],
   "cards": [
     {
@@ -202,8 +178,8 @@
       "dot": "amber",
       "title": "Dos caminos de rutas",
       "items": [
-        "La cotización del backend consume microservice-routes.",
-        "La publicación y GET /routes todavía usan el motor local del backend."
+        "Frontend consulta Geoservice directamente con GET /routes; el backend lo consume al cotizar y para el catálogo de localidades.",
+        "El GET /routes del backend quedó como endpoint legacy, sin consumidores."
       ]
     },
     {
