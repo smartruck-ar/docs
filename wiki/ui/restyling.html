@@ -1,0 +1,380 @@
+<!DOCTYPE HTML>
+<html lang="es" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Restyling de UI - Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="../../proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="../../arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../requerimientos.html"><strong aria-hidden="true">4.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="../../desarrollo.html"><strong aria-hidden="true">5.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="../../manual_usuario.html"><strong aria-hidden="true">6.</strong> Manual de usuario</a></li><li class="chapter-item expanded affix "><li class="part-title">Wiki del equipo</li><li class="chapter-item expanded "><a href="../../wiki/index.html"><strong aria-hidden="true">7.</strong> Wiki</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../wiki/proceso/jerarquia.html"><strong aria-hidden="true">7.1.</strong> Jerarquía</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/definition-of-ready.html"><strong aria-hidden="true">7.2.</strong> Definition of Ready</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/definition-of-done.html"><strong aria-hidden="true">7.3.</strong> Definition of Done</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/workflow-entrega.html"><strong aria-hidden="true">7.4.</strong> Workflow de entrega</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/desarrollo-con-agentes.html"><strong aria-hidden="true">7.5.</strong> Desarrollo con agentes</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/conventional-commits.html"><strong aria-hidden="true">7.6.</strong> Conventional Commits</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/logging.html"><strong aria-hidden="true">7.7.</strong> Logging (hexagonal)</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/gherkin.html"><strong aria-hidden="true">7.8.</strong> Gherkin (BDD)</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/plantilla-ticket.html"><strong aria-hidden="true">7.9.</strong> Plantilla de ticket</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/tipos-de-ticket.html"><strong aria-hidden="true">7.10.</strong> Tipos de ticket</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/estimacion.html"><strong aria-hidden="true">7.11.</strong> Estimación</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/automatizacion-historias.html"><strong aria-hidden="true">7.12.</strong> Automatización de historias (roadmap)</a></li><li class="chapter-item expanded "><a href="../../wiki/equipo/roles.html"><strong aria-hidden="true">7.13.</strong> Roles</a></li><li class="chapter-item expanded "><a href="../../wiki/equipo/glosario.html"><strong aria-hidden="true">7.14.</strong> Glosario</a></li><li class="chapter-item expanded "><a href="../../wiki/ui/restyling.html" class="active"><strong aria-hidden="true">7.15.</strong> Restyling de UI</a></li><li class="chapter-item expanded "><a href="../../wiki/ui/restyling-dador-handoff.html"><strong aria-hidden="true">7.16.</strong> Handoff restyling del dador (D.X.2/D.X.3 + backend)</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Repositories</li><li class="chapter-item expanded "><a href="../../repositories/index.html"><strong aria-hidden="true">8.</strong> Repositories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/index.html"><strong aria-hidden="true">8.1.</strong> smartruck-backend</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/arquitectura.html"><strong aria-hidden="true">8.1.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/links.html"><strong aria-hidden="true">8.1.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/index.html"><strong aria-hidden="true">8.2.</strong> smartruck-dador</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/arquitectura.html"><strong aria-hidden="true">8.2.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/links.html"><strong aria-hidden="true">8.2.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/index.html"><strong aria-hidden="true">8.3.</strong> smartruck-transportista</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/arquitectura.html"><strong aria-hidden="true">8.3.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/links.html"><strong aria-hidden="true">8.3.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/index.html"><strong aria-hidden="true">8.4.</strong> smartruck-audit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/arquitectura.html"><strong aria-hidden="true">8.4.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/links.html"><strong aria-hidden="true">8.4.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/cloud-template/index.html"><strong aria-hidden="true">8.5.</strong> cloud-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/cloud-template/arquitectura.html"><strong aria-hidden="true">8.5.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/cloud-template/links.html"><strong aria-hidden="true">8.5.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/infra-template/index.html"><strong aria-hidden="true">8.6.</strong> infra-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/infra-template/arquitectura.html"><strong aria-hidden="true">8.6.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/infra-template/links.html"><strong aria-hidden="true">8.6.2.</strong> Links</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="restyling-de-ui--referencia-cruzada"><a class="header" href="#restyling-de-ui--referencia-cruzada">Restyling de UI — referencia cruzada</a></h1>
+<p>Esta página es la referencia compartida del restyling de interfaz de Smartruck. Existe porque el pase se implementa primero en <strong>smartruck-dador</strong> y luego se replica de forma análoga en <strong>smartruck-transportista</strong>: los dos portales tienen que poder leer el mismo contrato.</p>
+<p>Los cuerpos de ticket con criterios de aceptación viven en el tracker. Acá se documenta lo que <strong>no</strong> cambia entre repos.</p>
+<h2 id="alcance"><a class="header" href="#alcance">Alcance</a></h2>
+<ul>
+<li>Renovación de la capa visual de los dos portales: tokens y theme, tipografía y escala, shell y estructura de outlet por vista, header/appbar, iconografía, transiciones entre vistas y estados de carga.</li>
+<li><strong>No</strong> incluye cambios de comportamiento, de flujos de negocio ni de integración con el backend.</li>
+</ul>
+<h2 id="regla-de-portado-espejo-no-extracción"><a class="header" href="#regla-de-portado-espejo-no-extracción">Regla de portado: espejo, no extracción</a></h2>
+<p>Los dos portales comparten stack y vocabulario de tokens, pero <strong>no comparten código</strong>: no hay monorepo, ni workspace, ni paquete, ni submódulo. El restyling se replica copiando archivos, no extrayendo un paquete compartido.</p>
+<p>Se extrae un paquete (<code>@smartruck/design-tokens</code>) <strong>solo si aparece una tercera pasada de restyling</strong>. Hasta entonces el costo de armar el workspace y tocar los dos repos en simultáneo no se justifica.</p>
+<h2 id="contrato-de-portado"><a class="header" href="#contrato-de-portado">Contrato de portado</a></h2>
+<p>Esta tabla es el <strong>contrato objetivo</strong>, no un inventario de lo que existe. Las filas marcadas <strong>PENDIENTE</strong> todavía no están construidas en el dador: describen algo que hay que construir <strong>antes</strong> de poder portarlo, y llevan anotado a qué historia pertenecen. Las filas sin marca ya existen y se copian tal cual.</p>
+<div class="table-wrapper"><table><thead><tr><th>Qué</th><th>Regla</th></tr></thead><tbody>
+<tr><td>Nombres de token</td><td><strong>Idénticos</strong> en los dos repos. Es la razón por la que el portado es casi 1:1.</td></tr>
+<tr><td>Valores de token</td><td>Deben quedar idénticos salvo el acento por portal, si se aprueba.</td></tr>
+<tr><td><code>src/styles.css</code></td><td>Único origen de verdad visual. Sin <code>tailwind.config.js</code> (Tailwind v4 es CSS-first).</td></tr>
+<tr><td>Tokens de color</td><td>Siempre <code>oklch()</code> como custom property en <code>:root</code> / <code>.dark</code>, mapeados en <code>@theme inline</code>.</td></tr>
+<tr><td>Componentes UI</td><td><code>src/components/ui/</code> (shadcn). El portado va archivo por archivo.</td></tr>
+<tr><td>Primitivas de layout</td><td><strong>PENDIENTE — sin historia asignada.</strong> <code>src/components/layout/</code> debe llegar a tener <code>PageContainer</code>, <code>PageHeader</code>, <code>PageSection</code>. Hoy solo existe <code>wordmark.tsx</code>. Ojo: esto nació en el plan original y <strong>no quedó dentro de ninguna de las tres tasks de D.X.1</strong>, así que hay que asignarlo a alguna historia antes de portar.</td></tr>
+<tr><td>Shell</td><td><code>src/views/layout/</code> — <code>app-shell.tsx</code> (chrome + <code>&lt;Outlet/&gt;</code> + drawer + dialog), <code>topbar.tsx</code> y <code>app-shell-context.ts</code> (contexto + <code>useAppShell()</code>). El dador ya convergió: las rutas autenticadas son hijas de un layout route sin path (<code>src/routes/_app.tsx</code>). El transportista todavía renderiza el shell por ruta y usa <code>src/views/layout/appbar.tsx</code>.</td></tr>
+<tr><td>Helpers</td><td><code>src/lib/</code> en ambos repos. <strong>No</strong> se usa <code>src/utils/</code>.</td></tr>
+<tr><td>Iconos</td><td><strong>PENDIENTE (D.X.3).</strong> Wrapper propio antes de cualquier migración de librería. Hoy no existe.</td></tr>
+<tr><td>Escala tipográfica</td><td><strong>Un solo valor</strong>: <code>html { font-size: 142.9% }</code> en <code>@layer base</code> de <code>src/styles.css</code>. Como Tailwind v4 es rem-based, escala texto, espaciados, alturas de control y contenedores de forma proporcional. Con eso <code>text-sm</code> pasa de 14px a ~20px. Recalibrar = cambiar ese único número.</td></tr>
+<tr><td>Fuentes</td><td>Autoalojadas con Fontsource, <strong>nunca</strong> <code>&lt;link&gt;</code> a Google. Interfaz: <strong>Figtree</strong> (<code>--font-sans</code>). Wordmark: <strong>Archivo</strong> (<code>--font-wordmark</code>).</td></tr>
+<tr><td>Tokens semánticos</td><td><code>--success</code>, <code>--warning</code>, <code>--danger</code> con sus <code>-foreground</code>, en <code>:root</code> y <code>.dark</code>, registrados en <code>@theme inline</code> como <code>--color-*</code>.</td></tr>
+<tr><td>Animaciones base</td><td><code>@import "tw-animate-css"</code> en <code>src/styles.css</code>. Sin eso, todas las clases <code>animate-in</code> / <code>fade-in-0</code> / <code>zoom-in-95</code> / <code>slide-in-from-*</code> de los primitivos shadcn quedan inertes.</td></tr>
+<tr><td>Cifras</td><td><code>font-variant-numeric: tabular-nums</code>, para que precios, pesos, distancias y fechas no desalineen columnas.</td></tr>
+</tbody></table>
+</div>
+<h2 id="divergencia-conocida-relevada-durante-el-relevamiento"><a class="header" href="#divergencia-conocida-relevada-durante-el-relevamiento">Divergencia conocida (relevada durante el relevamiento)</a></h2>
+<p>Detectada al planificar el restyling. Debe converger durante el pase del transportista.</p>
+<div class="table-wrapper"><table><thead><tr><th>Punto</th><th>smartruck-dador</th><th>smartruck-transportista</th></tr></thead><tbody>
+<tr><td><code>button.tsx</code></td><td><code>rounded-xl</code>, <code>font-medium</code>, <code>ring-1 ring-ring</code></td><td><code>rounded-lg</code>, <code>font-semibold</code>, <code>ring-2 ring-ring/50</code></td></tr>
+<tr><td>Tokens de estado</td><td><strong>Resuelto</strong> en el pase de theme</td><td>Presentes</td></tr>
+<tr><td>Escala de texto</td><td><strong>Resuelto</strong> con el knob global (<code>142.9%</code>), no con tokens <code>--text-*</code></td><td><code>--text-xs</code> … <code>--text-3xl</code> explícitos</td></tr>
+<tr><td>Tokens de superficie (claro)</td><td>Ahora <strong>beige cálido</strong> (h≈85)</td><td>Tinte azulado (h=210) — a converger en su pase</td></tr>
+<tr><td>Modo oscuro</td><td>Azul petróleo h=235 + oliva h=115, con elevación por capas de superficie</td><td>Idem</td></tr>
+<tr><td>Tipografía</td><td>Figtree (interfaz) + Archivo (wordmark)</td><td>Sin fuentes cargadas</td></tr>
+<tr><td>Mapas</td><td>Leaflet</td><td>MapLibre</td></tr>
+</tbody></table>
+</div>
+<h2 id="restricciones-vinculantes"><a class="header" href="#restricciones-vinculantes">Restricciones vinculantes</a></h2>
+<ul>
+<li><strong>Verde y beige/blanco siguen siendo los dos colores principales.</strong> Se pueden proponer colores adicionales.</li>
+<li><strong>Una sola fuente de Google para toda la interfaz</strong>, salvo el wordmark "Smartruck", que mantiene una familia propia.</li>
+<li><strong>La funcionalidad y los flujos de negocio no cambian de comportamiento.</strong> Es presentación.</li>
+<li><strong>La mayoría de los textos se mantiene.</strong> Solo se pueden reformular placeholders de secciones puntuales.</li>
+<li>El pase de transportista es <strong>análogo</strong>, no idéntico: mismo sistema, mismo contrato de portado.</li>
+</ul>
+<h2 id="decisiones-tomadas"><a class="header" href="#decisiones-tomadas">Decisiones tomadas</a></h2>
+<ul>
+<li><strong>Wordmark como texto, no como imagen.</strong> El header del dador dejó de usar <code>smartruck-logo.jpg</code> y renderiza el wordmark con el componente compartido <code>src/components/layout/wordmark.tsx</code>, usado tanto por el header autenticado como por el bloque de marca de las vistas públicas. Razón: un JPG escalado en proyector se ve borroso, el texto queda nítido a cualquier tamaño, y el brief pide una fuente propia para el título "Smartruck", cosa que solo aplica a texto. El JPG se mantiene como favicon y <code>og:image</code>.</li>
+<li><strong>El wordmark es bicolor y oblicuo, como el logo.</strong> "Smar" en <code>--brand-blue</code> y "Truck" en <code>--brand-green</code>, en <strong>Chakra Petch bold italic</strong> (<code>@fontsource/chakra-petch/700-italic.css</code>; Chakra Petch llega hasta 700, no existe el 900). Los dos tramos van en spans adyacentes <strong>sin espacio entre sí</strong>, para que un lector de pantalla lea una sola palabra.</li>
+<li><strong>El subrayado de la marca es una "frenada".</strong> Al pasar el mouse entra rápido y se asienta: la barra va sesgada a <code>skewX(-10deg)</code> para seguir la itálica y se pasa un 5% antes de volver, así que se lee como un vehículo frenando y no como un barrido. Es el swoosh que ya tiene el logo. Con <code>prefers-reduced-motion</code> aparece sin animación.</li>
+<li><strong>Cuidado con <code>scale</code> en Tailwind v4.</strong> El subrayado está escrito como CSS propio (<code>.wordmark-underline</code> en <code>src/styles.css</code>) y no con utilidades a propósito: Tailwind v4 emite <code>scale-x-*</code> a través de la propiedad independiente <code>scale</code>, que compone con <code>transform</code>, así que un <code>after:scale-x-0</code> de base <strong>cancela</strong> cualquier keyframe que anime <code>transform</code> y el subrayado queda invisible. Lo mismo rompe un <code>transition-transform</code> cuando lo que cambia es <code>scale</code>. Lección para el portado: si una animación anima <code>transform</code>, no la mezcles con utilidades de escala.</li>
+<li><strong>La marca lleva al inicio solo dentro del shell autenticado.</strong> En el header es un <code>Link</code> a <code>/</code> con cursor pointer; en el bloque de marca de las vistas públicas queda como texto, sin interacción. El componente <code>Wordmark</code> sigue siendo presentacional: el link está en el <code>Topbar</code>.</li>
+<li><strong>Los dos colores de marca son los del logo:</strong> azul petróleo <code>rgb(10 52 68)</code> = <code>#0a3444</code> en <code>--brand-blue</code>, y verde oliva <code>rgb(101 105 68)</code> = <code>#656944</code> en <code>--brand-green</code>. Definidos en <code>oklch()</code> con el <code>rgb</code> de origen en comentario, y registrados como <code>--color-brand-blue</code> / <code>--color-brand-green</code> para que existan las utilidades <code>text-brand-blue</code> / <code>text-brand-green</code>. <strong>En modo oscuro los dos se elevan</strong> (<code>#6b9aaf</code> y <code>#aab07d</code>): el azul del logo es ilegible sobre una superficie petróleo, así que se conserva el hue y se sube la luminosidad.</li>
+<li><strong>El primario del dador es un verde más fuerte que el del logo, no el oliva literal.</strong> <code>--primary</code>, <code>--ring</code> y las variantes de sidebar usan <code>oklch(0.51 0.1 130)</code> = <code>#53712f</code> (5.57:1 con blanco encima, 4.87:1 contra el fondo); en oscuro <code>oklch(0.64 0.11 130)</code> = <code>#76994f</code>.</li>
+<li><strong>Distinción importante para el portado:</strong> <code>--brand-green</code> sigue siendo el oliva <strong>exacto</strong> del logo (<code>#656944</code>, hue 113.4), porque es el color de la marca; el primario es su variante de portal, más verde y saturada (hue 130). Si en el transportista se quiere lo mismo, el equivalente es partir del azul del logo y subirlo de la misma forma. <strong>Dial del primario:</strong> subir el hue hacia 145 da más verde, bajarlo hacia 113 vuelve al oliva literal, y subir el chroma da más intensidad.</li>
+<li><strong>El primario del transportista será el azul petróleo</strong>: <code>rgb(10 52 68)</code> como opción principal (13.23:1 contra blanco) o <code>rgb(57 80 94)</code> = <code>#39505e</code> como alternativa más clara para un look menos duro.</li>
+<li><strong>Un solo punto de presentación de marca.</strong> Si el wordmark cambia, cambia en <code>wordmark.tsx</code> y los dos portales lo heredan.</li>
+<li><strong>Sin iconos decorativos en headers.</strong> Regla aplicada: se retira un icono si al quitarlo no se pierde información; se conserva si codifica dirección o estado. El inventario de lo retirado está abajo.</li>
+<li><strong>La escala es un único número.</strong> <code>html { font-size: 142.9% }</code>. Se eligió escalar la raíz en lugar de redefinir tamaños por componente porque es proporcional y no recorta nada: contenedores, paddings y alturas de control crecen junto con el texto, así que ningún componente necesita ajuste manual. Costo aceptado: menos densidad por pantalla, a cambio de legibilidad en proyector.</li>
+<li><strong>El modo claro pasa a beige cálido</strong> (h≈85) con el verde como primario; el oscuro mantiene el azul petróleo + oliva del logo y resuelve la elevación por capas de superficie en vez de sombras.</li>
+<li><strong>Se activan las animaciones base de shadcn</strong> importando <code>tw-animate-css</code>, que estaba instalado pero nunca importado.</li>
+<li><strong>El <code>theme-color</code> sigue al modo activo</strong>: el hook de tema actualiza el meta al togglear, en vez de quedar fijo en <code>#ffffff</code>.</li>
+<li><strong>La vista activa se deriva del pathname</strong>, no de estado local. <code>NavKey</code> perdió el miembro <code>myLoadDetail</code>: con rutas reales, <code>/my-loads/$loadId</code> ilumina solo el tab <code>myLoads</code>.</li>
+<li><strong>El guard de sesión vive en el root, no en el layout autenticado.</strong> Se evaluó moverlo al layout route y se descartó: el layout solo ve sus hijos, así que una visita sin sesión a una ruta desconocida terminaría en 404 en vez de redirigir a login. El guard necesita ver todas las rutas. Lección para el portado: no reubicar un guard sin comprobar que sigue cubriendo lo mismo.</li>
+<li><strong>El shell ya no se re-monta al navegar.</strong> Ese era el objetivo, pero trae una consecuencia de ciclo de vida a tener en cuenta al portar: la campana de notificaciones y el estado del drawer persisten entre tabs en vez de reiniciarse.</li>
+<li><strong>Tres roles de radio, y nada más.</strong> Pill (<code>rounded-full</code>) para todo lo que se <em>acciona</em>: botones, icon buttons, inputs, selects, badges, avatares, chips, pills de nav, tabs, progreso, slider. Panel (<code>rounded-2xl</code>, 16px) para todo lo que <em>contiene</em>: cards, dialogs, drawers, sheets, popovers, dropdowns, paneles de vista. Inset (<code>rounded-xl</code>, 12px) para lo que va <em>dentro</em> de un panel: tiles de icono, sub-paneles, empty states. Reglas: un elemento un rol, sin overrides de radio en el call site, y <strong>un hijo nunca puede quedar más redondo que su contenedor</strong>. <code>rounded-3xl</code> ya no existe en el código.</li>
+<li><strong>Los items de menú son la excepción deliberada:</strong> van en <code>rounded-lg</code> (8px), no pill. Son filas de ancho completo con icono y estado seleccionado full-bleed, y una cápsula les come el padding lateral de forma despareja.</li>
+<li><strong>El <code>Textarea</code> es el único control que no es pill:</strong> toma el radio Inset (12px) para que <strong>nunca pueda quedar más redondo que la card que lo contiene</strong>. Fue la única inversión real que apareció en el pase, y salió de que el contrato original le daba radio Panel.</li>
+<li><strong>Regla de superficies.</strong> El fondo de página es beige (<code>--background</code>, hoy <code>oklch(0.968 0.014 85)</code> = <code>#f9f4ea</code>). Toda superficie que contiene campos va en <code>--card</code> (blanco, <code>#fefbf6</code>), y <strong>ningún campo interactivo puede resolver al fondo de página</strong>. En el pase el beige venía de tres lados distintos: contenedores con <code>bg-background</code>, selects nativos con <code>bg-background</code> hardcodeado, y —el menos obvio— el variant <code>outline</code> de <code>Button</code>, que fija <code>bg-background</code> y es justo el que usan los triggers de autocomplete y date picker. Se corrigió agregando <code>bg-card</code> al <code>className</code> del trigger (twMerge lo respeta, porque <code>cn(buttonVariants({ ...className }))</code> deja el <code>className</code> último), <strong>sin tocar el variant global</strong>.</li>
+<li><strong>Ojo con los px fijos, no solo en tipografía.</strong> El knob del <code>142.9%</code> escala todo lo que es rem, pero un ancho en px queda clavado: el campo de hora tenía <code>w-[95px]</code> y por eso se veía diminuto al lado de campos que sí crecían. Es la misma trampa que los <code>text-[Npx]</code>, aplicada a anchos. Al portar, buscar <code>w-[</code>, <code>h-[</code>, <code>max-w-[</code> y <code>text-[</code> con valores en px.</li>
+</ul>
+<h2 id="decisiones-abiertas"><a class="header" href="#decisiones-abiertas">Decisiones abiertas</a></h2>
+<ul>
+<li>Acento por portal: el usuario se inclina por paletas idénticas con el contenido como única diferencia. Hay una propuesta de acento pendiente de aprobación.</li>
+<li><strong>Mecanismo de escala a unificar en el portado.</strong> El dador escala la raíz (<code>142.9%</code>); el transportista ya define tokens <code>--text-*</code> explícitos. Son mecanismos distintos y no conviven sin pisarse: hay que elegir uno antes de portar.</li>
+<li><strong>El chrome de Leaflet quedó en px a propósito.</strong> La geometría de los pins y el ancho del hover card dependen del zoom del mapa, no de la escala de la UI; escalarlos a ciegas cambia su significado. Requiere un pase propio, consciente del zoom.</li>
+</ul>
+<h2 id="checklist-de-portado-al-transportista"><a class="header" href="#checklist-de-portado-al-transportista">Checklist de portado al transportista</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<strong>Decidir el mecanismo de escala</strong> (knob de raíz vs tokens <code>--text-*</code> explícitos) y aplicar <code>html { font-size: 142.9% }</code> o su equivalente.</li>
+<li><input disabled="" type="checkbox"/>
+Cargar Figtree (interfaz) y <strong>Chakra Petch 700 italic</strong> (wordmark) con Fontsource. <strong>No</strong> usar <code>&lt;link&gt;</code> a Google.</li>
+<li><input disabled="" type="checkbox"/>
+Importar <code>tw-animate-css</code> en el CSS global.</li>
+<li><input disabled="" type="checkbox"/>
+Aplicar <code>--success</code> / <code>--warning</code> / <code>--danger</code> con sus <code>-foreground</code> y verificar contraste AA en los dos modos.</li>
+<li><input disabled="" type="checkbox"/>
+Aplicar los tres roles de radio y <strong>verificar que ningún hijo quede más redondo que su contenedor</strong>.</li>
+<li><input disabled="" type="checkbox"/>
+Aplicar la regla de superficies: fondo beige, superficies con campos en <code>--card</code>, y ningún campo interactivo resolviendo al fondo de página.</li>
+<li><input disabled="" type="checkbox"/>
+Convertir a rem o a la escala todo <code>text-[Npx]</code>, <code>font-size</code> en px, <strong>y todo ancho/alto en px</strong> (<code>w-[</code>, <code>h-[</code>, <code>max-w-[</code>): los px fijos no escalan con el knob.</li>
+<li><input disabled="" type="checkbox"/>
+Aplicar <code>src/styles.css</code> completo y verificar que los nombres de token coincidan 1:1.</li>
+<li><input disabled="" type="checkbox"/>
+Converger los cuatro tokens de superficie del modo claro al beige.</li>
+<li><input disabled="" type="checkbox"/>
+Alinear <code>button.tsx</code> y el resto de los componentes UI a la versión del contrato.</li>
+<li><input disabled="" type="checkbox"/>
+Portar <code>src/components/layout/</code> y migrar las vistas a las primitivas.</li>
+<li><input disabled="" type="checkbox"/>
+<strong>PENDIENTE (D.X.2):</strong> crear <code>src/components/ui/loader.tsx</code> y montar <code>defaultPendingComponent</code> en el router — hoy no existen en el dador.</li>
+<li><input disabled="" type="checkbox"/>
+Portar el shell a <code>src/views/layout/</code> y la estructura de outlet.</li>
+<li><input disabled="" type="checkbox"/>
+Quitar los iconos decorativos de headers.</li>
+<li><input disabled="" type="checkbox"/>
+Reemplazar <code>Loader2</code> inline por el loader compartido.</li>
+<li><input disabled="" type="checkbox"/>
+Verificar el header/appbar y el bloque de marca de las vistas públicas.</li>
+<li><input disabled="" type="checkbox"/>
+Lint, typecheck, tests (Vitest) y build en verde. <strong>No</strong> ejecutar ni agregar Playwright.</li>
+</ul>
+<h2 id="iconos-retirados-de-headers"><a class="header" href="#iconos-retirados-de-headers">Iconos retirados de headers</a></h2>
+<p>Inventario de la primera pasada (D.X.1.3 en smartruck-dador). Sirve para decidir <strong>dónde</strong> vuelven a ir los iconos, no para restaurarlos en los headers. El transportista debe retirar los suyos con la misma regla: se retira si al quitarlo no se pierde información; se conserva si codifica dirección o estado.</p>
+<div class="table-wrapper"><table><thead><tr><th>Archivo</th><th>Header / contexto</th><th>Icono retirado</th></tr></thead><tbody>
+<tr><td><code>src/views/smartruck-app.tsx</code></td><td>header autenticado, bloque de marca</td><td><code>smartruck-logo.jpg</code> (asset, no icono)</td></tr>
+<tr><td><code>src/views/smartruck-app.tsx</code></td><td>nav: Panel / Mis cargas / Publicar Carga / Perfil</td><td><code>LayoutDashboard</code>, <code>Package</code>, <code>PlusCircle</code>, <code>UserIcon</code></td></tr>
+<tr><td><code>src/views/auth/auth-brand.tsx</code></td><td>marca de vistas públicas</td><td><code>Store</code></td></tr>
+<tr><td><code>src/views/dashboard/dashboard-view.tsx</code></td><td>"Panel de control"</td><td><code>BarChart3</code></td></tr>
+<tr><td><code>src/views/create-load-view/create-load-view.tsx</code></td><td>"Publicar Nueva Carga"</td><td><code>Plus</code></td></tr>
+<tr><td><code>src/views/profile/profile-view.tsx</code></td><td>"Mis Centros y Depósitos Frecuentes"</td><td><code>Building2</code></td></tr>
+<tr><td><code>src/views/profile/profile-view.tsx</code></td><td>"Opiniones y Calificaciones Recibidas"</td><td><code>Star</code></td></tr>
+<tr><td><code>src/views/my-loads/my-load-detail.tsx</code></td><td>"Transportista asignado"</td><td><code>Truck</code></td></tr>
+<tr><td><code>src/views/my-loads/my-load-detail.tsx</code></td><td>"Hoja de ruta y direcciones"</td><td><code>Navigation</code></td></tr>
+<tr><td><code>src/views/my-loads/my-load-detail.tsx</code></td><td>"Recorrido en mapa"</td><td><code>MapPin</code></td></tr>
+<tr><td><code>src/views/my-loads/delivery-stepper.tsx</code></td><td>"Progreso y Seguimiento"</td><td><code>Truck</code></td></tr>
+<tr><td><code>src/views/my-loads/edit-load-modal.tsx</code></td><td>"Editar Carga #{id}"</td><td><code>PenLine</code></td></tr>
+<tr><td><code>src/views/profile/depot-modal.tsx</code></td><td>"Guardar Nuevo Centro / Depósito"</td><td><code>BookmarkPlus</code></td></tr>
+<tr><td><code>src/views/create-load-view/sections/cargo-info-section.tsx</code></td><td>"Información de la carga"</td><td><code>Package</code></td></tr>
+<tr><td><code>src/views/create-load-view/sections/trip-conditions-section.tsx</code></td><td>"Condiciones del viaje y pago"</td><td><code>Calendar</code></td></tr>
+<tr><td><code>src/views/create-load-view/sections/price-estimation-section.tsx</code></td><td>"Precio sugerido"</td><td><code>Sparkles</code></td></tr>
+<tr><td><code>src/views/send-proposal-modal.tsx</code></td><td>"Enviar propuesta", "Ruta", "Condiciones del viaje y pago", "Información adicional"</td><td><code>Truck</code>, <code>MapPin</code>, <code>Calendar</code>, <code>Truck</code></td></tr>
+<tr><td><code>src/views/send-proposal-view.tsx</code></td><td>"Ruta", "Información de la carga", "Condiciones del viaje", "Información adicional"</td><td><code>MapPin</code>, <code>Package</code>, <code>Calendar</code>, <code>Truck</code></td></tr>
+<tr><td><code>src/views/notifications/notifications-bell.tsx</code></td><td>fila de header del panel "Notificaciones"</td><td><code>Bell</code></td></tr>
+</tbody></table>
+</div>
+<h3 id="iconos-conservados-a-propósito"><a class="header" href="#iconos-conservados-a-propósito">Iconos conservados a propósito</a></h3>
+<p>Se mantienen porque codifican información o estado, no decoración:</p>
+<ul>
+<li><code>src/views/load-drawer/load-drawer-header.tsx</code> — <code>ArrowRight</code> <strong>entre</strong> origen y destino: renderiza el sentido de la ruta. Quitarlo destruye significado.</li>
+<li><code>src/views/my-loads/delivery-stepper.tsx</code> — los iconos de cada paso del stepper (<code>Lock</code>, <code>Package</code>, <code>Truck</code>, <code>Clock</code>, <code>MapPin</code>, <code>Star</code>, <code>BadgeCheck</code>, <code>Check</code>): codifican el estado del paso.</li>
+<li>Chips de estado y campos de <code>my-load-detail.tsx</code> (<code>BadgeCheck</code>, <code>ShieldCheck</code>, <code>Mail</code>, <code>Lock</code>, <code>MapPin</code>): llevan significado de estado o de campo.</li>
+<li>Iconos de inputs y de éxito/error en <code>send-proposal-*</code> (<code>Weight</code>, <code>DollarSign</code>, <code>CheckCircle2</code>, <code>AlertTriangle</code>): affordances y estado.</li>
+<li><code>src/views/my-loads/my-loads-summary.tsx</code> (<code>PiggyBank</code>) y las KPI cards del panel: son callouts de estadística, no headers.</li>
+<li>Los badges numerados de <code>create-load-view</code> (1/2/3) no son iconos: codifican orden de pasos.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../wiki/equipo/glosario.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../wiki/ui/restyling-dador-handoff.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../wiki/equipo/glosario.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../wiki/ui/restyling-dador-handoff.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

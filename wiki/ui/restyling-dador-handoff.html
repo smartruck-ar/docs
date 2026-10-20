@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html lang="es" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Handoff restyling del dador (D.X.2/D.X.3 + backend) - Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="../../proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="../../arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../requerimientos.html"><strong aria-hidden="true">4.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="../../desarrollo.html"><strong aria-hidden="true">5.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="../../manual_usuario.html"><strong aria-hidden="true">6.</strong> Manual de usuario</a></li><li class="chapter-item expanded affix "><li class="part-title">Wiki del equipo</li><li class="chapter-item expanded "><a href="../../wiki/index.html"><strong aria-hidden="true">7.</strong> Wiki</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../wiki/proceso/jerarquia.html"><strong aria-hidden="true">7.1.</strong> Jerarquía</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/definition-of-ready.html"><strong aria-hidden="true">7.2.</strong> Definition of Ready</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/definition-of-done.html"><strong aria-hidden="true">7.3.</strong> Definition of Done</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/workflow-entrega.html"><strong aria-hidden="true">7.4.</strong> Workflow de entrega</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/desarrollo-con-agentes.html"><strong aria-hidden="true">7.5.</strong> Desarrollo con agentes</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/conventional-commits.html"><strong aria-hidden="true">7.6.</strong> Conventional Commits</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/logging.html"><strong aria-hidden="true">7.7.</strong> Logging (hexagonal)</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/gherkin.html"><strong aria-hidden="true">7.8.</strong> Gherkin (BDD)</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/plantilla-ticket.html"><strong aria-hidden="true">7.9.</strong> Plantilla de ticket</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/tipos-de-ticket.html"><strong aria-hidden="true">7.10.</strong> Tipos de ticket</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/estimacion.html"><strong aria-hidden="true">7.11.</strong> Estimación</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/automatizacion-historias.html"><strong aria-hidden="true">7.12.</strong> Automatización de historias (roadmap)</a></li><li class="chapter-item expanded "><a href="../../wiki/equipo/roles.html"><strong aria-hidden="true">7.13.</strong> Roles</a></li><li class="chapter-item expanded "><a href="../../wiki/equipo/glosario.html"><strong aria-hidden="true">7.14.</strong> Glosario</a></li><li class="chapter-item expanded "><a href="../../wiki/ui/restyling.html"><strong aria-hidden="true">7.15.</strong> Restyling de UI</a></li><li class="chapter-item expanded "><a href="../../wiki/ui/restyling-dador-handoff.html" class="active"><strong aria-hidden="true">7.16.</strong> Handoff restyling del dador (D.X.2/D.X.3 + backend)</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Repositories</li><li class="chapter-item expanded "><a href="../../repositories/index.html"><strong aria-hidden="true">8.</strong> Repositories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/index.html"><strong aria-hidden="true">8.1.</strong> smartruck-backend</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/arquitectura.html"><strong aria-hidden="true">8.1.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/links.html"><strong aria-hidden="true">8.1.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/index.html"><strong aria-hidden="true">8.2.</strong> smartruck-dador</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/arquitectura.html"><strong aria-hidden="true">8.2.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/links.html"><strong aria-hidden="true">8.2.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/index.html"><strong aria-hidden="true">8.3.</strong> smartruck-transportista</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/arquitectura.html"><strong aria-hidden="true">8.3.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/links.html"><strong aria-hidden="true">8.3.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/index.html"><strong aria-hidden="true">8.4.</strong> smartruck-audit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/arquitectura.html"><strong aria-hidden="true">8.4.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/links.html"><strong aria-hidden="true">8.4.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/cloud-template/index.html"><strong aria-hidden="true">8.5.</strong> cloud-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/cloud-template/arquitectura.html"><strong aria-hidden="true">8.5.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/cloud-template/links.html"><strong aria-hidden="true">8.5.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/infra-template/index.html"><strong aria-hidden="true">8.6.</strong> infra-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/infra-template/arquitectura.html"><strong aria-hidden="true">8.6.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/infra-template/links.html"><strong aria-hidden="true">8.6.2.</strong> Links</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="handoff--restyling-del-dador-dx2--dx3-y-cambios-pendientes-del-backend"><a class="header" href="#handoff--restyling-del-dador-dx2--dx3-y-cambios-pendientes-del-backend">Handoff — Restyling del dador (D.X.2 / D.X.3) y cambios pendientes del backend</a></h1>
+<p>Este documento es <strong>autocontenido a propósito</strong>: se puede pegar entero en otro chat, en otro proveedor de IA, o leerse sin ninguna herramienta del entorno (sin Engram, sin MCP, sin skills). Existe porque el trabajo de restyling del portal <strong>dador</strong> se hizo en dos sesiones largas y sus pendientes cruzan a <strong>otro repositorio</strong> (<code>smartruck-backend</code>).</p>
+<p>Complementa —no reemplaza— a <a href="./restyling.html"><code>restyling.md</code></a>, que es el <strong>contrato visual</strong> de la épica. Si algo de acá contradice a <code>restyling.md</code>, manda <code>restyling.md</code>.</p>
+<hr />
+<h2 id="1-contexto-mínimo"><a class="header" href="#1-contexto-mínimo">1. Contexto mínimo</a></h2>
+<ul>
+<li><strong>Smartruck</strong> es una plataforma logística (Trabajo Profesional, FIUBA): publicación, cotización, gestión y desbloqueo de ofertas de carga, con pagos integrados.</li>
+<li>Dos portales de UI y un backend compartido:</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>Prefijo</th><th>Producto</th><th>Repo</th></tr></thead><tbody>
+<tr><td><code>D</code></td><td>Dador (shipper)</td><td><code>smartruck-dador</code></td></tr>
+<tr><td><code>T</code></td><td>Transportista (carrier)</td><td><code>smartruck-transportista</code></td></tr>
+<tr><td>—</td><td>API compartida</td><td><code>smartruck-backend</code> (Python 3.12, FastAPI, hexagonal)</td></tr>
+</tbody></table>
+</div>
+<ul>
+<li><strong>Jerarquía de gestión:</strong> épica → historia → task. Las tasks son el trabajo operativo (código, tests, commits, PR). Épicas e historias no se estiman.</li>
+<li>El portal dador usa <strong>TanStack Start + Vite + React 19 + Tailwind CSS v4 + shadcn/ui</strong>. El transportista usa el mismo stack y el mismo vocabulario de tokens, pero <strong>no comparte código</strong> (sin monorepo ni paquete): el restyling se replica como <strong>espejo</strong>, no por extracción.</li>
+</ul>
+<h2 id="2-metodología-y-dinámica-que-seguimos-esto-es-lo-que-hay-que-respetar"><a class="header" href="#2-metodología-y-dinámica-que-seguimos-esto-es-lo-que-hay-que-respetar">2. Metodología y dinámica que seguimos (esto es lo que hay que respetar)</a></h2>
+<ol>
+<li><strong>Commits atómicos, sin push.</strong> Formato conventional commits <code>&lt;type&gt;(&lt;id-task&gt;): &lt;descripción&gt;</code>, con <code>type</code> limitado a <code>feat</code> / <code>fix</code> / <code>refactor</code>. Un commit = un cambio revisable y autoexplicativo. Nada se pushea sin pedido explícito.</li>
+<li><strong>Gate de verificación por task, obligatorio.</strong> <code>scripts/run_lint</code> + <code>scripts/run_all_tests</code> + <code>npm run build</code>, todo en verde. En Windows los scripts son bash y WSL no trae node: hay que correrlos con <strong>Git Bash</strong> (<code>&amp; "C:\Program Files\Git\bin\bash.exe" -lc "./scripts/run_all_tests"</code>). <code>CI=true</code> los vuelve check-only (no mutan).</li>
+<li><strong>Normalizar ANTES de commitear.</strong> El gate corre <code>prettier --write</code> / <code>eslint --fix</code>: si commiteás primero y normalizás después, el árbol queda sucio y hay que rehacer commits.</li>
+<li><strong>Los tests de presentación son puntos de decisión, no bloqueantes.</strong> Un restyle <em>puede</em> cambiar lo que un test fija, pero entonces el test se actualiza <strong>en el mismo commit</strong> y a propósito. Lo prohibido es romperlo en silencio. Hay aserciones que fijan implementación y no valor para el usuario y conviene reescribirlas (ejemplo real: un <code>findAllByText("Transportista asignado")).toHaveLength(2)</code> que congelaba una duplicación card/overlay; se cambió a <code>findByText(...)</code> en el commit que deduplicó).</li>
+<li><strong>Presentación ≠ comportamiento.</strong> El restyling no cambia flujos, validaciones, navegación ni contratos de red. Cuando un pedido sí toca comportamiento (ej. caché), se documenta y se decide aparte.</li>
+<li><strong><code>git status</code> antes de delegar o commitear.</strong> Una vez el árbol tenía ediciones sin commitear de una persona y se commiteó sin querer. Si hay cambios que no son tuyos: <strong>parar y reportar</strong>.</li>
+<li><strong>Tokens antes que componentes.</strong> Nada de familias crudas de Tailwind (<code>emerald-*</code>, <code>sky-*</code>, …); todo por tokens semánticos en <code>src/styles.css</code> (<code>:root</code> / <code>.dark</code>, mapeados en <code>@theme inline</code>). Nada de px fijos (<code>text-[Npx]</code>, <code>w-[Npx]</code>, …): la escala se maneja con <code>html { font-size: 142.9% }</code> y todo es rem-based.</li>
+<li><strong>Tres roles de radio y nada más:</strong> Pill (<code>rounded-full</code>) para lo accionable, Panel (<code>rounded-2xl</code>) para lo que contiene, Inset (<code>rounded-xl</code>) para lo que va dentro de un panel. <strong>Un hijo nunca puede quedar más redondo que su contenedor.</strong></li>
+<li><strong>Regla de superficies:</strong> fondo de página beige (<code>--background</code>), toda superficie que contiene campos en <code>--card</code>, y ningún campo interactivo resolviendo al fondo de página.</li>
+<li><strong>Sin iconos decorativos en headers.</strong> Se retira un icono si al quitarlo no se pierde información; se conserva sólo si codifica dirección o estado.</li>
+<li><strong>Movimiento: sutil, corto y con guarda.</strong> Toda animación ≤200ms para feedback de UI, y <strong>tiene que degradar</strong> bajo la guarda global de <code>prefers-reduced-motion</code> (que ya está en <code>styles.css</code>). Nada de animación que tape un loading o retrase contenido.</li>
+</ol>
+<h2 id="3-qué-se-hizo-en-el-dador-estado-al-cierre-de-estas-dos-sesiones"><a class="header" href="#3-qué-se-hizo-en-el-dador-estado-al-cierre-de-estas-dos-sesiones">3. Qué se hizo en el dador (estado al cierre de estas dos sesiones)</a></h2>
+<p>Todo está commiteado en <code>smartruck-dador</code> (rama <code>main</code>, <strong>local, sin pushear</strong> salvo lo que ya estaba). Resumen por bloque:</p>
+<ul>
+<li><strong>Fundación de layout:</strong> primitivas compartidas <code>PageContainer</code> / <code>PageHeader</code> / <code>PageSection</code> (<code>src/components/layout/</code>), loader compartido (<code>src/components/ui/loader.tsx</code>) y <code>defaultPendingComponent</code> en el router. Cierran un hueco que el contrato de portado nombraba pero no existía en código.</li>
+<li><strong>D.X.2.1 (publicación):</strong> rail lateral sticky con precio + acción de publicar (una sola instancia de cada botón), estados visibles del precio, badges A/B y marcas de obligatorio consistentes con el schema, aviso de precio manual tokenizado, preview de ruta con estado de carga y distancia unificada, paradas intermedias demotadas.</li>
+<li><strong>D.X.2.2 (item de lista):</strong> estado y ruta como primera línea de lectura, un solo precio, campos en boxes con label, semántica de lista y <code>focus-visible</code>, skeleton de carga, y una familia nueva de tokens <code>--status-*</code> (un color por estado, claro+oscuro, todos ≥ AA).</li>
+<li><strong>D.X.2.3 (detalle):</strong> precio jerarquizado, stepper legible a distancia (sin <code>opacity-50</code> ni <code>animate-pulse</code>, con línea de progreso), tokens en los estados, alerta informativa dentro de la hoja de ruta, descripción 3/4 + pago acordado 1/4.</li>
+<li><strong>Caché de datos:</strong> se empezó a usar <strong>TanStack Query</strong> de verdad (antes estaba instanciado y sin usar: 0 <code>useQuery</code>). Defaults globales en <code>src/router.tsx</code> y queries cacheadas del detalle, el listado y la geometría de ruta, más invalidación al confirmar entrega y al publicar.</li>
+<li><strong>Fix de auth (verificación):</strong> el fetch de perfil se "latcheaba" en el primer fallo y la UI quedaba en "no verificado" con el backend devolviendo <code>VERIFIED</code>. Ahora la guarda se setea sólo en éxito (con un reintento acotado), el predicate es null-safe y durante la carga se muestra un estado neutro.</li>
+<li><strong>D.X.3 (animaciones):</strong> guarda global de movimiento reducido, <code>RoadLoader</code> (ruta + camión SVG inline viajando, con subtítulo por prop) montado en confirmación de cuenta y logout, spinner in-place en botones, transición de entrada al cambiar de tab, hover de elevación en cards, entrada de listados, borde girando en la acción pendiente, sonido de éxito al publicar y animación de apertura de popups.</li>
+</ul>
+<h2 id="4-cambios-pendientes-del-backend"><a class="header" href="#4-cambios-pendientes-del-backend">4. Cambios pendientes del BACKEND</a></h2>
+<blockquote>
+<p>Los números de línea y nombres de archivo de esta sección salen de <strong>relevar el repo <code>smartruck-backend</code></strong> al investigar el bug de hora. Conviene verificarlos contra el código actual antes de implementar.</p>
+</blockquote>
+<h3 id="41-contrato-de-fechas-normalizar-aware--local-argentina-naive-crÍtico"><a class="header" href="#41-contrato-de-fechas-normalizar-aware--local-argentina-naive-crÍtico">4.1 Contrato de fechas: normalizar <code>aware</code> → local Argentina naive (CRÍTICO)</a></h3>
+<p><strong>Qué pasa.</strong> El backend declara las fechas de carga como <strong>hora local argentina naive</strong>: <code>pickup_date</code> y <code>delivery_deadline</code> se persisten en columnas <code>TIMESTAMP WITHOUT TIME ZONE</code>.</p>
+<p>Evidencia relevada:</p>
+<ul>
+<li><code>src/infrastructure/outbound/time/system_date_time_provider.py</code> — el "ahora" del dominio es <code>datetime.now(ARGENTINA).replace(tzinfo=None)</code>.</li>
+<li><code>src/infrastructure/outbound/persistence/models/load.py</code> y <code>migrations/versions/0001_initial_schema.py</code> — columnas <code>sa.DateTime()</code> (naive).</li>
+<li>El test de aceptación exige <strong>eco exacto</strong>: <code>test/acceptance/.../crear_oferta_carga_steps.py</code> manda <code>"2026-08-20T08:00:00"</code> y espera el mismo string.</li>
+</ul>
+<p><strong>Qué rompía.</strong> El portal dador serializaba la hora del picker (wall clock naive) con offset <code>-03:00</code>. Al castear un <code>timestamptz</code> a una columna naive con la sesión en UTC, Postgres guardaba <strong>+3h</strong> (<code>12:00</code> → <code>15:00</code>). El dato quedaba mal <strong>persistido</strong> (por eso también lo veía mal el transportista, que sólo lee). El bug afectaba <strong>toda</strong> hora cargada, no sólo el default.</p>
+<p><strong>Qué ya se hizo (del lado dador, en <code>smartruck-dador</code>).</strong> Se corrigió el serializador para emitir hora local naive sin offset ni <code>Z</code> (<code>toBackendLocalDateTime</code> en <code>src/lib/date.ts</code>, con test unitario). Los envíos nuevos llegan correctos.</p>
+<p><strong>Qué falta del lado backend (red de seguridad).</strong> El backend sigue aceptando strings con offset de cualquier cliente. La recomendación es un <strong>validador de entrada</strong> que normalice a hora local argentina naive antes de que el valor llegue al caso de uso. Punto de entrada relevado: <code>src/infrastructure/inbound/http/.../create_load_request.py</code> (<code>pickup_date: datetime</code>, <code>delivery_deadline: datetime</code>).</p>
+<p>Comportamiento propuesto:</p>
+<pre><code>si el datetime viene aware  → astimezone(America/Argentina).replace(tzinfo=None)
+si viene naive              → dejarlo igual (comportamiento actual, no romper clientes)
+</code></pre>
+<p>Criterios de aceptación sugeridos:</p>
+<ul>
+<li><strong>CA1:</strong> un <code>pickup_date</code> con offset (<code>2026-09-20T12:00:00-03:00</code>) se persiste y se devuelve como <code>2026-09-20T12:00:00</code> (hora local argentina), no <code>15:00</code>.</li>
+<li><strong>CA2:</strong> un <code>pickup_date</code> naive sigue comportándose exactamente como hoy (el contrato de eco exacto del test de aceptación no cambia).</li>
+<li><strong>CA3:</strong> aplica a <code>pickup_date</code> y <code>delivery_deadline</code> por igual.</li>
+<li><strong>CA4:</strong> existe un test de aceptación que manda un datetime <strong>con offset</strong> y verifica el eco; hoy la suite sólo manda naive, que es justamente por lo que el bug no se detectó.</li>
+</ul>
+<h3 id="42-backfill-de-las-cargas-ya-persistidas-con-3h"><a class="header" href="#42-backfill-de-las-cargas-ya-persistidas-con-3h">4.2 Backfill de las cargas ya persistidas con +3h</a></h3>
+<p>El fix del dador <strong>no repara</strong> las filas ya guardadas con el offset aplicado. Hay que decidir y ejecutar una migración de datos (o un script acotado) que reste 3h a las fechas de las cargas afectadas, con criterio de alcance claro (ventana temporal / todos los registros) y su propio respaldo. Es una decisión de producto: conviene confirmarla antes de tocar datos.</p>
+<h3 id="43-confirmar-el-mapeo-del-status-bloqueada"><a class="header" href="#43-confirmar-el-mapeo-del-status-bloqueada">4.3 Confirmar el mapeo del status <code>bloqueada</code></a></h3>
+<p>Un commit reciente del portal dador (<code>fix(load): update status mapping for 'bloqueada'</code>) cambió el mapeo del lado frontend: <code>bloqueada</code> ahora mapea a <strong><code>Publicada</code></strong> y <code>cancelada</code> a <code>Cancelada</code>; además desapareció <code>Bloqueada</code> del mapeo inverso.</p>
+<p>Dos consecuencias a chequear con quien lo hizo:</p>
+<ul>
+<li><strong>Producto:</strong> hoy una carga <code>bloqueada</code> se muestra como <strong>"Publicada"</strong> en el dador. Si eso no es intencional, es un bug de presentación de estado (no de datos).</li>
+<li><strong>Código:</strong> el estado UI <code>Bloqueada</code> y el token <code>--status-bloqueada</code> del dador quedaron <strong>inalcanzables</strong> (dead code) — hay que decidir si se limpian o si <code>bloqueada</code> debería seguir siendo un estado propio.</li>
+</ul>
+<p>Conviene confirmar si el backend <strong>emite</strong> <code>bloqueada</code> alguna vez y con qué semántica.</p>
+<h2 id="5-dónde-quedó-guardada-la-información"><a class="header" href="#5-dónde-quedó-guardada-la-información">5. Dónde quedó guardada la información</a></h2>
+<p>Tres capas, de más durable a menos:</p>
+<div class="table-wrapper"><table><thead><tr><th>Capa</th><th>Qué contiene</th><th>Portabilidad</th></tr></thead><tbody>
+<tr><td><strong>Git (este repo)</strong></td><td>Los commits del dador: cada cambio con su mensaje, y los tests que lo respaldan. Los mensajes llevan el ID de task (<code>D.X.2.1</code>, <code>D.X.3.2</code>, …).</td><td>Alta — es el registro de verdad.</td></tr>
+<tr><td><strong>Docs (este archivo + <code>restyling.md</code>)</strong></td><td>El contrato visual de la épica y este handoff.</td><td>Alta — pensado para pegarse en cualquier chat.</td></tr>
+<tr><td><strong>Engram (memoria persistente del entorno)</strong></td><td>El detalle de cada sesión: baseline, plan, implementación, correcciones, el contrato de fechas y las animaciones. Topic keys bajo el proyecto <code>smartruck-dador</code>: <code>ui/restyling-baseline</code>, <code>ui/restyling-dx2-plan</code>, <code>ui/restyling-dx2-implementacion</code>, <code>ui/restyling-dx2-correcciones</code>, <code>bugfix/datetime-naive-argentina-contract</code>, <code>ui/restyling-dx3-animaciones</code>, <code>ui/restyling-dx3-sonido-popups</code>.</td><td><strong>Baja</strong> — requiere el entorno con Engram habilitado; no sirve para un proveedor externo.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Conclusión:</strong> para trabajar esto en otro chat o en un proveedor externo, usá <strong>este documento</strong>. Engram no viaja.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../wiki/ui/restyling.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../repositories/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../wiki/ui/restyling.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../repositories/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
