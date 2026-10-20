@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\slides\\07-observabilidad.json",
+    "sha256": "0d5dca97d0590083e22caa06ed8945b25b6a68e96ea52b64c2d3138b257989b2",
+    "bytes": 4319
+  },
+  "artifact": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\preview\\07-observabilidad.html",
+    "sha256": "3a7a29ee2dad1c19cc19c3687cd4e3528340093410f56a1ac65e80a2c5d406f8",
+    "bytes": 823907
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review2-07-observabilidad\\07-observabilidad.finalize.json",
+    "summaryReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review2-07-observabilidad\\07-observabilidad.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review2-07-observabilidad\\07-observabilidad.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-20T02:35:23.561Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2703,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

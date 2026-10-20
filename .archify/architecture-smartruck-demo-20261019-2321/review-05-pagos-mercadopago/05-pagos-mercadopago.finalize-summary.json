@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\slides\\05-pagos-mercadopago.json",
+    "sha256": "5f60faf4d3f536d0a46244749341060ebdd425781efad2699ead5af34d2fe46b",
+    "bytes": 3963
+  },
+  "artifact": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\preview\\05-pagos-mercadopago.html",
+    "sha256": "4ea2fbd4d11da2a4577fdde2abe2f0101d3ea2a5a188f0bff24e907982d8c101",
+    "bytes": 821618
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-05-pagos-mercadopago\\05-pagos-mercadopago.finalize.json",
+    "summaryReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-05-pagos-mercadopago\\05-pagos-mercadopago.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-05-pagos-mercadopago\\05-pagos-mercadopago.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-20T02:35:23.561Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2494,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

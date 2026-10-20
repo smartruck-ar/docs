@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\slides\\01-despliegue-general.json",
+    "sha256": "ee04eac96c21e4cb32037e36c0ed70b118733a0d14badb4399d2c8b062129d7a",
+    "bytes": 5340
+  },
+  "artifact": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\preview\\01-despliegue-general.html",
+    "sha256": "b229b9cdd8fb5df3209b17b87bc9d6739c29503ade1f5fa7f0d90f3bbdcc3e88",
+    "bytes": 830451
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-01-despliegue-general\\01-despliegue-general.finalize.json",
+    "summaryReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-01-despliegue-general\\01-despliegue-general.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-01-despliegue-general\\01-despliegue-general.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-20T02:35:23.561Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2557,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

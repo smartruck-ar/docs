@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\overview.json",
+    "sha256": "76340c0fd6747f4b20704c7ed574aa5db3bf05801122d1d2d7b95ab1dc4082bf",
+    "bytes": 8305
+  },
+  "artifact": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\src\\arquitectura\\diagrams\\smartruck-architecture.html",
+    "sha256": "43656bd65e4e18832c145f1f5a0550152af67a537e9a2ecb28f0286642e6d09b",
+    "bytes": 841337
+  },
+  "gates": {
+    "validate": "fail",
+    "deliver": "not-run",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "validate",
+  "diagnostics": [
+    {
+      "code": "composition/label-gap",
+      "severity": "error",
+      "message": "Label \"PostgREST · schema geo\" has only 68px between \"geo_worker\" and \"supabase_data\"; it needs at least 132px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "id": "geo-supabase",
+        "from": "geo_worker",
+        "to": "supabase_data"
+      },
+      "evidence": {
+        "clearGapPx": 68,
+        "minimumGapPx": 132,
+        "labelWidthPx": 115.6,
+        "obstacles": [
+          "geo_worker",
+          "supabase_data"
+        ]
+      },
+      "supportedFixes": [
+        "increase the clear gap between the connected nodes to at least 132px",
+        "reposition the connected nodes together while preserving the full relationship label"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-overview\\smartruck-architecture.finalize.json",
+    "summaryReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-overview\\smartruck-architecture.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-20T02:35:23.561Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 581,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  },
+  "nextAction": {
+    "action": "edit-in-place",
+    "candidate": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\overview.json",
+    "constraint": "Preserve unaffected semantics and geometry; apply each diagnostic's supportedFixes, or the fix its message names, and do not replace the whole candidate.",
+    "then": "finalize-once"
+  }
+}

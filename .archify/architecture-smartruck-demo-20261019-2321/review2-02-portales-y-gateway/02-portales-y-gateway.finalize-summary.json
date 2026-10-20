@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\slides\\02-portales-y-gateway.json",
+    "sha256": "51f27cd382c6c9d1ae29ff7d3570c8a8810f173d7c932ec56951b8b0c67c2098",
+    "bytes": 3933
+  },
+  "artifact": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\preview\\02-portales-y-gateway.html",
+    "sha256": "63630cf2dff73933b0416198667bf151afcbb8941a7017efcc3ff84f3267bf33",
+    "bytes": 822132
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review2-02-portales-y-gateway\\02-portales-y-gateway.finalize.json",
+    "summaryReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review2-02-portales-y-gateway\\02-portales-y-gateway.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review2-02-portales-y-gateway\\02-portales-y-gateway.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-20T02:35:23.561Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2412,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

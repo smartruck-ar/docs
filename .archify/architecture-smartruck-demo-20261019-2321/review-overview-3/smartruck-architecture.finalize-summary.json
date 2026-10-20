@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\overview.json",
+    "sha256": "10d169af3c7e8a60f4c09299546f3942982455f7436575b366cea953b647a75e",
+    "bytes": 8306
+  },
+  "artifact": {
+    "path": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\src\\arquitectura\\diagrams\\smartruck-architecture.html",
+    "sha256": "60bc93ea70f326b4ad60bad0b46fb38fe711b07f5d95abf50266edca5f0c9c3c",
+    "bytes": 845892
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-overview-3\\smartruck-architecture.finalize.json",
+    "summaryReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-overview-3\\smartruck-architecture.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\review-overview-3\\smartruck-architecture.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-20T02:35:23.561Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2817,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  },
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 2,
+      "routesOverSuggestedBends": 2
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "portals-gateway",
+            "from": "portales",
+            "to": "api_gateway",
+            "label": "HTTPS · JWT",
+            "collectionIndex": 1,
+            "artifactIndex": 2
+          },
+          "right": {
+            "id": "backend-mapbox",
+            "from": "backend",
+            "to": "mapbox",
+            "label": "geocodificación",
+            "collectionIndex": 9,
+            "artifactIndex": 10
+          },
+          "point": [
+            450,
+            320
+          ]
+        },
+        {
+          "left": {
+            "id": "backend-mapbox",
+            "from": "backend",
+            "to": "mapbox",
+            "label": "geocodificación",
+            "collectionIndex": 9,
+            "artifactIndex": 10
+          },
+          "right": {
+            "id": "geo-mapbox",
+            "from": "geo_worker",
+            "to": "mapbox",
+            "label": "Directions · fallback",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "point": [
+            450,
+            468
+          ],
+          "sharedNode": "mapbox"
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "backend-mapbox",
+            "from": "backend",
+            "to": "mapbox",
+            "label": "geocodificación",
+            "collectionIndex": 9,
+            "artifactIndex": 10
+          },
+          "bends": 4,
+          "stretch": 1.189
+        },
+        {
+          "relationship": {
+            "id": "geo-mapbox",
+            "from": "geo_worker",
+            "to": "mapbox",
+            "label": "Directions · fallback",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "bends": 4,
+          "stretch": 1.277
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "portales → api_gateway crosses backend → mapbox: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "backend → mapbox and geo_worker → mapbox cross next to mapbox: move node backend or geo_worker so the two reach mapbox from different sides (for example one level with it, one directly above or below it).",
+      "backend → mapbox needs 4 bends: move node backend or mapbox so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "geo_worker → mapbox needs 4 bends: move node geo_worker or mapbox so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

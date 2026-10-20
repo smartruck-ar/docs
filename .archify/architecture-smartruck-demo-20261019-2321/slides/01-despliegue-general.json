@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Smartruck · vista de despliegue",
+    "locale": "es",
+    "output": ".archify/architecture-smartruck-demo-20261019-2321/preview/01-despliegue-general.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/smartruck-ar/docs.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "4e4dc7bf4afa7eecd4bb4244e1d3785eb0841776"
+    }
+  },
+  "components": [
+    {
+      "id": "users",
+      "type": "external",
+      "label": "Usuarios",
+      "sublabel": "dadores · transportistas · admins",
+      "pos": [
+        35,
+        225
+      ],
+      "size": [
+        160,
+        96
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 13,
+          "end_line": 17,
+          "label": "roles"
+        }
+      ],
+      "icon": "person"
+    },
+    {
+      "id": "portals",
+      "type": "frontend",
+      "label": "Portales web",
+      "sublabel": "Dador · Transportista · Backoffice · Landing",
+      "pos": [
+        300,
+        225
+      ],
+      "size": [
+        230,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 21,
+          "end_line": 28,
+          "label": "portales"
+        }
+      ],
+      "tag": "Render",
+      "brand": "render"
+    },
+    {
+      "id": "gateway",
+      "type": "cloud",
+      "label": "API Gateway",
+      "sublabel": "entrada HTTPS pública",
+      "pos": [
+        640,
+        225
+      ],
+      "size": [
+        220,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 38,
+          "end_line": 38,
+          "label": "entrada"
+        }
+      ],
+      "brand": "google-cloud"
+    },
+    {
+      "id": "backend",
+      "type": "backend",
+      "label": "smartruck-backend",
+      "sublabel": "API · reglas de negocio",
+      "pos": [
+        980,
+        225
+      ],
+      "size": [
+        240,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 42,
+          "end_line": 51,
+          "label": "núcleo"
+        }
+      ],
+      "tag": "Cloud Run privado"
+    },
+    {
+      "id": "geo",
+      "type": "cloud",
+      "label": "microservice-routes",
+      "sublabel": "rutas · localidades",
+      "pos": [
+        640,
+        435
+      ],
+      "size": [
+        230,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 33,
+          "end_line": 37,
+          "label": "servicio geográfico"
+        }
+      ],
+      "tag": "Cloudflare Worker",
+      "brand": "cloudflare"
+    },
+    {
+      "id": "data",
+      "type": "database",
+      "label": "Supabase",
+      "sublabel": "Auth · PostgreSQL · Storage",
+      "pos": [
+        980,
+        435
+      ],
+      "size": [
+        230,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 55,
+          "end_line": 57,
+          "label": "datos y archivos"
+        }
+      ],
+      "brand": "supabase"
+    },
+    {
+      "id": "payments",
+      "type": "external",
+      "label": "MercadoPago",
+      "sublabel": "Checkout Pro · webhooks",
+      "pos": [
+        1320,
+        225
+      ],
+      "size": [
+        220,
+        100
+      ],
+      "sources": [
+        {
+          "path": "src/arquitectura.md",
+          "line": 58,
+          "end_line": 58,
+          "label": "proveedor"
+        },
+        {
+          "path": "src/arquitectura.md",
+          "line": 110,
+          "end_line": 117,
+          "label": "pagos"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "users-portals",
+      "from": "users",
+      "to": "portals",
+      "label": "usa",
+      "variant": "emphasis"
+    },
+    {
+      "id": "portals-gateway",
+      "from": "portals",
+      "to": "gateway",
+      "label": "HTTPS · JWT",
+      "variant": "security"
+    },
+    {
+      "id": "gateway-backend",
+      "from": "gateway",
+      "to": "backend",
+      "label": "run.invoker",
+      "variant": "emphasis"
+    },
+    {
+      "id": "backend-geo",
+      "from": "backend",
+      "to": "geo",
+      "label": "cotización",
+      "variant": "default",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "backend-data",
+      "from": "backend",
+      "to": "data",
+      "label": "datos · archivos",
+      "variant": "default",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "geo-data",
+      "from": "geo",
+      "to": "data",
+      "label": "schema geo",
+      "variant": "default"
+    },
+    {
+      "id": "backend-payments",
+      "from": "backend",
+      "to": "payments",
+      "label": "pagos",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Cuatro entornos de ejecución",
+      "items": [
+        "Portales en Render",
+        "API Gateway y backend privado en Google Cloud",
+        "Worker geográfico en Cloudflare"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Servicios conectados",
+      "items": [
+        "Supabase para identidad, datos y archivos",
+        "MercadoPago para Checkout Pro y notificaciones de pago"
+      ]
+    }
+  ]
+}

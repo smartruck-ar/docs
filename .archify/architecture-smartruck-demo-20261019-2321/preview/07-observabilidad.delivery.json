@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "e856caea-fe15-4ed6-8a3c-7e56578d7c01",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\slides\\07-observabilidad.json",
+  "output": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\preview\\07-observabilidad.html",
+  "specification": {
+    "sha256": "0d5dca97d0590083e22caa06ed8945b25b6a68e96ea52b64c2d3138b257989b2",
+    "bytes": 4319
+  },
+  "artifact": {
+    "sha256": "3a7a29ee2dad1c19cc19c3687cd4e3528340093410f56a1ac65e80a2c5d406f8",
+    "bytes": 823907
+  }
+}
