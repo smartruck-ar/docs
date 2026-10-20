@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "receiptId": "110f4f90-738a-4a5d-a994-d1a37248d8bc",
+  "receiptId": "ecfac769-7889-49f9-80ca-9789aba8b71f",
   "status": "current",
   "command": "deliver",
   "type": "architecture",
   "input": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\.archify\\architecture-smartruck-demo-20261019-2321\\overview.json",
   "output": "C:\\Users\\Martín Reimundo\\Desktop\\martin\\faq\\TPP\\docs\\src\\arquitectura\\diagrams\\smartruck-architecture.html",
   "specification": {
-    "sha256": "10d169af3c7e8a60f4c09299546f3942982455f7436575b366cea953b647a75e",
-    "bytes": 8306
+    "sha256": "98d6320d61ec639cce0bf1d37fd47dc1ed945215ef69afce23d02bc795e9dc4f",
+    "bytes": 7406
   },
   "artifact": {
-    "sha256": "60bc93ea70f326b4ad60bad0b46fb38fe711b07f5d95abf50266edca5f0c9c3c",
-    "bytes": 845892
+    "sha256": "926dfbd467bef645d3e5c6cbf65e05074103637d33831d7b57508d8bd2948c86",
+    "bytes": 840023
   }
 }

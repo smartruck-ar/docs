@@ -33,10 +33,10 @@ Términos del proceso y del dominio.
 | Transportista | Opera / cotiza / gestiona el transporte |
 | Provincia | División administrativa de Argentina a la que pertenece una localidad |
 | Localidad (`Locality`) | La ciudad: un lugar con coordenadas que pertenece a una provincia. Es el origen y el destino de una ruta. "Ciudad" es su nombre coloquial |
-| Catálogo de localidades | Las localidades que el geo-service conoce hoy (las 150 ciudades de las rutas precargadas). Una localidad fuera del catálogo es "no soportada" |
-| Geo-service (servicio geográfico) | `microservice-routes`: dueño de provincias, localidades, direcciones, geocodificación y rutas. Ver [ADR 0001](../adr/0001-geo-service-dueno-de-la-geografia.md) |
+| Catálogo de localidades | Las localidades que Geoservice conoce hoy (las 150 ciudades de las rutas precargadas). Una localidad fuera del catálogo es "no soportada" |
+| Geoservice | Componente Cloudflare Worker dueño de provincias, localidades, direcciones, geocodificación y rutas. |
 | Ruta | Camino vial entre dos localidades (distancia, duración y geometría); se identifica por el par de ids de localidad, sin importar el sentido |
-| Estimación | Distancia en línea recta por un factor vial configurable; el geo-service la marca `is_estimation` y nunca la guarda |
+| Estimación | Distancia en línea recta por un factor vial configurable; Geoservice la marca `is_estimation` y nunca la guarda |
 | Oferta de carga | *(completar con el lenguaje de dominio del equipo)* |
 | | |
 
