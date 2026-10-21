@@ -1239,6 +1239,13 @@ Cada historia del sprint tiene responsable y repo</li>
 <tr><td>Ruta</td><td>Camino vial entre dos localidades (distancia, duración y geometría); se identifica por el par de ids de localidad, sin importar el sentido</td></tr>
 <tr><td>Estimación</td><td>Distancia en línea recta por un factor vial configurable; Geoservice la marca <code>is_estimation</code> y nunca la guarda</td></tr>
 <tr><td>Oferta de carga</td><td><em>(completar con el lenguaje de dominio del equipo)</em></td></tr>
+<tr><td>Viaje solicitado</td><td>El viaje que el transportista pide recomendar: una localidad de origen y una de destino (Buenos Aires → Córdoba)</td></tr>
+<tr><td>Tramo vacío de inicio</td><td>Lo que el camión recorre sin carga desde el origen del viaje solicitado hasta el origen de la carga</td></tr>
+<tr><td>Tramo cargado</td><td>Lo que el camión recorre con la carga, desde su origen hasta su destino</td></tr>
+<tr><td>Tramo vacío de fin</td><td>Lo que el camión recorre sin carga desde el destino de la carga hasta el destino del viaje solicitado</td></tr>
+<tr><td>Desvío neto</td><td>Los km de más por tomar la carga: tramo vacío de inicio + tramo cargado + tramo vacío de fin − viaje solicitado; nunca es negativo</td></tr>
+<tr><td>Ajuste al viaje</td><td>Qué tanto el recorrido total de tomar la carga se parece al viaje solicitado; baja con el desvío neto</td></tr>
+<tr><td>Puntaje</td><td>Qué tan conveniente es una carga para el viaje solicitado, de 0 a 100. Combina el ajuste al viaje y cuánto paga la carga por km recorrido, tramos vacíos incluidos. 100 es una carga que no desvía y paga por km lo mejor de las recomendadas</td></tr>
 <tr><td></td><td></td></tr>
 </tbody></table>
 </div>
