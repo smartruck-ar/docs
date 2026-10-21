@@ -2,7 +2,7 @@
 
 Lista de lo que quedó por hacer, probar o decidir mientras se entregaban las historias de routes (R.1.x). Se actualiza a medida que se cierran cosas. Quién: **vos** (necesita credenciales, acceso o una decisión), **equipo** (otra persona), **pendiente de hacer** (código o tickets que se pueden retomar).
 
-Última actualización: 2026-10-21.
+Última actualización: 2026-10-21 (decisión de direcciones).
 
 ## 1. Pruebas manuales pendientes
 
@@ -44,7 +44,10 @@ La regla de rate limiting (`20 req / 10 s` por IP) alcanza también al backend, 
 | Retirar la consulta por nombre del servicio de rutas | #183 | Bloqueada por lo anterior |
 | Etapa 2 del backend: retirar la copia del motor de rutas y los endpoints de localidades | #145, #163, #170 (RUT 22), #184 | Retomar cuando los frontends dejen de usar `locations` y `/routes` |
 | Retirar la tabla `locations` y leer las localidades del servicio geográfico | #184 | Pendiente; toca la búsqueda de cargas |
-| Búsqueda de direcciones y dirección sugerida del pin en el servicio de rutas | #172, #175 | Depende de confirmar Georef (#166) |
+| Direcciones exactas: **quedan en el backend** (decidido 2026-10-21, ver `decision-proveedor-direcciones.md`); coordenada ↔ localidad queda en el servicio de rutas. #172 y #175 ya no aplican en su forma original | #172, #175, #166 | Cerrar o redefinir #172 y #175 (decisión tuya) |
+| Mapbox permanente o cambio de proveedor para poder guardar la dirección, y quitar el respaldo de Nominatim público si se decide «siempre Mapbox» | #166 | vos o el equipo (tarjeta y token) |
+| Revisar el token de Mapbox del backend en test y prod (en test las búsquedas parecen resolverse con Nominatim) | #166 | vos |
+| Acotar las direcciones sugeridas a la localidad elegida (hoy traen calles de ciudades vecinas) | #166 | Pendiente de hacer, en el backend |
 | Autorización por llamante en el servicio de rutas (usuario o cuenta de servicio) | #187 | Refinar qué endpoints son solo para servicios |
 | Resiliencia del servicio de rutas (copia en el borde ante falla de la base, JWKS con vigencia larga) | ADR 0003 | **Falta crear la historia**; #171 queda como entregada y #174 sin efecto |
 | Cerrar o comentar #174 (sin efecto por el ADR 0003) y #186 (superada por #184 y el recomendador) | #174, #186 | Pendiente de decidir |
