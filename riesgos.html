@@ -1,0 +1,519 @@
+<!DOCTYPE HTML>
+<html lang="es" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Riesgos - Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="riesgos.html" class="active"><strong aria-hidden="true">4.</strong> Riesgos</a></li><li class="chapter-item expanded "><a href="requerimientos.html"><strong aria-hidden="true">5.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="desarrollo.html"><strong aria-hidden="true">6.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="manual_usuario.html"><strong aria-hidden="true">7.</strong> Manual de usuario</a></li><li class="chapter-item expanded affix "><li class="part-title">Wiki del equipo</li><li class="chapter-item expanded "><a href="wiki/index.html"><strong aria-hidden="true">8.</strong> Wiki</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wiki/proceso/jerarquia.html"><strong aria-hidden="true">8.1.</strong> Jerarquía</a></li><li class="chapter-item expanded "><a href="wiki/proceso/definition-of-ready.html"><strong aria-hidden="true">8.2.</strong> Definition of Ready</a></li><li class="chapter-item expanded "><a href="wiki/proceso/definition-of-done.html"><strong aria-hidden="true">8.3.</strong> Definition of Done</a></li><li class="chapter-item expanded "><a href="wiki/proceso/workflow-entrega.html"><strong aria-hidden="true">8.4.</strong> Workflow de entrega</a></li><li class="chapter-item expanded "><a href="wiki/proceso/desarrollo-con-agentes.html"><strong aria-hidden="true">8.5.</strong> Desarrollo con agentes</a></li><li class="chapter-item expanded "><a href="wiki/proceso/conventional-commits.html"><strong aria-hidden="true">8.6.</strong> Conventional Commits</a></li><li class="chapter-item expanded "><a href="wiki/proceso/logging.html"><strong aria-hidden="true">8.7.</strong> Logging (hexagonal)</a></li><li class="chapter-item expanded "><a href="wiki/proceso/gherkin.html"><strong aria-hidden="true">8.8.</strong> Gherkin (BDD)</a></li><li class="chapter-item expanded "><a href="wiki/tickets/plantilla-ticket.html"><strong aria-hidden="true">8.9.</strong> Plantilla de ticket</a></li><li class="chapter-item expanded "><a href="wiki/tickets/tipos-de-ticket.html"><strong aria-hidden="true">8.10.</strong> Tipos de ticket</a></li><li class="chapter-item expanded "><a href="wiki/tickets/estimacion.html"><strong aria-hidden="true">8.11.</strong> Estimación</a></li><li class="chapter-item expanded "><a href="wiki/tickets/automatizacion-historias.html"><strong aria-hidden="true">8.12.</strong> Automatización de historias (roadmap)</a></li><li class="chapter-item expanded "><a href="wiki/equipo/roles.html"><strong aria-hidden="true">8.13.</strong> Roles</a></li><li class="chapter-item expanded "><a href="wiki/equipo/glosario.html"><strong aria-hidden="true">8.14.</strong> Glosario</a></li><li class="chapter-item expanded "><a href="wiki/ui/restyling.html"><strong aria-hidden="true">8.15.</strong> Restyling de UI</a></li><li class="chapter-item expanded "><a href="wiki/ui/restyling-dador-handoff.html"><strong aria-hidden="true">8.16.</strong> Handoff restyling del dador (D.X.2/D.X.3 + backend)</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Repositories</li><li class="chapter-item expanded "><a href="repositories/index.html"><strong aria-hidden="true">9.</strong> Repositories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-backend/index.html"><strong aria-hidden="true">9.1.</strong> smartruck-backend</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-backend/arquitectura.html"><strong aria-hidden="true">9.1.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backend/links.html"><strong aria-hidden="true">9.1.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/index.html"><strong aria-hidden="true">9.2.</strong> smartruck-dador</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-dador/arquitectura.html"><strong aria-hidden="true">9.2.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/links.html"><strong aria-hidden="true">9.2.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/index.html"><strong aria-hidden="true">9.3.</strong> smartruck-transportista</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/arquitectura.html"><strong aria-hidden="true">9.3.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/links.html"><strong aria-hidden="true">9.3.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/smartruck-audit/index.html"><strong aria-hidden="true">9.4.</strong> smartruck-audit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-audit/arquitectura.html"><strong aria-hidden="true">9.4.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-audit/links.html"><strong aria-hidden="true">9.4.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/cloud-template/index.html"><strong aria-hidden="true">9.5.</strong> cloud-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/cloud-template/arquitectura.html"><strong aria-hidden="true">9.5.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/cloud-template/links.html"><strong aria-hidden="true">9.5.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/infra-template/index.html"><strong aria-hidden="true">9.6.</strong> infra-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/infra-template/arquitectura.html"><strong aria-hidden="true">9.6.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/infra-template/links.html"><strong aria-hidden="true">9.6.2.</strong> Links</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="riesgos-del-proyecto-smartruck"><a class="header" href="#riesgos-del-proyecto-smartruck">Riesgos del proyecto Smartruck</a></h1>
+<h2 id="criterio-de-inclusión"><a class="header" href="#criterio-de-inclusión">Criterio de inclusión</a></h2>
+<p>Un ítem entra en la Tabla A solo si cumple las dos condiciones:</p>
+<ol>
+<li>Puede producir un resultado negativo <strong>de negocio o de operación</strong> (plata, carga, reputación, cobertura, confianza, disponibilidad, datos).</li>
+<li><strong>No está ya decidido y planificado</strong> en un ADR o en el backlog. Si hay una decisión tomada, el ítem va a la Tabla B.</li>
+</ol>
+<p>Un bug que no cambia el resultado comercial se trata como incidencia y no entra.</p>
+<h3 id="escalas"><a class="header" href="#escalas">Escalas</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Dimensión</th><th>Valores</th><th>Criterio</th></tr></thead><tbody>
+<tr><td>Probabilidad</td><td>Alta</td><td>La condición que lo dispara ya existe en el sistema o es el estado por defecto.</td></tr>
+<tr><td></td><td>Media</td><td>Requiere un disparador concreto (concurrencia, un tercero, una falla de proveedor, un deploy).</td></tr>
+<tr><td></td><td>Baja</td><td>Requiere una cadena de eventos poco habitual.</td></tr>
+<tr><td>Impacto</td><td>Crítico</td><td>Se pierde el modelo de negocio: la carga no se vende, la plata se quema o la confianza se rompe de forma estructural.</td></tr>
+<tr><td></td><td>Alto</td><td>Pérdida material acotada (un viaje, un transportista, un corredor) o daño reputacional sensible.</td></tr>
+<tr><td></td><td>Medio-Alto</td><td>Molestia operativa con costo o imagen reputacional menor.</td></tr>
+<tr><td></td><td>Medio</td><td>Pérdida de eficiencia o fricción, sin efecto directo sobre la transacción.</td></tr>
+</tbody></table>
+</div>
+<h3 id="semáforo"><a class="header" href="#semáforo">Semáforo</a></h3>
+<p>Se conserva el criterio de la propuesta original:</p>
+<ul>
+<li>🔴 <strong>Rojo</strong>: alta probabilidad con impacto crítico o alto, o probabilidad media con impacto crítico.</li>
+<li>🟡 <strong>Amarillo</strong>: probabilidad media con impacto alto o medio-alto, o probabilidad alta con impacto medio, o probabilidad baja con impacto crítico.</li>
+<li>🟢 <strong>Verde</strong>: combinaciones menores.</li>
+</ul>
+<hr />
+<h2 id="estado-de-los-riesgos-de-la-propuesta-original"><a class="header" href="#estado-de-los-riesgos-de-la-propuesta-original">Estado de los riesgos de la propuesta original</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Riesgo (propuesta)</th><th>Mitigación prevista</th><th>Estado en el sistema implementado</th></tr></thead><tbody>
+<tr><td>Condición de carrera en el Unlock</td><td>Locking optimista</td><td><strong>Mitigada por diseño de estado, no por locking.</strong> Cuando un transportista bloquea, la carga pasa a <code>bloqueada</code> y deja de aparecer en la búsqueda, así que no hay dos transportistas compitiendo por la misma carga. Queda un residuo: el bloqueo no tiene vencimiento y no valida el estado previo (R-11).</td></tr>
+<tr><td>Tercerización ("puenteo")</td><td>Transparencia y baja recurrencia del recorrido</td><td><strong>Vigente, y es de negocio.</strong> La mitigación era técnica; el problema real es que no hay garantía, ni seguro por viaje, ni salida del pago (R-16).</td></tr>
+<tr><td>Saturación por consultas geoespaciales</td><td>Índices espaciales</td><td><strong>Resuelta por decisión de arquitectura.</strong> El ADR-001 (decisión D4) define el matching con PostGIS dentro del backend para el MVP, con vista <code>matching_loads</code> e índices GiST. Es trabajo planificado (Tabla B), no riesgo.</td></tr>
+<tr><td>Inconsistencia en webhooks de pago</td><td>Claves de idempotencia</td><td><strong>Reformulada.</strong> La firma del webhook se valida correctamente; el problema real es que no hay reconciliación del lado del servidor y el estado interno puede divergir del de MercadoPago (R-08).</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="riesgos-de-negocio-y-técnicos"><a class="header" href="#riesgos-de-negocio-y-técnicos">Riesgos de negocio y técnicos</a></h2>
+<p>Ordenados por severidad, de más grave a menos grave.</p>
+<h3 id="-r-16--no-hay-garantía-ni-seguro-de-carga-el-puenteo-es-el-camino-por-defecto"><a class="header" href="#-r-16--no-hay-garantía-ni-seguro-de-carga-el-puenteo-es-el-camino-por-defecto">🔴 R-16 — No hay garantía ni seguro de carga: el puenteo es el camino por defecto</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Alta · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: la propuesta justificaba el modelo "la plataforma no intermedia en el flete" con un blindaje de pólizas de seguro por viaje. En el sistema implementado no hay emisión de póliza ni servicio de seguro: lo único relacionado es un tipo de documento que el usuario puede subir (<code>INSURANCE_POLICY</code>, <code>smartruck-backend/src/domain/models/document.py:9</code>). Tampoco hay escrow, ni prueba de entrega por viaje, ni garantía de pago del flete.</p>
+<p><strong>Qué pasa en el negocio</strong>: la razón por la que un transportista dejaría de usar un grupo de WhatsApp —que la transacción tenga respaldo— no existe. El unlock fee es un costo puro frente a un WhatsApp gratuito. Salvo que la reputación dentro de la plataforma tenga valor real, el camino racional es cerrar el trato fuera y volver al grupo: <strong>el riesgo de tercerización no se mitigó, se volvió el comportamiento por defecto</strong>. Lo único que empuja a quedarse es la reputación, y esa reputación depende de viajes que el producto no puede garantizar (R-15).</p>
+<p><strong>Mitigación</strong>: sostener la promesa con lo que sí se controla —verificación obligatoria de ambos lados, historial visible con reseñas atadas a evidencia— y dejar la póliza por viaje como objetivo de mediano plazo, financiada con parte del fee.</p>
+<h3 id="-r-11--el-bloqueo-de-oferta-no-tiene-vencimiento-ni-valida-el-estado-previo"><a class="header" href="#-r-11--el-bloqueo-de-oferta-no-tiene-vencimiento-ni-valida-el-estado-previo">🔴 R-11 — El bloqueo de oferta no tiene vencimiento ni valida el estado previo</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Alta · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: <code>LockLoadUseCase.lock</code> no mira el estado actual de la carga: la marca <code>bloqueada</code> y le asigna el transportista que viene en la URL (<code>smartruck-backend/src/application/use_cases/loads/lock_load_use_case.py:25</code>). No hay TTL ni marca de tiempo. La liberación depende de que el cliente llame explícitamente a <code>abort-lock</code>, algo que solo ocurre si el transportista cierra el drawer (<code>smartruck-transportista/src/views/loads/load-drawer.tsx:155</code>). Mientras la carga está <code>bloqueada</code> no aparece en la búsqueda (<code>smartruck-backend/src/application/use_cases/loads/search_loads_use_case.py:109</code>).</p>
+<p><strong>Qué pasa en el negocio</strong>: el bloqueo sí evita la carrera (la carga desaparece del tablero), pero deja dos problemas. Primero: un transportista que abre el checkout y cierra la pestaña deja la oferta <strong>fuera del mercado de forma permanente</strong>. Segundo: como el bloqueo no valida el estado, un transportista puede bloquear una carga que ya estaba reservada y pagada por otro, pisando la reserva y el pago acreditado. En un tablero con volumen bajo, cada oferta muerta es una venta perdida y una excusa para volver al canal informal.</p>
+<p><strong>Mitigación</strong>: TTL de bloqueo con liberación automática (por ejemplo 15 minutos, alineado con la expiración de la preferencia de MercadoPago, que ya existe: <code>smartruck-backend/src/infrastructure/outbound/gateways/mercadopago_payment_gateway.py:66</code>); validar la transición <code>activa</code> → <code>bloqueada</code> antes de bloquear.</p>
+<h3 id="-r-13--una-carga-reservada-no-se-puede-cancelar-el-viaje-que-no-ocurre-deja-todo-bloqueado"><a class="header" href="#-r-13--una-carga-reservada-no-se-puede-cancelar-el-viaje-que-no-ocurre-deja-todo-bloqueado">🔴 R-13 — Una carga reservada no se puede cancelar: el viaje que no ocurre deja todo bloqueado</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: el estado de la carga no tiene <code>cancelada</code> ni <code>rechazada</code> (<code>smartruck-backend/src/domain/load_status.py:4</code>). El dador solo puede pasar <code>entregada</code> → <code>entrega_confirmada</code> (<code>smartruck-backend/src/application/use_cases/manage_load_by_offerer_use_case.py:44</code>), y el transportista solo puede mover la carga a <code>en_camino</code>, <code>demorada</code> o <code>entregada</code> (<code>smartruck-backend/src/application/use_cases/manage_load_by_transporter_use_case.py:58</code>). El camión queda <code>ocupado</code> hasta que la carga llega a <code>entregada</code> (<code>smartruck-backend/src/application/use_cases/loads/assign_truck_to_load_use_case.py:29</code> y <code>manage_load_by_transporter_use_case.py:98</code>).</p>
+<p><strong>Qué pasa en el negocio</strong>: si el viaje se cae (el dador no aparece, la mercadería no está, el transportista se arrepiente), <strong>no existe ninguna salida</strong>. El transportista queda con el camión bloqueado, una carga reservada que no puede iniciar y el unlock fee pagado. El dador tampoco puede liberar la oferta. Ambos quedan atrapados en un error que el producto no sabe resolver y que se resuelve por teléfono: es el peor momento posible para la reputación.</p>
+<p><strong>Mitigación</strong>: agregar el estado <code>cancelada</code> con actor y motivo; liberar camión y semirremolque automáticamente; definir la regla de devolución del fee según quién cancela y en qué momento.</p>
+<h3 id="-r-07--el-unlock-fee-no-se-devuelve-y-no-hay-mecanismo-de-disputa"><a class="header" href="#-r-07--el-unlock-fee-no-se-devuelve-y-no-hay-mecanismo-de-disputa">🔴 R-07 — El unlock fee no se devuelve y no hay mecanismo de disputa</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: no existe refund, ni chargeback, ni estado de disputa en el backend (búsqueda de <code>refund</code>, <code>reembolso</code>, <code>chargeback</code> y <code>disputa</code> en <code>smartruck-backend/src</code>: sin resultados). La propuesta sí lo prometía: "si alguna de las dos partes decide retirarse o cancelar por distintos motivos, el dinero será devuelto".</p>
+<p><strong>Qué pasa en el negocio</strong>: el unlock fee es un pago sin cobertura. Si el transportista paga y el dador no aparece, la plata se pierde. Si el transportista paga y después se arrepiente, la plata se pierde. Cada caso se convierte en un reclamo que la plataforma no tiene cómo contestar, y un reclamo sin respuesta es una razón excelente para volver al canal informal. El fee deja de ser "el precio de acceder a la oportunidad" y pasa a ser "el peaje que se paga por el riesgo".</p>
+<p><strong>Mitigación</strong>: definir y construir la política de devolución (plazo, responsable, casos); devolver el fee cuando la carga se cancela por responsabilidad del dador; registrar los pagos aprobados sin carga reservada para poder compensarlos.</p>
+<h3 id="-r-08--el-estado-interno-del-pago-puede-divergir-del-de-mercadopago"><a class="header" href="#-r-08--el-estado-interno-del-pago-puede-divergir-del-de-mercadopago">🔴 R-08 — El estado interno del pago puede divergir del de MercadoPago</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: la firma del webhook se valida bien (<code>smartruck-backend/src/infrastructure/inbound/http_controllers/payments_controller.py:141</code>) y el unlock revalida contra MercadoPago antes de reservar (<code>smartruck-backend/src/application/use_cases/loads/unlock_load_use_case.py:46</code>). Lo que falta es la reconciliación: no hay ningún barrido del lado del servidor que compare los pagos locales con los del proveedor. La única reparación automática es el webhook, y la única reparación manual es que el transportista siga con la app abierta y llame a <code>POST /payments/{id}/sync</code> (<code>payments_controller.py:203</code>). Además, <code>ProcessPaymentNotificationUseCase.process</code> sobrescribe el estado local con el que informe el proveedor en ese momento, sin impedir una regresión (<code>smartruck-backend/src/application/use_cases/payments/process_payment_notification_use_case.py:19</code>), y la preferencia declara una <code>back_urls.pending</code> (<code>mercadopago_payment_gateway.py:55</code>), o sea que hay métodos de pago cuyo ciclo no llega a <code>approved</code> de inmediato.</p>
+<p><strong>Qué pasa en el negocio</strong>: si el webhook se pierde, el transportista ya pagó pero el sistema sigue viendo el pago como <code>PENDING</code>: la carga queda <code>bloqueada</code> (R-11) y la oferta muere. Nadie se entera hasta que alguien reclama. Con un pago en estado <code>pending</code> (por ejemplo, una transferencia), el desbloqueo se rechaza hasta que el proveedor lo aprueba, y si el transportista se va, la plata queda en el limbo del proveedor y la carga bloqueada.</p>
+<p><strong>Mitigación</strong>: barrido de reconciliación periódico que compare pagos locales con MercadoPago y marque los divergentes; no permitir que el estado local retroceda (ignorar notificaciones tardías); manejar explícitamente el estado <code>pending</code> con una espera visible para el usuario en lugar de un rechazo.</p>
+<h3 id="-r-12--la-identidad-transaccional-viene-de-la-url-y-las-rutas-críticas-no-validan-al-usuario"><a class="header" href="#-r-12--la-identidad-transaccional-viene-de-la-url-y-las-rutas-críticas-no-validan-al-usuario">🔴 R-12 — La identidad transaccional viene de la URL y las rutas críticas no validan al usuario</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: las rutas de bloqueo, desbloqueo y abort-lock reciben el <code>transporter_id</code> como parámetro de path y no declaran ninguna dependencia de autenticación (<code>smartruck-backend/src/infrastructure/inbound/http_controllers/loads_controller.py:903</code> a <code>:943</code>). El API Gateway es público y sin política de seguridad (<code>smartruck-infra/modules/api_gateway/main.tf</code>, "Punto de entrada público SMARTRUCK"), y tampoco tiene rate limiting (la única regla de WAF vive en la zona de Cloudflare y cubre otro host, ver R-26).</p>
+<p><strong>Qué pasa en el negocio</strong>: un tercero puede bloquear ofertas (denegación de servicio sobre un inventario que es escaso por definición), suplantar a un transportista en un desbloqueo y generar o contestar disputas a nombre de terceros. Con un modelo basado en reputación y cobro, esto no es un detalle de seguridad: es un riesgo de integridad del marketplace. Un solo incidente de suplantación publicado alcanza para romper la confianza de los transportistas legítimos.</p>
+<p><strong>Mitigación</strong>: derivar el actor del token verificado y eliminar el <code>transporter_id</code> del path; exigir sesión en todas las rutas transaccionales; verificar que el actor coincide con el dueño de la oferta bloqueada.</p>
+<h3 id="-r-28--fraude-de-dador-cobrar-el-unlock-fee-y-no-despachar"><a class="header" href="#-r-28--fraude-de-dador-cobrar-el-unlock-fee-y-no-despachar">🔴 R-28 — Fraude de dador: cobrar el unlock fee y no despachar</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: la publicación de cargas no tiene límite por oferente, ni velocity check, ni detección de patrón; el desbloqueo se produce contra un pago aprobado y el contacto se entrega después (<code>smartruck-backend/src/application/use_cases/loads/unlock_load_use_case.py:57</code>). La verificación es de identidad del usuario, no de solvencia ni de existencia de la carga.</p>
+<p><strong>Qué pasa en el negocio</strong>: el modelo: cobrar antes de que exista el flete es exactamente el incentivo del atacante. Un dador falso publica una carga atractiva, cobra el unlock fee a varios transportistas, entrega datos de contacto que no atienden y desaparece. El transportista pierde la plata; el daño se propaga como "...esa plataforma te hace perder plata". Con pocos usuarios, un solo caso de este tipo quema la confianza del lado de la oferta, que es el más difícil de recuperar. La probabilidad crece con el volumen: el fraude es más rentable cuando hay más transportistas mirando el tablero.</p>
+<p><strong>Mitigación</strong>: límites de publicaciones y de desbloqueos por oferente con alerta; encuesta de satisfacción post-viaje que detecte cargas fantasma; verificación reforzada para dadores nuevos o sin historial; registro auditado de los documentos y del contacto entregado.</p>
+<h3 id="-r-29--cobro-sin-control-previo-doble-preferencia-o-pago-de-una-oferta-ajena"><a class="header" href="#-r-29--cobro-sin-control-previo-doble-preferencia-o-pago-de-una-oferta-ajena">🔴 R-29 — Cobro sin control previo: doble preferencia o pago de una oferta ajena</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: <code>CreatePaymentUseCase.create</code> no valida ni el estado de la carga ni quién la bloqueó: crea un <code>Payment</code> nuevo con un <code>uuid4</code> por llamada y abre una preferencia de MercadoPago (<code>smartruck-backend/src/application/use_cases/payments/create_payment_use_case.py:23</code>). La ruta <code>POST /payments</code> no declara dependencia de autenticación (<code>payments_controller.py:173</code>).</p>
+<p><strong>Qué pasa en el negocio</strong>: un doble clic o un reintento del navegador abre dos preferencias para la misma oferta y el transportista puede pagar dos veces. Peor: se puede pagar una oferta que no está bloqueada por quien paga, o que ya fue reservada por otro. En los dos casos la plata sale y la reserva no llega: la pérdida la asume el transportista.</p>
+<p><strong>Mitigación</strong>: clave de idempotencia por transportista y oferta; validar <code>bloqueada</code> + <code>transporter_id</code> antes de crear la preferencia; rechazar la creación si ya hay un pago aprobado para esa oferta.</p>
+<h3 id="-r-17--la-verificación-manual-es-el-cuello-de-botella-del-ingreso-y-depende-de-una-sola-persona"><a class="header" href="#-r-17--la-verificación-manual-es-el-cuello-de-botella-del-ingreso-y-depende-de-una-sola-persona">🔴 R-17 — La verificación manual es el cuello de botella del ingreso y depende de una sola persona</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Alta · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: toda operación del negocio exige perfil <code>VERIFIED</code>: <code>require_verified_offerer</code> y <code>require_transporter</code> rechazan con 403 a quien no lo esté (<code>smartruck-backend/src/infrastructure/inbound/dependencies/authentication.py:170</code> y <code>:192</code>). El alta nace en <code>PENDING</code> (<code>smartruck-backend/src/application/use_cases/transporters/create_transporter_use_case.py:25</code>) y el único que puede promoverlo es un administrador del backoffice revisando documentos uno por uno (<code>smartruck-backend/src/application/use_cases/admin/verify_user_use_case.py</code>). El rol <code>ADMIN</code> es un atributo del token (<code>authentication.py:144</code>).</p>
+<p><strong>Qué pasa en el negocio</strong>: el tiempo entre el registro y la primera operación no depende del sistema, depende de una agenda humana. En una campaña de lanzamiento con cientos de registros, la verificación se vuelve el cuello de botella de la liquidez: los transportistas se registran, quedan esperando y no pueden trabajar. Y como la aprobación depende de una sola persona con rol <code>ADMIN</code>, hay riesgo de persona clave: si esa persona no está, nadie verifica y nadie entra.</p>
+<p><strong>Mitigación</strong>: revisión por lotes con criterios y plantillas; autoaprobación de CUIT válido contra la fuente fiscal; SLA de verificación publicado; más de un administrador con capacidad de aprobar.</p>
+<h3 id="-r-32--un-flag-de-build-puede-dejar-el-portal-en-modo-demo"><a class="header" href="#-r-32--un-flag-de-build-puede-dejar-el-portal-en-modo-demo">🔴 R-32 — Un flag de build puede dejar el portal en modo demo</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: los tres portales eligen entre adaptadores reales y adaptadores en memoria según <code>VITE_USE_STUB === "true"</code> (<code>smartruck-transportista/src/infrastructure/config/configuration.ts:44</code>, aplicado en nueve repositorios de <code>composition.ts</code>, incluidos documentos y perfil). Ese valor llega como <strong>build argument</strong> desde un secreto de GitHub (<code>smartruck-dador/.github/workflows/pipeline.yml:139</code>: <code>--build-arg "VITE_USE_STUB=${VITE_USE_STUB:-false}"</code>). Como se hornea en la imagen, cambiarlo exige un rebuild.</p>
+<p><strong>Qué pasa en el negocio</strong>: si el valor queda en <code>true</code> al construir producción, la imagen publicada sirve <strong>cargas, ciudades, perfil y pagos falsos</strong>. El transportista entra a un tablero de demostración, y el dador publica contra datos que nadie ve. Es el peor modo de falla posible: la aplicación responde 200, los tests pasan y el pipeline queda en verde. No hay ninguna aserción de arranque que rechace el modo stub en producción.</p>
+<p><strong>Mitigación</strong>: fallar el arranque si <code>useStub</code> es verdadero y el ambiente es <code>production</code>; mover el flag a una variable de ambiente documentada por ambiente en lugar de un secreto; agregarlo a la checklist de despliegue y verificar la imagen publicada antes de promoverla.</p>
+<h3 id="-r-25--los-secretos-del-pipeline-quedan-expuestos-en-los-logs"><a class="header" href="#-r-25--los-secretos-del-pipeline-quedan-expuestos-en-los-logs">🔴 R-25 — Los secretos del pipeline quedan expuestos en los logs</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media-Alta · <strong>Impacto</strong>: Alto · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: el deploy pasa los secretos como argumentos de línea de comandos: <code>gcloud run deploy ... --set-env-vars="^@@^DATABASE_URL=${DATABASE_URL}@@SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}@@MERCADOPAGO_ACCESS_TOKEN=${MERCADOPAGO_ACCESS_TOKEN}@@..."</code> (<code>smartruck-backend/.github/workflows/pipeline.yml:292</code>). Los valores vienen de Infisical (<code>Infisical/secrets-action</code>), no de secretos de GitHub, y por lo tanto <strong>GitHub no los enmascara</strong> en la salida del step.</p>
+<p><strong>Qué pasa en el negocio</strong>: quedan en el log del pipeline el acceso a la base, la service role key de Supabase (que administra usuarios y Storage) y el access token de MercadoPago (que cobra y recibe plata). Cualquiera con acceso al log del workflow —o el propio historial del runner self-hosted— puede tomar el control de la plataforma: cobrar, leer datos personales y acceder a la base. El equipo además rota los secretos con dificultad, porque no sabe cuáles quedaron expuestos.</p>
+<p><strong>Mitigación</strong>: pasar los secretos por archivo o por Secret Manager y referenciarlos desde la configuración, sin interpolarlos en el comando; revisar y rotar las credenciales expuestas; activar el enmascarado de secretos de Infisical en el runner.</p>
+<h3 id="-r-22--el-smoke-test-solo-verifica-la-versión-una-integración-rota-llega-a-producción"><a class="header" href="#-r-22--el-smoke-test-solo-verifica-la-versión-una-integración-rota-llega-a-producción">🔴 R-22 — El smoke test solo verifica la versión: una integración rota llega a producción</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Alto · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: <code>scripts/smoke_test.sh</code> hace un <code>GET /version</code> y espera que el cuerpo contenga la versión del release. No toca la base, ni MercadoPago, ni Storage, ni el geo-service. El pipeline lo corre después de desplegar (y también antes, esperando la versión) y da por bueno el ambiente si esa respuesta llega (<code>smartruck-backend/.github/workflows/pipeline.yml:295</code>).</p>
+<p><strong>Qué pasa en el negocio</strong>: un release sin <code>SUPABASE_SERVICE_ROLE_KEY</code>, con un token de MercadoPago vencido, con el bucket <code>documents</code> inexistente o con el geo-service caído pasa el pipeline en verde y llega a producción. El defecto se descubre cuando un transportista intenta desbloquear y recibe un 500: es el usuario el detector de regresiones. Ya ocurrió: hubo que propagar <code>SUPABASE_SERVICE_ROLE_KEY</code> a los comandos de deploy porque el <code>gcloud deploy</code> no lo incluía.</p>
+<p><strong>Mitigación</strong>: extender el smoke test a un chequeo de dependencias reales (crear una preferencia de pago de prueba contra MercadoPago, firmar una URL de Storage, pedir una ruta al geo-service); correr los tests de aceptación contra el ambiente desplegado, no solo contra el código.</p>
+<h3 id="-r-23--las-migraciones-se-aplican-contra-producción-antes-de-desplegar-y-no-hay-reversión"><a class="header" href="#-r-23--las-migraciones-se-aplican-contra-producción-antes-de-desplegar-y-no-hay-reversión">🔴 R-23 — Las migraciones se aplican contra producción antes de desplegar, y no hay reversión</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Alto · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: el job de producción aplica las migraciones de Alembic contra la base de Supabase de prod y recién después despliega la imagen nueva (<code>smartruck-backend/.github/workflows/pipeline.yml:266</code> a <code>:294</code>). Mientras la migración corre, la revisión anterior del servicio sigue atendiendo tráfico. No hay snapshot previo de la base ni migraciones de bajada.</p>
+<p><strong>Qué pasa en el negocio</strong>: si una migración no es retrocompatible con la versión que está sirviendo (por ejemplo, renombra una columna o cambia un tipo), el servicio en vivo se rompe <strong>antes</strong> de que exista el código que la usa. Con el backend caído, no hay desbloqueos, no hay cotizaciones y no hay búsquedas: la plataforma entera se cae por una migración. Y como no hay reversión, la única salida es un fix forward en caliente.</p>
+<p><strong>Mitigación</strong>: aplicar las migraciones de forma compatible hacia atrás (expand/contract); tomar un snapshot de la base antes de migrar en prod; separar el job de migración del job de deploy y poder correrlos en otro orden; documentar el procedimiento de reversión.</p>
+<h3 id="-r-14--después-del-desbloqueo-la-plataforma-queda-ciega"><a class="header" href="#-r-14--después-del-desbloqueo-la-plataforma-queda-ciega">🔴 R-14 — Después del desbloqueo la plataforma queda ciega</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Alta · <strong>Impacto</strong>: Alto · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: al desbloquear, el sistema marca la carga como <code>reservada</code>, expone los datos de contacto y notifica al dador (<code>smartruck-backend/src/application/use_cases/loads/unlock_load_use_case.py:57</code>). No hay registro de que el flete se pagara, ni comprobante de retiro, ni documento de entrega atado a la carga: los estados los declara cada parte (<code>smartruck-backend/src/application/use_cases/manage_load_by_transporter_use_case.py:86</code>). El tipo de documento <code>WAYBILL</code> existe (<code>smartruck-backend/src/domain/models/document.py:9</code>), pero la tabla <code>documents</code> no tiene <code>load_id</code> (<code>smartruck-backend/src/infrastructure/outbound/persistence/models/document.py:6</code>): el remito existe, pero no está atado a un viaje, así que no sirve como prueba de una carga concreta.</p>
+<p><strong>Qué pasa en el negocio</strong>: el punto exacto donde se mueven la carga y el dinero es el punto donde Smartruck deja de tener visibilidad. Sin trazabilidad no hay base para resolver una disputa, ni para cobrar un seguro, ni para construir un historial confiable, ni para mejorar el matching con datos reales de viajes. La plataforma cobra una tarifa y después no sabe qué pasó.</p>
+<p><strong>Mitigación</strong>: registrar hitos del viaje con autor y timestamp (reserva, retiro, llegada, entrega) y atar el remito a la carga (<code>load_id</code> en <code>documents</code>); generar un comprobante de entrega por la plataforma, que es el insumo de las "pruebas de entrega electrónicas" de la propuesta.</p>
+<h3 id="-r-09--el-ticket-es-chico-frente-a-la-comisión-y-los-costos-fijos-de-la-operación"><a class="header" href="#-r-09--el-ticket-es-chico-frente-a-la-comisión-y-los-costos-fijos-de-la-operación">🔴 R-09 — El ticket es chico frente a la comisión y los costos fijos de la operación</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media-Alta · <strong>Impacto</strong>: Alto · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: el ingreso por desbloqueo es 5 USD + 0,04 USD/km: para un viaje de 500 km, unos 25 USD. La plataforma no cobra comisión sobre el flete (decisión de diseño del modelo). El costo es de estructura fija: cuatro portales en Render, Cloud Run, Datadog, Cloudflare Workers, Mapbox, Supabase y MercadoPago, este último con comisión porcentual más un cargo fijo por ticket.</p>
+<p><strong>Qué pasa en el negocio</strong>: con un ticket de ~25 USD, el cargo fijo de la pasarela se lleva una porción material del ingreso, y el resto tiene que cubrir infraestructura y soporte sin margen de error. El modelo no financia el crecimiento: necesita volumen, el volumen necesita liquidez, y la liquidez necesita al transportista que ya está midiendo su ROI con la calculadora (R-20).</p>
+<p><strong>Mitigación</strong>: modelar el punto de equilibrio con números reales (costo fijo mensual, costo por desbloqueo, comisión efectiva) antes de decidir cualquier inversión; explorar un cobro por publicación de carga (hoy gratuita) como fuente complementaria.</p>
+<h3 id="-r-06--el-precio-mostrado-puede-no-ser-el-cobrado"><a class="header" href="#-r-06--el-precio-mostrado-puede-no-ser-el-cobrado">🔴 R-06 — El precio mostrado puede no ser el cobrado</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Alto · <strong>Semáforo</strong>: 🔴</li>
+</ul>
+<p><strong>Evidencia</strong>: el portal del transportista calcula el fee por su cuenta cuando el backend no responde: <code>(5 + 0.04 × distancia) × 1500</code>, y le suma un 21% de IVA que el backend nunca cobra (<code>smartruck-transportista/src/views/checkout/checkout-flow.tsx:96</code>). El backend calcula el fee sobre la distancia <strong>geodésica</strong> (<code>smartruck-backend/src/domain/unlock_fee.py:19</code>), mientras el frontend usa la distancia <strong>vial</strong> que ve en el mapa.</p>
+<p><strong>Qué pasa en el negocio</strong>: hay dos verdades del precio. El total que se muestra puede no ser el que se cobra, ni en el monto ni en el IVA. Además de la pérdida de plata en el cobro, es un riesgo de precios: el precio publicado tiene que ser el precio cobrado, y la diferencia entre la pantalla y el cobro es un reclamo esperando a ocurrir.</p>
+<p><strong>Mitigación</strong>: una sola fuente de precio (el backend), con el front consumiendo el fee publicado y nunca recalculándolo; desglose explícito de base, kilómetros e IVA; si el backend no responde, mostrar indisponibilidad en lugar de un monto estimado.</p>
+<h3 id="-r-30--el-dador-no-puede-elegir-transportista-gana-el-primero-que-desbloquea"><a class="header" href="#-r-30--el-dador-no-puede-elegir-transportista-gana-el-primero-que-desbloquea">🟡 R-30 — El dador no puede elegir transportista: gana el primero que desbloquea</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Alta · <strong>Impacto</strong>: Medio-Alto · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: el flujo implementado es de un solo ganador: el transportista bloquea, paga y reserva. No hay puja, ni contraoferta, ni ranking de candidatos, ni un endpoint que exponga varios transportistas interesados a un mismo dador. La cotización existente (<code>POST /loads/quote</code>) es el dador calculando el precio de su propia carga, no un transportista ofertando por ella.</p>
+<p><strong>Qué pasa en el negocio</strong>: la propuesta vendía negociación directa entre las partes; el producto implementado es un asignación por orden de llegada. El dador no puede comparar, no puede elegir por flota ni por reputación y no puede rechazar a un transportista que le sirve: queda el único camino, aceptar. Y el transportista compite por velocidad, no por precio ni por calidad. Es una de las razones por las que la plataforma no se vuelve indispensable (R-16).</p>
+<p><strong>Mitigación</strong>: exponer al dador los transportistas interesados (con reputación y flota) antes de que se pague el fee; permitir una contraoferta dentro de la plataforma; registrar la intención del transportista de forma gratuita, separándola del acceso de contacto.</p>
+<h3 id="-r-26--el-rate-limit-de-cloudflare-no-cubre-los-endpoints-que-se-usan"><a class="header" href="#-r-26--el-rate-limit-de-cloudflare-no-cubre-los-endpoints-que-se-usan">🟡 R-26 — El rate limit de Cloudflare no cubre los endpoints que se usan</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Medio-Alto · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: la única regla de WAF matchea <code>starts_with(http.request.uri.path, "/routes")</code> para los hosts <code>api.smartruck.tech</code> y <code>api-test.smartruck.tech</code> (<code>smartruck-infra/modules/cloudflare_waf/main.tf</code>). Pero el geo-service expone y los consumidores llaman <code>/geo/routes</code>, <code>/geo/routes/batch</code> y <code>/geo/localities/*</code> (<code>smartruck-transportista/src/infrastructure/outbound/http/http-axios-route-repository.ts:16</code>, <code>smartruck-backend/src/infrastructure/outbound/http_client/routes_service_distance.py:64</code>). <code>/routes</code> quedó como alias legacy.</p>
+<p><strong>Qué pasa en el negocio</strong>: la protección que se construyó para el servicio de rutas no alcanza a las rutas que realmente se consumen. Un script puede pedir rutas y cotizaciones sin límite y agotar la cuota de Mapbox que la plataforma paga, degradando la cotización y la distancia de todos los usuarios. El mismo razonamiento aplica al API Gateway del backend, que está en otro host y no tiene ninguna regla de rate limiting.</p>
+<p><strong>Mitigación</strong>: corregir la expresión de la regla para cubrir <code>/geo/</code> y <code>/routes</code>; agregar rate limiting en el borde del API Gateway; cachear en el Worker las respuestas de Mapbox para acotar el consumo de cuota.</p>
+<h3 id="-r-27--el-pool-de-conexiones-no-está-dimensionado-frente-a-las-instancias-de-producción"><a class="header" href="#-r-27--el-pool-de-conexiones-no-está-dimensionado-frente-a-las-instancias-de-producción">🟡 R-27 — El pool de conexiones no está dimensionado frente a las instancias de producción</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Medio-Alto · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: el motor se crea sin dimensionar el pool: <code>create_engine(url, pool_pre_ping=True)</code> (<code>smartruck-backend/src/infrastructure/outbound/persistence/engine.py:15</code>), con los valores por defecto de SQLAlchemy (5 conexiones más 10 de overflow por instancia). En producción Cloud Run corre con <code>max_instances = 5</code> (<code>smartruck-infra/environments/prod/variables.tf</code>) y <code>max_instance_request_concurrency = 80</code> (<code>smartruck-infra/modules/cloud_run/main.tf</code>). No se configura <code>pool_size</code>, <code>max_overflow</code> ni <code>pool_recycle</code>, y no hay verificación de que <code>DATABASE_URL</code> apunte al pooler de Supabase y no a la conexión directa.</p>
+<p><strong>Qué pasa en el negocio</strong>: en un pico de tráfico, las cinco instancias pueden abrir hasta 75 conexiones. Si apuntan a la conexión directa de Supabase, se agota el límite de conexiones del proyecto y el backend empieza a responder con errores de conexión: el mismo efecto de una caída, pero causado por el propio crecimiento de uso.</p>
+<p><strong>Mitigación</strong>: dimensionar el pool según el límite real de conexiones (<code>pool_size</code>, <code>max_overflow</code>, <code>pool_recycle</code>); apuntar al pooler en modo transaction; bajar <code>max_instance_request_concurrency</code> o el número de instancias en consecuencia; monitorear el uso de conexiones.</p>
+<h3 id="-r-10--riesgo-fiscal-y-de-exposición-legal-sin-resolver"><a class="header" href="#-r-10--riesgo-fiscal-y-de-exposición-legal-sin-resolver">🟡 R-10 — Riesgo fiscal y de exposición legal sin resolver</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Medio-Alto · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: la plataforma cobra una tarifa por operación y el backend no tiene módulo de facturación electrónica (búsqueda de <code>factur</code>, <code>afip</code> e <code>iva</code> en <code>smartruck-backend/src</code>: sin resultados). Al mismo tiempo, el flete se paga fuera de la plataforma y la plataforma expone los datos de contacto directo tras el desbloqueo.</p>
+<p><strong>Qué pasa en el negocio</strong>: por un lado, cobrar una tarifa electrónica sin respaldo de facturación es una exposición fiscal directa para quien opera el servicio. Por el otro, al aparecer en la cadena de la transacción, la plataforma queda expuesta a reclamos por hechos que no controla (mercadería dañada, flete no pagado) sin un mecanismo formal de resolución. La posición de "no intervenimos en el flete" protege el modelo de negocio, pero no neutraliza la responsabilidad percibida.</p>
+<p><strong>Mitigación</strong>: documentar el rol de la plataforma (proveedor de software, no de transporte) en los términos de uso; emitir factura electrónica por la tarifa cobrada; establecer un canal de soporte y una política de reclamo documentada.</p>
+<h3 id="-r-15--la-reputación-se-puede-negociar-sin-que-exista-viaje"><a class="header" href="#-r-15--la-reputación-se-puede-negociar-sin-que-exista-viaje">🟡 R-15 — La reputación se puede negociar sin que exista viaje</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Medio-Alto · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: una carga se puede calificar cuando está entregada <strong>o cuando su <code>delivery_deadline</code> venció</strong> (<code>smartruck-backend/src/domain/models/load.py:51</code>), y cada actor califica una sola vez por carga (<code>smartruck-backend/src/application/use_cases/ratings/rate_load_use_case.py:63</code>). No hay evidencia ni documento que respalde la calificación: es una declaración de las dos partes.</p>
+<p><strong>Qué pasa en el negocio</strong>: un dador que no recibió la carga puede dejar una calificación negativa una vez vencido el plazo, y el transportista que nunca recogió la carga puede devolverla. Como la reputación es el activo que justifica quedarse en la plataforma (R-16), permitir que se negocie sin evidencia destruye el activo: los actores con mejor historial son exactamente los que más pueden perder por una puntuación injusta.</p>
+<p><strong>Mitigación</strong>: atar la calificación a un hito verificable (entrega confirmada o evidencia adjunta) y no al vencimiento del plazo; habilitar la respuesta pública del calificado; ponderar la puntuación por peso del viaje.</p>
+<h3 id="-r-31--datos-personales-y-documentos-sin-política-de-protección-de-datos"><a class="header" href="#-r-31--datos-personales-y-documentos-sin-política-de-protección-de-datos">🟡 R-31 — Datos personales y documentos sin política de protección de datos</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Medio-Alto · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: la plataforma almacena constancias de CUIT, pólizas de seguro y remitos en un bucket privado de Supabase Storage, con URLs firmadas de 10 minutos (<code>smartruck-backend/src/domain/models/document.py:6</code>, <code>smartruck-backend/src/infrastructure/outbound/gateways/supabase_storage_gateway.py:72</code>), expone datos de contacto de las partes tras el desbloqueo y registra IP y actor en la auditoría de documentos (<code>smartruck-backend/src/infrastructure/outbound/persistence/models/document.py:25</code>). En la documentación y en los tres portales no hay aviso de privacidad, términos y condiciones ni consentimiento (búsqueda de <code>privacidad</code>, <code>términos</code> y <code>consentimiento</code> en <code>docs/</code> y en los portales: sin resultados).</p>
+<p><strong>Qué pasa en el negocio</strong>: se guardan datos personales de terceros sin información al usuario, sin base de consentimiento y sin política de tratamiento, en un contexto que además se expone públicamente. Desde el punto de vista legal, hay exposición a la normativa de protección de datos y a reclamos de los titulares de los documentos. Desde el punto de vista operativo, una filtración de ese bucket expone constancias de CUIT y pólizas de transportistas: un incidente así destruye la confianza en el canal verificado, que es el activo central del producto.</p>
+<p><strong>Mitigación</strong>: aviso de privacidad y términos de uso versionados, con consentimiento explícito en el alta; inventario de datos personales y política de retención; registro de auditoría consultable y alertas sobre accesos anómalos; evaluar la necesidad de cifrar el bucket o delegar la custodia documental.</p>
+<h3 id="-r-21--continuidad-sin-equipo-sin-soporte-y-con-las-cuentas-atadas-a-personas"><a class="header" href="#-r-21--continuidad-sin-equipo-sin-soporte-y-con-las-cuentas-atadas-a-personas">🟡 R-21 — Continuidad: sin equipo, sin soporte y con las cuentas atadas a personas</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Alta · <strong>Impacto</strong>: Medio-Alto · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: el producto y su operación dependen hoy de un equipo de cuatro estudiantes que se gradúa al cierre del cuatrimestre (propuesta, equipo 179). No hay proceso de soporte al usuario, ni guardia, ni SLA, ni plan de continuidad. Las cuentas de terceros que hacen funcionar la plataforma (MercadoPago para cobrar, Cloudflare para el DNS y el geo-service, GCP para el deploy, Supabase para datos y auth, Render para los portales, Datadog para los logs) están a nombre de personas o de cuentas sin institución detrás.</p>
+<p><strong>Qué pasa en el negocio</strong>: sin dueño de la operación, los incidentes se acumulan y cada uno degrada la confianza de un actor que, por definición, tiene alternativa (WhatsApp). Y si la titularidad de las cuentas es personal, no hay continuidad posible: el día que el equipo se disuelve, se pierde el cobro, el DNS o el despliegue, no solo el código. Es el riesgo que convierte todos los demás en irrecuperables.</p>
+<p><strong>Mitigación</strong>: transferir la titularidad de las cuentas a una organización o a los tutores antes del cierre; definir un responsable de operación y un canal de soporte publicado con tiempos de respuesta; dejar un checklist de cierre con los puntos que requieren atención continua (tarifa, catálogo, verificaciones pendientes, dependencias).</p>
+<h3 id="-r-24--el-despliegue-es-todo-o-nada-y-no-hay-procedimiento-de-reversión"><a class="header" href="#-r-24--el-despliegue-es-todo-o-nada-y-no-hay-procedimiento-de-reversión">🟡 R-24 — El despliegue es todo o nada y no hay procedimiento de reversión</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Medio-Alto · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: el job de producción hace un <code>gcloud run deploy</code> único, sin división de tráfico, sin canary y sin paso de verificación posterior más allá del <code>GET /version</code> (<code>smartruck-backend/.github/workflows/pipeline.yml:284</code>). La reversión de un release roto depende de que alguien recuerde el tag anterior y lo vuelva a desplegar a mano. Además, <code>lifecycle { ignore_changes = [template[0].containers[0].env] }</code> (<code>smartruck-infra/modules/cloud_run/main.tf</code>) deja las variables de entorno fuera del estado de Terraform: la configuración real del servicio vive fuera del control de versiones.</p>
+<p><strong>Qué pasa en el negocio</strong>: un release que pasa el smoke test pero rompe una funcionalidad entra completo a producción, sin forma automática de volver atrás. Y como las variables de entorno no están en el estado de Terraform, un <code>terraform apply</code> no corrige ni muestra la deriva de configuración: la diferencia entre "lo que dice la infraestructura" y "lo que corre en producción" solo se ve leyendo el job de deploy.</p>
+<p><strong>Mitigación</strong>: documentar el procedimiento de rollback con el tag anterior y probarlo una vez antes de necesitarlo; sumar un paso de verificación post-despliegue con flujo real; mover las variables de entorno a Terraform o a un gestor de secretos para eliminar la deriva.</p>
+<h3 id="-r-04--las-ofertas-no-tienen-vencimiento-y-el-tablero-se-ensucia"><a class="header" href="#-r-04--las-ofertas-no-tienen-vencimiento-y-el-tablero-se-ensucia">🟡 R-04 — Las ofertas no tienen vencimiento y el tablero se ensucia</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Alta · <strong>Impacto</strong>: Medio · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: el listado de cargas filtra por disponibilidad y por vencimiento (<code>smartruck-backend/src/application/builders/load_filters_builder.py:18</code>), pero la búsqueda no usa ninguno de los dos filtros: trae todas las cargas con <code>get_all()</code> y solo mira el estado (<code>smartruck-backend/src/application/use_cases/loads/search_loads_use_case.py:108</code> y <code>smartruck-backend/src/infrastructure/outbound/persistence/repositories/postgres_load_repository.py:117</code>). Una carga cuyo <code>delivery_deadline</code> ya venció sigue apareciendo en los resultados.</p>
+<p><strong>Qué pasa en el negocio</strong>: el transportista encuentra una carga, la toma y descubre que la ventana de carga ya pasó. Sumado a R-11 (cargas bloqueadas que nunca se liberan), el tablero degrada hacia inventario muerto, y un tablero con ruido enseña al transportista a desconfiar de los resultados. La reescritura del matching con PostGIS (Tabla B) va a reescribir esta consulta, pero hasta que llegue, el defecto está en producción.</p>
+<p><strong>Mitigación</strong>: aplicar el filtro de vencimiento en la búsqueda con el <code>NotExpiredLoadsFilter</code> que ya existe; barrido periódico de cargas vencidas y bloqueadas huérfanas; mostrar la ventana de tiempo en la tarjeta de oferta.</p>
+<h3 id="-r-20--inconsistencia-entre-los-números-que-muestra-el-producto-y-los-que-usa-el-sistema"><a class="header" href="#-r-20--inconsistencia-entre-los-números-que-muestra-el-producto-y-los-que-usa-el-sistema">🟡 R-20 — Inconsistencia entre los números que muestra el producto y los que usa el sistema</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Media · <strong>Impacto</strong>: Medio · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: la calculadora de retorno del portal del transportista usa constantes fijas: gasoil 1.200 $/L, consumo 30 L/100km, peaje 35.000 (<code>smartruck-transportista/src/domain/empty-return-cost.ts:2</code>). El backend usa otros valores: gasoil 2.000 $/L y 0,3 L/km (<code>smartruck-backend/src/application/use_cases/loads/search_loads_use_case.py:15</code>), y tarifa de 2.000 ARS/km (<code>smartruck-backend/src/domain/models/pricing.py:4</code>). Además, el monto estimado que ve el transportista es el <code>max_price</code> que puso el dador, no un precio de mercado (<code>search_loads_use_case.py:177</code>). El propio archivo de la calculadora aclara que es un cálculo provisional hasta que lo haga la API.</p>
+<p><strong>Qué pasa en el negocio</strong>: el producto muestra dos precios de combustible y dos tarifas por kilómetro, y un estimado de ingreso que es el techo del rango del dador. La promesa de ahorro —el argumento de venta central— se calcula con supuestos que el propio sistema contradice. Un transportista que chequee los números (y los transportistas chequean los números: es su oficio) encuentra la contradicción y pierde confianza en todo el resto.</p>
+<p><strong>Mitigación</strong>: que la calculadora consuma los mismos valores que usa el backend, o que el backend exponga un endpoint de simulación; mostrar el supuesto con su fecha de vigencia; mostrar un estimado de mercado en lugar del techo del dador.</p>
+<h3 id="-r-33--no-hay-procedimiento-de-recuperación-ante-pérdida-de-datos"><a class="header" href="#-r-33--no-hay-procedimiento-de-recuperación-ante-pérdida-de-datos">🟡 R-33 — No hay procedimiento de recuperación ante pérdida de datos</a></h3>
+<ul>
+<li><strong>Probabilidad</strong>: Baja · <strong>Impacto</strong>: Crítico · <strong>Semáforo</strong>: 🟡</li>
+</ul>
+<p><strong>Evidencia</strong>: en el repositorio no hay ningún script de backup ni de restore, ni el pipeline documenta un snapshot previo a las migraciones (R-23). La base vive en Supabase, con los respaldos del proveedor, pero no hay procedimiento propio que definir qué se restaura, en qué orden y con qué criterios.</p>
+<p><strong>Qué pasa en el negocio</strong>: una pérdida o corrupción de la base no solo borra las cargas: borra el historial de viajes, las calificaciones y la reputación, que es el activo que justifica quedarse en la plataforma. Sin el historial, el producto vuelve a ser un tablón vacío: se pierde el activo de confianza que justificaba el esfuerzo comercial.</p>
+<p><strong>Mitigación</strong>: documentar el procedimiento de restore y probarlo una vez contra un ambiente de pruebas; definir el punto de recuperación aceptable (RPO/RTO) y verificar que el plan de respaldos del proveedor lo cubra; versionar un export de los datos de negocio críticos.</p>
+<hr />
+<h2 id="tabla-a--matriz-de-riesgos"><a class="header" href="#tabla-a--matriz-de-riesgos">Tabla A — Matriz de riesgos</a></h2>
+<p>Ordenada de más a menos severidad. La columna <strong>Acción</strong> resume el primer movimiento concreto.</p>
+<div class="table-wrapper"><table><thead><tr><th>ID</th><th>Riesgo</th><th>Prob.</th><th>Impacto</th><th>Semáforo</th><th>Acción inmediata</th></tr></thead><tbody>
+<tr><td>R-16</td><td>Sin garantía ni seguro: el puenteo es el camino por defecto</td><td>Alta</td><td>Crítico</td><td>🔴</td><td>Reputación atada a evidencia + plan de póliza por viaje</td></tr>
+<tr><td>R-11</td><td>Bloqueo sin TTL ni validación de estado</td><td>Alta</td><td>Crítico</td><td>🔴</td><td>TTL de bloqueo + transición <code>activa</code> → <code>bloqueada</code> válida</td></tr>
+<tr><td>R-17</td><td>Verificación manual: cuello de botella y persona clave</td><td>Alta</td><td>Crítico</td><td>🔴</td><td>Autoaprobación de CUIT + revisión por lotes + SLA</td></tr>
+<tr><td>R-32</td><td>Un flag de build puede dejar el portal en modo demo</td><td>Media</td><td>Crítico</td><td>🔴</td><td>Fallar el arranque en stub + llevar el flag a variable de ambiente</td></tr>
+<tr><td>R-07</td><td>El unlock fee no se devuelve ni se disputa</td><td>Media</td><td>Crítico</td><td>🔴</td><td>Política de devolución + compensación automática</td></tr>
+<tr><td>R-08</td><td>El estado del pago puede divergir del de MercadoPago</td><td>Media</td><td>Crítico</td><td>🔴</td><td>Barrido de reconciliación + sin regresión de estado</td></tr>
+<tr><td>R-12</td><td>Identidad transaccional desde la URL, rutas sin sesión</td><td>Media</td><td>Crítico</td><td>🔴</td><td>Actor desde el token + sesión en rutas transaccionales</td></tr>
+<tr><td>R-13</td><td>La carga reservada no se puede cancelar</td><td>Media</td><td>Crítico</td><td>🔴</td><td>Estado <code>cancelada</code> con actor y motivo + liberación de flota</td></tr>
+<tr><td>R-28</td><td>Fraude de dador: cobrar el fee y no despachar</td><td>Media</td><td>Crítico</td><td>🔴</td><td>Límites por oferente + encuesta post-viaje</td></tr>
+<tr><td>R-29</td><td>Cobro sin control previo: doble preferencia o oferta ajena</td><td>Media</td><td>Crítico</td><td>🔴</td><td>Idempotencia + validar <code>bloqueada</code> antes de cobrar</td></tr>
+<tr><td>R-25</td><td>Secretos del pipeline expuestos en los logs</td><td>Media-Alta</td><td>Alto</td><td>🔴</td><td>Secretos por archivo/gestor + rotación de credenciales</td></tr>
+<tr><td>R-22</td><td>El smoke test solo verifica la versión</td><td>Media</td><td>Alto</td><td>🔴</td><td>Smoke test de dependencias reales</td></tr>
+<tr><td>R-23</td><td>Migración contra prod antes del deploy, sin reversión</td><td>Media</td><td>Alto</td><td>🔴</td><td>Migraciones compatibles + snapshot previo</td></tr>
+<tr><td>R-14</td><td>La plataforma queda ciega después del desbloqueo</td><td>Alta</td><td>Alto</td><td>🔴</td><td>Hitos de viaje + remito atado a la carga</td></tr>
+<tr><td>R-09</td><td>Ticket chico frente a comisión y costos fijos</td><td>Media-Alta</td><td>Alto</td><td>🔴</td><td>Modelo de equilibrio con números reales</td></tr>
+<tr><td>R-06</td><td>El precio mostrado puede no ser el cobrado</td><td>Media</td><td>Alto</td><td>🔴</td><td>Una sola fuente de precio (backend)</td></tr>
+<tr><td>R-30</td><td>El dador no puede elegir transportista</td><td>Alta</td><td>Medio-Alto</td><td>🟡</td><td>Exponer candidatos antes del pago del fee</td></tr>
+<tr><td>R-10</td><td>Riesgo fiscal y de exposición legal</td><td>Media</td><td>Medio-Alto</td><td>🟡</td><td>Facturación electrónica + términos de uso</td></tr>
+<tr><td>R-15</td><td>Reputación negociable sin evidencia</td><td>Media</td><td>Medio-Alto</td><td>🟡</td><td>Calificación atada a hito verificable</td></tr>
+<tr><td>R-21</td><td>Continuidad: sin equipo, sin soporte, cuentas atadas a personas</td><td>Alta</td><td>Medio-Alto</td><td>🟡</td><td>Transferir titularidad de cuentas + responsable de operación</td></tr>
+<tr><td>R-24</td><td>Deploy todo o nada, sin rollback ni verificación posterior</td><td>Media</td><td>Medio-Alto</td><td>🟡</td><td>Procedimiento de rollback probado + verificación post-deploy</td></tr>
+<tr><td>R-26</td><td>El rate limit de Cloudflare no cubre <code>/geo/*</code></td><td>Media</td><td>Medio-Alto</td><td>🟡</td><td>Corregir la expresión del WAF + rate limit en el gateway</td></tr>
+<tr><td>R-27</td><td>Pool de conexiones sin dimensionar</td><td>Media</td><td>Medio-Alto</td><td>🟡</td><td>Dimensionar el pool y apuntar al pooler de Supabase</td></tr>
+<tr><td>R-31</td><td>Datos personales y documentos sin política de protección</td><td>Media</td><td>Medio-Alto</td><td>🟡</td><td>Aviso de privacidad, consentimiento y política de retención</td></tr>
+<tr><td>R-33</td><td>Sin procedimiento de recuperación ante pérdida de datos</td><td>Baja</td><td>Crítico</td><td>🟡</td><td>Documentar y probar el restore</td></tr>
+<tr><td>R-04</td><td>Ofertas vencidas en la búsqueda: el tablero se ensucia</td><td>Alta</td><td>Medio</td><td>🟡</td><td>Aplicar el filtro de vencimiento en la búsqueda</td></tr>
+<tr><td>R-20</td><td>Números del producto contradicen al sistema</td><td>Media</td><td>Medio</td><td>🟡</td><td>Calculadora contra los valores del backend</td></tr>
+</tbody></table>
+</div>
+<h2 id="tabla-b--trabajo-planificado-no-son-riesgos"><a class="header" href="#tabla-b--trabajo-planificado-no-son-riesgos">Tabla B — Trabajo planificado (no son riesgos)</a></h2>
+<p>Decidido en un ADR o en el backlog; se va a atacar paulatinamente. <strong>No son riesgos del MVP</strong>: no corresponde ponderarlos en la matriz.</p>
+<div class="table-wrapper"><table><thead><tr><th>ID</th><th>Ítem</th><th>Decisión</th><th>Dónde está</th></tr></thead><tbody>
+<tr><td>B-01</td><td>Matching con PostGIS en el backend, vista <code>matching_loads</code> e índices GiST</td><td>ADR-001, decisión D4</td><td><code>ADR-001-arquitectura-smartruck-y-descomposicion.md</code>, borradores de tickets M1–M10</td></tr>
+<tr><td>B-02</td><td>Alerta de cargas por ruta y preferencias guardadas del transportista</td><td>Alcance del MVP</td><td>Sin tipo de notificación ni entidad de preferencias en el backend</td></tr>
+<tr><td>B-03</td><td>Tarifa de desbloqueo configurable (base, por km, tipo de cambio, IVA) con vigencia</td><td>Pendiente de diseño</td><td><code>smartruck-backend/src/domain/unlock_fee.py</code></td></tr>
+<tr><td>B-04</td><td>Ampliación del catálogo de localidades (150) y su copia en el borde</td><td>ADR-0002, catálogo cerrado</td><td><code>microservice-routes/src/application/use-cases/list-localities.use-case.ts</code></td></tr>
+<tr><td>B-05</td><td>Resiliencia del geo-service en el borde (stale-if-error, monitor de health)</td><td>ADR-0003</td><td><code>docs/adr/0003-resiliencia-en-el-geo-service-y-no-en-los-frontends.md</code></td></tr>
+<tr><td>B-06</td><td>Arranque con oferta garantizada en un corredor (siembra y campaña)</td><td>Decisión operativa</td><td><code>smartruck-backend/src/infrastructure/api.py:81</code> (la siembra solo corre en desarrollo)</td></tr>
+</tbody></table>
+</div>
+<h2 id="riesgos-aceptados"><a class="header" href="#riesgos-aceptados">Riesgos aceptados</a></h2>
+<p>Ya evaluados y aceptados por el equipo; se documentan para que no se confundan con pendientes.</p>
+<div class="table-wrapper"><table><thead><tr><th>Riesgo</th><th>Decisión</th></tr></thead><tbody>
+<tr><td>Caída total de Cloudflare (DNS, WAF y geo-service en el mismo proveedor)</td><td>Aceptado hasta que el monitor de <code>/geo/health</code> indique lo contrario (ADR-0003)</td></tr>
+<tr><td>Catálogo o ruta nunca consultada durante una caída de la base: sin copia en el borde, se informa "no disponible"</td><td>Aceptado (ADR-0003)</td></tr>
+<tr><td>Copia en el borde por centro de datos de la Cache API de Workers (sin réplica)</td><td>Aceptado, la elección de tecnología se resuelve en la historia #171 (ADR-0003)</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="lectura-por-probabilidad"><a class="header" href="#lectura-por-probabilidad">Lectura por probabilidad</a></h2>
+<ul>
+<li>
+<ul>
+<li><strong>Probabilidad alta</strong> (7): R-04, R-11, R-14, R-16, R-17, R-21, R-30. Son condiciones que el sistema tiene hoy escritas en el código o que son consecuencia directa de cómo se opera.</li>
+</ul>
+</li>
+<li><strong>Probabilidad media-alta</strong> (2): R-09 y R-25, que dependen del volumen de transacciones y de la exposición de los logs del pipeline.</li>
+<li><strong>Probabilidad media</strong> (17): R-06, R-07, R-08, R-10, R-12, R-13, R-15, R-20, R-22, R-23, R-24, R-26, R-27, R-28, R-29, R-31, R-32. Todas con un disparador concreto: concurrencia, abandono de una de las partes, un tercero, un deploy o el paso del tiempo.</li>
+<li><strong>Probabilidad baja</strong> (1): R-33, que requiere una pérdida de datos no prevista.</li>
+</ul>
+<p><strong>Ninguno de los riesgos de la Tabla A depende de un evento excepcional</strong>: todos son el comportamiento normal del sistema bajo carga, bajo abandono o en un deploy.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="arquitectura.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="requerimientos.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="arquitectura.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="requerimientos.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
