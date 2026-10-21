@@ -38,6 +38,13 @@ Términos del proceso y del dominio.
 | Ruta | Camino vial entre dos localidades (distancia, duración y geometría); se identifica por el par de ids de localidad, sin importar el sentido |
 | Estimación | Distancia en línea recta por un factor vial configurable; Geoservice la marca `is_estimation` y nunca la guarda |
 | Oferta de carga | *(completar con el lenguaje de dominio del equipo)* |
+| Viaje solicitado | El viaje que el transportista pide recomendar: una localidad de origen y una de destino (Buenos Aires → Córdoba) |
+| Tramo vacío de inicio | Lo que el camión recorre sin carga desde el origen del viaje solicitado hasta el origen de la carga |
+| Tramo cargado | Lo que el camión recorre con la carga, desde su origen hasta su destino |
+| Tramo vacío de fin | Lo que el camión recorre sin carga desde el destino de la carga hasta el destino del viaje solicitado |
+| Desvío neto | Los km de más por tomar la carga: tramo vacío de inicio + tramo cargado + tramo vacío de fin − viaje solicitado; nunca es negativo |
+| Ajuste al viaje | Qué tanto el recorrido total de tomar la carga se parece al viaje solicitado; baja con el desvío neto |
+| Puntaje | Qué tan conveniente es una carga para el viaje solicitado, de 0 a 100. Combina el ajuste al viaje y cuánto paga la carga por km recorrido, tramos vacíos incluidos. 100 es una carga que no desvía y paga por km lo mejor de las recomendadas |
 | | |
 
 ## Repositorios
