@@ -153,7 +153,7 @@ El backend no confía en el estado que informa el cliente: la reserva exige un p
 
 ## Vistas para la presentación
 
-Estas vistas se prepararon a partir del modelo de arquitectura validado en Archify, como PNGs transparentes individuales de 3200 × 1800; muestran solo los diagramas, sin títulos ni encabezados, y usan tipografía grande. Los diagramas distinguen las llamadas directas del frontend y del backend a Geoservice.
+Estas vistas se prepararon a partir del modelo de arquitectura validado en Archify, como PNGs transparentes individuales de 3200 × 1800; muestran solo los diagramas, sin títulos ni encabezados, y usan tipografía grande. Los diagramas distinguen las llamadas directas del frontend y del backend a Geoservice. La vista 08 agrupa las tecnologías en uso según el stack al que pertenecen.
 
 - [01 - Vista de despliegue](arquitectura/diagrams/presentacion/01-despliegue-general.png)
 - [02 - Portales y API Gateway](arquitectura/diagrams/presentacion/02-portales-y-gateway.png)
@@ -162,3 +162,4 @@ Estas vistas se prepararon a partir del modelo de arquitectura validado en Archi
 - [05 - Pagos con MercadoPago](arquitectura/diagrams/presentacion/05-pagos-mercadopago.png)
 - [06 - Identidad, datos y archivos](arquitectura/diagrams/presentacion/06-datos-y-archivos.png)
 - [07 - Observabilidad](arquitectura/diagrams/presentacion/07-observabilidad.png)
+- [08 - Stack tecnológico](arquitectura/diagrams/presentacion/08-stack-tecnologico.png)
