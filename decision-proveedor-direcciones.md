@@ -1,6 +1,29 @@
 # Decisión: proveedor de direcciones y qué guarda el backend
 
-> Estado: **propuesta (2026-10-17)**, para que la confirme el equipo. Spike S.5 #166. Relacionada con `decision-proveedor-rutas.md` y con `research/fuentes-datos-geograficos.md` (términos y precios; no se repiten acá).
+> Estado: **decidida (2026-10-21)**, ver la sección «Decisión» más abajo. Propuesta original del 2026-10-17. Spike S.5 #166. Relacionada con `decision-proveedor-rutas.md` y con `research/fuentes-datos-geograficos.md` (términos y precios; no se repiten acá).
+
+## Decisión (2026-10-21)
+
+Se separan dos responsabilidades que no se mezclan:
+
+| Pregunta | Quién responde | Cómo |
+| --- | --- | --- |
+| Dada una coordenada, ¿en qué **localidad** está (y, al revés, dónde queda una localidad)? | **El servicio de rutas (geo-service)** | `GET /geo/localities/nearest?lat=&lng=` (devuelve la localidad del catálogo o `out_of_coverage`) y `GET /geo/localities/{id}` (trae las coordenadas) |
+| Buscar una **dirección exacta** y, dado un pin, ¿qué **dirección exacta** es? | **El backend**, con un proveedor externo | `/localizaciones/direcciones` y `/localizaciones/reversa` (búsqueda y pin del dador) y `loads/{id}/…/reverse-geocode` (dirección exacta después del desbloqueo). **No pasan por el servicio de rutas ni por los frontends** |
+
+Consecuencias:
+
+- **Georef no se usa para direcciones.** El servicio de rutas no recibe búsquedas de direcciones, así no suma carga ni dependencia de un proveedor. Georef sigue solo como fuente offline de provincias y localidades. Verificado el 2026-10-21: su consulta por coordenadas (`/ubicacion`) devuelve provincia, departamento y municipio, no calle, así que tampoco sirve para la dirección de un pin.
+- **El proveedor de direcciones exactas es el que ya tiene el backend:** `FallbackGeocoder` con **Mapbox** como principal y **Nominatim** como respaldo; la dirección exacta de un pin ya publicado usa solo Mapbox. Los frontends no llaman a proveedores de direcciones.
+- **El frontend** consulta cada cosa a su dueño: la localidad al servicio de rutas y la dirección al backend. Lo único que decide es qué mostrar.
+- Las historias #172 y #175 (direcciones en el servicio de rutas) **dejan de aplicar en su forma original**.
+
+Riesgos que quedan abiertos (no se resuelven con esta decisión):
+
+- Mapbox en modo **temporal** no permite guardar los resultados y el backend guarda el texto de la dirección. Para cumplirlo hace falta el modo permanente (`permanent=true`, con tarjeta cargada y unos USD 5 por 1.000 consultas) o cambiar de proveedor.
+- **Nominatim público** prohíbe el autocompletado y las aplicaciones de seguimiento de vehículos.
+- En el ambiente de test las búsquedas parecen resolverse con el respaldo (formato de Nominatim): conviene revisar el token de Mapbox.
+- Las direcciones sugeridas no se limitan a la localidad elegida (se arma un texto libre con la localidad como contexto): puede traer calles de ciudades vecinas.
 
 ## Qué se decide
 
