@@ -6,7 +6,7 @@ El transportista que pide recomendaciones para su viaje recibe las cargas cercan
 
 ## Solución
 
-Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramos: vacío de inicio, cargado, vacío de fin y desvío neto. La lista llega ordenada de la más conveniente a la menos conveniente, con un máximo de 20 cargas. El puntaje combina el ajuste al viaje (cuántos km de más le hace hacer la carga) y lo que paga por km realizado, tramos vacíos incluidos.
+Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramos: vacío de inicio, cargado, vacío de fin y desvío neto. La lista llega ordenada de la más conveniente a la menos conveniente, con un máximo de 20 cargas. El puntaje combina el aprovechamiento (qué parte de los km realizados el camión va con carga) y lo que paga por km realizado, tramos vacíos incluidos.
 
 ## Comportamientos
 
@@ -14,10 +14,10 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 2. Como transportista, quiero ver los km del tramo vacío de inicio, del tramo cargado y del tramo vacío de fin de cada carga, para saber cuánto voy a manejar con y sin carga. → #190
 3. Como transportista, quiero ver el desvío neto de cada carga, para saber cuántos km de más hago respecto de mi viaje solicitado. → #190
 4. Como transportista, quiero que el desvío neto nunca sea negativo, para no ver números que no tienen sentido. → #190
-5. Como transportista, quiero que el puntaje premie las cargas que no me desvían del viaje solicitado, para hacer la menor cantidad de km de más. → #192
+5. Como transportista, quiero que el puntaje premie las cargas que me hacen andar menos km vacíos, para ir con carga la mayor parte del recorrido. → #192
 6. Como transportista, quiero que el puntaje premie las cargas que pagan más por km realizado, contando los tramos vacíos, para cobrar más por cada km que manejo. → #192
 7. Como transportista, quiero que entre dos cargas con el mismo recorrido gane la que paga más, para que el precio decida cuando la ruta empata. → #192
-8. Como transportista, quiero que una carga solo tenga 100 cuando no me desvía nada y es la que mejor paga por km de las recomendadas, para que el 100 signifique "la mejor posible". → #192
+8. Como transportista, quiero que una carga solo tenga 100 cuando voy cargado todo el recorrido y es la que mejor paga por km de las recomendadas, para que el 100 signifique "la mejor posible". → #192
 9. Como transportista, quiero recibir las recomendaciones ordenadas de mayor a menor puntaje, para ver primero las mejores. → #192
 10. Como transportista, quiero que a igual puntaje vaya primero la carga con mayor precio máximo, y si también empatan, la de id menor, para que el orden sea siempre el mismo. → #195
 11. Como transportista, quiero recibir como máximo 20 recomendaciones, para no tener que revisar una lista interminable. → #195
@@ -43,13 +43,19 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
   6. Puntúa, ordena y corta en 20.
 - **Tramos:** distancia vial entre localidades (ids de localidad del servicio de rutas), no entre pines. El tramo cargado también se pide al servicio de rutas, porque publicar una carga ya no guarda su distancia (R.1.6). Los pares repetidos se piden una sola vez.
 - **Batch del servicio de rutas:** el puerto `RouteDistance` ya tiene la consulta en lote. El adaptador parte los pares en tandas de hasta 200, que es el máximo de pares por llamada del servicio de rutas.
-- **Fórmula del puntaje** (servicio de dominio nuevo, por ejemplo `LoadScorer`):
+- **Fórmula del puntaje:**
   - km realizados = tramo vacío de inicio + tramo cargado + tramo vacío de fin.
-  - Ajuste al viaje = km del viaje solicitado / km realizados. Va de 0 a 1.
+  - Aprovechamiento = km del tramo cargado / km realizados. Va de 0 a 1 y nunca lo supera, porque los km cargados son parte de los realizados.
   - Plata = (precio máximo / km realizados) dividido por el mejor precio por km realizado entre las cargas puntuadas del mismo pedido. Va de 0 a 1.
-  - Puntaje = redondeo de 100 × (0,5 × ajuste al viaje + 0,5 × plata). Es un entero de 0 a 100.
-  - Desvío neto = km realizados − km del viaje solicitado, recortado a 0.
-- **Constantes del dominio:** peso del ajuste al viaje = 0,5, peso de la plata = 0,5 y máximo de recomendaciones = 20. Viven junto a la tolerancia de cercanía del 20%.
+  - Puntaje = 100 × (0,5 × aprovechamiento + 0,5 × plata), redondeado medio para arriba (62,5 da 63). Es un entero de 0 a 100.
+  - Desvío neto = km realizados − km del viaje solicitado, recortado a 0. Se informa, pero no entra en el puntaje.
+- **Diseño en el dominio:**
+  - `RequestedTrip.carry(load, leg_km)` arma la `CarriedLoad`: la carga con los km de sus tres tramos.
+  - `CarriedLoad` calcula su aprovechamiento (`loaded_ratio`) y su plata por km (`price_per_km`).
+  - El servicio de dominio `LoadScorer.rank(trip, carried_loads)` busca el mejor precio por km de la lista, puntúa cada carga y devuelve las `Recommendation` ordenadas de mayor a menor puntaje. Es el dueño de la fórmula.
+  - `Recommendation` tiene su puntaje y deriva su desvío neto.
+  - El caso de uso recibe el `LoadScorer` por constructor. Sus unitarios usan el `LoadScorer` real y mockean solo los puertos.
+- **Constantes del dominio:** los pesos del aprovechamiento (0,5) y de la plata (0,5) son constantes de clase del `LoadScorer`, porque son parte de su fórmula. El máximo de recomendaciones (20) se define en #195.
 - **Orden:** puntaje descendente; a igual puntaje, precio máximo descendente; después id ascendente.
 - **Errores:**
   - Si el batch falla (no responde, timeout o error del servicio de rutas), el pedido entero falla con 503 y un mensaje claro, como al cotizar una carga.
@@ -82,9 +88,10 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 ## Notas
 
 - El puntaje de una carga depende de las demás cargas del mismo pedido, porque la plata se compara contra el mejor precio por km de la respuesta. Una misma carga puede tener distinto puntaje en dos búsquedas distintas.
-- El castigo por km vacíos está dentro de la plata: una carga que obliga a andar vacío reparte su pago en más km realizados.
-- Ejemplo de referencia con el viaje Buenos Aires → Córdoba (696 km): Buenos Aires → Córdoba con $1.393.000 da 100; Pilar → Alta Gracia (735 km realizados, $1.338.000) da 93; Buenos Aires → Rosario (700 km realizados, $600.000) da 71.
-- Vocabulario en el glosario: viaje solicitado, tramo vacío de inicio, tramo cargado, tramo vacío de fin, desvío neto, ajuste al viaje y puntaje.
+- Los km vacíos castigan las dos mitades: bajan el aprovechamiento y reparten el pago de la carga en más km realizados.
+- Ejemplo de referencia con el viaje Buenos Aires → Córdoba (696 km): Buenos Aires → Córdoba con $1.393.000 da 100; Pilar → Alta Gracia (650 km cargados de 735 realizados, $1.338.000) da 90; Buenos Aires → Rosario (300 km cargados de 700 realizados, $600.000) da 43.
+- Vocabulario en el glosario: viaje solicitado, tramo vacío de inicio, tramo cargado, tramo vacío de fin, desvío neto, km realizados, aprovechamiento, plata por km y puntaje.
+- El aprovechamiento reemplazó al "ajuste al viaje" (km del viaje solicitado / km realizados) durante T.2.18: el ajuste no castigaba una carga con los mismos km que el viaje pero casi todos vacíos, y pasaba de 1 cuando los km realizados eran menos que los del viaje.
 
 ## Historias derivadas
 
