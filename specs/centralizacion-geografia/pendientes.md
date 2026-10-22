@@ -2,7 +2,7 @@
 
 Lista de lo que quedó por hacer, probar o decidir mientras se entregaban las historias de routes (R.1.x). Se actualiza a medida que se cierran cosas. Quién: **vos** (necesita credenciales, acceso o una decisión), **equipo** (otra persona), **pendiente de hacer** (código o tickets que se pueden retomar).
 
-Última actualización: 2026-10-22.
+Última actualización: 2026-10-23.
 
 ## 1. Pruebas manuales pendientes
 
@@ -12,6 +12,7 @@ Lista de lo que quedó por hacer, probar o decidir mientras se entregaban las hi
 | Cotizar con ids, sin ids y ciudad no reconocida en test, con el servicio de rutas real | #196 | vos | Publicar carga en el dador de test y ver el precio; detalle en el comentario de #196 |
 | Preparar y probar la ruta por ids del dador: vista previa de Publicar, detalle, mini-mapa y una carga vieja sin ids (resuelve por nombre y entra al lote) | #189 | vos | En test, Network, filtro `geo`. Detalle en el comentario de #189 |
 | Centros de carga con localidad, crear un centro nuevo eligiendo la ciudad de la lista, publicar con `MINERÍA Y CONSTRUCCIÓN` | #164 (dador) | vos | En `localhost:5174` con `dev_against_test`, o en test. Revisar en el payload `origin_locality_id` y `destination_locality_id` |
+| Mapa del transportista con la búsqueda por localidad: buscar origen y destino en el filtro, ver los trazados de las cargas y el minimapa del detalle de carga y de viaje | #164 (transportista) | vos | En test (`smartruck-transportista` v1.16.0), DevTools → Network, filtro `geo`: el autocompletado llama a `/geo/localities?q` y las rutas a `/geo/routes?origin_id&destination_id`. No debe haber pedidos a `/locations` |
 | Mapa del transportista sin cargas, `403` en `/trucks` y en `/notifications/transporter/<id>` | #152 | vos | Pasar el cuerpo de la respuesta de esos pedidos y la consola |
 | Preflight de CORS del servicio de rutas desde los dos frontends desplegados | #152 | vos | Verificado por vos en test; repetirlo en prod con los orígenes de prod |
 
@@ -40,8 +41,8 @@ La regla de rate limiting (`20 req / 10 s` por IP) alcanza también al backend, 
 
 | Qué | Historia | Estado |
 | --- | --- | --- |
-| Filtro de origen y destino del transportista por localidad del servicio geográfico | #164 (transportista) | Espera a que la búsqueda de cargas use ids (recomendador / #184) |
-| Pedir las rutas por **id de localidad** en dador y transportista; prerequisito para retirar la consulta por nombre | #183 (#189 el dador) | **Dador hecho en #189 (v0.15.1)**; transportista depende de la búsqueda |
+| Que `/loads/search` (recomendador) reciba ids de localidad en vez de nombres | #164 (transportista), #150 | **Autocompletado y rutas del transportista hechos (v1.16.0)**; falta que el recomendador del compañero acepte ids |
+| Pedir las rutas por **id de localidad** en dador y transportista; prerequisito para retirar la consulta por nombre | #183 (#189 el dador) | **Dador hecho en #189 (v0.15.1)** y **transportista en #164 (v1.16.0)**; falta la búsqueda de cargas |
 | Retirar la consulta por nombre del servicio de rutas | #183 | **Entrega 1 hecha (v0.12.2)**: escenarios de la ruta y acceptance en vivo ya usan ids; el backend (#196) y el dador (#189) también. Falta la entrega 2 (activar RUT 26 y borrar RUT 05, 06, 07, 10, 11, 16 y 17), que espera al transportista |
 | Etapa 2 del backend: retirar la copia del motor de rutas y los endpoints de localidades | #145, #163, #170 (RUT 22), #184 | Retomar cuando los frontends dejen de usar `locations` y `/routes` |
 | Retirar la tabla `locations` y leer las localidades del servicio geográfico | #184 | Pendiente; toca la búsqueda de cargas |
@@ -65,4 +66,4 @@ La regla de rate limiting (`20 req / 10 s` por IP) alcanza también al backend, 
 
 ## 6. Horas (`Spent (hs)`) sin cargar
 
-La regla es que las horas las dice el usuario. Faltan las de #164 (dador), #181 y las historias que se vayan cerrando.
+La regla es que las horas las dice el usuario. Faltan las de #196, #197, #181 y las historias que se vayan cerrando.
