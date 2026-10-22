@@ -72,11 +72,15 @@ Solo en los **bordes** del hexágono: **entradas** y **salidas**.
 | Loguear el mismo error en repo **y** controller **y** handler | Duplicado; el error se loguea una sola vez en el GlobalExceptionHandler |
 | Passwords, tokens, PII innecesaria | Seguridad |
 
+## Excepción: decisiones de negocio que el spec pide registrar
+
+Un caso de uso puede emitir un `warn` cuando el spec pide dejar registro de una decisión de negocio para poder investigarla después. Por ejemplo, el caso de uso de recomendaciones deja una línea por cada carga que descarta, con su id y el motivo. El caso de uso recibe `LogManager` por constructor, y el motivo lo describe el dominio (`DiscardedLoad`). Es un `warn` por decisión, no un log por línea: no es ruido.
+
 ## Checklist
 
 - [ ] `info` en controlador (entrada) y repositorio (salida)
 - [ ] Errores/excepciones logueados en el **GlobalExceptionHandler** (no catch/rethrow en controllers)
-- [ ] Sin logs de negocio ruidosos en application/domain
+- [ ] Sin logs de negocio ruidosos en application/domain (salvo las decisiones que el spec pide registrar)
 - [ ] Salida a stdout (JSON vía LogManager)
 - [ ] Sin passwords/tokens en la API ni en el contenido del mensaje
 
