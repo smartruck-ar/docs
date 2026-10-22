@@ -42,7 +42,7 @@ La regla de rate limiting (`20 req / 10 s` por IP) alcanza también al backend, 
 | --- | --- | --- |
 | Filtro de origen y destino del transportista por localidad del servicio geográfico | #164 (transportista) | Espera a que la búsqueda de cargas use ids (recomendador / #184) |
 | Pedir las rutas por **id de localidad** en dador y transportista; prerequisito para retirar la consulta por nombre | #183 (#189 el dador) | **Dador hecho en #189 (v0.15.1)**; transportista depende de la búsqueda |
-| Retirar la consulta por nombre del servicio de rutas | #183 | **El backend ya no consulta por nombre (#196)**; falta el transportista y migrar a ids los escenarios RUT 01 a 20 y el acceptance en vivo del pipeline |
+| Retirar la consulta por nombre del servicio de rutas | #183 | **Entrega 1 hecha (v0.12.2)**: escenarios de la ruta y acceptance en vivo ya usan ids; el backend (#196) y el dador (#189) también. Falta la entrega 2 (activar RUT 26 y borrar RUT 05, 06, 07, 10, 11, 16 y 17), que espera al transportista |
 | Etapa 2 del backend: retirar la copia del motor de rutas y los endpoints de localidades | #145, #163, #170 (RUT 22), #184 | Retomar cuando los frontends dejen de usar `locations` y `/routes` |
 | Retirar la tabla `locations` y leer las localidades del servicio geográfico | #184 | Pendiente; toca la búsqueda de cargas |
 | Direcciones exactas: **quedan en el backend** (decidido 2026-10-21, ver `decision-proveedor-direcciones.md`); coordenada ↔ localidad queda en el servicio de rutas. #172 y #175 ya no aplican en su forma original | #172, #175, #166 | Cerrar o redefinir #172 y #175 (decisión tuya) |
