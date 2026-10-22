@@ -10,26 +10,26 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 
 ## Comportamientos
 
-1. Como transportista, quiero que cada carga recomendada tenga un puntaje de 0 a 100, para saber cuál me conviene más sin hacer cuentas.
-2. Como transportista, quiero ver los km del tramo vacío de inicio, del tramo cargado y del tramo vacío de fin de cada carga, para saber cuánto voy a manejar con y sin carga.
-3. Como transportista, quiero ver el desvío neto de cada carga, para saber cuántos km de más hago respecto de mi viaje solicitado.
-4. Como transportista, quiero que el desvío neto nunca sea negativo, para no ver números que no tienen sentido.
-5. Como transportista, quiero que el puntaje premie las cargas que no me desvían del viaje solicitado, para hacer la menor cantidad de km de más.
-6. Como transportista, quiero que el puntaje premie las cargas que pagan más por km realizado, contando los tramos vacíos, para cobrar más por cada km que manejo.
-7. Como transportista, quiero que entre dos cargas con el mismo recorrido gane la que paga más, para que el precio decida cuando la ruta empata.
-8. Como transportista, quiero que una carga solo tenga 100 cuando no me desvía nada y es la que mejor paga por km de las recomendadas, para que el 100 signifique "la mejor posible".
-9. Como transportista, quiero recibir las recomendaciones ordenadas de mayor a menor puntaje, para ver primero las mejores.
-10. Como transportista, quiero que a igual puntaje vaya primero la carga con mayor precio máximo, y si también empatan, la de id menor, para que el orden sea siempre el mismo.
-11. Como transportista, quiero recibir como máximo 20 recomendaciones, para no tener que revisar una lista interminable.
-12. Como transportista, quiero recibir todas las cargas puntuadas cuando son menos de 20, para no perder ninguna opción.
-13. Como transportista, quiero que no se recomienden cargas sin precio máximo, para no ver cargas cuyo pago por km no se puede calcular.
-14. Como transportista, quiero que una carga cuyo tramo no se pudo medir quede fuera de la lista y que el resto se recomiende igual, para no quedarme sin respuesta por una sola carga.
-15. Como transportista, quiero recibir un error claro cuando el servicio de rutas no responde, para saber que el problema no es mi búsqueda.
-16. Como equipo, queremos que cada carga descartada (sin precio máximo o con un tramo sin medir) quede registrada en el log con su id y el motivo, para poder investigar por qué no se recomendó.
-17. Como equipo, queremos que los tramos se midan como distancia vial entre localidades, con el servicio de rutas, para que el puntaje use los mismos km que el resto de la plataforma.
-18. Como equipo, queremos que cada tramo distinto se pida una sola vez al servicio de rutas, aunque lo compartan varias cargas, para no hacer llamadas de más.
-19. Como equipo, queremos que los tramos se pidan en tandas que respeten el máximo del servicio de rutas, para que la recomendación no falle cuando hay muchas cargas candidatas.
-20. Como equipo, queremos que los pesos del puntaje y el máximo de recomendaciones sean constantes del dominio, para ajustarlos con datos reales sin tocar la fórmula.
+1. Como transportista, quiero que cada carga recomendada tenga un puntaje de 0 a 100, para saber cuál me conviene más sin hacer cuentas. → #192
+2. Como transportista, quiero ver los km del tramo vacío de inicio, del tramo cargado y del tramo vacío de fin de cada carga, para saber cuánto voy a manejar con y sin carga. → #190
+3. Como transportista, quiero ver el desvío neto de cada carga, para saber cuántos km de más hago respecto de mi viaje solicitado. → #190
+4. Como transportista, quiero que el desvío neto nunca sea negativo, para no ver números que no tienen sentido. → #190
+5. Como transportista, quiero que el puntaje premie las cargas que no me desvían del viaje solicitado, para hacer la menor cantidad de km de más. → #192
+6. Como transportista, quiero que el puntaje premie las cargas que pagan más por km realizado, contando los tramos vacíos, para cobrar más por cada km que manejo. → #192
+7. Como transportista, quiero que entre dos cargas con el mismo recorrido gane la que paga más, para que el precio decida cuando la ruta empata. → #192
+8. Como transportista, quiero que una carga solo tenga 100 cuando no me desvía nada y es la que mejor paga por km de las recomendadas, para que el 100 signifique "la mejor posible". → #192
+9. Como transportista, quiero recibir las recomendaciones ordenadas de mayor a menor puntaje, para ver primero las mejores. → #192
+10. Como transportista, quiero que a igual puntaje vaya primero la carga con mayor precio máximo, y si también empatan, la de id menor, para que el orden sea siempre el mismo. → #195
+11. Como transportista, quiero recibir como máximo 20 recomendaciones, para no tener que revisar una lista interminable. → #195
+12. Como transportista, quiero recibir todas las cargas puntuadas cuando son menos de 20, para no perder ninguna opción. → #195
+13. Como transportista, quiero que no se recomienden cargas sin precio máximo, para no ver cargas cuyo pago por km no se puede calcular. → #193
+14. Como transportista, quiero que una carga cuyo tramo no se pudo medir quede fuera de la lista y que el resto se recomiende igual, para no quedarme sin respuesta por una sola carga. → #193
+15. Como transportista, quiero recibir un error claro cuando el servicio de rutas no responde, para saber que el problema no es mi búsqueda. → #191
+16. Como equipo, queremos que cada carga descartada (sin precio máximo o con un tramo sin medir) quede registrada en el log con su id y el motivo, para poder investigar por qué no se recomendó. → #193
+17. Como equipo, queremos que los tramos se midan como distancia vial entre localidades, con el servicio de rutas, para que el puntaje use los mismos km que el resto de la plataforma. → #190
+18. Como equipo, queremos que cada tramo distinto se pida una sola vez al servicio de rutas, aunque lo compartan varias cargas, para no hacer llamadas de más. → #190
+19. Como equipo, queremos que los tramos se pidan en tandas que respeten el máximo del servicio de rutas, para que la recomendación no falle cuando hay muchas cargas candidatas. → #194
+20. Como equipo, queremos que los pesos del puntaje y el máximo de recomendaciones sean constantes del dominio, para ajustarlos con datos reales sin tocar la fórmula. → #192
 
 ## Decisiones de implementación
 
@@ -52,7 +52,7 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 - **Constantes del dominio:** peso del ajuste al viaje = 0,5, peso de la plata = 0,5 y máximo de recomendaciones = 20. Viven junto a la tolerancia de cercanía del 20%.
 - **Orden:** puntaje descendente; a igual puntaje, precio máximo descendente; después id ascendente.
 - **Errores:**
-  - Si el batch falla (no responde, timeout o error del servicio de rutas), el pedido entero falla.
+  - Si el batch falla (no responde, timeout o error del servicio de rutas), el pedido entero falla con 503 y un mensaje claro, como al cotizar una carga.
   - Si falta el tramo de una carga, esa carga se descarta con un `warn` que incluye el id de la carga y el par de localidades faltante.
   - Una carga sin precio máximo se descarta con un `warn` que incluye su id y el motivo "sin precio máximo".
 - **Contrato de la respuesta:** cada recomendación conserva los datos públicos actuales (incluidos `offerer_id` y `max_price`) y agrega `score`, `loaded_km`, `empty_start_km`, `empty_end_km` y `detour_km`.
@@ -78,7 +78,6 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 - Búsqueda en el corredor (Tier 2).
 - Mínimo de km por lado del cuadrado en viajes cortos.
 - Pin exacto obligatorio al publicar y el arreglo del front del dador que hoy descarta las coordenadas de la dirección elegida.
-- Respuesta 503 específica cuando falla el servicio de rutas. Este spec solo pide que el pedido falle; el código HTTP se define en su propia historia.
 
 ## Notas
 
@@ -89,7 +88,11 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 
 ## Historias derivadas
 
-_Lo completa `/to-tickets`. No lo escribas a mano._
-
 | Historia | Cubre (de este spec) |
 | --- | --- |
+| #190 Como transportista, Quiero ver los km vacíos de inicio, cargados, vacíos de fin y el desvío neto de cada carga recomendada… | Comportamientos 2, 3, 4, 17 y 18; decisiones "Tramos" y "Batch del servicio de rutas" (pares sin repetir) |
+| #191 Como transportista, Quiero recibir un error claro cuando el servicio de rutas no responde… | Comportamiento 15; decisión "Errores" (batch caído) |
+| #192 Como transportista, Quiero que cada carga recomendada tenga un puntaje de 0 a 100 y que la lista venga ordenada de mayor a menor… | Comportamientos 1, 5, 6, 7, 8, 9 y 20; decisiones "Fórmula del puntaje" y "Constantes del dominio" |
+| #193 Como transportista, Quiero que no se recomienden cargas sin precio máximo o con un tramo que no se pudo medir… | Comportamientos 13, 14 y 16; decisión "Errores" (cargas descartadas) |
+| #194 Como transportista, Quiero recibir recomendaciones aunque haya muchas cargas candidatas… | Comportamiento 19; decisión "Batch del servicio de rutas" (tandas de 200) |
+| #195 Como transportista, Quiero que las recomendaciones empatadas se ordenen siempre igual y recibir como máximo 20… | Comportamientos 10, 11 y 12; decisión "Orden" |
