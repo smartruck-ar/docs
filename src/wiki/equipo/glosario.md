@@ -43,8 +43,10 @@ Términos del proceso y del dominio.
 | Tramo cargado | Lo que el camión recorre con la carga, desde su origen hasta su destino |
 | Tramo vacío de fin | Lo que el camión recorre sin carga desde el destino de la carga hasta el destino del viaje solicitado |
 | Desvío neto | Los km de más por tomar la carga: tramo vacío de inicio + tramo cargado + tramo vacío de fin − viaje solicitado; nunca es negativo |
-| Ajuste al viaje | Qué tanto el recorrido total de tomar la carga se parece al viaje solicitado; baja con el desvío neto |
-| Puntaje | Qué tan conveniente es una carga para el viaje solicitado, de 0 a 100. Combina el ajuste al viaje y cuánto paga la carga por km recorrido, tramos vacíos incluidos. 100 es una carga que no desvía y paga por km lo mejor de las recomendadas |
+| Km realizados | Todo lo que el camión recorre al tomar la carga: tramo vacío de inicio + tramo cargado + tramo vacío de fin |
+| Aprovechamiento | Qué parte de los km realizados el camión va con carga: km del tramo cargado / km realizados. Vale 1 cuando va cargado todo el recorrido; baja con los km vacíos |
+| Plata por km | Lo que paga la carga por cada km realizado: precio máximo / km realizados, tramos vacíos incluidos |
+| Puntaje | Qué tan conveniente es una carga para el viaje solicitado, de 0 a 100: 50 × aprovechamiento + 50 × plata por km comparada con la mejor de las recomendadas, redondeado a entero. 100 es una carga que va cargada todo el recorrido y paga por km lo mejor de las recomendadas |
 | | |
 
 ## Repositorios
