@@ -66,4 +66,4 @@ La regla de rate limiting (`20 req / 10 s` por IP) alcanza también al backend, 
 
 ## 6. Horas (`Spent (hs)`) sin cargar
 
-La regla es que las horas las dice el usuario. Faltan las de #196, #197, #181 y las historias que se vayan cerrando.
+La regla es que las horas las dice el usuario. Faltan las de #196, #197 y las historias que se vayan cerrando.
