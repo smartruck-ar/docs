@@ -8,6 +8,8 @@ El transportista que pide recomendaciones para su viaje recibe las cargas cercan
 
 Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramos: vacío de inicio, cargado, vacío de fin y desvío neto. La lista llega ordenada de la más conveniente a la menos conveniente, con un máximo de 20 cargas. El puntaje combina el aprovechamiento (qué parte de los km realizados el camión va con carga) y lo que paga por km realizado, tramos vacíos incluidos.
 
+El transportista también puede acotar las recomendaciones por fechas: desde qué día puede retirar, hasta qué día puede retirar y hasta qué día puede entregar. Sin fechas, se recomiendan las cargas con retiro desde ahora.
+
 ## Comportamientos
 
 1. Como transportista, quiero que cada carga recomendada tenga un puntaje de 0 a 100, para saber cuál me conviene más sin hacer cuentas. → #192
@@ -26,6 +28,14 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 14. Como transportista, quiero que una carga cuyo tramo no se pudo medir quede fuera de la lista y que el resto se recomiende igual, para no quedarme sin respuesta por una sola carga. → #193
 15. Como transportista, quiero recibir un error claro cuando el servicio de rutas no responde, para saber que el problema no es mi búsqueda. → #191
 16. Como equipo, queremos que cada carga descartada (sin precio máximo o con un tramo sin medir) quede registrada en el log con su id y el motivo, para poder investigar por qué no se recomendó. → #193
+21. Como transportista, quiero indicar desde qué día puedo retirar una carga, para ver solo las cargas con retiro desde ese día. → #204
+22. Como transportista, quiero que si indico el día de hoy se sigan descartando las cargas cuya hora de retiro ya pasó, para no ver cargas que ya no puedo levantar. → #204
+23. Como transportista, quiero recibir un error claro si indico un día de retiro anterior a hoy, para saber que la fecha no es válida. → #204
+24. Como transportista, quiero indicar hasta qué día puedo retirar una carga, incluido todo ese día, para ver solo las cargas que puedo retirar dentro de mi ventana. → #205
+25. Como transportista, quiero recibir un error claro si el último día de retiro es anterior al primero o anterior a hoy, para saber que el rango no puede devolver cargas. → #205
+26. Como transportista, quiero indicar hasta qué día puedo entregar una carga, incluido todo ese día, para ver solo las cargas cuya fecha límite de entrega cumplo. → #206
+27. Como transportista, quiero que las cargas sin fecha límite de entrega no se recomienden cuando indico una fecha máxima de entrega, para no ver cargas cuya entrega no puedo comprobar. → #206
+28. Como transportista, quiero recibir un error claro si la fecha máxima de entrega es anterior a hoy o anterior al primer día de retiro, para saber que la fecha no es válida. → #206
 17. Como equipo, queremos que los tramos se midan como distancia vial entre localidades, con el servicio de rutas, para que el puntaje use los mismos km que el resto de la plataforma. → #190
 18. Como equipo, queremos que cada tramo distinto se pida una sola vez al servicio de rutas, aunque lo compartan varias cargas, para no hacer llamadas de más. → #190
 19. Como equipo, queremos que los tramos se pidan en tandas que respeten el máximo del servicio de rutas, para que la recomendación no falle cuando hay muchas cargas candidatas. → #194
@@ -64,6 +74,21 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 - **Contrato de la respuesta:** cada recomendación conserva los datos públicos actuales (incluidos `offerer_id` y `max_price`) y agrega `score`, `loaded_km`, `empty_start_km`, `empty_end_km` y `detour_km`.
 - **Sin cambios de esquema:** no hay migraciones.
 
+### Filtros de fecha
+
+- **Contrato del pedido:** tres campos opcionales de tipo fecha (`YYYY-MM-DD`) en `POST /loads/recommendations`: `pickup_from`, `pickup_to` y `delivery_deadline_max`. Un formato inválido da el 422 de siempre. Una fecha que no puede devolver nada da un 422 con un código en el detalle, como `VIAJE_DENTRO_DE_LA_MISMA_LOCALIDAD`.
+- **Solo fecha, siempre hora de Argentina:** el transportista no indica hora. La hora actual sale de `DateTimeProvider`.
+- **Piso de retiro:** sin `pickup_from`, el piso es `ahora`, como ya hace T.2.20 (`roadmap#198`). Con `pickup_from`, el piso es el mayor entre `ahora` y las 00:00 de esa fecha. Con `pickup_from` igual a hoy el piso es `ahora`; con una fecha futura, las 00:00 de ese día. La fecha nunca recupera cargas con retiro pasado.
+- **Techo de retiro:** `pickup_to` es inclusivo hasta las 23:59:59 de ese día.
+- **Fecha máxima de entrega:** `delivery_deadline_max` es inclusiva hasta las 23:59:59 de ese día y compara contra la fecha límite de entrega de la carga (`delivery_deadline <= máximo`). Una carga sin fecha límite de entrega no se recomienda cuando se indica este filtro.
+- **Errores (422, con el código en el detalle):**
+  - `pickup_from` anterior a hoy: `RETIRO_DESDE_ANTERIOR_A_HOY`.
+  - `pickup_to` anterior a hoy: `RETIRO_HASTA_ANTERIOR_A_HOY`. Anterior a `pickup_from`: `RETIRO_HASTA_ANTERIOR_A_RETIRO_DESDE`.
+  - `delivery_deadline_max` anterior a hoy: `ENTREGA_MAXIMA_ANTERIOR_A_HOY`. Anterior a `pickup_from`: `ENTREGA_MAXIMA_ANTERIOR_A_RETIRO_DESDE`. No se compara con `pickup_to`: una carga con retiro temprano puede cumplir un máximo de entrega cercano.
+- **Diseño en el dominio:** un objeto de valor `PickupWindow`, que se construye con las fechas pedidas y la hora actual, se valida a sí mismo y expone el piso y el techo de retiro. Lanza un error de dominio que el mapper traduce a 422. `LoadPreferences` no cambia: sigue con los tipos de carga y de remolque. La fecha máxima de entrega entra al puerto como parámetro propio, sin necesitar una ventana.
+- **Dónde se filtra:** en la consulta de cargas candidatas del repositorio, junto al piso de retiro que ya existe.
+- **Orden de las historias:** primero `pickup_from`, que trae el cableado (campos, mapper, puerto, consulta y su 422); después `pickup_to`, y por último `delivery_deadline_max`. Son tres historias.
+
 ## Decisiones de testing
 
 - **Seam principal:** el endpoint `POST /loads/recommendations`, con escenarios de aceptación pytest-bdd en `recomendar_cargas.feature` (como REC 01 y REC 02). Cubre el puntaje, los km de los tramos, el orden, el desempate, el máximo de 20, las cargas descartadas y el error cuando el servicio de rutas falla.
@@ -73,13 +98,16 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 - **Qué hace bueno a un test:** verifica el comportamiento por la interfaz pública con datos conocidos (por ejemplo, tres cargas con km y precios fijos y sus puntajes esperados). No verifica cómo está hecho por dentro.
 - **Tests parecidos en el código:** los steps de `recomendar_cargas_steps.py` (REC 01 y REC 02), `test_recommend_loads_use_case.py` y `test_routes_service_distance.py`.
 - **Escenarios existentes:** el step de datos públicos de REC 01 hoy exige que `score` y `empty_km` no aparezcan. Se actualiza para el contrato nuevo.
+- **Filtros de fecha:** mismo seam principal (el endpoint de recomendaciones), en la regla "Fecha de retiro" de `recomendar_cargas.feature` (como REC 13 y REC 14) y una regla nueva para la fecha de entrega. Los unitarios de `PickupWindow` cubren el piso, el techo y los errores; el repositorio se prueba con la integración existente.
 
 ## Fuera de alcance
 
 - Tope de cargas candidatas antes de puntuar (escenario de "muchas cargas").
 - Medir los tramos entre pines en lugar de entre localidades.
 - Autenticación y rol del endpoint de recomendaciones.
-- Filtros de remolque, peso y fecha.
+- Filtro de peso.
+- Hacer obligatoria la fecha límite de entrega (`delivery_deadline`) al publicar una carga, como se hace con la fecha de retiro. Tiene que ser una historia aparte; hasta entonces, el filtro de fecha máxima de entrega descarta las cargas que no la tienen.
+- Indicar hora en los filtros de fecha.
 - Tolerancia de cercanía elegida por el transportista.
 - Búsqueda en el corredor (Tier 2).
 - Mínimo de km por lado del cuadrado en viajes cortos.
@@ -92,6 +120,7 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 - Ejemplo de referencia con el viaje Buenos Aires → Córdoba (696 km): Buenos Aires → Córdoba con $1.393.000 da 100; Pilar → Alta Gracia (650 km cargados de 735 realizados, $1.338.000) da 90; Buenos Aires → Rosario (300 km cargados de 700 realizados, $600.000) da 43.
 - Vocabulario en el glosario: viaje solicitado, tramo vacío de inicio, tramo cargado, tramo vacío de fin, desvío neto, km realizados, aprovechamiento, plata por km y puntaje.
 - El aprovechamiento reemplazó al "ajuste al viaje" (km del viaje solicitado / km realizados) durante T.2.18: el ajuste no castigaba una carga con los mismos km que el viaje pero casi todos vacíos, y pasaba de 1 cuando los km realizados eran menos que los del viaje.
+- Los límites de día de los filtros de fecha (las 00:00 de `pickup_from` y las 23:59:59 de `pickup_to` y de `delivery_deadline_max`) se calculan en hora de Argentina y dependen de que `pickup_date` y `delivery_deadline` se guarden en hora argentina. Hoy eso no está garantizado: queda pendiente en "publicar con datos completos" (zona horaria). Este spec no lo resuelve.
 
 ## Historias derivadas
 
@@ -103,3 +132,6 @@ Cada carga recomendada viene con un puntaje de 0 a 100 y con los km de sus tramo
 | #193 Como transportista, Quiero que no se recomienden cargas sin precio máximo o con un tramo que no se pudo medir… | Comportamientos 13, 14 y 16; decisión "Errores" (cargas descartadas) |
 | #194 Como transportista, Quiero recibir recomendaciones aunque haya muchas cargas candidatas… | Comportamiento 19; decisión "Batch del servicio de rutas" (tandas de 200) |
 | #195 Como transportista, Quiero que las recomendaciones empatadas se ordenen siempre igual y recibir como máximo 20… | Comportamientos 10, 11 y 12; decisión "Orden" |
+| #204 Como transportista, Quiero indicar desde qué día puedo retirar una carga… | Comportamientos 21, 22 y 23; decisiones "Contrato del pedido", "Piso de retiro" y "Diseño en el dominio" (cableado) |
+| #205 Como transportista, Quiero indicar hasta qué día puedo retirar una carga… | Comportamientos 24 y 25; decisión "Techo de retiro" |
+| #206 Como transportista, Quiero indicar hasta qué día puedo entregar una carga… | Comportamientos 26, 27 y 28; decisión "Fecha máxima de entrega" |
