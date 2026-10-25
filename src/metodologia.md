@@ -1,158 +1,291 @@
 # Metodología de trabajo aplicada
 
-El proyecto se desarrolló mediante un enfoque ágil e híbrido. Se conservaron de
-Scrum la gestión incremental del producto, la priorización de historias, la
-estimación del trabajo y la revisión de los incrementos. De Extreme Programming
-(XP) se incorporaron prácticas orientadas a la calidad técnica, como el
-desarrollo guiado por pruebas de aceptación, la integración frecuente, los
-commits atómicos y la refactorización. Sin embargo, el proceso aplicado no
-constituyó una implementación ortodoxa de Scrum ni de XP: se adaptó a un equipo
-académico horizontal, con responsabilidades distribuidas y sin un Scrum Master
-dedicado.
+Para el desarrollo del proyecto se adoptó un marco de trabajo ágil e híbrido
+que combinó elementos de Scrum para la gestión, planificación y seguimiento del
+proceso, con prácticas de Extreme Programming (XP) orientadas a asegurar la
+calidad técnica del software. En la práctica, el proceso evolucionó hacia un
+sistema mixto y pragmático, adaptado al contexto académico y a la estructura
+horizontal del equipo de estudiantes, sin constituir una implementación
+ortodoxa de ninguna de las metodologías mencionadas.
 
-La unidad principal de planificación fue la **historia de usuario**. Las
-historias se registraron en el repositorio `roadmap`, se agruparon en épicas
-(milestones) y se asociaron al repositorio de producto correspondiente. El
-trabajo se organizó en sprints y en entregas incrementales, aunque la
-documentación vigente no establece una duración única para todos los sprints.
-La prioridad y el alcance se revisaron durante el desarrollo a partir de las
-dependencias, los resultados de las validaciones y la retroalimentación del
-equipo y de los tutores.
+Scrum se utilizó como referencia para organizar el trabajo mediante un backlog
+priorizado, historias de usuario, estimaciones y entregas incrementales. De XP
+se incorporaron prácticas vinculadas con el desarrollo guiado por pruebas de
+aceptación, la integración frecuente, los commits atómicos y la
+refactorización. La aplicación de estas prácticas se adaptó a las
+características del equipo, con responsabilidades distribuidas y sin la
+asignación de roles rígidos.
 
-## Gestión del trabajo
+El objetivo de esta metodología fue mantener una evolución continua del
+producto, facilitar la validación temprana de los requerimientos, mejorar la
+trazabilidad entre las necesidades y su implementación y establecer condiciones
+verificables para asegurar la calidad de cada incremento de software.
 
-El flujo de gestión aplicado fue el siguiente:
+## Marcos de gestión y organización del trabajo
 
-1. Las necesidades se expresaron como historias con formato
-   **Como / Quiero / Para** y se agruparon bajo una épica.
-2. Durante el refinamiento se definieron los criterios de aceptación, las
-   dependencias, la prioridad y los puntos relativos de la historia.
-3. Una historia solo podía comenzar cuando cumplía la
-   [Definition of Ready](./wiki/proceso/definition-of-ready.md) y pasaba a
-   `In progress`.
-4. El desarrollo se realizó directamente sobre `main`, con commits pequeños y
-   atómicos, siguiendo la convención de
-   [Conventional Commits](./wiki/proceso/conventional-commits.md). A diferencia
-   de lo previsto inicialmente, el flujo vigente no utiliza ramas de feature ni
-   pull requests.
-5. Una vez implementada y verificada la funcionalidad, se generó una versión y
-   se liberó al ambiente `test`. La historia pasó a `In review` y se registraron
-   las horas reales insumidas.
-6. Al cierre del ciclo de trabajo, el equipo validó el incremento en `test` y
-   promovió la versión a `prod`. Solo en ese momento la historia pasó a `Done`,
-   conforme a la [Definition of Done](./wiki/proceso/definition-of-done.md).
+### Product backlog e historias de usuario
 
-Este flujo reemplazó la idea de una entrega final única por incrementos
-verificables. La separación entre `main`, `test` y `prod` permitió detectar
-problemas antes de la liberación definitiva y conservar evidencia del estado de
-cada historia.
+La planificación del producto se organizó a partir de un conjunto de historias
+de usuario registradas en el repositorio
+[`roadmap`](https://github.com/smartruck-ar/roadmap), dentro de la plataforma
+GitHub. Estas historias se agruparon en épicas, representadas mediante
+milestones, y se vincularon con los repositorios de producto correspondientes.
 
-## Artefactos y técnicas de planificación
+El backlog funcionó como un artefacto dinámico que permitió organizar los
+requerimientos, priorizarlos y mantener la trazabilidad entre las necesidades
+funcionales, los cambios de código y los resultados obtenidos. La prioridad y
+el alcance de las historias se revisaron durante el desarrollo en función de
+las dependencias técnicas, los resultados de las validaciones y la
+retroalimentación recibida del equipo y de los tutores.
 
-El backlog se organizó en épicas, historias de backend, historias de interfaz y
-spikes. La numeración de las historias se asignó automáticamente al vincularlas
-con una épica, y las historias de interfaz mantuvieron la referencia a su
-contraparte de backend. Esta estructura permitió relacionar el requerimiento,
-el código, los escenarios de aceptación y los commits.
+Las historias se utilizaron como unidad principal de planificación y
+seguimiento. Para su identificación y organización se emplearon referencias
+asociadas a las épicas como prefijo del nombre. Las historias asociadas al
+desarrollo de interfaces mantuvieron la referencia a sus correspondientes
+historias de backend cuando esa división resultó útil para conservar la
+trazabilidad. Cuando la separación dejaba de aportar cohesión, el trabajo se
+organizó como una única historia. Así, los requerimientos pudieron relacionarse
+con sus criterios de aceptación, los cambios de código y los commits asociados.
 
-La estimación distinguió dos conceptos que en la propuesta inicial aparecían
-relacionados:
+### Sprints y entregas incrementales
 
-- **US Points:** estimación relativa de complejidad, incertidumbre y esfuerzo de
-  la historia, realizada durante el refinamiento con una escala de Fibonacci
-  acotada.
-- **Estimate (hs) y Spent (hs):** horas previstas al comenzar la historia y
-  horas efectivamente insumidas al liberarla a `test`, respectivamente.
+El trabajo se organizó mediante sprints y entregas incrementales orientadas a
+obtener funcionalidades verificables durante el ciclo de desarrollo. La
+propuesta inicial contemplaba iteraciones de dos semanas, pero en la práctica
+los ciclos tuvieron una duración aproximada de una semana, determinada
+principalmente por las demostraciones que el equipo realizaba ante los tutores.
 
-De este modo, los puntos se utilizaron para comparar el tamaño relativo de las
-historias y las horas para contrastar la previsión con el esfuerzo real. Las
-historias demasiado grandes se analizaron para dividirlas en sub-historias.
+Los sprints funcionaron como referencia para organizar la planificación, el
+desarrollo, la revisión y la validación de los incrementos. El alcance se
+ajustó durante el ciclo cuando las necesidades del proyecto lo requirieron,
+manteniendo como referencia el valor de negocio definido.
 
-## Prácticas de ingeniería y aseguramiento de calidad
+Este enfoque reemplazó la dependencia de una única entrega final por una
+secuencia de incrementos que se verificaron progresivamente en los distintos
+ambientes. De esta manera, los problemas pudieron detectarse con anticipación y
+los ajustes se incorporaron durante el desarrollo.
 
-Los criterios de aceptación de las historias de backend se expresaron como
-escenarios Gherkin en español. Antes de que una historia quedara lista para
-desarrollo, los archivos `.feature` debían estar versionados en `main` y
-enlazados desde el ticket. El escenario debía ejercitar la aplicación en el
-paso `Cuando` y verificar el resultado esperado mediante `Entonces`. Esta
-práctica funcionó como una forma de desarrollo guiado por comportamiento (BDD)
-y como lenguaje común entre requerimientos, implementación y validación.
+### Planificación, estimación y seguimiento
 
-La calidad se controló en distintos niveles:
+Durante el refinamiento de las historias se definieron los criterios de
+aceptación, las dependencias, la prioridad y la estimación relativa del
+esfuerzo. La planificación organizó el trabajo de acuerdo con su valor, su
+complejidad y las condiciones necesarias para comenzar la implementación.
 
-- pruebas unitarias, de integración y de aceptación cuando correspondía;
-- ejecución de la suite acordada antes de liberar a `test`;
-- validación de los criterios de aceptación sobre el ambiente `test`;
-- revisión de la documentación técnica y del README cuando el cambio los
-  afectaba;
-- control de que no se incorporaran secretos ni configuraciones locales;
-- uso de una arquitectura hexagonal y principios de código limpio en los
-  servicios que los documentan.
+La estimación distinguió dos dimensiones complementarias:
 
-La documentación de infraestructura también evidencia el uso de
-Infrastructure as Code mediante Terraform y pipelines automatizados con
-GitHub Actions en los templates de plataforma. No obstante, esas prácticas
-deben atribuirse al repositorio o servicio donde están implementadas y no
-generalizarse automáticamente a todos los componentes del proyecto.
+- **US Points:** representaron una estimación relativa de la complejidad, la
+  incertidumbre y el esfuerzo asociado a una historia. Se utilizaron durante
+  el refinamiento mediante una escala de Fibonacci acotada.
+- **Estimate (hs) y Spent (hs):** representaron, respectivamente, las horas
+  previstas al comenzar una historia y las horas efectivamente insumidas al
+  liberar la funcionalidad al ambiente de test.
 
-## Definition of Ready aplicada
+Esta distinción permitió complementar la estimación relativa con el registro
+del esfuerzo real. Mientras que los US Points facilitaron la comparación entre
+historias, las horas permitieron contrastar la previsión inicial con el tiempo
+de ejecución y mejorar las estimaciones futuras.
 
-La Definition of Ready aplicada no se limitó a que la historia tuviera una
-descripción. Exigió que contara con:
+Cuando una historia presentó un alcance o una complejidad excesivos, se evaluó
+su división en sub-historias. En particular, la documentación de estimación
+estableció que las historias de 8 puntos o más debían analizarse para decidir
+si convenía dividirlas.
 
-- título y contexto en formato de historia de usuario;
-- épica, identificador y prioridad asignados;
-- criterios de aceptación Gherkin versionados y enlazados para historias de
-  backend, o indicación explícita de que no aplican en un spike;
-- referencia a la historia de backend para las historias de interfaz;
-- puntos de historia cargados;
-- dependencias declaradas y desbloqueadas;
-- estimación inicial en horas al pasar a `In progress`.
+### Revisión y validación de los incrementos
 
-El detalle operativo se encuentra en la
-[Definition of Ready](./wiki/proceso/definition-of-ready.md) y en la
-[plantilla de ticket](./wiki/tickets/plantilla-ticket.md). En contraste con la
-propuesta original, el repositorio no exige como condición general un mockup
-adjunto ni la documentación previa de todos los microservicios y tablas
-afectadas. Esos elementos pueden incorporarse cuando la historia los necesita,
-pero no forman parte del checklist vigente común a todas las historias.
+La revisión del trabajo se integró al flujo de desarrollo mediante la
+validación de las funcionalidades implementadas y la comprobación de sus
+criterios de aceptación. Los incrementos se liberaron inicialmente al ambiente
+de test, donde el equipo verificó el comportamiento del producto antes de
+promover una versión a producción.
 
-## Definition of Done aplicada
+La retroalimentación del equipo y de los tutores permitió ajustar las
+prioridades y revisar el alcance de los requerimientos en cada semana. Si bien
+la propuesta inicial contemplaba ceremonias formalizadas de Sprint Review,
+demostraciones y retrospectivas con una duración determinada, el proceso
+aplicado se centró en las actividades efectivas de planificación, revisión y
+validación, sin establecer una duración u horario obligatorio para todas estas
+instancias. Esta decisión respondió a los solapamientos entre las
+responsabilidades externas de los integrantes.
 
-Una historia se consideró terminada únicamente cuando:
+La mejora continua se abordó mediante el análisis de los resultados del
+desarrollo, las dificultades detectadas y la información obtenida durante las
+validaciones. En las retrospectivas realizadas se utilizó un tablero de Miro
+con notas anónimas organizadas en tres categorías: qué se debía mantener, qué
+se debía mejorar y qué se podía incorporar o innovar.
 
-- todos sus criterios de aceptación se cumplieron y los escenarios aplicables
-  quedaron en verde;
-- el código y las pruebas fueron integrados en `main`;
-- la suite de pruebas acordada finalizó correctamente;
-- la funcionalidad fue liberada y validada en `test`;
-- se registraron las horas reales (`Spent (hs)`);
-- se actualizó la documentación afectada;
-- el equipo promovió la versión a `prod` mediante el release del sprint.
+## Prácticas de ingeniería del software
 
-Por lo tanto, en el proceso aplicado **Done no equivale a “implementado” ni
-solamente a “disponible en test”: equivale a estar validado y desplegado en
-producción**. Esta es la diferencia más relevante respecto de una Definition
-of Done centrada únicamente en la ejecución de pruebas o en la disponibilidad
-del incremento en un ambiente intermedio.
+### Desarrollo guiado por criterios de aceptación
 
-## Contraste con la propuesta inicial
+Los criterios de aceptación de las historias de backend se expresaron mediante
+escenarios Gherkin en español. Estos escenarios describieron el comportamiento
+esperado de las funcionalidades utilizando un lenguaje compartido entre los
+requerimientos, la implementación y la validación.
 
-| Elemento de la propuesta | Aplicación observada en el repositorio |
-|---|---|
-| Scrum e XP como marcos combinados | Se mantuvo un enfoque híbrido y pragmático, sin roles rígidos ni aplicación purista. |
-| Backlog único y priorizado | Se concretó en historias agrupadas por épicas y gestionadas en `roadmap`, con Board y estados. |
-| Sprints e incrementos | Se conservaron sprints y entregas incrementales; la documentación vigente no fija una duración única. |
-| Planning, review y retrospectiva | La planificación, revisión y validación están reflejadas en el flujo; las ceremonias no están documentadas como eventos rígidos con duración obligatoria. |
-| Pair/Mob Programming | Puede utilizarse como técnica colaborativa, pero no hay evidencia en esta documentación de que sea una práctica obligatoria o sistemática. |
-| CI/CD ante cada push o pull request | Hay automatización de build y publicación para la documentación y pipelines en templates; el flujo de producto documentado trabaja con pushes a `main` y releases a `test`/`prod`, no con pull requests. |
-| Despliegue y smoke test | La promoción por ambientes está formalizada; la existencia y alcance de smoke tests depende del repositorio de servicio y no se afirma aquí como requisito uniforme. |
-| IaC | Está documentado en los templates de infraestructura; se aplica por repositorio o componente. |
-| DoR con mockups y análisis técnico completo | El DoR vigente exige historia, Gherkin, prioridad, estimación y dependencias; mockups y análisis técnico se solicitan cuando la historia los requiere. |
-| DoD con validación en test | La DoD vigente agrega la condición más fuerte de despliegue en producción, además de pruebas, documentación y registro de horas. |
+Antes de que una historia de backend quedara preparada para su desarrollo, los
+archivos `.feature` debían estar versionados en `main` y vinculados desde el
+ticket correspondiente. Los escenarios ejercitaban la aplicación en el paso
+`Cuando` y comprobaban el resultado esperado mediante `Entonces`.
 
-Esta formulación describe el proceso efectivamente utilizado y permite
-conservar la propuesta original como antecedente: algunas prácticas fueron
-confirmadas, otras se adaptaron al contexto y otras quedaron como criterios
-recomendados para los repositorios que las implementen explícitamente.
+De esta manera, los criterios de aceptación se utilizaron como una referencia
+verificable para determinar si la funcionalidad implementada cumplía con el
+comportamiento esperado. Esta práctica incorporó principios de desarrollo
+guiado por comportamiento (BDD) y redujo las ambigüedades entre las
+necesidades expresadas y su implementación técnica.
 
+### Integración, pruebas y despliegue
+
+La integración frecuente se implementó mediante trabajo directo sobre `main`,
+commits atómicos y una convención uniforme de mensajes. A diferencia de la
+propuesta inicial, el flujo aplicado no utilizó ramas de feature ni pull
+requests. Las versiones se liberaron progresivamente a los ambientes de test y
+producción mediante los scripts de release definidos para los repositorios de
+producto.
+
+La propuesta original también contemplaba pipelines con etapas específicas de
+compilación, análisis estático, pruebas automatizadas, detección de secretos y
+smoke tests posteriores al despliegue. Estas técnicas se aplicaron según las
+capacidades del repositorio o servicio correspondiente, sin considerarlas un
+requisito uniforme para todo el proyecto. La validación común consistió en
+ejecutar la suite de pruebas acordada, verificar los criterios de aceptación en
+test y confirmar la promoción del incremento a producción.
+
+### Infraestructura como código
+
+La gestión de infraestructura incorporó el uso de Infrastructure as Code
+(IaC), con el objetivo de describir y versionar programáticamente la
+configuración de los entornos de plataforma.
+
+La documentación de los templates de infraestructura evidencia el uso de
+Terraform y su integración con procesos automatizados mediante GitHub Actions.
+Estas herramientas permitieron reproducir configuraciones, mantener un
+historial de cambios y reducir la dependencia de modificaciones manuales sobre
+los recursos de infraestructura. La aplicación de estas prácticas se atribuye
+a los repositorios y componentes donde están implementadas, sin extenderla
+automáticamente a todos los servicios del sistema.
+
+### Refactorización y código limpio
+
+La mantenibilidad del software se promovió mediante commits atómicos,
+integración frecuente y refactorización cuando fue necesario. Estas prácticas
+mejoraron la estructura interna del código sin alterar el comportamiento
+funcional esperado.
+
+En los servicios que documentan explícitamente estos criterios se utilizó una
+arquitectura hexagonal y principios de código limpio para favorecer la
+separación de responsabilidades, la claridad de las dependencias y la
+facilidad de mantenimiento. La revisión de la documentación técnica también
+formó parte de las actividades de calidad cuando los cambios introducidos
+afectaron su contenido.
+
+## Definición de preparado (Definition of Ready)
+
+La Definition of Ready (DoR) estableció las condiciones mínimas que debía
+cumplir una historia antes de ingresar a la etapa de desarrollo. Su objetivo
+fue evitar que se iniciaran trabajos con requerimientos ambiguos, dependencias
+sin resolver o estimaciones pendientes.
+
+Para que una historia pudiera comenzar, debía cumplir con los siguientes
+requisitos:
+
+1. **Identificación y descripción:** título, descripción contextualizada en
+   formato de historia de usuario, épica, identificador y prioridad asignados.
+2. **Criterios de aceptación:** escenarios Gherkin en español, versionados en
+   `main` y enlazados desde el ticket para las historias de backend. En los
+   spikes se indicó explícitamente cuando estos criterios no aplicaban.
+3. **Vinculación entre historias relacionadas:** referencia explícita a la
+   historia de backend correspondiente en las historias de interfaz cuando
+   existía esa relación.
+4. **Estimación del esfuerzo:** US Points cargados durante el refinamiento
+   mediante la escala de Fibonacci utilizada por el equipo.
+5. **Análisis de dependencias:** dependencias técnicas y funcionales
+   identificadas y desbloqueadas antes de comenzar la implementación.
+6. **Estimación inicial en horas:** campo `Estimate (hs)` registrado al pasar
+   la historia al estado `In progress`.
+
+Los requisitos específicos de cada historia se complementaron con información
+de diseño, prototipos, contratos de API, estructuras de datos o análisis de
+microservicios afectados cuando el requerimiento lo necesitó. Estos elementos
+no constituyeron condiciones generales obligatorias para todas las historias.
+
+## Definición de terminado (Definition of Done)
+
+La Definition of Done (DoD) estableció las condiciones que debía cumplir una
+historia para considerarse finalizada. El cierre no dependió exclusivamente de
+terminar la implementación, sino también de verificar el comportamiento,
+integrar el código y liberar efectivamente el incremento.
+
+Una historia se consideró terminada cuando cumplía con las siguientes
+condiciones:
+
+1. **Criterios de aceptación satisfechos:** todos los escenarios aplicables
+   finalizaban correctamente.
+2. **Código y pruebas integrados:** los cambios se encontraban integrados en
+   `main`, manteniendo la trazabilidad mediante el historial de commits.
+3. **Pruebas ejecutadas satisfactoriamente:** la suite acordada finalizaba
+   correctamente, de acuerdo con las características del servicio y del
+   requerimiento.
+4. **Liberación y validación en test:** la funcionalidad se encontraba
+   liberada en `test` y había sido validada por el equipo.
+5. **Esfuerzo real registrado:** las horas efectivamente insumidas estaban
+   cargadas en el campo `Spent (hs)`.
+6. **Documentación actualizada:** se habían actualizado el README, las
+   especificaciones técnicas o los contratos de API cuando los cambios los
+   afectaban.
+7. **Promoción a producción:** el equipo había promovido la versión a `prod`
+   mediante el release correspondiente al ciclo de trabajo.
+
+Por lo tanto, en el proceso aplicado, el estado `Done` no equivalió únicamente
+a haber terminado la implementación ni a disponer de una funcionalidad en
+test. Una historia alcanzó este estado cuando el incremento fue validado, se
+registró el esfuerzo real, se actualizó la documentación afectada y se
+completó su promoción a producción.
+
+Estas definiciones se aplicaron como criterios de referencia y no de manera
+purista. Los trabajos de reestilizado, correcciones y otras tareas de
+mantenimiento no siempre contaron con una épica asociada a una funcionalidad
+nueva. En esos casos se mantuvieron los controles pertinentes de trazabilidad,
+validación, registro del esfuerzo y documentación, adaptando el formato del
+ticket a la naturaleza del trabajo.
+
+## Organización de los estados y trazabilidad
+
+El seguimiento de las historias se realizó mediante estados que reflejaron su
+avance:
+
+- una historia preparada pasó a `In progress` al comenzar su implementación;
+- una vez desarrollada y verificada, se liberó a `test` y pasó a `In review`;
+- durante esa etapa se registraron las horas reales y se validaron los
+  criterios de aceptación;
+- cuando el equipo confirmó el incremento y promovió la versión a producción,
+  la historia pasó a `Done`.
+
+Este flujo permitió distinguir la implementación de una funcionalidad, su
+validación en un ambiente intermedio y su liberación definitiva. La relación
+entre épicas, historias, repositorios, escenarios Gherkin y commits mantuvo la
+trazabilidad entre los requerimientos y su implementación. A su vez, los
+campos de estimación y esfuerzo real aportaron información para analizar la
+ejecución del trabajo y mejorar las decisiones de planificación.
+
+## Síntesis del enfoque metodológico
+
+La metodología aplicada combinó una organización incremental del trabajo con
+prácticas de ingeniería destinadas a mantener la calidad y la trazabilidad del
+software. La gestión basada en historias de usuario, épicas, prioridades y
+estimaciones permitió estructurar el backlog y ajustar el alcance durante el
+desarrollo. Gherkin, la integración frecuente, los commits atómicos, las
+pruebas y la refactorización establecieron mecanismos de verificación y
+mantenimiento del producto.
+
+La separación entre los ambientes `main`, `test` y `prod` organizó la
+liberación progresiva de los incrementos, mientras que las definiciones de
+preparado y terminado establecieron condiciones explícitas para comenzar y
+cerrar las historias.
+
+Si bien el proceso no siguió estrictamente una única metodología ágil,
+conservó los principios de adaptabilidad, colaboración, entrega incremental y
+mejora continua. La metodología resultante se definió por la combinación de
+mecanismos de gestión y prácticas técnicas que permitieron organizar el
+desarrollo, validar los resultados y considerar terminadas las funcionalidades
+únicamente después de su validación y despliegue en producción.
