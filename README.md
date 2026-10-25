@@ -25,7 +25,7 @@ En `main`, el workflow [Deploy mdBook](.github/workflows/deploy.yml) publica en 
 
 | Sección | Contenido |
 |---------|-----------|
-| Páginas raíz | Inicio, proyecto, arquitectura, requerimientos, desarrollo, manual |
+| Páginas raíz | Inicio, proyecto, arquitectura, requerimientos, metodología, desarrollo, manual |
 | [wiki/](src/wiki/README.md) | Jerarquía, DoR/DoD, tickets, roles, glosario |
 | [repositories/](src/repositories/README.md) | Docs por servicio (backend, dador, transportista, templates) |
 

@@ -5,6 +5,7 @@
 - [Arquitectura](./arquitectura.md)
 - [Riesgos](./riesgos.md)
 - [Requerimientos](./requerimientos.md)
+- [Metodología de trabajo aplicada](./metodologia.md)
 - [Guía de desarrollo](./desarrollo.md)
 - [Manual de usuario](./manual_usuario.md)
 
