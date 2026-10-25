@@ -1088,6 +1088,8 @@ LogManager(service="smartruck-backend", env="test").error("…")
 <tr><td>Passwords, tokens, PII innecesaria</td><td>Seguridad</td></tr>
 </tbody></table>
 </div>
+<h2 id="excepción-decisiones-de-negocio-que-el-spec-pide-registrar"><a class="header" href="#excepción-decisiones-de-negocio-que-el-spec-pide-registrar">Excepción: decisiones de negocio que el spec pide registrar</a></h2>
+<p>Un caso de uso puede emitir un <code>warn</code> cuando el spec pide dejar registro de una decisión de negocio para poder investigarla después. Por ejemplo, el caso de uso de recomendaciones deja una línea por cada carga que descarta, con su id y el motivo. El caso de uso recibe <code>LogManager</code> por constructor, y el motivo lo describe el dominio (<code>DiscardedLoad</code>). Es un <code>warn</code> por decisión, no un log por línea: no es ruido.</p>
 <h2 id="checklist-1"><a class="header" href="#checklist-1">Checklist</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"/>
@@ -1095,7 +1097,7 @@ LogManager(service="smartruck-backend", env="test").error("…")
 <li><input disabled="" type="checkbox"/>
 Errores/excepciones logueados en el <strong>GlobalExceptionHandler</strong> (no catch/rethrow en controllers)</li>
 <li><input disabled="" type="checkbox"/>
-Sin logs de negocio ruidosos en application/domain</li>
+Sin logs de negocio ruidosos en application/domain (salvo las decisiones que el spec pide registrar)</li>
 <li><input disabled="" type="checkbox"/>
 Salida a stdout (JSON vía LogManager)</li>
 <li><input disabled="" type="checkbox"/>
@@ -1540,6 +1542,8 @@ Cada historia del sprint tiene responsable y repo</li>
 <tr><td>Aprovechamiento</td><td>Qué parte de los km realizados el camión va con carga: km del tramo cargado / km realizados. Vale 1 cuando va cargado todo el recorrido; baja con los km vacíos</td></tr>
 <tr><td>Plata por km</td><td>Lo que paga la carga por cada km realizado: precio máximo / km realizados, tramos vacíos incluidos</td></tr>
 <tr><td>Puntaje</td><td>Qué tan conveniente es una carga para el viaje solicitado, de 0 a 100: 50 × aprovechamiento + 50 × plata por km comparada con la mejor de las recomendadas, redondeado a entero. 100 es una carga que va cargada todo el recorrido y paga por km lo mejor de las recomendadas</td></tr>
+<tr><td>Ventana de retiro</td><td>El rango de días en que el transportista puede retirar una carga: desde <code>pickup_from</code> hasta <code>pickup_to</code>, ambos incluidos. Sin <code>pickup_from</code> empieza ahora; nunca incluye cargas con retiro pasado</td></tr>
+<tr><td>Fecha máxima de entrega</td><td>El último día (incluido) en que el transportista puede entregar. Se compara con la fecha límite de entrega de la carga; una carga sin fecha límite no se recomienda</td></tr>
 <tr><td></td><td></td></tr>
 </tbody></table>
 </div>
