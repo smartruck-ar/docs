@@ -79,11 +79,12 @@ El transportista también puede acotar las recomendaciones por fechas: desde qu�
 - **Contrato del pedido:** tres campos opcionales de tipo fecha (`YYYY-MM-DD`) en `POST /loads/recommendations`: `pickup_from`, `pickup_to` y `delivery_deadline_max`. Un formato inválido da el 422 de siempre. Una fecha que no puede devolver nada da un 422 con un código en el detalle, como `VIAJE_DENTRO_DE_LA_MISMA_LOCALIDAD`.
 - **Solo fecha, siempre hora de Argentina:** el transportista no indica hora. La hora actual sale de `DateTimeProvider`.
 - **Piso de retiro:** sin `pickup_from`, el piso es `ahora`, como ya hace T.2.20 (`roadmap#198`). Con `pickup_from`, el piso es el mayor entre `ahora` y las 00:00 de esa fecha. Con `pickup_from` igual a hoy el piso es `ahora`; con una fecha futura, las 00:00 de ese día. La fecha nunca recupera cargas con retiro pasado.
-- **Techo de retiro:** `pickup_to` es inclusivo hasta las 23:59:59 de ese día.
+- **Techo de retiro:** `pickup_to` es inclusivo hasta las 23:59:59 de ese día. En el código el techo es el último instante del día (`23:59:59.999999`), así que una carga con retiro a las 23:59:59,5 también entra.
 - **Fecha máxima de entrega:** `delivery_deadline_max` es inclusiva hasta las 23:59:59 de ese día y compara contra la fecha límite de entrega de la carga (`delivery_deadline <= máximo`). Una carga sin fecha límite de entrega no se recomienda cuando se indica este filtro.
 - **Errores (422, con el código en el detalle):**
   - `pickup_from` anterior a hoy: `RETIRO_DESDE_ANTERIOR_A_HOY`.
   - `pickup_to` anterior a hoy: `RETIRO_HASTA_ANTERIOR_A_HOY`. Anterior a `pickup_from`: `RETIRO_HASTA_ANTERIOR_A_RETIRO_DESDE`.
+  - Orden de validación: si hay más de un error, sale el primero de estos tres: `pickup_from` anterior a hoy, `pickup_to` anterior a hoy, `pickup_to` anterior a `pickup_from`. Un `pickup_to` igual a `pickup_from` es válido (rango de un solo día).
   - `delivery_deadline_max` anterior a hoy: `ENTREGA_MAXIMA_ANTERIOR_A_HOY`. Anterior a `pickup_from`: `ENTREGA_MAXIMA_ANTERIOR_A_RETIRO_DESDE`. No se compara con `pickup_to`: una carga con retiro temprano puede cumplir un máximo de entrega cercano.
 - **Diseño en el dominio:** un objeto de valor `PickupWindow`, que se construye con las fechas pedidas y la hora actual, se valida a sí mismo y expone el piso y el techo de retiro. Lanza un error de dominio que el mapper traduce a 422. `LoadPreferences` no cambia: sigue con los tipos de carga y de remolque. La fecha máxima de entrega entra al puerto como parámetro propio, sin necesitar una ventana.
 - **Dónde se filtra:** en la consulta de cargas candidatas del repositorio, junto al piso de retiro que ya existe.
