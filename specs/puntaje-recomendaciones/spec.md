@@ -40,17 +40,17 @@ El transportista también puede acotar las recomendaciones por fechas: desde qu�
 18. Como equipo, queremos que cada tramo distinto se pida una sola vez al servicio de rutas, aunque lo compartan varias cargas, para no hacer llamadas de más. → #190
 19. Como equipo, queremos que los tramos se pidan en tandas que respeten el máximo del servicio de rutas, para que la recomendación no falle cuando hay muchas cargas candidatas. → #194
 20. Como equipo, queremos que los pesos del puntaje y el máximo de recomendaciones sean constantes del dominio, para ajustarlos con datos reales sin tocar la fórmula. → #192
-29. Como transportista, quiero que si falla cualquiera de las tandas de tramos reciba el error claro de siempre y no una lista armada con una parte, para no ver puntajes que no son reales.
-30. Como transportista, quiero que dos cargas con localidades rotas en tandas distintas se descarten y el resto se recomiende igual, para no quedarme sin respuesta por datos ajenos.
-31. Como transportista, quiero recibir un error claro si no se pudo medir mi viaje con km viales, para no recibir una lista vacía que parezca "no hay cargas".
-32. Como transportista, quiero que no se recomienden cargas con algún tramo estimado, para que el puntaje use solo km viales.
-33. Como transportista, quiero que en un viaje corto se recomienden las cargas de toda mi ciudad, para no perder las que tienen el pin lejos del centro.
-34. Como transportista, quiero recibir una lista vacía, y no un error, cuando no hay cargas cercanas o todas se descartan, para saber que mi búsqueda funcionó.
-35. Como equipo, queremos que se evalúen como máximo 2.000 cargas candidatas, las más cercanas al viaje, y que quede un aviso en el log cuando se alcanza el tope, para que la consulta tenga un techo y sepamos cuándo empieza a actuar.
-36. Como equipo, queremos una línea de resumen en el log por cada pedido (traídas, descartadas por motivo, si actuó el tope, tandas pedidas y devueltas), para entender por qué una carga no se recomendó.
-37. Como equipo, queremos confirmar con datos sembrados que la consulta de candidatas entra por los índices de los pines y no recorre toda la tabla, para que escale.
-38. Como transportista, quiero que al buscar la lista venga ordenada por mejor puntaje y poder ordenarla por retiro más próximo, mayor precio o más km cargados, para ver primero la que más me conviene y elegir otro criterio si quiero.
-39. Como transportista, quiero que sin búsqueda la lista venga ordenada por mayor precio y que no aparezca el orden por puntaje, para no ver un criterio que sin viaje no existe.
+29. Como transportista, quiero que si falla cualquiera de las tandas de tramos reciba el error claro de siempre y no una lista armada con una parte, para no ver puntajes que no son reales. → #194
+30. Como transportista, quiero que dos cargas con localidades rotas en tandas distintas se descarten y el resto se recomiende igual, para no quedarme sin respuesta por datos ajenos. → #194
+31. Como transportista, quiero recibir un error claro si no se pudo medir mi viaje con km viales, para no recibir una lista vacía que parezca "no hay cargas". → #213
+32. Como transportista, quiero que no se recomienden cargas con algún tramo estimado, para que el puntaje use solo km viales. → #213
+33. Como transportista, quiero que en un viaje corto se recomienden las cargas de toda mi ciudad, para no perder las que tienen el pin lejos del centro. → #215
+34. Como transportista, quiero recibir una lista vacía, y no un error, cuando no hay cargas cercanas o todas se descartan, para saber que mi búsqueda funcionó. → #213
+35. Como equipo, queremos que se evalúen como máximo 2.000 cargas candidatas, las más cercanas al viaje, y que quede un aviso en el log cuando se alcanza el tope, para que la consulta tenga un techo y sepamos cuándo empieza a actuar. → sin historia (postergada)
+36. Como equipo, queremos una línea de resumen en el log por cada pedido (traídas, descartadas por motivo, si actuó el tope, tandas pedidas y devueltas), para entender por qué una carga no se recomendó. → sin historia (postergada)
+37. Como equipo, queremos confirmar con datos sembrados que la consulta de candidatas entra por los índices de los pines y no recorre toda la tabla, para que escale. → sin historia (postergada)
+38. Como transportista, quiero que al buscar la lista venga ordenada por mejor puntaje y poder ordenarla por retiro más próximo, mayor precio o más km cargados, para ver primero la que más me conviene y elegir otro criterio si quiero. → #216
+39. Como transportista, quiero que sin búsqueda la lista venga ordenada por mayor precio y que no aparezca el orden por puntaje, para no ver un criterio que sin viaje no existe. → #216
 
 ## Decisiones de implementación
 
@@ -184,8 +184,13 @@ El transportista también puede acotar las recomendaciones por fechas: desde qu�
 | #191 Como transportista, Quiero recibir un error claro cuando el servicio de rutas no responde… | Comportamiento 15; decisión "Errores" (batch caído) |
 | #192 Como transportista, Quiero que cada carga recomendada tenga un puntaje de 0 a 100 y que la lista venga ordenada de mayor a menor… | Comportamientos 1, 5, 6, 7, 8, 9 y 20; decisiones "Fórmula del puntaje" y "Constantes del dominio" |
 | #193 Como transportista, Quiero que no se recomienden cargas sin precio máximo o con un tramo que no se pudo medir… | Comportamientos 13, 14 y 16; decisión "Errores" (cargas descartadas) |
-| #194 Como transportista, Quiero recibir recomendaciones aunque haya muchas cargas candidatas… | Comportamiento 19; decisión "Batch del servicio de rutas" (tandas de 200) |
-| #195 Como transportista, Quiero que las recomendaciones empatadas se ordenen siempre igual y recibir como máximo 20… | Comportamientos 10, 11 y 12; decisión "Orden" |
+| #194 Como transportista, Quiero recibir recomendaciones aunque haya muchas cargas candidatas… | Comportamientos 19, 29 y 30; decisión "Batch del servicio de rutas" (tandas de 200, todo o nada, ids desconocidos juntados) |
+| #195 Como transportista, Quiero recibir como máximo 20 recomendaciones y que las empatadas se ordenen por retiro más próximo, mayor precio y publicación… | Comportamientos 10, 11 y 12; decisión "Orden" |
 | #204 Como transportista, Quiero indicar desde qué día puedo retirar una carga… | Comportamientos 21, 22 y 23; decisiones "Contrato del pedido", "Piso de retiro" y "Diseño en el dominio" (cableado) |
 | #205 Como transportista, Quiero indicar hasta qué día puedo retirar una carga… | Comportamientos 24 y 25; decisión "Techo de retiro" |
 | #206 Como transportista, Quiero indicar hasta qué día puedo entregar una carga… | Comportamientos 26, 27 y 28; decisión "Fecha máxima de entrega" |
+| #213 Como transportista, Quiero que las recomendaciones usen solo km viales y recibir un error claro cuando no se pudo medir mi viaje… | Comportamientos 31, 32 y 34; decisión "Errores" |
+| #215 Como transportista, Quiero que en un viaje corto se recomienden las cargas de toda mi ciudad… | Comportamiento 33; decisión "Candidatas" (cuadrado y esquinas) |
+| #216 UI-Como transportista, Quiero que al buscar la lista venga ordenada por mejor puntaje y poder elegir otro orden… | Comportamientos 38 y 39; decisión "Orden en el front del transportista" |
+
+Sin historia (postergadas por decisión del usuario): comportamientos 35 (tope de candidatas), 36 (resumen del log) y 37 (`EXPLAIN ANALYZE`).
