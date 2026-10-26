@@ -94,7 +94,7 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 
 **Resiliencia**
 - La resiliencia vive en el geo-service ([ADR 0003](../../adr/0003-resiliencia-en-el-geo-service-y-no-en-los-frontends.md)): el catálogo y las rutas guardadas se sirven desde una copia en el borde ante una falla de la base (*stale-if-error*), las claves de verificación de sesión (JWKS) se guardan con vigencia larga y las rutas precargadas cubren todas las combinaciones. Los frontends nunca calculan distancias ni estimaciones, ni embeben el catálogo.
-- El backend responde 503 al cotizar si el geo-service no responde. Publicar no consulta ni guarda la distancia, así que funciona aunque el geo-service esté caído; la distancia de una carga la piden los frontends al geo-service (en las listas, con el lote).
+- El backend responde 503 al cotizar si el geo-service no responde. Publicar funciona aunque el geo-service esté caído. Desde #203 (2026-10-24) publicar sí pide y guarda la distancia de la ruta real, con falla suave: si el geo-service no responde o solo estima, la carga se guarda sin distancia. Esto reemplaza lo que decía el comportamiento 16.
 - No hay segundo deploy. Se reevalúa (ver ADR 0003) si hay caídas repetidas, un SLO de disponibilidad incumplido, consultas espaciales (PostGIS) que no entren en PostgREST, límites de CPU en el batch o un motor de ruteo propio.
 
 ## Decisiones de testing
