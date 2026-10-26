@@ -21,7 +21,7 @@ El transportista también puede acotar las recomendaciones por fechas: desde qu�
 7. Como transportista, quiero que entre dos cargas con el mismo recorrido gane la que paga más, para que el precio decida cuando la ruta empata. → #192
 8. Como transportista, quiero que una carga solo tenga 100 cuando voy cargado todo el recorrido y es la que mejor paga por km de las recomendadas, para que el 100 signifique "la mejor posible". → #192
 9. Como transportista, quiero recibir las recomendaciones ordenadas de mayor a menor puntaje, para ver primero las mejores. → #192
-10. Como transportista, quiero que a igual puntaje vaya primero la carga con mayor precio máximo, y si también empatan, la de id menor, para que el orden sea siempre el mismo. → #195
+10. Como transportista, quiero que a igual puntaje vaya primero la carga con el retiro más próximo, después la de mayor precio máximo y, si también empatan, la de id menor, para que entre dos cargas igual de buenas vea primero la que puedo levantar antes y el orden sea siempre el mismo. → #195
 11. Como transportista, quiero recibir como máximo 20 recomendaciones, para no tener que revisar una lista interminable. → #195
 12. Como transportista, quiero recibir todas las cargas puntuadas cuando son menos de 20, para no perder ninguna opción. → #195
 13. Como transportista, quiero que no se recomienden cargas sin precio máximo, para no ver cargas cuyo pago por km no se puede calcular. → #193
@@ -40,19 +40,44 @@ El transportista también puede acotar las recomendaciones por fechas: desde qu�
 18. Como equipo, queremos que cada tramo distinto se pida una sola vez al servicio de rutas, aunque lo compartan varias cargas, para no hacer llamadas de más. → #190
 19. Como equipo, queremos que los tramos se pidan en tandas que respeten el máximo del servicio de rutas, para que la recomendación no falle cuando hay muchas cargas candidatas. → #194
 20. Como equipo, queremos que los pesos del puntaje y el máximo de recomendaciones sean constantes del dominio, para ajustarlos con datos reales sin tocar la fórmula. → #192
+29. Como transportista, quiero que si falla cualquiera de las tandas de tramos reciba el error claro de siempre y no una lista armada con una parte, para no ver puntajes que no son reales.
+30. Como transportista, quiero que dos cargas con localidades rotas en tandas distintas se descarten y el resto se recomiende igual, para no quedarme sin respuesta por datos ajenos.
+31. Como transportista, quiero recibir un error claro si no se pudo medir mi viaje con km viales, para no recibir una lista vacía que parezca "no hay cargas".
+32. Como transportista, quiero que no se recomienden cargas con algún tramo estimado, para que el puntaje use solo km viales.
+33. Como transportista, quiero que en un viaje corto se recomienden las cargas de toda mi ciudad, para no perder las que tienen el pin lejos del centro.
+34. Como transportista, quiero recibir una lista vacía, y no un error, cuando no hay cargas cercanas o todas se descartan, para saber que mi búsqueda funcionó.
+35. Como equipo, queremos que se evalúen como máximo 2.000 cargas candidatas, las más cercanas al viaje, y que quede un aviso en el log cuando se alcanza el tope, para que la consulta tenga un techo y sepamos cuándo empieza a actuar.
+36. Como equipo, queremos una línea de resumen en el log por cada pedido (traídas, descartadas por motivo, si actuó el tope, tandas pedidas y devueltas), para entender por qué una carga no se recomendó.
+37. Como equipo, queremos confirmar con datos sembrados que la consulta de candidatas entra por los índices de los pines y no recorre toda la tabla, para que escale.
+38. Como transportista, quiero que al buscar la lista venga ordenada por mejor puntaje y poder ordenarla por retiro más próximo, mayor precio o más km cargados, para ver primero la que más me conviene y elegir otro criterio si quiero.
+39. Como transportista, quiero que sin búsqueda la lista venga ordenada por mayor precio y que no aparezca el orden por puntaje, para no ver un criterio que sin viaje no existe.
 
 ## Decisiones de implementación
 
 - **Repo:** `smartruck-backend`. Extiende la recomendación de T.2.15 (`roadmap#150`), que hoy busca las cargas activas cuyo pin cae en un cuadrado del 20% de los km del viaje alrededor de cada extremo y las devuelve ordenadas por id.
 - **Flujo del caso de uso de recomendación:**
-  1. Pide al servicio de rutas el viaje solicitado.
-  2. Busca las cargas candidatas con la búsqueda por cuadrados que ya existe.
+  1. Pide al servicio de rutas el viaje solicitado. Si no vuelve, o vuelve estimado, el pedido falla con 503.
+  2. Busca las cargas candidatas con la búsqueda por cuadrados que ya existe, con el tope de candidatas.
   3. Descarta las que no tienen precio máximo.
   4. Pide al servicio de rutas los tramos de las candidatas: vacío de inicio (origen solicitado → origen de la carga), cargado (origen → destino de la carga) y vacío de fin (destino de la carga → destino solicitado).
-  5. Descarta las cargas con algún tramo faltante.
+  5. Descarta las cargas con algún tramo faltante o estimado.
   6. Puntúa, ordena y corta en 20.
-- **Tramos:** distancia vial entre localidades (ids de localidad del servicio de rutas), no entre pines. El tramo cargado también se pide al servicio de rutas, porque publicar una carga ya no guarda su distancia (R.1.6). Los pares repetidos se piden una sola vez.
-- **Batch del servicio de rutas:** el puerto `RouteDistance` ya tiene la consulta en lote. El adaptador parte los pares en tandas de hasta 200, que es el máximo de pares por llamada del servicio de rutas.
+  7. Escribe la línea de resumen del pedido.
+- **Tramos:** distancia vial entre localidades (ids de localidad del servicio de rutas), no entre pines. El tramo cargado también se pide al servicio de rutas. Los pares repetidos se piden una sola vez. Publicar sí guarda la distancia de la carga desde #203, pero no se usa para el tramo cargado: puede faltar (servicio caído o estimación al publicar), y usarla solo cuando existe deja dos fuentes para el mismo dato y no evita las tandas en el peor caso.
+- **Batch del servicio de rutas:** el puerto `RouteDistance` ya tiene la consulta en lote. El adaptador parte los pares en tandas de hasta 200 (el máximo del servicio de rutas, que hoy rechaza más con un 422 que termina en 503), las pide en serie y une los resultados. El caso de uso no se entera de las tandas: sigue pidiendo todos sus tramos en un solo llamado al puerto.
+  - **Todo o nada:** si cualquier tanda falla, falla todo el pedido. Nunca se puntúa con un conjunto parcial, porque la plata se compara contra el mejor precio por km del conjunto: si se pierde la carga que mejor paga, las demás suben de puntaje sin motivo.
+  - **Localidades desconocidas:** si una tanda responde 404 con `missing_locality_ids`, el adaptador sigue con las demás, junta todos los ids desconocidos y avisa una sola vez. El caso de uso hace lo de siempre: descarta esas cargas y vuelve a pedir una vez. Sin juntarlos, dos ids rotos en tandas distintas daban un 503 falso.
+  - **En serie, no en paralelo:** con el catálogo actual son 4 tandas como máximo y cada una tarda menos de 0,1 s (README del servicio de rutas). El paralelo se evalúa solo si se mide que la latencia molesta.
+  - **Cota medida:** con las 150 localidades, los pares únicos de un pedido no dependen de la cantidad de cargas sino de las localidades que caen en los cuadrados: 96 en la mediana, 597 en el p99 y 777 en el peor viaje (Bragado → Cafayate). El 22,9% de los viajes posibles puede pasar de 200.
+  - **Por qué no subir el máximo del servicio de rutas:** corre el límite en lugar de quitarlo (vuelve a fallar si el catálogo crece) y obliga a tocar y liberar otro repo.
+- **Candidatas:**
+  - **Tope:** como máximo 2.000 cargas, ordenadas por cercanía en línea recta de los pines de la carga a los centros de las localidades pedidas (suma de las dos distancias). Si se alcanza el tope, `warn` en el log. Por qué: la base no conoce el puntaje antes de pedir los km viales; la cercanía es lo que más se le parece. Ordenar con `LIMIT` hace un top-N sobre las candidatas que ya filtró el índice: no es trabajo doble ni copia la fórmula del `LoadScorer`. Sin orden, el tope se quedaría con cualquiera. Con 2.000 no corta en el volumen del Tier 1. El tope no afecta las tandas: los pares están acotados por la geografía.
+  - **Cuadrado:** la mitad del lado es el mayor entre el 20% de los km del viaje y 15 km. Por qué: en viajes cortos (Avellaneda → Buenos Aires mide 7,5 km, ±1,5 km) el 20% da un cuadrado más chico que la ciudad. Solo cambia los viajes de menos de 75 km (1,4% del catálogo). Los 15 km son un criterio (cubren una ciudad grande desde su centro), no un dato medido: se revisan con pines reales.
+  - **Esquinas:** se aceptan (hasta 1,41 veces la mitad del lado). El puntaje ya castiga los km vacíos de más.
+  - **Cuadrado con `&&` y no círculo con `ST_DWithin`:** `&&` es una sola pasada por el índice GiST; `ST_DWithin` hace esa misma pasada y además la distancia exacta de cada candidata, y sobre `geometry` en grados no mide km (habría que pasar a `geography` y crear otro índice).
+  - **Constantes del dominio:** el 20%, los 15 km y las 2.000 viven juntas en la tolerancia de la recomendación. El tope llega al repositorio como parámetro.
+- **Eficiencia:** `EXPLAIN ANALYZE` sobre datos sembrados para confirmar que la consulta entra por los índices de los pines. Con el estado normalizado (spec `publicar-carga-completa`), el filtro compara con `activa` sin `upper`. Índices parciales solo si la medición los pide. La recomendación no usa el trazado de la carga.
+- **Observabilidad:** una línea `info` por pedido con el viaje y sus km, la mitad del lado, cuántas trajo la base, si actuó el tope, las descartadas por motivo (sin precio máximo, tramo sin medir, tramo estimado, localidad desconocida), las tandas pedidas y cuántas se devolvieron. Sin duración: Cloud Run ya registra la latencia de cada pedido. El aviso por cada carga descartada se mantiene. Nada de esto va en la respuesta. `LogManager` no filtra por nivel, así que se elige la etiqueta: `info` para el resumen y `warn` solo para el tope alcanzado y las descartadas.
 - **Fórmula del puntaje:**
   - km realizados = tramo vacío de inicio + tramo cargado + tramo vacío de fin.
   - Aprovechamiento = km del tramo cargado / km realizados. Va de 0 a 1 y nunca lo supera, porque los km cargados son parte de los realizados.
@@ -66,13 +91,25 @@ El transportista también puede acotar las recomendaciones por fechas: desde qu�
   - `Recommendation` tiene su puntaje y deriva su desvío neto.
   - El caso de uso recibe el `LoadScorer` por constructor. Sus unitarios usan el `LoadScorer` real y mockean solo los puertos.
 - **Constantes del dominio:** los pesos del aprovechamiento (0,5) y de la plata (0,5) son constantes de clase del `LoadScorer`, porque son parte de su fórmula. El máximo de recomendaciones (20) se define en #195.
-- **Orden:** puntaje descendente; a igual puntaje, precio máximo descendente; después id ascendente.
+- **Orden:** puntaje descendente; a igual puntaje, fecha de retiro ascendente (la más próxima primero; la consulta ya descarta el retiro pasado y publicar exige la fecha); después precio máximo descendente; después id ascendente.
 - **Errores:**
-  - Si el batch falla (no responde, timeout o error del servicio de rutas), el pedido entero falla con 503 y un mensaje claro, como al cotizar una carga.
+  - Si el batch falla (no responde, timeout, error del servicio de rutas o cualquier tanda), el pedido entero falla con 503 `RECOMENDACIONES_NO_DISPONIBLES` y `Retry-After: 30`, como al cotizar una carga.
+  - Si el viaje solicitado no vuelve en la respuesta, o vuelve estimado, también 503. Antes devolvía una lista vacía con 200, que se confunde con "no hay cargas".
+  - Sin reintentos en el backend (salvo los que ya existen: token vencido y una vez ante localidades desconocidas). El `Retry-After` le dice al cliente cuándo volver; reintentar acá duplica la espera justo cuando el servicio está lento.
   - Si falta el tramo de una carga, esa carga se descarta con un `warn` que incluye el id de la carga y el par de localidades faltante.
+  - Si el tramo de una carga viene estimado (`is_estimation`), esa carga se descarta con un `warn` y el motivo "tramo estimado". Por qué: las 11.175 rutas están guardadas, así que una estimación solo aparece si algo está roto, y publicar tampoco guarda una distancia estimada (#203).
   - Una carga sin precio máximo se descarta con un `warn` que incluye su id y el motivo "sin precio máximo".
+  - Sin cargas cercanas, o con todas descartadas: 200 con la lista vacía.
 - **Contrato de la respuesta:** cada recomendación conserva los datos públicos actuales (incluidos `offerer_id` y `max_price`) y agrega `score`, `loaded_km`, `empty_start_km`, `empty_end_km` y `detour_km`.
-- **Sin cambios de esquema:** no hay migraciones.
+- **Sin cambios de esquema** en este spec. La normalización del estado de la carga es del spec `publicar-carga-completa`.
+
+### Orden en el front del transportista
+
+- **Repo:** `smartruck-transportista`. Hoy la pantalla reordena las recomendaciones por mayor precio y no existe el orden por puntaje, así que el orden del backend no se ve.
+- **Con búsqueda:** por defecto "Mejor puntaje" (el orden del backend). Opciones: retiro más próximo, mayor precio y más km cargados (en km, no en porcentaje: el porcentaje ya está en el puntaje).
+- **Sin búsqueda:** por defecto "Mayor precio". Opciones: retiro más próximo, mayor precio y más km cargados (la distancia de la carga que el front ya pide al servicio de rutas). No aparece "Mejor puntaje".
+- Las opciones de distancia que existen hoy se sacan.
+- El máximo de 20 también protege al front: dibuja las rutas de todas las recomendaciones con un lote propio al servicio de rutas, que con 20 cargas son 60 pares como máximo.
 
 ### Filtros de fecha
 
@@ -100,19 +137,26 @@ El transportista también puede acotar las recomendaciones por fechas: desde qu�
 - **Tests parecidos en el código:** los steps de `recomendar_cargas_steps.py` (REC 01 y REC 02), `test_recommend_loads_use_case.py` y `test_routes_service_distance.py`.
 - **Escenarios existentes:** el step de datos públicos de REC 01 hoy exige que `score` y `empty_km` no aparezcan. Se actualiza para el contrato nuevo.
 - **Filtros de fecha:** mismo seam principal (el endpoint de recomendaciones), en la regla "Fecha de retiro" de `recomendar_cargas.feature` (como REC 13 y REC 14) y una regla nueva para la fecha de entrega. Los unitarios de `PickupWindow` cubren el piso, el techo y los errores; el repositorio se prueba con la integración existente.
+- **Ciclo:** BDD + TDD en baby steps, como en este repo: escenario `@wip` primero, outside-in, un test por vez, commits atómicos con push en `main` (ver `bdd-tdd-execution`). Arquitectura hexagonal, repositorios como puertos, inyección por constructor, DDD sin modelos anémicos ni abstracciones especulativas.
+- **Tier 1, mismo seam principal.** Escenarios nuevos en `recomendar_cargas.feature`: más de 200 tramos recomienda igual; falla de una tanda da 503; dos localidades rotas en tandas distintas; viaje solicitado ausente o estimado da 503; tramo estimado descarta la carga; cero cargas y todas descartadas dan lista vacía; más de 20 devuelve las 20 mejores y menos de 20 devuelve todas; desempate por retiro, precio e id; viaje corto con una carga de la misma ciudad lejos del centro; carga en la esquina del cuadrado. El fake del servicio de rutas suma: rechazar pedidos de más de 200 pares, fallar una tanda, marcar un par como estimado y omitir el viaje solicitado.
+- **Adaptador del servicio de rutas:** unitarios con opener falso para lo que el fake de aceptación no ve: el corte en tandas, la unión de resultados, los ids desconocidos juntados entre tandas y el timeout.
+- **Repositorio de cargas:** integración con un tope chico pasado como parámetro (por ejemplo 2) para probar que se quedan las más cercanas, sin sembrar 2.001 cargas. `EXPLAIN ANALYZE` con datos sembrados para el comportamiento 37; el resultado se anota en el README del backend.
+- **Front del transportista:** vitest del orden por defecto con y sin búsqueda y de las opciones disponibles en cada caso.
 
 ## Fuera de alcance
 
-- Tope de cargas candidatas antes de puntuar (escenario de "muchas cargas").
 - Medir los tramos entre pines en lugar de entre localidades.
 - Autenticación y rol del endpoint de recomendaciones.
-- Filtro de peso.
-- Hacer obligatoria la fecha límite de entrega (`delivery_deadline`) al publicar una carga, como se hace con la fecha de retiro. Tiene que ser una historia aparte; hasta entonces, el filtro de fecha máxima de entrega descarta las cargas que no la tienen.
+- Filtro de peso y capacidad del remolque.
 - Indicar hora en los filtros de fecha.
 - Tolerancia de cercanía elegida por el transportista.
 - Búsqueda en el corredor (Tier 2).
-- Mínimo de km por lado del cuadrado en viajes cortos.
-- Pin exacto obligatorio al publicar y el arreglo del front del dador que hoy descarta las coordenadas de la dirección elegida.
+- Recomendar viajes dentro de una misma localidad (sigue el 422 de REC 20).
+- Tomar el tramo cargado de la distancia guardada en la carga.
+- Subir el máximo de pares del lote en el servicio de rutas, pedir las tandas en paralelo y reintentar en el backend.
+- Círculo exacto en lugar del cuadrado, e índices parciales salvo que la medición los pida.
+- Contar las cargas activas sin pin o sin localidad: publicar ya no las acepta (spec `publicar-carga-completa`) y prod no tiene cargas.
+- Lo de publicar (pin, localidad, precio máximo, fechas, centros de carga y front del dador): spec `publicar-carga-completa`.
 
 ## Notas
 
@@ -121,7 +165,16 @@ El transportista también puede acotar las recomendaciones por fechas: desde qu�
 - Ejemplo de referencia con el viaje Buenos Aires → Córdoba (696 km): Buenos Aires → Córdoba con $1.393.000 da 100; Pilar → Alta Gracia (650 km cargados de 735 realizados, $1.338.000) da 90; Buenos Aires → Rosario (300 km cargados de 700 realizados, $600.000) da 43.
 - Vocabulario en el glosario: viaje solicitado, tramo vacío de inicio, tramo cargado, tramo vacío de fin, desvío neto, km realizados, aprovechamiento, plata por km y puntaje.
 - El aprovechamiento reemplazó al "ajuste al viaje" (km del viaje solicitado / km realizados) durante T.2.18: el ajuste no castigaba una carga con los mismos km que el viaje pero casi todos vacíos, y pasaba de 1 cuando los km realizados eran menos que los del viaje.
-- Los límites de día de los filtros de fecha (las 00:00 de `pickup_from` y las 23:59:59 de `pickup_to` y de `delivery_deadline_max`) se calculan en hora de Argentina y dependen de que `pickup_date` y `delivery_deadline` se guarden en hora argentina. Hoy eso no está garantizado: queda pendiente en "publicar con datos completos" (zona horaria). Este spec no lo resuelve.
+- Los límites de día de los filtros de fecha (las 00:00 de `pickup_from` y las 23:59:59 de `pickup_to` y de `delivery_deadline_max`) se calculan en hora de Argentina y dependen de que `pickup_date` y `delivery_deadline` se guarden en hora argentina. Lo garantiza el spec `publicar-carga-completa` (normaliza la zona horaria al publicar).
+- **Riesgo abierto del servicio de rutas (sin verificar, no es de este spec):** el lote lee las rutas con todas las combinaciones de los ids pedidos a través de PostgREST, y Supabase hosted corta por defecto en 1.000 filas. Si corta, tramos guardados vuelven estimados y, con la decisión de descartar los tramos estimados, se pierden cargas buenas. Queda como pendiente del servicio de rutas; si aparece "tramo estimado" en los logs, es la primera sospecha.
+- **Riesgo aceptado:** la localidad y el pin de una carga no se validan entre sí (spec `publicar-carga-completa`). Una carga con localidad y pin de ciudades distintas entra por el pin y se puntúa con los km de su localidad.
+- **Comprobación final del Tier 1 en test**, con todas las historias de este spec y de `publicar-carga-completa` liberadas:
+  1. Desde el front del dador, publicar una carga escribiendo la dirección (el pin sale de la sugerencia) y otra desde un centro de carga; comprobar que sin pin no deja publicar.
+  2. Desde el front del transportista, buscar un viaje que incluya esas cargas y verlas ordenadas por mejor puntaje, con 20 como máximo.
+  3. Buscar un viaje largo con muchas cargas de localidades variadas (más de 200 tramos) y comprobar que responde.
+  4. Buscar un viaje corto del AMBA y comprobar que aparece una carga de la misma ciudad con el pin lejos del centro.
+  5. Revisar en el log la línea de resumen de cada pedido.
+- **Relacionado, no es de este spec:** `docs/borrador-bug-fecha-retiro-vs-entrega.md` (el listado devuelve cargas con retiro vencido y la tarjeta del transportista rotula la entrega como retiro). Afecta al orden "retiro más próximo" sin búsqueda.
 
 ## Historias derivadas
 
