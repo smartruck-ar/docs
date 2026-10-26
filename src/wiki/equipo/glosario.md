@@ -46,7 +46,7 @@ Términos del proceso y del dominio.
 | Km realizados | Todo lo que el camión recorre al tomar la carga: tramo vacío de inicio + tramo cargado + tramo vacío de fin |
 | Aprovechamiento | Qué parte de los km realizados el camión va con carga: km del tramo cargado / km realizados. Vale 1 cuando va cargado todo el recorrido; baja con los km vacíos |
 | Plata por km | Lo que paga la carga por cada km realizado: precio máximo / km realizados, tramos vacíos incluidos |
-| Puntaje | Qué tan conveniente es una carga para el viaje solicitado, de 0 a 100: 50 × aprovechamiento + 50 × plata por km comparada con la mejor de las recomendadas, redondeado a entero. 100 es una carga que va cargada todo el recorrido y paga por km lo mejor de las recomendadas |
+| Puntaje | Qué tan conveniente es una carga para el viaje solicitado, de 0 a 100: 50 × aprovechamiento + 50 × plata por km comparada con la mejor de las recomendadas, redondeado a entero. 100 es una carga que va cargada todo el recorrido y paga por km lo mejor de las recomendadas. La lista trae como máximo 20 cargas; a igual puntaje va primero la de retiro más próximo, después la de mayor precio máximo y después la publicada primero |
 | Ventana de retiro | El rango de días en que el transportista puede retirar una carga: desde `pickup_from` hasta `pickup_to`, ambos incluidos. Sin `pickup_from` empieza ahora; nunca incluye cargas con retiro pasado |
 | Fecha máxima de entrega | El último día (incluido) en que el transportista puede entregar. Se compara con la fecha límite de entrega de la carga; una carga sin fecha límite no se recomienda |
 | | |
