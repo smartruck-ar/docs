@@ -12,31 +12,31 @@ Toda carga nueva sale con lo que la recomendación necesita: pin y localidad de 
 
 **Publicar (backend)**
 
-1. Como dador, quiero recibir un error claro si publico sin el pin de origen o de destino, para saber que tengo que marcarlo en el mapa.
-2. Como dador, quiero recibir un error claro si publico sin la localidad de origen o de destino, para saber que tengo que elegirla.
-3. Como dador, quiero recibir un error claro si publico con una localidad que no está en el catálogo, para elegir una que sí esté.
-4. Como dador, quiero recibir un error claro si publico sin precio máximo o con un precio máximo de 0 o menos, para saber que la carga necesita un precio.
-5. Como dador, quiero recibir un error claro si la fecha límite de entrega es anterior a la fecha de retiro, para corregir las fechas.
-6. Como dador, quiero recibir un error claro si la fecha de retiro ya pasó, para no publicar una carga que nadie puede retirar.
-7. Como dador, quiero que las fechas de mi carga se guarden en hora argentina aunque mi cliente las mande con otra zona horaria, para que el retiro y la entrega sean los que elegí.
-8. Como transportista, quiero que toda carga publicada tenga pin, localidad y precio máximo, para que pueda aparecer en mis recomendaciones.
-9. Como equipo, queremos que una carga activa se guarde siempre con el mismo estado escrito de la misma forma, para filtrar por estado sin parches.
+1. Como dador, quiero recibir un error claro si publico sin el pin de origen o de destino, para saber que tengo que marcarlo en el mapa. → #218
+2. Como dador, quiero recibir un error claro si publico sin la localidad de origen o de destino, para saber que tengo que elegirla. → #218
+3. Como dador, quiero recibir un error claro si publico con una localidad que no está en el catálogo, para elegir una que sí esté. → #218
+4. Como dador, quiero recibir un error claro si publico sin precio máximo o con un precio máximo de 0 o menos, para saber que la carga necesita un precio. → #218
+5. Como dador, quiero recibir un error claro si la fecha límite de entrega es anterior a la fecha de retiro, para corregir las fechas. → #219
+6. Como dador, quiero recibir un error claro si la fecha de retiro ya pasó, para no publicar una carga que nadie puede retirar. → #219
+7. Como dador, quiero que las fechas de mi carga se guarden en hora argentina aunque mi cliente las mande con otra zona horaria, para que el retiro y la entrega sean los que elegí. → #219
+8. Como transportista, quiero que toda carga publicada tenga pin, localidad y precio máximo, para que pueda aparecer en mis recomendaciones. → #218
+9. Como equipo, queremos que una carga activa se guarde siempre con el mismo estado escrito de la misma forma, para filtrar por estado sin parches. → #214
 
 **Centros de carga (backend)**
 
-10. Como dador, quiero recibir un error claro si creo un centro de carga sin pin, para saber que tengo que marcarlo en el mapa.
-11. Como dador, quiero recibir un error claro si creo un centro de carga sin localidad, para saber que tengo que elegirla.
-12. Como dador, quiero que el centro de carga guarde su pin y me lo devuelva, para reutilizarlo al publicar.
+10. Como dador, quiero recibir un error claro si creo un centro de carga sin pin, para saber que tengo que marcarlo en el mapa. → #220
+11. Como dador, quiero recibir un error claro si creo un centro de carga sin localidad, para saber que tengo que elegirla. → #220
+12. Como dador, quiero que el centro de carga guarde su pin y me lo devuelva, para reutilizarlo al publicar. → #220
 
 **Front del dador**
 
-13. Como dador, quiero que al elegir una dirección sugerida el mapa se centre ahí y ponga el pin, para confirmarlo o moverlo sin buscarlo a mano.
-14. Como dador, quiero tener que marcar el pin en el mapa cuando escribo una dirección sin elegir una sugerencia o cuando la búsqueda falla, para que la carga quede ubicada igual.
-15. Como dador, quiero que el formulario no me deje publicar sin el pin de cada extremo, y que me diga cuál falta, para no recibir el error recién al enviar.
-16. Como dador, quiero que al elegir un centro de carga se copie su pin en la carga, para no marcarlo cada vez.
-17. Como dador, quiero que al elegir un centro de carga viejo sin pin el formulario me pida marcarlo en el mapa, para poder publicar igual.
-18. Como dador, quiero marcar el pin en el mapa al crear un centro de carga, para que quede guardado con el centro.
-19. Como dador, quiero ver un mensaje claro cuando el backend rechaza la carga o el centro por un dato faltante o inválido, para saber qué corregir.
+13. Como dador, quiero que al elegir una dirección sugerida el mapa se centre ahí y ponga el pin, para confirmarlo o moverlo sin buscarlo a mano. → #217
+14. Como dador, quiero tener que marcar el pin en el mapa cuando escribo una dirección sin elegir una sugerencia o cuando la búsqueda falla, para que la carga quede ubicada igual. → #217
+15. Como dador, quiero que el formulario no me deje publicar sin el pin de cada extremo, y que me diga cuál falta, para no recibir el error recién al enviar. → #217
+16. Como dador, quiero que al elegir un centro de carga se copie su pin en la carga, para no marcarlo cada vez. → #221
+17. Como dador, quiero que al elegir un centro de carga viejo sin pin el formulario me pida marcarlo en el mapa, para poder publicar igual. → #221
+18. Como dador, quiero marcar el pin en el mapa al crear un centro de carga, para que quede guardado con el centro. → #221
+19. Como dador, quiero ver un mensaje claro cuando el backend rechaza la carga o el centro por un dato faltante o inválido, para saber qué corregir. → #217, #221
 
 ## Decisiones de implementación
 
@@ -84,7 +84,11 @@ Toda carga nueva sale con lo que la recomendación necesita: pin y localidad de 
 
 ## Historias derivadas
 
-_Lo completa `/to-tickets`. No lo escribas a mano._
-
 | Historia | Cubre (de este spec) |
 | --- | --- |
+| #214 Como desarrollador, Quiero que el estado activa de una carga se guarde siempre igual… | Comportamiento 9; decisión "Estado normalizado" |
+| #217 UI-Como dador, Quiero que al elegir una dirección sugerida el mapa ponga el pin… | Comportamientos 13, 14, 15 y 19; decisiones "De dónde sale el pin en el front" y "Orden de release" |
+| #218 Como dador, Quiero recibir un error claro si publico sin pin, sin localidad o sin precio máximo… | Comportamientos 1, 2, 3, 4 y 8 |
+| #219 Como dador, Quiero recibir un error claro si las fechas de mi carga no tienen sentido… | Comportamientos 5, 6 y 7; decisión "Fechas" |
+| #220 Como dador, Quiero que mi centro de carga guarde su pin y su localidad… | Comportamientos 10, 11 y 12; decisión "Centros de carga" |
+| #221 UI-Como dador, Quiero marcar el pin al crear un centro de carga y que mis cargas lo copien… | Comportamientos 16, 17, 18 y 19 |
