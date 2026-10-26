@@ -30,7 +30,7 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 
 **Backend**
 
-16. Como dador, quiero que la carga no guarde la distancia y que cada pantalla la consulte al geo-service a partir de las localidades de la carga, para ver siempre el mismo valor que al cotizar.
+16. Como dador, quiero que al publicar el backend consulte la distancia al geo-service por los ids de las localidades y la guarde en la carga solo si viene de una ruta real (nunca una estimación), para ver siempre el mismo valor que al cotizar y que las listas no tengan que volver a consultarla. Si el geo-service no responde o informa una estimación, la carga se publica con la distancia nula y un backfill la completa.
 17. Como dador, quiero un error claro si el geo-service no responde al cotizar, para saber que debo reintentar.
 18. Como desarrollador, quiero que el backend deje de exponer localidades, geocodificación y rutas y elimine su copia del motor y de la estimación, para que exista una sola implementación.
 19. Como desarrollador, quiero que las cargas y los centros de carga guarden solo el id de la localidad del geo-service y que el backend valide ese id contra una tabla local de ids válidos, con un backfill de lo existente, para no duplicar datos geográficos.
@@ -57,12 +57,13 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 **Dueño y límites**
 - El geo-service es dueño de provincias, localidades, direcciones, geocodificación inversa, rutas y estimación. No llama a otros servicios del producto y no tiene endpoints de escritura. Corre como Cloudflare Worker.
 - Esquema y rol propios (`geo`, `geo_service`) en el mismo proyecto de Supabase; ningún servicio lee ni escribe tablas de otro.
-- Las cargas y los centros de carga guardan solo el id de su localidad del geo-service, sin nombre ni distancia: son referencias, no copias. El backend tiene una tabla local con los ids válidos (solo ids) y la usa para validar al guardar; cómo se mantiene al día cuando el catálogo crece queda por decidir. El pin y la dirección confirmados por el usuario los guarda el backend.
+- Las cargas y los centros de carga guardan solo el id de su localidad del geo-service, sin nombre: son referencias, no copias. La carga además guarda la distancia de su ruta (cambio de diseño del 2026-10-24, ver Notas). El backend tiene una tabla local con los ids válidos (solo ids) y la usa para validar al guardar; cómo se mantiene al día cuando el catálogo crece queda por decidir. El pin y la dirección confirmados por el usuario los guarda el backend.
 
 **Flujo de una carga**
 - El frontend busca y normaliza origen y destino contra el geo-service y obtiene el id de cada localidad.
-- Al publicar manda esos ids; el backend valida que existan en su tabla local y guarda la carga.
-- Al mostrarla, el frontend toma las cargas del backend y le pide al geo-service, por id, el nombre y la provincia (el catálogo embebido los resuelve sin llamar) y la distancia y el trazado (en las listas, con el lote).
+- Al publicar manda esos ids (nunca la distancia: el cliente no la aporta); el backend valida que existan en su tabla local, le pide la ruta al geo-service con su cuenta de servicio y guarda la carga con la distancia solo si la ruta no es una estimación.
+- Al mostrarla, el frontend toma las cargas del backend y lee la distancia del campo de la carga. Al geo-service le pide, por id, el nombre y la provincia (el catálogo embebido los resuelve sin llamar) y el trazado. Si la distancia es nula, la pide al endpoint de ruta (en las listas, con el lote) y muestra «distancia no disponible» si tampoco está.
+- El endpoint de ruta entre dos localidades se mantiene para frontends y backend; la distancia guardada es una copia de su respuesta, no un cálculo propio.
 - Los ids de localidad no se reasignan ni se borran: el geo-service no tiene endpoints de escritura y su catálogo es cerrado.
 
 **Catálogo y datos**
@@ -94,7 +95,7 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 
 **Resiliencia**
 - La resiliencia vive en el geo-service ([ADR 0003](../../adr/0003-resiliencia-en-el-geo-service-y-no-en-los-frontends.md)): el catálogo y las rutas guardadas se sirven desde una copia en el borde ante una falla de la base (*stale-if-error*), las claves de verificación de sesión (JWKS) se guardan con vigencia larga y las rutas precargadas cubren todas las combinaciones. Los frontends nunca calculan distancias ni estimaciones, ni embeben el catálogo.
-- El backend responde 503 al cotizar si el geo-service no responde. Publicar funciona aunque el geo-service esté caído. Desde #203 (2026-10-24) publicar sí pide y guarda la distancia de la ruta real, con falla suave: si el geo-service no responde o solo estima, la carga se guarda sin distancia. Esto reemplaza lo que decía el comportamiento 16.
+- El backend responde 503 al cotizar si el geo-service no responde. Publicar funciona aunque el geo-service esté caído. Desde #203 (2026-10-24) publicar sí pide y guarda la distancia de la ruta real, con falla suave: si el geo-service no responde o solo estima, la carga se guarda con la distancia nula y el script de #148 (una sola vez, a mano) la completa. Una estimación nunca se guarda, así que toda distancia guardada es fehaciente. Esto reemplaza lo que decía el comportamiento 16.
 - No hay segundo deploy. Se reevalúa (ver ADR 0003) si hay caídas repetidas, un SLO de disponibilidad incumplido, consultas espaciales (PostGIS) que no entren en PostgREST, límites de CPU en el batch o un motor de ruteo propio.
 
 ## Decisiones de testing
@@ -118,6 +119,8 @@ Un único lugar, el **geo-service** (`microservice-routes`), responde todo lo ge
 - Renombrar el repositorio.
 
 ## Notas
+
+- **Cambio de diseño (2026-10-24):** el comportamiento 16 vuelve a guardar la distancia en la carga, pero rellenada por el backend (no por el cliente) desde el endpoint de ruta, y solo si es una ruta real. Reemplaza el cambio del 2026-10-17 ("la carga no guarda la distancia"). Motivo: las listas no vuelven a consultar el geo-service por cada carga, y es un solo campo. Afecta a #145, #152, #188 y #148 (el backfill pasa a ser parte del diseño).
 
 - **Spike de cumplimiento de direcciones (abierto):** el backend guarda el pin y la dirección de cada carga. Si la dirección viene del geocoding temporal de Mapbox, guardarla viola los términos, y la documentación de Mapbox además exige usar su mapa; los frontends dibujan con MapLibre. El spike decide el proveedor de direcciones (Mapbox permanente, Geoapify u otro que permita guardar). Fuentes en [fuentes-datos-geograficos](../../research/fuentes-datos-geograficos.md).
 - **Sin verificar:** si Mapbox Directions permite guardar resultados (por eso no se guardan); la licencia de las capas SIG del IGN; qué copia en el borde (Cache API por centro de datos o KV global) da la garantía de *stale-if-error* que pide el ADR 0003; se decide en #171.
@@ -152,3 +155,4 @@ Cada historia lleva la línea `Spec:` que apunta a este documento.
 | #181 R.1.16 · monitor y badges apuntando a `/geo` | 25 |
 | #182 R.1.17 · consultar localidad y ruta por id | 27 |
 | #183 R.1.18 · retirar la consulta de rutas por nombre | 15, 27 |
+| #203 Como dador, Quiero que la carga publicada guarde la distancia de su ruta real | 16 |
