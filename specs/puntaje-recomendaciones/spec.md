@@ -107,7 +107,7 @@ El transportista también puede acotar las recomendaciones por fechas: desde qu�
 
 - **Repo:** `smartruck-transportista`. Hoy, con una búsqueda aplicada, el selector de orden está oculto y la lista usa el orden del backend (ya por puntaje); el selector solo existe sin búsqueda y no tiene la opción de puntaje. La historia lo muestra también con búsqueda, con "Mejor puntaje" por defecto.
 - **Con búsqueda:** por defecto "Mejor puntaje" (el orden del backend). Opciones: retiro más próximo, mayor precio y más km cargados (en km, no en porcentaje: el porcentaje ya está en el puntaje).
-- **Sin búsqueda:** por defecto "Mayor precio". Opciones: retiro más próximo, mayor precio y más km cargados (la distancia de la carga que el front ya pide al servicio de rutas). No aparece "Mejor puntaje".
+- **Sin búsqueda:** por defecto "Mayor precio". Opciones: retiro más próximo, mayor precio y más km cargados (la distancia de la carga si es mayor a 0 y, si no, la de la ruta que el front ya pide al servicio de rutas; las cargas sin ninguna van al final). No aparece "Mejor puntaje".
 - Las opciones de distancia que existen hoy se sacan.
 - El máximo de 20 también protege al front: dibuja las rutas de todas las recomendaciones con un lote propio al servicio de rutas, que con 20 cargas son 60 pares como máximo.
 
