@@ -6,7 +6,7 @@ El dador puede publicar una carga sin pin, sin localidad o con solo un precio m�
 
 ## Solución
 
-Toda carga nueva sale con lo que la recomendación necesita: pin y localidad de cada extremo, precio máximo y fechas válidas en hora argentina. Si falta algo, el dador recibe un error claro que dice qué falta. Al escribir la dirección, el mapa se centra en la sugerencia y pone el pin, que el dador acepta o mueve. Los centros de carga guardan su pin, y la carga que sale de un centro lo copia.
+Toda carga nueva sale con lo que la recomendación necesita: pin y localidad de cada extremo, precio máximo y fechas válidas en hora argentina. Si falta algo, el dador recibe un error claro que dice qué falta. Al elegir una dirección sugerida, un modal de confirmación muestra el mapa con el pin de la sugerencia fijo y la dirección completa, que el dador confirma o cambia. Los centros de carga guardan su pin, y la carga que sale de un centro lo copia.
 
 ## Comportamientos
 
@@ -30,7 +30,7 @@ Toda carga nueva sale con lo que la recomendación necesita: pin y localidad de 
 
 **Front del dador**
 
-13. Como dador, quiero que al elegir una dirección sugerida el mapa se centre ahí y ponga el pin, para confirmarlo o moverlo sin buscarlo a mano. → #217
+13. Como dador, quiero que al elegir una dirección sugerida se abra un modal que muestre el mapa con el pin fijo y la dirección completa, para confirmarla o cambiarla sin marcar el pin a mano. → #217
 14. Como dador, quiero tener que marcar el pin en el mapa cuando escribo una dirección sin elegir una sugerencia o cuando la búsqueda falla, para que la carga quede ubicada igual. → #217
 15. Como dador, quiero que el formulario no me deje publicar sin el pin de cada extremo, y que me diga cuál falta, para no recibir el error recién al enviar. → #217
 16. Como dador, quiero que al elegir un centro de carga se copie su pin en la carga, para no marcarlo cada vez. → #221
@@ -42,7 +42,7 @@ Toda carga nueva sale con lo que la recomendación necesita: pin y localidad de 
 
 - **Repos:** `smartruck-backend` (publicar y centros de carga) y `smartruck-dador` (formulario de la carga y modal del centro).
 - **Pin obligatorio, sin geocodificar en el backend.** El backend exige latitud y longitud de los dos extremos y no las completa con un proveedor. Por qué: el pin es la entrada del filtro de candidatas de la recomendación; si es opcional existe una carga activa invisible que nadie eligió. Geocodificar en el backend haría depender a publicar de un proveedor y guardaría un punto que el dador no confirmó. Usar el centro de la localidad inventaría un dato.
-- **De dónde sale el pin en el front.** La búsqueda de direcciones del backend ya devuelve coordenadas en cada sugerencia; hoy el front las descarta. Al elegir una sugerencia, el mapa se centra ahí y pone el pin; el dador lo acepta o lo mueve. Si escribe la dirección sin elegir sugerencia, o si la búsqueda falla, tiene que marcar el pin en el mapa. Al cambiar la localidad, el pin se borra (como ya pasa).
+- **De dónde sale el pin en el front.** La búsqueda de direcciones del backend ya devuelve coordenadas en cada sugerencia; hoy el front las descarta. Al elegir una sugerencia con coordenadas se abre un modal de confirmación, distinto del selector de punto: muestra el mapa con el pin de la sugerencia fijo (no se mueve) y la dirección completa. «Confirmar dirección» carga en el formulario el texto y el pin de la sugerencia; «Cambiar dirección» cierra el modal, borra el texto y el pin, y deja el campo vacío y enfocado. Cerrar el modal sin elegir equivale a «Cambiar dirección». Una dirección sugerida ya confirmada se cambia con «Cambiar dirección» en la tarjeta del campo, no con «Modificar en el mapa», que queda solo para los puntos marcados a mano: así el pin de una dirección sugerida no se mueve y lo guardado es siempre el texto de la sugerencia con su pin. Si la sugerencia no trae coordenadas, si el dador escribe la dirección sin elegir sugerencia, si la búsqueda falla o si toca «¿No encontrás tu ubicación? Seleccionala en el mapa», se abre el selector de punto de siempre y tiene que marcar el pin. Al cambiar la localidad, el pin se borra (como ya pasa).
 - **Riesgo aceptado (licencia).** La sugerencia viene de Mapbox en modo temporal, que no permite guardar coordenadas. Se asume que el pin que el dador acepta en el mapa es dato suyo y se puede guardar. Cambiar de proveedor (por ejemplo Georef) queda fuera de este spec. El texto de la dirección tiene el mismo riesgo y sigue abierto, como dice `decision-proveedor-direcciones.md`.
 - **Localidad obligatoria y validada.** `origin_locality_id` y `destination_locality_id` (ids del geo-service) son obligatorios y se validan contra la tabla local de ids válidos, como ya se hace cuando vienen.
 - **Localidad y pin sin chequeo de consistencia (riesgo aceptado).** La localidad la elige el dador y el pin va aparte; no se valida que el pin caiga en esa localidad. Consecuencia: una carga con localidad Córdoba y pin en Buenos Aires entra como candidata por el pin y se puntúa con los km de Córdoba. Por qué: validarlo obliga a publicar a depender del geo-service (`nearest`), que no tiene copia en el borde. Se retoma junto con la limpieza de los datos viejos.
@@ -62,7 +62,7 @@ Toda carga nueva sale con lo que la recomendación necesita: pin y localidad de 
 - **Seam principal (backend):** los endpoints `POST` de publicar una carga y de crear un centro de carga, con escenarios pytest-bdd en `crear_oferta_carga.feature` y en el feature de centros de carga.
 - **Escenarios que cambian:** COC-14 ("se crea aunque la localidad no esté en el catálogo") y COC-LOC 03 ("sin id de localidad se publica como hasta ahora") pasan a ser rechazos. Los demás escenarios de publicar suman localidad y pin sin cambiar lo que prueban.
 - **Seam secundario (backend):** integración del repositorio de cargas para la migración del estado y para que una carga publicada quede con `activa`.
-- **Front del dador:** vitest de integración sobre el formulario de la carga y el modal del centro: la sugerencia centra el mapa y pone el pin, no deja publicar sin pin, el centro copia su pin, el centro viejo pide el mapa y se muestran los errores del backend.
+- **Front del dador:** vitest de integración sobre el formulario de la carga y el modal del centro: la sugerencia abre el modal de confirmación con el pin fijo, confirmar carga el texto y el pin, cambiar los borra, no deja publicar sin pin, el centro copia su pin, el centro viejo pide el mapa y se muestran los errores del backend.
 - **Qué hace bueno a un test:** verifica el comportamiento por la interfaz pública (el endpoint o la pantalla) con datos fijos; nunca usa la hora de la máquina (fechas fijas o `StubDateTimeProvider`).
 - **Tests parecidos:** COC-LOC 01 a 03 y COC-18 en `crear_oferta_carga.feature`; DEP 07 y 08 en centros de carga; los tests del formulario de creación de carga del dador.
 
