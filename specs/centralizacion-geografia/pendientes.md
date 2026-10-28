@@ -2,7 +2,7 @@
 
 Lista de lo que quedó por hacer, probar o decidir mientras se entregaban las historias de routes (R.1.x). Se actualiza a medida que se cierran cosas. Quién: **vos** (necesita credenciales, acceso o una decisión), **equipo** (otra persona), **pendiente de hacer** (código o tickets que se pueden retomar).
 
-Última actualización: 2026-10-23.
+Última actualización: 2026-10-28.
 
 ## 1. Pruebas manuales pendientes
 
@@ -43,7 +43,7 @@ La regla de rate limiting (`20 req / 10 s` por IP) alcanza también al backend, 
 | --- | --- | --- |
 | Que `/loads/search` (recomendador) reciba ids de localidad en vez de nombres | #164 (transportista), #150 | **Autocompletado y rutas del transportista hechos (v1.16.0)**; falta que el recomendador del compañero acepte ids |
 | Pedir las rutas por **id de localidad** en dador y transportista; prerequisito para retirar la consulta por nombre | #183 (#189 el dador) | **Dador hecho en #189 (v0.15.1)** y **transportista en #164 (v1.16.0)**; falta la búsqueda de cargas |
-| Retirar la consulta por nombre del servicio de rutas | #183 | **Entrega 1 hecha (v0.12.2)**: escenarios de la ruta y acceptance en vivo ya usan ids; el backend (#196) y el dador (#189) también. Falta la entrega 2 (activar RUT 26 y borrar RUT 05, 06, 07, 10, 11, 16 y 17), que espera al transportista |
+| Retirar la consulta por nombre del servicio de rutas | #183 | **Hecho en v0.14.0 (en test, `In review`)**: RUT 26 activo y RUT 05, 06, 07, 10, 11, 16 y 17 borrados con su código. Backend, dador y transportista piden `/geo/routes` solo por ids |
 | Etapa 2 del backend: retirar la copia del motor de rutas y los endpoints de localidades | #145, #163, #170 (RUT 22), #184 | Retomar cuando los frontends dejen de usar `locations` y `/routes` |
 | Retirar la tabla `locations` y leer las localidades del servicio geográfico | #184 | Pendiente; toca la búsqueda de cargas |
 | Direcciones exactas: **quedan en el backend** (decidido 2026-10-21, ver `decision-proveedor-direcciones.md`); coordenada ↔ localidad queda en el servicio de rutas. #172 y #175 ya no aplican en su forma original | #172, #175, #166 | Cerrar o redefinir #172 y #175 (decisión tuya) |
