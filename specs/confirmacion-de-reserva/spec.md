@@ -42,7 +42,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 25. Como equipo, queremos que el envío de emails sea un puerto genérico de notificaciones por email, para reusarlo en otros avisos. → #236
 26. Como equipo, queremos que la plantilla del email viva en Resend, para cambiar el texto y el diseño sin deploy. → #236
 27. Como equipo, queremos que la API key de Resend llegue como secreto por ambiente y nunca esté en el código, para no exponerla. → #236
-28. Como equipo, queremos que en local, sin API key, el backend arranque y el email solo quede en el log, y que en test y prod el backend no arranque sin ella, para desarrollar sin Resend y no desplegar sin email. → #236
+28. Como equipo, queremos que sin API key el backend arranque y el email solo quede en el log (completo en local, un aviso corto en test y prod), y que el pipeline no despliegue a test ni a prod sin ella, para desarrollar sin Resend y no desplegar sin email. → #236
 
 ## Decisiones de implementación
 
@@ -60,7 +60,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
   El dominio no conoce Resend ni sus eventos.
 - **Adaptador de Resend:**
   - Hace un solo `POST https://api.resend.com/events/send` con `event`, `email` y `payload`, `Authorization: Bearer <key>` y timeout corto.
-  - Traduce el tipo de notificación al nombre del evento: `load.reserved`, una constante del adaptador.
+  - Traduce el tipo de notificación al nombre del evento: `Reserva Carga`, una constante del adaptador.
   - Ante cualquier error o timeout, deja un warning en el log y no tira excepción.
 - **Disparo:** el controller del desbloqueo pasa el envío a `BackgroundTasks` de FastAPI, que corre en el mismo proceso, después de responder. Sin cola, sin tabla pendiente y sin reintentos.
 - **Garantía de entrega: a lo sumo una vez.** Nunca hay duplicados, pero un email se puede perder, por ejemplo si Resend falla o si Cloud Run, que corre con CPU solo durante el pedido (`cpu_idle`), no llega a mandarlo. La notificación en el portal no se pierde porque está en la base. Para tener "al menos una vez" haría falta una fila pendiente y reintentos; se descartó.
@@ -81,17 +81,18 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
   | `RETURN_SEARCH_URL` | Link a la búsqueda de retorno | ver "Links" |
 
   No lleva el pago del flete, el unlock fee ni sus datos de pago, las cargas sugeridas, el teléfono ni datos de contacto del dador. Si falta una clave, Resend no manda el email: las variables de la plantilla no tienen valor por defecto.
-- **Links,** armados con `FRONTEND_URL`, que ya existe por ambiente y apunta al portal del transportista:
+- **Links,** armados con `FRONTEND_URL`, que ya existe por ambiente y apunta al portal del transportista. Fuera de local es obligatoria: el backend falla si falta y el pipeline la valida igual que `RESEND_API_KEY`, para que un link nunca apunte a localhost:
   - detalle: `/trips/<load_id>`;
   - búsqueda de retorno: `/map?origin=<id de localidad de destino>&destination=<id de localidad de origen>&pickup_from=<X>&pickup_to=<X+1>&trailer_type=<tipo>`.
 
   X es la fecha (`YYYY-MM-DD`, hora argentina) de la fecha límite de entrega de la carga reservada, que es obligatoria. El tipo de remolque va tal cual está guardado en la carga, codificado para URL; sin tipo de remolque, el parámetro no va. Los links no llevan tokens ni datos personales.
 - **Resend:**
-  - Una sola automatización, compartida por test y prod: evento `load.reserved` → Send Email con la plantilla publicada. La plantilla sale del ejemplo de confirmación de reserva, sin el pago del flete ni las cargas sugeridas.
+  - Una sola automatización, compartida por test y prod: evento `Reserva Carga` → Send Email con la plantilla publicada. La plantilla sale del ejemplo de confirmación de reserva, sin el pago del flete ni las cargas sugeridas.
   - Si el email no es un contacto, Resend lo crea. Si un contacto se dio de baja, Resend saltea el envío. Se acepta porque hoy no hay emails de marketing. Si se agregan, la confirmación pasa a `POST /emails`.
 - **Secretos:**
   - `RESEND_API_KEY` vive en Infisical, una key por ambiente, y el pipeline la pasa a Cloud Run como hoy pasa las de MercadoPago.
-  - El backend la lee con el patrón de configuración que ya existe y es obligatoria en test y prod. En `APP_MODE` local, si falta, se usa un sender que solo loguea.
+  - El backend la lee con el patrón de configuración que ya existe. La barrera es el pipeline: el paso de deploy a test y a prod valida con `test -n` que la key exista y, si falta, no despliega.
+  - Si la key falta, el backend arranca igual y usa un sender que solo loguea. En `APP_MODE` local el log lleva el destinatario y los datos del email, con los links; en test y prod, un aviso corto sin datos personales.
   - Se usa la key de solo envío si `/events/send` la acepta; si no, acceso completo, y queda anotado.
 - **Portal, `/map`:**
   - Valida los parámetros `origin`, `destination` (enteros), `pickup_from`, `pickup_to` (fechas) y `trailer_type`.
@@ -143,7 +144,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 - **Antes de implementar, a mano:**
   1. crear las dos API keys en Resend y cargar `RESEND_API_KEY` en los ambientes test y prod de Infisical;
   2. confirmar con una llamada en test que `POST /events/send` responde `202` con la key de solo envío (también confirma que Automations está en el plan);
-  3. crear la automatización `load.reserved` y publicar la plantilla.
+  3. crear la automatización `Reserva Carga` y publicar la plantilla.
 - El payload lleva datos personales del transportista y direcciones de la carga: Resend pasa a tratar datos personales (Ley 25.326). Se manda solo lo mínimo para el email.
 - Ejemplo: se reserva la carga #1042 Buenos Aires (id 123) → Córdoba (id 456), con entrega límite el 28/10 y remolque SEMIRREMOLQUE. Link de retorno: `/map?origin=456&destination=123&pickup_from=2026-10-28&pickup_to=2026-10-29&trailer_type=SEMIRREMOLQUE`.
 - Glosario: "Confirmación de reserva" y "Búsqueda de retorno".
