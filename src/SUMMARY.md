@@ -34,6 +34,7 @@
 - [Repositories](./repositories/README.md)
   - [smartruck-backend](./repositories/smartruck-backend/README.md)
     - [Arquitectura](./repositories/smartruck-backend/arquitectura.md)
+    - [Reserva y desbloqueo consistente](./repositories/smartruck-backend/reserva-concurrencia-y-desbloqueo.md)
     - [Links](./repositories/smartruck-backend/links.md)
   - [smartruck-dador](./repositories/smartruck-dador/README.md)
     - [Arquitectura](./repositories/smartruck-dador/arquitectura.md)
