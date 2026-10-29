@@ -76,7 +76,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
   | `CARGO_TYPE` | Tipo de carga | `Cargas paletizadas` |
   | `WEIGHT` | Peso como en el portal | `24 TN` |
   | `DISTANCE_KM` | Km de la carga | `700` |
-  | `TRAILER_TYPE` | Remolque con mayúscula inicial; `No especifica` si la carga no pide | `Sider` |
+  | `TRAILER_TYPE` | Remolque con mayúscula inicial; `No especifica` si la carga no pide | `Semirremolque` |
   | `TRIP_URL` | Link al detalle del viaje | ver "Links" |
   | `RETURN_SEARCH_URL` | Link a la búsqueda de retorno | ver "Links" |
 
@@ -85,7 +85,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
   - detalle: `/trips/<load_id>`;
   - búsqueda de retorno: `/map?origin=<id de localidad de destino>&destination=<id de localidad de origen>&pickup_from=<X>&pickup_to=<X+1>&trailer_type=<tipo>`.
 
-  X es la fecha (`YYYY-MM-DD`, hora argentina) de la fecha límite de entrega de la carga reservada, que es obligatoria. Sin tipo de remolque, el parámetro no va. Los links no llevan tokens ni datos personales.
+  X es la fecha (`YYYY-MM-DD`, hora argentina) de la fecha límite de entrega de la carga reservada, que es obligatoria. El tipo de remolque va tal cual está guardado en la carga, codificado para URL; sin tipo de remolque, el parámetro no va. Los links no llevan tokens ni datos personales.
 - **Resend:**
   - Una sola automatización, compartida por test y prod: evento `load.reserved` → Send Email con la plantilla publicada. La plantilla sale del ejemplo de confirmación de reserva, sin el pago del flete ni las cargas sugeridas.
   - Si el email no es un contacto, Resend lo crea. Si un contacto se dio de baja, Resend saltea el envío. Se acepta porque hoy no hay emails de marketing. Si se agregan, la confirmación pasa a `POST /emails`.
@@ -145,7 +145,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
   2. confirmar con una llamada en test que `POST /events/send` responde `202` con la key de solo envío (también confirma que Automations está en el plan);
   3. crear la automatización `load.reserved` y publicar la plantilla.
 - El payload lleva datos personales del transportista y direcciones de la carga: Resend pasa a tratar datos personales (Ley 25.326). Se manda solo lo mínimo para el email.
-- Ejemplo: se reserva la carga #1042 Buenos Aires (id 123) → Córdoba (id 456), con entrega límite el 28/10 y remolque sider. Link de retorno: `/map?origin=456&destination=123&pickup_from=2026-10-28&pickup_to=2026-10-29&trailer_type=sider`.
+- Ejemplo: se reserva la carga #1042 Buenos Aires (id 123) → Córdoba (id 456), con entrega límite el 28/10 y remolque SEMIRREMOLQUE. Link de retorno: `/map?origin=456&destination=123&pickup_from=2026-10-28&pickup_to=2026-10-29&trailer_type=SEMIRREMOLQUE`.
 - Glosario: "Confirmación de reserva" y "Búsqueda de retorno".
 - La plantilla publicada en Resend está copiada en `email.html`, en esta misma carpeta. Si se cambia en Resend, se actualiza la copia.
 
