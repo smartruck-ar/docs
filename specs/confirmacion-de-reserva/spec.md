@@ -17,7 +17,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 
 1. Como transportista, quiero recibir una notificación en el portal cuando reservo una carga, que me invite a buscar cargas de regreso desde donde la entrego hasta donde la retiré, para tener la confirmación junto con mis otros avisos y pensar en la vuelta. → #234
 2. Como transportista, quiero que al tocar esa notificación se abra la búsqueda de retorno, para encontrar mi próxima carga sin armarla. → #235
-3. Como transportista, quiero recibir un email de confirmación de reserva con la ruta, el número de carga, el retiro (fecha y dirección), la entrega límite (fecha y dirección), el tipo de carga y el peso, el tipo de remolque, la distancia y lo que pagué en Smartruck (monto, operación y fecha), para tener los datos del viaje a mano. → #236
+3. Como transportista, quiero recibir un email de confirmación de reserva con la carga mostrada como en las tarjetas de la búsqueda (ruta, tipo de carga, peso, distancia y remolque), el retiro y la entrega límite con fecha, hora y dirección, para tener los datos del viaje a mano → #236
 4. Como transportista, quiero que el email tenga un botón al detalle del viaje en el portal, para entrar directo a mi reserva. → #236
 5. Como transportista, quiero que el email tenga un botón "Buscá tu carga de retorno: <destino> → <origen>", para encontrar la próxima carga sin armar la búsqueda. → #236
 6. Como transportista, quiero que la búsqueda de retorno salga de la localidad donde entrego y vaya a la localidad donde retiré, para volver a mi punto de partida. → #236
@@ -51,7 +51,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 - **Reserva (caso de uso de desbloqueo):**
   - Si la carga ya está reservada por el mismo transportista, devuelve la carga sin guardar la notificación del transportista ni pedir el email.
   - Si no, además de lo que hace hoy, guarda en la misma transacción una notificación nueva para el transportista y arma la notificación por email.
-- **Notificación en el portal:** un tipo nuevo, `reserva_confirmada`, que lleva `transporter_id` y el `load_id` de la carga reservada. Su mensaje no es fijo como el de los demás tipos: invita a buscar cargas de regreso con las localidades de la carga reservada, de su destino a su origen ("Encontrá cargas de regreso de Buenos Aires, CABA a Rosario, Santa Fe."). Al tocarla, el portal abre la búsqueda de retorno: arma el mismo link que el email con los datos de la carga reservada (localidades, fecha límite de entrega y tipo de remolque), que el transportista ya puede leer porque la reservó. El backend no agrega datos a la notificación para esto.
+- **Notificación en el portal:** un tipo nuevo, `reserva_confirmada`, que lleva `transporter_id` y el `load_id` de la carga reservada. Su mensaje no es fijo como el de los demás tipos: invita a buscar cargas de regreso con las localidades de la carga reservada, de su destino a su origen ("Encontrá cargas de regreso de Buenos Aires, CABA a Rosario, Santa Fe."). La notificación guarda esos parámetros (origen y destino) y el mensaje se arma con ellos. Al tocarla, el portal abre la búsqueda de retorno: arma el mismo link que el email con los datos de la carga reservada (localidades, fecha límite de entrega y tipo de remolque), que el transportista ya puede leer porque la reservó.
 - **Puerto `EmailNotificationSender`** en el dominio. Recibe un `EmailNotification` con:
   - un tipo de notificación por email (primer valor: reserva confirmada);
   - el email del destinatario;
@@ -64,14 +64,23 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
   - Ante cualquier error o timeout, deja un warning en el log y no tira excepción.
 - **Disparo:** el controller del desbloqueo pasa el envío a `BackgroundTasks` de FastAPI, que corre en el mismo proceso, después de responder. Sin cola, sin tabla pendiente y sin reintentos.
 - **Garantía de entrega: a lo sumo una vez.** Nunca hay duplicados, pero un email se puede perder, por ejemplo si Resend falla o si Cloud Run, que corre con CPU solo durante el pedido (`cpu_idle`), no llega a mandarlo. La notificación en el portal no se pierde porque está en la base. Para tener "al menos una vez" haría falta una fila pendiente y reintentos; se descartó.
-- **Datos del email (payload):**
-  - `load_id`, `origin_name`, `destination_name`;
-  - `pickup_date`, `pickup_address`, `delivery_deadline`, `delivery_address`;
-  - `cargo_type`, `weight_kg`, `trailer_type`, `distance_km`;
-  - `fee_amount`, `payment_operation`, `paid_at`, `transporter_name`;
-  - `trip_url`, `return_search_url`.
+- **Datos del email (payload):** claves en mayúsculas, como las variables de la plantilla de Resend, y todos los valores como texto ya formateado (la plantilla no formatea):
 
-  No lleva el pago del flete, las cargas sugeridas, el teléfono ni datos de contacto del dador.
+  | Clave | Valor | Ejemplo |
+  | --- | --- | --- |
+  | `LOAD_ID` | Número de la carga | `1042` |
+  | `TRANSPORTER_NAME` | Nombre del transportista | `Transportes del Sur` |
+  | `ORIGIN_NAME` / `DESTINATION_NAME` | Localidad sin provincia (lo que va antes de la coma) | `Buenos Aires` / `Córdoba` |
+  | `PICKUP_DATE` / `DELIVERY_DEADLINE` | Fecha y hora como en las tarjetas del portal, hora argentina | `sáb 25 oct · 08:00` |
+  | `PICKUP_ADDRESS` / `DELIVERY_ADDRESS` | Dirección de retiro y de entrega | `Av. Pellegrini 1500, Buenos Aires` |
+  | `CARGO_TYPE` | Tipo de carga | `Cargas paletizadas` |
+  | `WEIGHT` | Peso como en el portal | `24 TN` |
+  | `DISTANCE_KM` | Km de la carga | `700` |
+  | `TRAILER_TYPE` | Remolque con mayúscula inicial; `No especifica` si la carga no pide | `Sider` |
+  | `TRIP_URL` | Link al detalle del viaje | ver "Links" |
+  | `RETURN_SEARCH_URL` | Link a la búsqueda de retorno | ver "Links" |
+
+  No lleva el pago del flete, el unlock fee ni sus datos de pago, las cargas sugeridas, el teléfono ni datos de contacto del dador. Si falta una clave, Resend no manda el email: las variables de la plantilla no tienen valor por defecto.
 - **Links,** armados con `FRONTEND_URL`, que ya existe por ambiente y apunta al portal del transportista:
   - detalle: `/trips/<load_id>`;
   - búsqueda de retorno: `/map?origin=<id de localidad de destino>&destination=<id de localidad de origen>&pickup_from=<X>&pickup_to=<X+1>&trailer_type=<tipo>`.
@@ -138,6 +147,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 - El payload lleva datos personales del transportista y direcciones de la carga: Resend pasa a tratar datos personales (Ley 25.326). Se manda solo lo mínimo para el email.
 - Ejemplo: se reserva la carga #1042 Buenos Aires (id 123) → Córdoba (id 456), con entrega límite el 28/10 y remolque sider. Link de retorno: `/map?origin=456&destination=123&pickup_from=2026-10-28&pickup_to=2026-10-29&trailer_type=sider`.
 - Glosario: "Confirmación de reserva" y "Búsqueda de retorno".
+- La plantilla publicada en Resend está copiada en `email.html`, en esta misma carpeta. Si se cambia en Resend, se actualiza la copia.
 
 ## Historias derivadas
 
