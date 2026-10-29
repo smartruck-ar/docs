@@ -6,7 +6,7 @@ Cuando un transportista reserva una carga, no recibe nada que le confirme la res
 
 ## Solución
 
-Al reservar una carga, el transportista recibe una confirmación de reserva: una notificación en el portal y un email con los datos del viaje. El email trae dos botones:
+Al reservar una carga, el transportista recibe una confirmación de reserva: una notificación en el portal que lo invita a buscar cargas de regreso y abre la búsqueda de retorno, y un email con los datos del viaje. El email trae dos botones:
 
 - uno lleva al detalle del viaje en el portal;
 - otro abre la búsqueda de retorno ya armada: el viaje inverso al de la carga reservada (de donde la entrega a donde la retiró), con retiro el día de entrega o el siguiente y el mismo tipo de remolque. El portal completa el formulario y busca solo, así que el transportista ve las recomendaciones sin tocar nada.
@@ -15,8 +15,8 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 
 ## Comportamientos
 
-1. Como transportista, quiero recibir una notificación en el portal cuando reservo una carga, para tener la confirmación junto con mis otros avisos. → #234
-2. Como transportista, quiero que al tocar esa notificación vaya al detalle del viaje, para ver los datos de la carga que reservé. → #235
+1. Como transportista, quiero recibir una notificación en el portal cuando reservo una carga, que me invite a buscar cargas de regreso desde donde la entrego hasta donde la retiré, para tener la confirmación junto con mis otros avisos y pensar en la vuelta. → #234
+2. Como transportista, quiero que al tocar esa notificación se abra la búsqueda de retorno, para encontrar mi próxima carga sin armarla. → #235
 3. Como transportista, quiero recibir un email de confirmación de reserva con la ruta, el número de carga, el retiro (fecha y dirección), la entrega límite (fecha y dirección), el tipo de carga y el peso, el tipo de remolque, la distancia y lo que pagué en Smartruck (monto, operación y fecha), para tener los datos del viaje a mano. → #236
 4. Como transportista, quiero que el email tenga un botón al detalle del viaje en el portal, para entrar directo a mi reserva. → #236
 5. Como transportista, quiero que el email tenga un botón "Buscá tu carga de retorno: <destino> → <origen>", para encontrar la próxima carga sin armar la búsqueda. → #236
@@ -51,7 +51,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 - **Reserva (caso de uso de desbloqueo):**
   - Si la carga ya está reservada por el mismo transportista, devuelve la carga sin guardar la notificación del transportista ni pedir el email.
   - Si no, además de lo que hace hoy, guarda en la misma transacción una notificación nueva para el transportista y arma la notificación por email.
-- **Notificación en el portal:** un tipo nuevo, `reserva_confirmada`, con título "Reserva confirmada" y mensaje "Reservaste una carga. Mirá los datos del viaje.", con texto fijo como los demás tipos. Lleva `transporter_id` y el `load_id` de la carga reservada. Al tocarla, el portal abre el detalle del viaje, la misma página que el botón del email.
+- **Notificación en el portal:** un tipo nuevo, `reserva_confirmada`, que lleva `transporter_id` y el `load_id` de la carga reservada. Su mensaje no es fijo como el de los demás tipos: invita a buscar cargas de regreso con las localidades de la carga reservada, de su destino a su origen ("Encontrá cargas de regreso de Buenos Aires, CABA a Rosario, Santa Fe."). Al tocarla, el portal abre la búsqueda de retorno: arma el mismo link que el email con los datos de la carga reservada (localidades, fecha límite de entrega y tipo de remolque), que el transportista ya puede leer porque la reservó. El backend no agrega datos a la notificación para esto.
 - **Puerto `EmailNotificationSender`** en el dominio. Recibe un `EmailNotification` con:
   - un tipo de notificación por email (primer valor: reserva confirmada);
   - el email del destinatario;
@@ -117,6 +117,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
   - que ignora un remolque desconocido;
   - que limpia la URL.
 - **Seam 4: login con `redirect_to`**, extendiendo los tests de la vista de login. Verifica que vuelve a una ruta interna y que ignora una externa.
+- **Seam 5: campana de notificaciones**, extendiendo sus tests de presentación. Verifica que tocar una notificación `reserva_confirmada` navega a `/map` con los parámetros de la búsqueda de retorno de esa carga.
 - Los escenarios Gherkin viven en los `.feature` y en cada historia.
 
 ## Fuera de alcance
@@ -142,8 +143,8 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 
 | Historia | Cubre (de este spec) |
 | --- | --- |
-| #234 Como transportista, Quiero recibir una notificación en el portal cuando reservo una carga… | Comportamientos 1 y 13 (notificación); decisión "Reserva (caso de uso de desbloqueo)" y "Notificación en el portal" |
-| #235 UI- Como transportista, Quiero que la notificación de reserva confirmada me lleve al detalle del viaje… | Comportamiento 2 |
-| #236 Como transportista, Quiero recibir un email de confirmación de reserva con los datos del viaje y la búsqueda de retorno… | Comportamientos 3 a 13 (email) y 24 a 28; decisiones de puerto, adaptador de Resend, disparo, payload, links, Resend y secretos |
-| #237 UI- Como transportista, Quiero que al abrir la búsqueda de retorno el portal complete los datos y busque solo… | Comportamientos 14, 15 y 18 a 22; decisión "Portal, /map" |
-| #238 UI- Como transportista, Quiero volver a la página que abrí después de iniciar sesión… | Comportamientos 16, 17 y 23; decisión "Portal, login" |
+| #234 T.6.3 - Como transportista, Quiero recibir una notificación en el portal cuando reservo una carga… | Comportamientos 1 y 13 (notificación); decisiones "Reserva (caso de uso de desbloqueo)" y "Notificación en el portal" |
+| #235 UI-T.6.4 - Como transportista, Quiero que la notificación de reserva confirmada me abra la búsqueda de retorno… | Comportamiento 2; decisión "Notificación en el portal" (link armado en el portal) |
+| #236 T.6.5 - Como transportista, Quiero recibir un email de confirmación de reserva con los datos del viaje y la búsqueda de retorno… | Comportamientos 3 a 13 (email) y 24 a 28; decisiones de puerto, adaptador de Resend, disparo, payload, links, Resend y secretos |
+| #237 UI-T.6.6 - Como transportista, Quiero que al abrir la búsqueda de retorno el portal complete los datos y busque solo… | Comportamientos 14, 15 y 18 a 22; decisión "Portal, /map" |
+| #238 UI-T.6.7 - Como transportista, Quiero volver a la página que abrí después de iniciar sesión… | Comportamientos 16, 17 y 23; decisión "Portal, login" |
