@@ -55,8 +55,8 @@ Términos del proceso y del dominio.
 | Carga de paso | Una carga que no coincide con los extremos del viaje solicitado, pero está en su camino y lo acerca al destino (Zárate → Rosario en Buenos Aires → Córdoba). _Evitar_: carga parcial |
 | Aprovechamiento mínimo | El aprovechamiento por debajo del cual una carga no se recomienda (25%). _Evitar_: piso, umbral |
 | Carga cancelada | Carga que el dador o el transportista dio de baja antes de que arranque el viaje. Es un estado final: nunca vuelve a estar activa y registra quién canceló. _Evitar_: carga anulada, carga dada de baja |
-| Aviso de retorno | Email y notificación que recibe el transportista al reservar una carga, con hasta 3 cargas que salen de donde la entrega, para que su camión no vuelva vacío. Si no hay ninguna, no se avisa. _Evitar_: retorno automático, Tier |
-| Carga de vuelta | En el aviso de retorno, la carga que sale de donde se entrega la carga reservada y va a donde se retiró: lleva al camión de vuelta a su punto de partida |
+| Confirmación de reserva | El email y la notificación que recibe el transportista cuando reserva una carga, con los datos del viaje y la búsqueda de retorno |
+| Búsqueda de retorno | La búsqueda que se le deja armada al transportista con el viaje inverso al de la carga reservada (desde donde la entrega hasta donde la retiró), con retiro el día de entrega o el siguiente y el mismo tipo de remolque. _Evitar_: retorno automático |
 | | |
 
 ## Repositorios
