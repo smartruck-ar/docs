@@ -6,7 +6,7 @@ Cuando un transportista reserva una carga, no recibe nada que le confirme la res
 
 ## Solución
 
-Al reservar una carga, el transportista recibe una confirmación de reserva: una notificación en la app y un email con los datos del viaje. El email trae dos botones:
+Al reservar una carga, el transportista recibe una confirmación de reserva: una notificación en el portal y un email con los datos del viaje. El email trae dos botones:
 
 - uno lleva al detalle del viaje en el portal;
 - otro abre la búsqueda de retorno ya armada: el viaje inverso al de la carga reservada (de donde la entrega a donde la retiró), con retiro el día de entrega o el siguiente y el mismo tipo de remolque. El portal completa el formulario y busca solo, así que el transportista ve las recomendaciones sin tocar nada.
@@ -15,44 +15,43 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 
 ## Comportamientos
 
-1. Como transportista, quiero recibir una notificación en la app cuando reservo una carga, para tener la confirmación junto con mis otros avisos.
-2. Como transportista, quiero que al tocar esa notificación vaya al detalle del viaje, para ver los datos de la carga que reservé.
-3. Como transportista, quiero recibir un email de confirmación de reserva con la ruta, el número de carga, el retiro (fecha y dirección), la entrega límite (fecha y dirección), el tipo de carga y el peso, el tipo de remolque, la distancia y lo que pagué en Smartruck (monto, operación y fecha), para tener los datos del viaje a mano.
-4. Como transportista, quiero que el email tenga un botón al detalle del viaje en el portal, para entrar directo a mi reserva.
-5. Como transportista, quiero que el email tenga un botón "Buscá tu carga de retorno: <destino> → <origen>", para encontrar la próxima carga sin armar la búsqueda.
-6. Como transportista, quiero que la búsqueda de retorno salga de la localidad donde entrego y vaya a la localidad donde retiré, para volver a mi punto de partida.
-7. Como transportista, quiero que la búsqueda de retorno busque cargas con retiro el día de entrega de la carga reservada o el día siguiente, para encadenar los viajes.
-8. Como transportista, quiero que la búsqueda de retorno filtre por el tipo de remolque que pide la carga reservada y no por tipo de carga, para ver cargas que mi equipo puede llevar.
-9. Como transportista, quiero que si la carga reservada no pide un tipo de remolque, la búsqueda de retorno vaya sin ese filtro, para no perder opciones.
-10. Como transportista, quiero que los links del email me lleven al portal del ambiente donde reservé (test o prod), para no terminar en otro ambiente.
-11. Como transportista, quiero que la reserva responda sin esperar el envío del email, para no demorar el pago.
-12. Como transportista, quiero que la reserva quede hecha aunque falle el envío del email, para no perder la carga por un problema de correo.
-13. Como transportista, quiero que si desbloqueo de nuevo una carga que ya reservé no me llegue otra notificación ni otro email, para no recibir avisos repetidos.
-14. Como dador, quiero que si el transportista desbloquea de nuevo una carga que ya reservó no me llegue otra notificación de carga reservada, para no recibir avisos repetidos.
-15. Como transportista, quiero que al abrir el portal con una búsqueda de retorno se completen origen, destino, ventana de retiro y tipo de remolque, para no cargarlos a mano.
-16. Como transportista, quiero que con esos datos completos el portal busque las recomendaciones solo, para ahorrarme el clic.
-17. Como transportista, quiero que si abro el link sin sesión, después de entrar vuelva a la búsqueda de retorno con los mismos datos, para no perder el link.
-18. Como transportista, quiero que el link al detalle del viaje también me devuelva ahí después de entrar, para no tener que buscarlo.
-19. Como transportista, quiero que si abro un link viejo cuyo primer día de retiro ya pasó, la búsqueda arranque hoy, para no recibir un error por una fecha vencida.
-20. Como transportista, quiero que si ya pasaron los dos días de retiro, la búsqueda vaya sin fechas, para ver igual las cargas de esa ruta.
-21. Como transportista, quiero que si una localidad del link no existe, el portal complete lo que pueda y no busque, para terminar la búsqueda yo.
-22. Como transportista, quiero que si el tipo de remolque del link no existe, el portal lo ignore y busque igual, para no quedarme sin resultados por un dato viejo.
-23. Como transportista, quiero que después de la búsqueda automática la dirección del portal quede sin los datos del link, para que al recargar no se pise lo que cambié a mano.
-24. Como equipo, queremos que la vuelta después del login acepte solo rutas internas del portal, para que el link no sirva para mandar a alguien a otro sitio.
-25. Como equipo, queremos que cada envío fallido quede en el log con el id de la carga y el motivo, sin la API key, el email ni los datos del transportista, para investigar sin exponer datos.
-26. Como equipo, queremos que el envío de emails sea un puerto genérico de notificaciones por email, para reusarlo en otros avisos.
-27. Como equipo, queremos que la plantilla del email viva en Resend, para cambiar el texto y el diseño sin deploy.
-28. Como equipo, queremos que la API key de Resend llegue como secreto por ambiente y nunca esté en el código, para no exponerla.
-29. Como equipo, queremos que en local, sin API key, el backend arranque y el email solo quede en el log, y que en test y prod el backend no arranque sin ella, para desarrollar sin Resend y no desplegar sin email.
+1. Como transportista, quiero recibir una notificación en el portal cuando reservo una carga, para tener la confirmación junto con mis otros avisos. → #234
+2. Como transportista, quiero que al tocar esa notificación vaya al detalle del viaje, para ver los datos de la carga que reservé. → #235
+3. Como transportista, quiero recibir un email de confirmación de reserva con la ruta, el número de carga, el retiro (fecha y dirección), la entrega límite (fecha y dirección), el tipo de carga y el peso, el tipo de remolque, la distancia y lo que pagué en Smartruck (monto, operación y fecha), para tener los datos del viaje a mano. → #236
+4. Como transportista, quiero que el email tenga un botón al detalle del viaje en el portal, para entrar directo a mi reserva. → #236
+5. Como transportista, quiero que el email tenga un botón "Buscá tu carga de retorno: <destino> → <origen>", para encontrar la próxima carga sin armar la búsqueda. → #236
+6. Como transportista, quiero que la búsqueda de retorno salga de la localidad donde entrego y vaya a la localidad donde retiré, para volver a mi punto de partida. → #236
+7. Como transportista, quiero que la búsqueda de retorno busque cargas con retiro el día de entrega de la carga reservada o el día siguiente, para encadenar los viajes. → #236
+8. Como transportista, quiero que la búsqueda de retorno filtre por el tipo de remolque que pide la carga reservada y no por tipo de carga, para ver cargas que mi equipo puede llevar. → #236
+9. Como transportista, quiero que si la carga reservada no pide un tipo de remolque, la búsqueda de retorno vaya sin ese filtro, para no perder opciones. → #236
+10. Como transportista, quiero que los links del email me lleven al portal del ambiente donde reservé (test o prod), para no terminar en otro ambiente. → #236
+11. Como transportista, quiero que la reserva responda sin esperar el envío del email, para no demorar el pago. → #236
+12. Como transportista, quiero que la reserva quede hecha aunque falle el envío del email, para no perder la carga por un problema de correo. → #236
+13. Como transportista, quiero que si desbloqueo de nuevo una carga que ya reservé no me llegue otra notificación ni otro email, para no recibir avisos repetidos. → #234, #236
+14. Como transportista, quiero que al abrir el portal con una búsqueda de retorno se completen origen, destino, ventana de retiro y tipo de remolque, para no cargarlos a mano. → #237
+15. Como transportista, quiero que con esos datos completos el portal busque las recomendaciones solo, para ahorrarme el clic. → #237
+16. Como transportista, quiero que si abro el link sin sesión, después de entrar vuelva a la búsqueda de retorno con los mismos datos, para no perder el link. → #238
+17. Como transportista, quiero que el link al detalle del viaje también me devuelva ahí después de entrar, para no tener que buscarlo. → #238
+18. Como transportista, quiero que si abro un link viejo cuyo primer día de retiro ya pasó, la búsqueda arranque hoy, para no recibir un error por una fecha vencida. → #237
+19. Como transportista, quiero que si ya pasaron los dos días de retiro, la búsqueda vaya sin fechas, para ver igual las cargas de esa ruta. → #237
+20. Como transportista, quiero que si una localidad del link no existe, el portal complete lo que pueda y no busque, para terminar la búsqueda yo. → #237
+21. Como transportista, quiero que si el tipo de remolque del link no existe, el portal lo ignore y busque igual, para no quedarme sin resultados por un dato viejo. → #237
+22. Como transportista, quiero que después de la búsqueda automática la dirección del portal quede sin los datos del link, para que al recargar no se pise lo que cambié a mano. → #237
+23. Como equipo, queremos que la vuelta después del login acepte solo rutas internas del portal, para que el link no sirva para mandar a alguien a otro sitio. → #238
+24. Como equipo, queremos que cada envío fallido quede en el log con el id de la carga y el motivo, sin la API key, el email ni los datos del transportista, para investigar sin exponer datos. → #236
+25. Como equipo, queremos que el envío de emails sea un puerto genérico de notificaciones por email, para reusarlo en otros avisos. → #236
+26. Como equipo, queremos que la plantilla del email viva en Resend, para cambiar el texto y el diseño sin deploy. → #236
+27. Como equipo, queremos que la API key de Resend llegue como secreto por ambiente y nunca esté en el código, para no exponerla. → #236
+28. Como equipo, queremos que en local, sin API key, el backend arranque y el email solo quede en el log, y que en test y prod el backend no arranque sin ella, para desarrollar sin Resend y no desplegar sin email. → #236
 
 ## Decisiones de implementación
 
 - **Repos:** `smartruck-backend` (reserva, notificación, email), `smartruck-transportista` (`/map` con parámetros y vuelta después del login) y Resend (automatización y plantilla, se configura a mano).
 - **El backend no busca cargas al reservar.** Solo arma el link. La búsqueda la hace el recomendador que ya existe, cuando el portal abre el link. Así la reserva no depende del servicio de rutas ni del puntaje.
 - **Reserva (caso de uso de desbloqueo):**
-  - Si la carga ya está reservada por el mismo transportista, devuelve la carga sin guardar notificaciones ni pedir el email. Esto cambia el comportamiento actual, que repite la notificación del dador.
+  - Si la carga ya está reservada por el mismo transportista, devuelve la carga sin guardar la notificación del transportista ni pedir el email.
   - Si no, además de lo que hace hoy, guarda en la misma transacción una notificación nueva para el transportista y arma la notificación por email.
-- **Notificación en la app:** un tipo nuevo, `reserva_confirmada`, con título "Reserva confirmada" y mensaje "Reservaste una carga. Mirá los datos del viaje.", con texto fijo como los demás tipos. Lleva `transporter_id` y el `load_id` de la carga reservada. El portal la abre en el detalle del viaje.
+- **Notificación en el portal:** un tipo nuevo, `reserva_confirmada`, con título "Reserva confirmada" y mensaje "Reservaste una carga. Mirá los datos del viaje.", con texto fijo como los demás tipos. Lleva `transporter_id` y el `load_id` de la carga reservada. Al tocarla, el portal abre el detalle del viaje, la misma página que el botón del email.
 - **Puerto `EmailNotificationSender`** en el dominio. Recibe un `EmailNotification` con:
   - un tipo de notificación por email (primer valor: reserva confirmada);
   - el email del destinatario;
@@ -64,7 +63,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
   - Traduce el tipo de notificación al nombre del evento: `load.reserved`, una constante del adaptador.
   - Ante cualquier error o timeout, deja un warning en el log y no tira excepción.
 - **Disparo:** el controller del desbloqueo pasa el envío a `BackgroundTasks` de FastAPI, que corre en el mismo proceso, después de responder. Sin cola, sin tabla pendiente y sin reintentos.
-- **Garantía de entrega: a lo sumo una vez.** Nunca hay duplicados, pero un email se puede perder, por ejemplo si Resend falla o si Cloud Run, que corre con CPU solo durante el pedido (`cpu_idle`), no llega a mandarlo. La notificación en la app no se pierde porque está en la base. Para tener "al menos una vez" haría falta una fila pendiente y reintentos; se descartó.
+- **Garantía de entrega: a lo sumo una vez.** Nunca hay duplicados, pero un email se puede perder, por ejemplo si Resend falla o si Cloud Run, que corre con CPU solo durante el pedido (`cpu_idle`), no llega a mandarlo. La notificación en el portal no se pierde porque está en la base. Para tener "al menos una vez" haría falta una fila pendiente y reintentos; se descartó.
 - **Datos del email (payload):**
   - `load_id`, `origin_name`, `destination_name`;
   - `pickup_date`, `pickup_address`, `delivery_deadline`, `delivery_address`;
@@ -141,7 +140,10 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
 
 ## Historias derivadas
 
-_Lo completa `/to-tickets`. No lo escribas a mano._
-
 | Historia | Cubre (de este spec) |
 | --- | --- |
+| #234 Como transportista, Quiero recibir una notificación en el portal cuando reservo una carga… | Comportamientos 1 y 13 (notificación); decisión "Reserva (caso de uso de desbloqueo)" y "Notificación en el portal" |
+| #235 UI- Como transportista, Quiero que la notificación de reserva confirmada me lleve al detalle del viaje… | Comportamiento 2 |
+| #236 Como transportista, Quiero recibir un email de confirmación de reserva con los datos del viaje y la búsqueda de retorno… | Comportamientos 3 a 13 (email) y 24 a 28; decisiones de puerto, adaptador de Resend, disparo, payload, links, Resend y secretos |
+| #237 UI- Como transportista, Quiero que al abrir la búsqueda de retorno el portal complete los datos y busque solo… | Comportamientos 14, 15 y 18 a 22; decisión "Portal, /map" |
+| #238 UI- Como transportista, Quiero volver a la página que abrí después de iniciar sesión… | Comportamientos 16, 17 y 23; decisión "Portal, login" |
