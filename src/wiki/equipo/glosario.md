@@ -44,11 +44,19 @@ Términos del proceso y del dominio.
 | Tramo vacío de fin | Lo que el camión recorre sin carga desde el destino de la carga hasta el destino del viaje solicitado |
 | Desvío neto | Los km de más por tomar la carga: tramo vacío de inicio + tramo cargado + tramo vacío de fin − viaje solicitado; nunca es negativo |
 | Km realizados | Todo lo que el camión recorre al tomar la carga: tramo vacío de inicio + tramo cargado + tramo vacío de fin |
+| Coincidencia exacta | Una carga que coincide con el viaje solicitado: el camión va cargado todo el recorrido, sin tramos vacíos y sin desvío neto |
 | Aprovechamiento | Qué parte de los km realizados el camión va con carga: km del tramo cargado / km realizados. Vale 1 cuando va cargado todo el recorrido; baja con los km vacíos |
 | Plata por km | Lo que paga la carga por cada km realizado: precio máximo / km realizados, tramos vacíos incluidos |
 | Puntaje | Qué tan conveniente es una carga para el viaje solicitado, de 0 a 100: 50 × aprovechamiento + 50 × plata por km comparada con la mejor de las recomendadas, redondeado a entero. 100 es una carga que va cargada todo el recorrido y paga por km lo mejor de las recomendadas. La lista trae como máximo 20 cargas; a igual puntaje va primero la de retiro más próximo, después la de mayor precio máximo y después la publicada primero |
 | Ventana de retiro | El rango de días en que el transportista puede retirar una carga: desde `pickup_from` hasta `pickup_to`, ambos incluidos. Sin `pickup_from` empieza ahora; nunca incluye cargas con retiro pasado |
 | Fecha máxima de entrega | El último día (incluido) en que el transportista puede entregar. Se compara con la fecha límite de entrega de la carga; una carga sin fecha límite no se recomienda |
+| Búsqueda cercana | La primera búsqueda de la recomendación: cargas con origen cerca del origen del viaje solicitado y destino cerca de su destino. _Evitar_: Tier 1 |
+| Búsqueda de paso | La búsqueda ampliada que corre cuando la búsqueda cercana deja menos de 3 recomendaciones: cargas en el camino del viaje solicitado que acercan al destino. _Evitar_: Tier 2, búsqueda ampliada |
+| Carga de paso | Una carga que no coincide con los extremos del viaje solicitado, pero está en su camino y lo acerca al destino (Zárate → Rosario en Buenos Aires → Córdoba). _Evitar_: carga parcial |
+| Aprovechamiento mínimo | El aprovechamiento por debajo del cual una carga no se recomienda (25%). _Evitar_: piso, umbral |
+| Carga cancelada | Carga que el dador o el transportista dio de baja antes de que arranque el viaje. Es un estado final: nunca vuelve a estar activa y registra quién canceló. _Evitar_: carga anulada, carga dada de baja |
+| Aviso de retorno | Email y notificación que recibe el transportista al reservar una carga, con hasta 3 cargas que salen de donde la entrega, para que su camión no vuelva vacío. Si no hay ninguna, no se avisa. _Evitar_: retorno automático, Tier |
+| Carga de vuelta | En el aviso de retorno, la carga que sale de donde se entrega la carga reservada y va a donde se retiró: lleva al camión de vuelta a su punto de partida |
 | | |
 
 ## Repositorios
