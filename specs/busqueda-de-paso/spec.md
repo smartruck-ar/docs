@@ -24,7 +24,7 @@ Si la búsqueda cercana deja menos de 3 recomendaciones, la recomendación sale 
 12. Como transportista, quiero recibir la respuesta en un tiempo acotado aunque haya muchas cargas en la zona de paso, para no esperar más porque haya más cargas publicadas. → #243
 13. Como transportista, quiero que cuando no se pueden medir todas las cargas de paso se midan las de mejor puntaje estimado, para no perder las que más me convienen. → #243
 14. Como transportista, quiero que las cargas de paso lleguen con el mismo formato que las demás (km de cada tramo, desvío neto y puntaje), para leerlas igual. → #240
-15. Como equipo, queremos que la línea de resumen del log diga si entró la búsqueda de paso, con cuántas recomendaciones venía la búsqueda cercana, el margen de la zona, cuántas candidatas trajo la base, si actuó el presupuesto de pares y cuántas dejó afuera, y las descartadas por aprovechamiento mínimo, para verificar las decisiones de este spec con datos reales. → #244
+15. Como equipo, queremos que la línea de resumen del log diga si entró la búsqueda de paso, con cuántas recomendaciones venía la búsqueda cercana, el margen de la zona, cuántas candidatas trajo la base, si actuó el presupuesto de pares y cuántas dejó afuera, para verificar las decisiones de este spec con datos reales. → #244
 16. Como equipo, queremos un `warn` cuando la búsqueda de paso falla y se devuelven solo las de la búsqueda cercana, para investigar la falla. → #242
 17. Como equipo, queremos confirmar con `EXPLAIN ANALYZE` sobre datos sembrados que la consulta de la búsqueda de paso entra por los índices de los pines, para no sumar una consulta que recorra toda la tabla. → #240
 
@@ -95,7 +95,7 @@ Si la búsqueda cercana deja menos de 3 recomendaciones, la recomendación sale 
 
 ### Aprovechamiento mínimo: 25%
 
-- **Regla:** no se recomienda una carga con aprovechamiento menor al 25%, en ninguna de las dos búsquedas. Se descarta sin `warn`: no es un dato roto como las demás descartadas, es una carga que no conviene. Cuenta para el "menos de 3" y en la línea de resumen.
+- **Regla:** no se recomienda una carga con aprovechamiento menor al 25%, en ninguna de las dos búsquedas. Se descarta sin `warn`: no es un dato roto como las demás descartadas, es una carga que no conviene. Se aplica antes del "menos de 3" y no se cuenta en la línea de resumen.
 - **Por qué:** un piso por puntaje (≥ 50) no sirve porque el puntaje es relativo: una carga puede desaparecer solo porque apareció otra mejor (Buenos Aires → Rosario pasa de 71 a 43 si aparece Buenos Aires → Córdoba) y una carga sola siempre pasa. El aprovechamiento es de la carga misma y no cambia por las demás. El 25% saca lo que es casi todo vacío (Zárate → Campana, 1%; Rosario → San Lorenzo, 4%) y deja la carga de paso de referencia, Zárate → Rosario (30%).
 - **Costo aceptado:** cambia la búsqueda cercana ya liberada, y una carga corta que paga muchísimo con poco aprovechamiento queda afuera. El 25% es una constante del dominio, junto a los pesos del `LoadScorer`.
 
@@ -113,7 +113,7 @@ Si la búsqueda cercana deja menos de 3 recomendaciones, la recomendación sale 
 
 ### Observabilidad
 
-- **La línea de resumen no existe hoy:** el spec del Tier 1 la decidió y su historia quedó postergada. Se hace en una historia propia, la última de este spec, con los campos del Tier 1 (viaje y km, mitad del lado, candidatas, descartadas por motivo, tandas y devueltas) más los de la búsqueda de paso: si entró y con cuántas recomendaciones venía la búsqueda cercana, el margen de la zona, las candidatas que trajo la base, si actuó el presupuesto de pares y cuántas dejó sin medir, y las descartadas por aprovechamiento mínimo. Una línea `info` por pedido; nada de esto va en la respuesta.
+- **La línea de resumen no existe hoy:** el spec del Tier 1 la decidió y su historia quedó postergada. Se hace en una historia propia, la última de este spec, con los campos del Tier 1 (viaje y km, mitad del lado, candidatas, descartadas por motivo, tandas y devueltas) más los de la búsqueda de paso: si entró y con cuántas recomendaciones venía la búsqueda cercana, el margen de la zona, las candidatas que trajo la base, si actuó el presupuesto de pares y cuántas dejó sin medir. Una línea `info` por pedido; nada de esto va en la respuesta.
 - **Por qué aparte:** es chica, cruza las dos búsquedas y es lo que permite ver en producción si la curva, el presupuesto y el piso se sostienen.
 - `warn` cuando la búsqueda de paso falla y se devuelven solo las cercanas.
 
