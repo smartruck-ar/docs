@@ -62,7 +62,7 @@ El backend no busca cargas al reservar: la búsqueda corre cuando el transportis
   - Hace un solo `POST https://api.resend.com/events/send` con `event`, `email` y `payload`, `Authorization: Bearer <key>` y timeout corto.
   - Traduce el tipo de notificación al nombre del evento: `Reserva Carga`, una constante del adaptador.
   - Ante cualquier error o timeout, deja un warning en el log y no tira excepción.
-- **Disparo:** el controller del desbloqueo pasa el envío a `BackgroundTasks` de FastAPI, que corre en el mismo proceso, después de responder. Sin cola, sin tabla pendiente y sin reintentos.
+- **Disparo:** el caso de uso del desbloqueo envía por el puerto `EmailNotificationSender`; el adaptador `BackgroundEmailNotificationSender` lo agenda en `BackgroundTasks` de FastAPI, que corre en el mismo proceso, después de responder. El envío es de mejor esfuerzo: `send` nunca lanza y, si falla, queda un warning en el log. Sin cola, sin tabla pendiente y sin reintentos.
 - **Garantía de entrega: a lo sumo una vez.** Nunca hay duplicados, pero un email se puede perder, por ejemplo si Resend falla o si Cloud Run, que corre con CPU solo durante el pedido (`cpu_idle`), no llega a mandarlo. La notificación en el portal no se pierde porque está en la base. Para tener "al menos una vez" haría falta una fila pendiente y reintentos; se descartó.
 - **Datos del email (payload):** claves en mayúsculas, como las variables de la plantilla de Resend, y todos los valores como texto ya formateado (la plantilla no formatea):
 
