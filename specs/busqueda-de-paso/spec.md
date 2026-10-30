@@ -10,25 +10,23 @@ Si la búsqueda cercana deja menos de 3 recomendaciones, la recomendación sale 
 
 ## Comportamientos
 
-1. Como transportista, quiero que cuando la búsqueda cercana deje menos de 3 recomendaciones se busquen también cargas de paso, para tener opciones aunque no haya coincidencias.
-2. Como transportista, quiero que la búsqueda de paso corra sola en el mismo pedido, para no tener que buscar de nuevo.
-3. Como transportista, quiero que con 3 o más recomendaciones de la búsqueda cercana no se busquen cargas de paso, para ver primero las coincidencias y recibir la respuesta sin trabajo de más.
-4. Como transportista, quiero que las cargas de paso tengan su origen y su destino en el camino de mi viaje, para no ver cargas lejos de mi recorrido.
-5. Como transportista, quiero que la zona de paso sea proporcionalmente más ancha en viajes cortos y más ajustada en viajes largos, para no perderme cargas en viajes cortos ni ver medio país en viajes largos.
-6. Como transportista, quiero que no se recomienden cargas de paso que me dejan más lejos de mi destino que donde las cargo, para no ver cargas en sentido contrario.
-7. Como transportista, quiero ver en una sola lista, ordenadas por puntaje, las cargas de la búsqueda cercana y las de paso, para compararlas con la misma vara.
-8. Como transportista, quiero que una carga de la búsqueda cercana siga en la lista aunque quede fuera de la zona de paso, para no perder una opción que ya se había encontrado.
-9. Como transportista, quiero que no se recomiende ninguna carga en la que voy cargado menos del 25% de los km realizados, en ninguna de las dos búsquedas, para no ver cargas que me hacen viajar casi vacío.
-10. Como transportista, quiero que las menos de 3 recomendaciones se cuenten después de descartar las que no se pueden recomendar, para que la búsqueda de paso entre cuando de verdad me faltan opciones.
-11. Como transportista, quiero recibir las recomendaciones de la búsqueda cercana cuando la búsqueda de paso no puede medir sus tramos, para no recibir un error teniendo opciones.
-12. Como transportista, quiero recibir la respuesta en un tiempo acotado aunque haya muchas cargas en la zona de paso, para no esperar más porque haya más cargas publicadas.
-13. Como transportista, quiero que cuando no se pueden medir todas las cargas de paso se midan las de mejor puntaje estimado, para no perder las que más me convienen.
-14. Como transportista, quiero que las cargas de paso lleguen con el mismo formato que las demás (km de cada tramo, desvío neto y puntaje), para leerlas igual.
-15. Como equipo, queremos que la línea de resumen del log diga si entró la búsqueda de paso, con cuántas recomendaciones venía la búsqueda cercana, el margen de la zona, cuántas candidatas trajo la base, si actuó el presupuesto de pares y cuántas dejó afuera, y las descartadas por aprovechamiento mínimo, para verificar las decisiones de este spec con datos reales.
-16. Como equipo, queremos un `warn` cuando la búsqueda de paso falla y se devuelven solo las de la búsqueda cercana, para investigar la falla.
-17. Como equipo, queremos que la consulta de cargas candidatas no traiga el trazado de la carga, en las dos búsquedas, para que la memoria del pedido no dependa del tamaño de los trazados.
-18. Como equipo, queremos que la recomendación nunca guarde cargas, para que una carga leída sin su trazado no lo borre en la base.
-19. Como equipo, queremos confirmar con `EXPLAIN ANALYZE` sobre datos sembrados que la consulta de la búsqueda de paso entra por los índices de los pines, para no sumar una consulta que recorra toda la tabla.
+1. Como transportista, quiero que cuando la búsqueda cercana deje menos de 3 recomendaciones se busquen también cargas de paso, para tener opciones aunque no haya coincidencias. → #240
+2. Como transportista, quiero que la búsqueda de paso corra sola en el mismo pedido, para no tener que buscar de nuevo. → #240
+3. Como transportista, quiero que con 3 o más recomendaciones de la búsqueda cercana no se busquen cargas de paso, para ver primero las coincidencias y recibir la respuesta sin trabajo de más. → #240
+4. Como transportista, quiero que las cargas de paso tengan su origen y su destino en el camino de mi viaje, para no ver cargas lejos de mi recorrido. → #240
+5. Como transportista, quiero que la zona de paso sea proporcionalmente más ancha en viajes cortos y más ajustada en viajes largos, para no perderme cargas en viajes cortos ni ver medio país en viajes largos. → #240
+6. Como transportista, quiero que no se recomienden cargas de paso que me dejan más lejos de mi destino que donde las cargo, para no ver cargas en sentido contrario. → #241
+7. Como transportista, quiero ver en una sola lista, ordenadas por puntaje, las cargas de la búsqueda cercana y las de paso, para compararlas con la misma vara. → #240
+8. Como transportista, quiero que una carga de la búsqueda cercana siga en la lista aunque quede fuera de la zona de paso, para no perder una opción que ya se había encontrado. → #240
+9. Como transportista, quiero que no se recomiende ninguna carga en la que voy cargado menos del 25% de los km realizados, en ninguna de las dos búsquedas, para no ver cargas que me hacen viajar casi vacío. → #239
+10. Como transportista, quiero que las menos de 3 recomendaciones se cuenten después de descartar las que no se pueden recomendar, para que la búsqueda de paso entre cuando de verdad me faltan opciones. → #240
+11. Como transportista, quiero recibir las recomendaciones de la búsqueda cercana cuando la búsqueda de paso no puede medir sus tramos, para no recibir un error teniendo opciones. → #242
+12. Como transportista, quiero recibir la respuesta en un tiempo acotado aunque haya muchas cargas en la zona de paso, para no esperar más porque haya más cargas publicadas. → #243
+13. Como transportista, quiero que cuando no se pueden medir todas las cargas de paso se midan las de mejor puntaje estimado, para no perder las que más me convienen. → #243
+14. Como transportista, quiero que las cargas de paso lleguen con el mismo formato que las demás (km de cada tramo, desvío neto y puntaje), para leerlas igual. → #240
+15. Como equipo, queremos que la línea de resumen del log diga si entró la búsqueda de paso, con cuántas recomendaciones venía la búsqueda cercana, el margen de la zona, cuántas candidatas trajo la base, si actuó el presupuesto de pares y cuántas dejó afuera, y las descartadas por aprovechamiento mínimo, para verificar las decisiones de este spec con datos reales. → #244
+16. Como equipo, queremos un `warn` cuando la búsqueda de paso falla y se devuelven solo las de la búsqueda cercana, para investigar la falla. → #242
+17. Como equipo, queremos confirmar con `EXPLAIN ANALYZE` sobre datos sembrados que la consulta de la búsqueda de paso entra por los índices de los pines, para no sumar una consulta que recorra toda la tabla. → #240
 
 ## Decisiones de implementación
 
@@ -97,7 +95,7 @@ Si la búsqueda cercana deja menos de 3 recomendaciones, la recomendación sale 
 
 ### Aprovechamiento mínimo: 25%
 
-- **Regla:** no se recomienda una carga con aprovechamiento menor al 25%, en ninguna de las dos búsquedas. Se descarta con un `warn` y el motivo "aprovechamiento bajo", como las demás descartadas, y cuenta para el "menos de 3".
+- **Regla:** no se recomienda una carga con aprovechamiento menor al 25%, en ninguna de las dos búsquedas. Se descarta sin `warn`: no es un dato roto como las demás descartadas, es una carga que no conviene. Cuenta para el "menos de 3" y en la línea de resumen.
 - **Por qué:** un piso por puntaje (≥ 50) no sirve porque el puntaje es relativo: una carga puede desaparecer solo porque apareció otra mejor (Buenos Aires → Rosario pasa de 71 a 43 si aparece Buenos Aires → Córdoba) y una carga sola siempre pasa. El aprovechamiento es de la carga misma y no cambia por las demás. El 25% saca lo que es casi todo vacío (Zárate → Campana, 1%; Rosario → San Lorenzo, 4%) y deja la carga de paso de referencia, Zárate → Rosario (30%).
 - **Costo aceptado:** cambia la búsqueda cercana ya liberada, y una carga corta que paga muchísimo con poco aprovechamiento queda afuera. El 25% es una constante del dominio, junto a los pesos del `LoadScorer`.
 
@@ -107,16 +105,16 @@ Si la búsqueda cercana deja menos de 3 recomendaciones, la recomendación sale 
 - **Por qué:** la búsqueda de paso mejora una respuesta que ya está bien. El "todo o nada" del Tier 1 evita puntuar con un conjunto a medias, y el de la búsqueda cercana está completo. Un 503 escondería opciones válidas.
 - **Si falla la búsqueda cercana,** todo sigue como hoy: 503 `RECOMENDACIONES_NO_DISPONIBLES`.
 
-### Trazado y memoria
+### Sin tope de candidatas
 
-- **Regla:** las consultas de candidatas de las dos búsquedas no leen el trazado de la carga; esas cargas se arman sin trazado.
-- **Por qué:** es la única columna pesada y la recomendación no la usa (la respuesta no lo devuelve). Con 10.000 cargas y trazados de 1.000 puntos, el pedido pasaría 1 GB de memoria, y la instancia de Cloud Run tiene 512 MiB. Sin el trazado, 10.000 cargas son unos 5 MB.
-- **Costo aceptado:** una carga leída así, si se guardara, borraría su trazado. La recomendación nunca guarda cargas y un test lo verifica.
-- **Sin tope de candidatas:** el lote ya está acotado por el presupuesto de pares y la memoria por sacar el trazado. El tope de 2.000 del spec del Tier 1 sigue postergado; el conteo de candidatas en el log avisa si algún día hace falta.
+- **Regla:** la consulta de candidatas de paso no lleva tope de filas.
+- **Por qué:** el lote ya está acotado por el presupuesto de pares. Las cargas que se publican hoy no guardan trazado (el front del dador no lo manda; lo pide al geo-service para dibujar el mapa), así que cada candidata es una fila chica: 10.000 cargas sin trazado ocupan unos 5 MB, con 512 MiB por instancia. El tope de 2.000 del spec del Tier 1 sigue postergado.
+- **Riesgo aceptado:** cargas viejas con trazado guardado por un front anterior pesan más en memoria. Se confirma con una consulta de solo lectura sobre la base.
 
 ### Observabilidad
 
-- La línea `info` de resumen del pedido suma: si entró la búsqueda de paso y con cuántas recomendaciones venía la búsqueda cercana, el margen de la zona, las candidatas que trajo la base, si actuó el presupuesto de pares y cuántas candidatas dejó sin medir, y las descartadas por aprovechamiento mínimo. Nada de esto va en la respuesta.
+- **La línea de resumen no existe hoy:** el spec del Tier 1 la decidió y su historia quedó postergada. Se hace en una historia propia, la última de este spec, con los campos del Tier 1 (viaje y km, mitad del lado, candidatas, descartadas por motivo, tandas y devueltas) más los de la búsqueda de paso: si entró y con cuántas recomendaciones venía la búsqueda cercana, el margen de la zona, las candidatas que trajo la base, si actuó el presupuesto de pares y cuántas dejó sin medir, y las descartadas por aprovechamiento mínimo. Una línea `info` por pedido; nada de esto va en la respuesta.
+- **Por qué aparte:** es chica, cruza las dos búsquedas y es lo que permite ver en producción si la curva, el presupuesto y el piso se sostienen.
 - `warn` cuando la búsqueda de paso falla y se devuelven solo las cercanas.
 
 ### Contrato
@@ -131,8 +129,8 @@ Si la búsqueda cercana deja menos de 3 recomendaciones, la recomendación sale 
 ## Decisiones de testing
 
 - **Seam principal:** el endpoint `POST /loads/recommendations`, con escenarios de aceptación pytest-bdd en `recomendar_cargas.feature`, en una regla nueva "Cargas de paso". Cubre: entra con menos de 3 y no con 3; la carga de paso aparece (Zárate → Rosario en Buenos Aires → Córdoba); la contraria no aparece; una fuera de la elipse no aparece; la unión conserva una cercana fuera de la elipse; el aprovechamiento mínimo en las dos búsquedas y su efecto en el conteo; la búsqueda de paso que falla devuelve las cercanas; el presupuesto de pares mide las de mejor puntaje estimado.
-- **Fake del servicio de rutas:** el de aceptación ya devuelve una distancia por par y puede fallar una tanda; hace falta que pueda fallar solo el lote de la búsqueda de paso (el segundo pedido) y contar los pares pedidos.
-- **Repositorio de cargas:** integración con PostGIS para la elipse (dentro, fuera, detrás de una ciudad), el sentido y que no lee el trazado.
+- **Fake del servicio de rutas:** el de aceptación ya alcanza: devuelve una distancia por par, falla el pedido número N (con una tanda por lote, el de la búsqueda de paso es el tercero: viaje, lote cercano y lote de paso) y registra cuántos pares trae cada pedido.
+- **Repositorio de cargas:** integración con PostGIS para la elipse (dentro, fuera, detrás de una ciudad) y el sentido.
 - **Unitarios internos:** el ciclo outside-in de `bdd-tdd-execution` va a crear los del margen en curva, el objeto de valor de la zona, el orden completo del `LoadScorer` y la selección por presupuesto en el caso de uso con `MagicMock(spec=...)`, siguiendo `pytest-unit`.
 - **Qué hace bueno a un test:** verifica comportamiento por la interfaz pública con datos conocidos (cargas con pines, km y precios fijos y sus puntajes esperados), no cómo está hecho por dentro.
 - **Tests parecidos en el código:** los steps de `recomendar_cargas_steps.py`, `test_recommend_loads_use_case.py`, `test_routes_service_distance.py` y la integración del repositorio de la búsqueda cercana.
@@ -161,7 +159,11 @@ Si la búsqueda cercana deja menos de 3 recomendaciones, la recomendación sale 
 
 ## Historias derivadas
 
-_Lo completa `/to-tickets`. No lo escribas a mano._
-
 | Historia | Cubre (de este spec) |
 | --- | --- |
+| #239 Aprovechamiento mínimo del 25% | 9 |
+| #240 Búsqueda de paso con menos de 3 cercanas | 1, 2, 3, 4, 5, 7, 8, 10, 14, 17 |
+| #241 Sin cargas de paso que alejan del destino | 6 |
+| #242 Si falla la búsqueda de paso, devolver las cercanas | 11, 16 |
+| #243 Presupuesto de 600 pares | 12, 13 |
+| #244 Línea de resumen del log | 15 |
