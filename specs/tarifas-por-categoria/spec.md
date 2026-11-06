@@ -104,3 +104,4 @@ _Lo completa `/to-tickets`. No lo escribas a mano._
 | #257 | Tarifa ligada a la carga e historial (11) |
 | #258 | Administrar categorías y tipos desde el backoffice (13, 18, 19) |
 | #259 | Administrar tarifas, vigencia y parámetros (14 a 19) |
+| #289 | Editar los parámetros del cálculo y auditar los cambios (15, 17) |

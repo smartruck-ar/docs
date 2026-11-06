@@ -63,5 +63,6 @@ _Lo completa `/to-tickets`. No lo escribas a mano._
 | --- | --- |
 | #277 | Métricas reales del transportista (1 a 5, 8, 10) |
 | #278 | Métricas reales del dador (6, 7, 8, 10) |
+| #290 | Emisiones de CO₂ y rentabilidad del transportista (4, 5) |
 | #279 | Panel y perfil del transportista sin datos escritos (9, 10) |
 | #280 | Panel y perfil del dador sin datos escritos (9, 10) |
