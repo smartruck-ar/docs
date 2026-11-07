@@ -43,7 +43,7 @@ El dador recibe un precio sugerido calculado según la categoría de su carga, c
 - **Tarifas relacionadas con la categoría.** Cada tarifa pertenece a una categoría y tiene una unidad de cobro, una fecha de vigencia y un estado. Tres unidades: por km, por tonelada según tramo de distancia y por tipo de vehículo según tramo de distancia. Los valores concretos de cada tarifa (tarifa por km, escalones por tramo, porcentaje sobre un tarifario de referencia) cuelgan de la tarifa en una tabla de renglones. Una carga queda ligada a la tarifa con la que se calculó su precio sugerido.
 - **Valores iniciales (tarifario propuesto por el equipo, en pesos).** Carga general 2.500 ARS/km, refrigerada 2.800 ARS/km y peligrosa 3.000 ARS/km (20 % más que la general). Las tres se cobran solo por km, sin toneladas, como se maneja el mercado informal. Granos y agricultura es el 78 % de la tarifa sugerida por FADEEAC para ese viaje, y ganadería el tarifario de FADEEAC por km y tipo de vehículo. Solo estas dos últimas tienen un tarifario oficial. El 78 % sale de lo que un transportista del relevamiento consideró aceptable respecto del tarifario de CATAC. Los tarifarios de FADEEAC se cargan como tramos desde el backoffice, no como constantes.
 - **Descuento de Smartruck.** Sobre la tarifa de referencia de cada categoría se aplica siempre un 20 % de descuento (se multiplica por 0,8), porque para Smartruck todo viaje es de retorno. En granos y agroindustria el 78 % se aplica primero y el 0,8 después. No hay una marca de retorno en la carga. Con la tarifa general, el sugerido queda en 2.000 ARS/km, que es el valor que usa hoy el backend.
-- **Parámetros generales.** El descuento de Smartruck (20 %) y el porcentaje del piso mínimo (80 % del sugerido) en una tabla de parámetros editable, no ligada a una categoría. Los porcentajes de las categorías (78 % de agro, 20 % de recargo de peligrosa) también deben poder editarse desde el backoffice.
+- **Parámetros generales.** El descuento de Smartruck (20 %) y el porcentaje del piso mínimo (90 % del sugerido) en una tabla de parámetros editable, no ligada a una categoría. Los porcentajes de las categorías (78 % de agro, 20 % de recargo de peligrosa) también deben poder editarse desde el backoffice.
 - **Moneda.** Las tarifas se guardan en pesos, como las definió el equipo. El precio sugerido se redondea a miles como hoy. El unlock fee sigue en USD con su propio tipo de cambio y no se mezcla con esto.
 - **Distancia.** Siempre vial y siempre del servicio de geografía. Si no responde, el cálculo falla con un error claro y no se usa una distancia aproximada.
 - **Endpoints de administración.** Bajo `/admin`, con la misma autenticación de administrador que usan los endpoints de usuarios y documentos. Lectura del catálogo y de la tarifa vigente, alta y modificación de categorías y subcategorías, alta de una tarifa nueva con vigencia y modificación de parámetros. Una tarifa nueva se agrega, no se edita la anterior.
@@ -71,7 +71,7 @@ El dador recibe un precio sugerido calculado según la categoría de su carga, c
 
 **Decisiones cerradas en la entrevista:**
 
-1. **Piso mínimo: 80 % del precio sugerido.** Es un parámetro editable desde el backoffice.
+1. **Piso mínimo: 90 % del precio sugerido.** Es un parámetro editable desde el backoffice.
 2. **Las categorías son las seis del informe** (granos y agricultura, agroindustria, peligrosa / regulada, ganadería / hacienda, refrigerado y carga general). Quedan cargadas como datos iniciales de la migración.
 3. **«Productos industrializados» va en carga general**, como en el informe. Granos y agricultura y agroindustria usan el mismo 78 % de la tarifa de FADEEAC.
 4. **Los valores de los tarifarios de FADEEAC quedan afuera del spec.** El spec solo exige que el sistema sepa calcular con ellos y que se carguen desde el backoffice. Conseguirlos es una tarea de datos del equipo, no de este spec.
@@ -100,7 +100,7 @@ _Lo completa `/to-tickets`. No lo escribas a mano._
 | #253 | Precio sugerido por km según categoría, con 0,8 y errores (1, 2, 5, 9, 10) |
 | #254 | Precio sugerido de granos y agroindustria (3) |
 | #255 | Precio sugerido de ganadería (4) |
-| #256 | Piso mínimo del 80 % (7, 8) |
+| #256 | Piso mínimo del 90 % (7, 8) |
 | #257 | Tarifa ligada a la carga e historial (11) |
 | #258 | Administrar categorías y tipos desde el backoffice (13, 18, 19) |
 | #259 | Administrar tarifas, vigencia y parámetros (14 a 19) |
