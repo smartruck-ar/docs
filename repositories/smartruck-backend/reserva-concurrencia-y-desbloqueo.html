@@ -1,0 +1,747 @@
+<!DOCTYPE HTML>
+<html lang="es" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Reserva y desbloqueo consistente - Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="../../proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="../../arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../riesgos.html"><strong aria-hidden="true">4.</strong> Riesgos</a></li><li class="chapter-item expanded "><a href="../../requerimientos.html"><strong aria-hidden="true">5.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="../../metodologia.html"><strong aria-hidden="true">6.</strong> Metodología de trabajo aplicada</a></li><li class="chapter-item expanded "><a href="../../desarrollo.html"><strong aria-hidden="true">7.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="../../manual_usuario.html"><strong aria-hidden="true">8.</strong> Manual de usuario</a></li><li class="chapter-item expanded affix "><li class="part-title">Wiki del equipo</li><li class="chapter-item expanded "><a href="../../wiki/index.html"><strong aria-hidden="true">9.</strong> Wiki</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../wiki/proceso/jerarquia.html"><strong aria-hidden="true">9.1.</strong> Jerarquía</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/definition-of-ready.html"><strong aria-hidden="true">9.2.</strong> Definition of Ready</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/definition-of-done.html"><strong aria-hidden="true">9.3.</strong> Definition of Done</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/workflow-entrega.html"><strong aria-hidden="true">9.4.</strong> Workflow de entrega</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/desarrollo-con-agentes.html"><strong aria-hidden="true">9.5.</strong> Desarrollo con agentes</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/conventional-commits.html"><strong aria-hidden="true">9.6.</strong> Conventional Commits</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/logging.html"><strong aria-hidden="true">9.7.</strong> Logging (hexagonal)</a></li><li class="chapter-item expanded "><a href="../../wiki/proceso/gherkin.html"><strong aria-hidden="true">9.8.</strong> Gherkin (BDD)</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/plantilla-ticket.html"><strong aria-hidden="true">9.9.</strong> Plantilla de ticket</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/tipos-de-ticket.html"><strong aria-hidden="true">9.10.</strong> Tipos de ticket</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/estimacion.html"><strong aria-hidden="true">9.11.</strong> Estimación</a></li><li class="chapter-item expanded "><a href="../../wiki/tickets/automatizacion-historias.html"><strong aria-hidden="true">9.12.</strong> Automatización de historias (roadmap)</a></li><li class="chapter-item expanded "><a href="../../wiki/equipo/roles.html"><strong aria-hidden="true">9.13.</strong> Roles</a></li><li class="chapter-item expanded "><a href="../../wiki/equipo/glosario.html"><strong aria-hidden="true">9.14.</strong> Glosario</a></li><li class="chapter-item expanded "><a href="../../wiki/ui/restyling.html"><strong aria-hidden="true">9.15.</strong> Restyling de UI</a></li><li class="chapter-item expanded "><a href="../../wiki/ui/restyling-dador-handoff.html"><strong aria-hidden="true">9.16.</strong> Handoff restyling del dador (D.X.2/D.X.3 + backend)</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Repositories</li><li class="chapter-item expanded "><a href="../../repositories/index.html"><strong aria-hidden="true">10.</strong> Repositories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/index.html"><strong aria-hidden="true">10.1.</strong> smartruck-backend</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/arquitectura.html"><strong aria-hidden="true">10.1.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/reserva-concurrencia-y-desbloqueo.html" class="active"><strong aria-hidden="true">10.1.2.</strong> Reserva y desbloqueo consistente</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-backend/links.html"><strong aria-hidden="true">10.1.3.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/index.html"><strong aria-hidden="true">10.2.</strong> smartruck-dador</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/arquitectura.html"><strong aria-hidden="true">10.2.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-dador/links.html"><strong aria-hidden="true">10.2.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/index.html"><strong aria-hidden="true">10.3.</strong> smartruck-transportista</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/arquitectura.html"><strong aria-hidden="true">10.3.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-transportista/links.html"><strong aria-hidden="true">10.3.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/index.html"><strong aria-hidden="true">10.4.</strong> smartruck-audit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/arquitectura.html"><strong aria-hidden="true">10.4.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/smartruck-audit/links.html"><strong aria-hidden="true">10.4.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/cloud-template/index.html"><strong aria-hidden="true">10.5.</strong> cloud-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/cloud-template/arquitectura.html"><strong aria-hidden="true">10.5.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/cloud-template/links.html"><strong aria-hidden="true">10.5.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="../../repositories/infra-template/index.html"><strong aria-hidden="true">10.6.</strong> infra-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repositories/infra-template/arquitectura.html"><strong aria-hidden="true">10.6.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="../../repositories/infra-template/links.html"><strong aria-hidden="true">10.6.2.</strong> Links</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="documento-de-arquitectura-de-software-reserva-temporal-concurrencia-y-desbloqueo-consistente-de-cargas"><a class="header" href="#documento-de-arquitectura-de-software-reserva-temporal-concurrencia-y-desbloqueo-consistente-de-cargas">Documento de Arquitectura de Software: Reserva Temporal, Concurrencia y Desbloqueo Consistente de Cargas</a></h1>
+<p><strong>Modelo de Vistas Arquitectónicas 4+1 (Philippe Kruchten) + Árboles de Decisión y Prosa Exhaustiva</strong><br />
+<strong>Proyecto:</strong> Smartruck Backend &amp; Frontend Transportista<br />
+<strong>Módulo:</strong> Gestión de Cargas y Pasarela de Pagos (MercadoPago Checkout Pro)<br />
+<strong>Ticket:</strong> T.2.32 — Desbloqueo y Reserva Consistente de Cargas<br />
+<strong>Versión:</strong> 4.1 (Definitiva y fiel al código en producción)</p>
+<hr />
+<h2 id="Índice-general"><a class="header" href="#Índice-general">Índice General</a></h2>
+<ol>
+<li><a href="#1-resumen-ejecutivo-y-declaraci%C3%B3n-del-problema">Resumen Ejecutivo y Declaración del Problema</a></li>
+<li><a href="#2-vista-de-escenarios-narrativa-en-prosa-de-los-12-casos-de-uso">Vista de Escenarios (Narrativa en Prosa de los 12 Casos de Uso)</a></li>
+<li><a href="#3-vista-l%C3%B3gica-%C3%A1rboles-de-decisi%C3%B3n-y-explicaci%C3%B3n-en-prosa">Vista Lógica: Árboles de Decisión y Explicación en Prosa</a>
+<ul>
+<li><a href="#31-%C3%A1rbol-1-flujo-de-bloqueo-temporal-e-inicio-de-pago">3.1. Árbol 1: Bloqueo Temporal e Inicio de Pago</a></li>
+<li><a href="#32-%C3%A1rbol-2-procesamiento-del-webhook-de-mercadopago-y-reembolso">3.2. Árbol 2: Procesamiento del Webhook de MercadoPago y Reembolso</a></li>
+<li><a href="#33-%C3%A1rbol-3-consulta-b%C3%BAsqueda-y-visibilidad-de-cargas">3.3. Árbol 3: Consulta, Búsqueda y Visibilidad de Cargas</a></li>
+<li><a href="#34-diagrama-de-clases-del-dominio-ddd-t%C3%A1ctico">3.4. Diagrama de Clases del Dominio (DDD Táctico)</a></li>
+</ul>
+</li>
+<li><a href="#4-vista-de-procesos-diagramas-de-secuencia-y-narrativa-t%C3%A9cnica">Vista de Procesos: Diagramas de Secuencia y Narrativa Técnica</a>
+<ul>
+<li><a href="#41-secuencia-del-caso-feliz-bloqueo-pago-y-desbloqueo--10-min">4.1. Secuencia del Caso Feliz (&lt; 10 min)</a></li>
+<li><a href="#42-secuencia-del-caso-borde-cr%C3%ADtico-webhook-tard%C3%ADo-con-reembolso-autom%C3%A1tico">4.2. Secuencia del Caso Borde Crítico (Webhook Tardío con Auto-Refund)</a></li>
+</ul>
+</li>
+<li><a href="#5-vista-de-desarrollo-arquitectura-hexagonal-capas-y-puertos">Vista de Desarrollo (Arquitectura Hexagonal, Capas y Puertos)</a></li>
+<li><a href="#6-vista-f%C3%ADsica-y-de-despliegue-en-la-nube">Vista Física y de Despliegue en la Nube</a></li>
+<li><a href="#7-mecanismos-de-persistencia-y-consulta-sql-at%C3%B3mica">Mecanismos de Persistencia y Consulta SQL Atómica</a></li>
+<li><a href="#8-matriz-de-riesgos-resiliencia-y-mitigaciones">Matriz de Riesgos, Resiliencia y Mitigaciones</a></li>
+<li><a href="#9-alcance-y-casos-diferidos">Alcance y Casos Diferidos</a></li>
+</ol>
+<hr />
+<h2 id="1-resumen-ejecutivo-y-declaración-del-problema"><a class="header" href="#1-resumen-ejecutivo-y-declaración-del-problema">1. Resumen Ejecutivo y Declaración del Problema</a></h2>
+<p>En la plataforma logística Smartruck, transportistas y dadores de carga interactúan concurrentemente en tiempo real. La asignación física de un viaje exige el pago previo de un <em>Unlock Fee</em> a través de MercadoPago Checkout Pro. La consistencia en el estado de las cargas es de misión crítica para evitar disputas comerciales y pérdida de reputación.</p>
+<h3 id="los-4-grandes-desafíos-de-concurrencia"><a class="header" href="#los-4-grandes-desafíos-de-concurrencia">Los 4 Grandes Desafíos de Concurrencia</a></h3>
+<ol>
+<li><strong>Condición de Carrera (<em>Race Condition</em>)</strong>:<br />
+Dos o más transportistas intentan tomar la misma carga al mismo tiempo. Sin un bloqueo transaccional a nivel de tupla en PostgreSQL, ambos podrían obtener preferencias de pago independientes para la misma carga física.</li>
+<li><strong>Doble Cobro sin Asignación Física</strong>:<br />
+Si MercadoPago cobra a dos choferes por el mismo viaje (debido a latencias de red o pagos rezagados), el sistema no puede permitir que ambos tengan la carga. Debe garantizarse que solo uno sea asignado y que el segundo reciba un reembolso automático inmediato sin intervención manual.</li>
+<li><strong>Bloqueos Fantasma (<em>Stale Locks / Abandoned Checkouts</em>)</strong>:<br />
+Si un transportista inicia la reserva pero abandona el checkout, cierra el navegador o se queda sin batería, la carga no debe quedar bloqueada indefinidamente. La carga debe volver a aparecer en los listados y mapas para otros choferes tras vencer la ventana temporal de 10 minutos (<code>reserved_until &lt; NOW()</code>).</li>
+<li><strong>Desincronización por Latencia de Red (<em>Late Webhooks</em>)</strong>:<br />
+Un transportista paga en el límite de los 10 minutos (p. ej. minuto 09:59) y el webhook de MercadoPago llega con demora (minuto 11:30) cuando la ventana de reserva ya expiró. El sistema debe evaluar de forma atómica si la carga sigue libre para asignarla tolerantemente, o si ya fue bloqueada/tomada por otro chofer para disparar un reembolso automático total (<em>auto-refund</em>).</li>
+</ol>
+<h3 id="la-solución-arquitectónica"><a class="header" href="#la-solución-arquitectónica">La Solución Arquitectónica</a></h3>
+<p>Se implementa una ventana de <strong>Bloqueo Temporal Optimista de 10 Minutos</strong> sincronizada con el TTL de la preferencia de MercadoPago (<code>PREFERENCE_TTL_SECONDS = 600</code>), controlada por una sentencia atómica <code>UPDATE ... WHERE ... RETURNING</code> en PostgreSQL, un webhook handler idempotente con guarda de estados terminales y un servicio de <strong>Reembolso Automático (<em>Auto-Refund</em>)</strong> ante desincronización tardía o alteración de montos.</p>
+<hr />
+<h2 id="2-vista-de-escenarios-narrativa-en-prosa-de-los-12-casos-de-uso"><a class="header" href="#2-vista-de-escenarios-narrativa-en-prosa-de-los-12-casos-de-uso">2. Vista de Escenarios (Narrativa en Prosa de los 12 Casos de Uso)</a></h2>
+<pre><code class="language-mermaid">flowchart TD
+    subgraph Actores
+        T(["Transportista"])
+        D(["Dador de Carga"])
+        MP(["MercadoPago"])
+    end
+
+    subgraph Casos de Uso
+        UC01["CU-01: Bloqueo Temporal e Inicio de Pago"]
+        UC02["CU-02: Aborto Voluntario de Bloqueo"]
+        UC03["CU-03: Procesar Webhook de Pago"]
+        UC04["CU-04: Reembolso Automático por Colisión"]
+        UC05["CU-05: Desbloqueo Idempotente de Carga"]
+        UC06["CU-06: Liberación Perezosa de Cargas Vencidas"]
+    end
+
+    T --&gt; UC01
+    T --&gt; UC02
+    T --&gt; UC05
+    MP --&gt; UC03
+    UC03 -.-&gt; UC04
+    UC01 -.-&gt; UC06
+</code></pre>
+<h3 id="explicación-en-prosa-de-cada-escenario"><a class="header" href="#explicación-en-prosa-de-cada-escenario">Explicación en Prosa de Cada Escenario:</a></h3>
+<ul>
+<li><strong>E01 - Caso Feliz Estándar (Pago en &lt; 10 minutos)</strong>:<br />
+El transportista visualiza una carga en estado <code>activa</code>. Al presionar pagar en el modal de checkout, el frontend ejecuta <code>POST /loads/{id}/transporters/{tid}/lock</code>. El backend actualiza la fila atómicamente a <code>bloqueada</code> con <code>reserved_until = NOW() + 600s</code>. Luego se crea la preferencia de pago en MercadoPago (<code>POST /payments</code>) y el chofer abona dentro del plazo. Llega el webhook <code>APPROVED</code>. El backend confirma la vigencia, asigna la carga pasando a <code>reservada</code>, limpia el <code>reserved_until</code>, aprueba el <code>Payment</code> y crea la notificación para el dador. Cuando el frontend completa el polling y llama a <code>POST /loads/{id}/transporters/{tid}/unlock</code>, la operación responde de manera idempotente entregando los datos completos del dador.</li>
+<li><strong>E02 - Concurrencia Simultánea (Dos transportistas en el mismo milisegundo)</strong>:<br />
+El transportista A y el transportista B solicitan el lock de la carga al mismo tiempo. El motor de PostgreSQL evalúa la condición atómica <code>WHERE id = :id AND (status = 'activa' OR (status = 'bloqueada' AND reserved_until &lt; :now))</code>. El primer proceso gana la tupla y cambia el estado a <code>bloqueada</code>. Cuando el segundo proceso evalúa la tupla, la condición es falsa (0 filas afectadas). El backend detecta la colisión y responde <code>409 Conflict</code> informando que la carga está ocupada por otro chofer.</li>
+<li><strong>E03 - Abandono de Pago (Expiración Perezosa / Lazy Timeout)</strong>:<br />
+El transportista A bloquea la carga pero abandona la pantalla. Transcurren los 10 minutos. No se requiere ningún cron en segundo plano consumiendo CPU: la próxima vez que cualquier usuario busque o liste cargas, la consulta SQL evalúa <code>OR (status = 'bloqueada' AND reserved_until &lt; NOW())</code>, tratando la tupla como disponible. Si otro transportista B solicita el lock, la condición atómica le transfiere la carga directamente.</li>
+<li><strong>E04 - Cancelación Manual por el Transportista</strong>:<br />
+El transportista inicia el proceso pero cierra el diálogo de checkout o presiona volver. El frontend dispara <code>POST /loads/{id}/transporters/{tid}/abort-lock</code>. El backend comprueba que la carga siga bloqueada por ese mismo transportista y la retorna inmediatamente a <code>activa</code> con <code>transporter_id = null</code> y <code>reserved_until = null</code>, dejándola disponible al instante sin esperar los 10 minutos.</li>
+<li><strong>E05 - Pago Rechazado o Cancelado en MercadoPago</strong>:<br />
+La tarjeta del transportista es rechazada o el usuario cancela en la pasarela. MercadoPago emite el webhook con estado <code>REJECTED</code> o <code>CANCELLED</code>. El backend actualiza el registro local del <code>Payment</code> y, al constatar que la carga continúa bloqueada por ese mismo chofer, ejecuta <code>release_if_locked_by</code>, devolviéndola inmediatamente a <code>activa</code>.</li>
+<li><strong>E06 - Webhook Tardío con Carga Libre</strong>:<br />
+El transportista A completa el pago con demora y la notificación llega en el minuto 11 (cuando la reserva ya había expirado). Al evaluar la carga, el backend verifica que ningún otro chofer la tomó en ese lapso (sigue libre o con reserva vencida). Por tolerancia de negocio, ejecuta <code>reserve_for_payer</code>, asignándole la carga a A (<code>reservada</code>).</li>
+<li><strong>E07 - Webhook Tardío con Carga Ocupada (Colisión Crítica: Auto-Refund)</strong>:<br />
+El transportista A pagó con retraso, pero en el minuto 10:30 el transportista B bloqueó la carga libre. Cuando llega el webhook de aprobación de A, el backend detecta que la carga ya no puede ser asignada a A. Para evitar cobrarle por un viaje que no tendrá, invoca inmediatamente al SDK oficial de MercadoPago (<code>sdk.refund().create(provider_payment_id)</code>), reintegra el 100% del dinero, guarda el pago local como <code>REFUNDED</code> y responde <code>200 OK</code> al webhook.</li>
+<li><strong>E08 - Idempotencia ante Webhooks Duplicados</strong>:<br />
+MercadoPago reenvía la notificación de pago varias veces por reintentos de red. El backend busca el pago por <code>external_reference</code>. Si el pago ya se encuentra en un estado terminal (<code>APPROVED</code> o <code>REFUNDED</code>), retorna <code>200 OK</code> inmediatamente sin re-ejecutar transacciones ni duplicar notificaciones.</li>
+<li><strong>E09 - Seguridad: Firma Criptográfica HMAC Inválida</strong>:<br />
+Un atacante envía peticiones simuladas a <code>/payments/mercadopago/webhook</code>. El gateway verifica las cabeceras <code>X-Signature</code> y <code>X-Request-Id</code> contra <code>MERCADOPAGO_WEBHOOK_SECRET</code> mediante <code>WebhookSignatureValidator</code>. Al no coincidir, rechaza la solicitud con <code>401 Unauthorized</code> sin modificar la base de datos.</li>
+<li><strong>E10 - Detección de Alteración de Monto (<em>Tampering</em>)</strong>:<br />
+Un usuario malintencionado intenta manipular los parámetros de pago abonando un importe menor al oficial. Al llegar el webhook aprobado, el backend compara <code>status.amount</code> y <code>status.currency</code> contra el <code>Payment</code> local. Al diferir, dispara <code>refund_payment()</code> automáticamente, marca el pago como <code>REFUNDED</code> y no asigna la carga.</li>
+<li><strong>E11 - Consulta y Polling de Estado desde el Frontend</strong>:<br />
+Mientras el transportista está en el checkout de MercadoPago, la aplicación web realiza sondeo a <code>GET /payments/{id}</code>. Al detectarse el cambio a <code>APPROVED</code>, sincroniza la pantalla de espera y llama al endpoint de confirmación <code>unlock</code>.</li>
+<li><strong>E12 - Falla de Pasarela al Crear Preferencia</strong>:<br />
+Si MercadoPago se encuentra caído o hay error de conexión al invocar <code>create_preference()</code>, el caso de uso marca el <code>Payment</code> como <code>CANCELLED</code>, libera inmediatamente el bloqueo previo de la carga para que no quede retenida, y propaga <code>502 Bad Gateway</code> al cliente.</li>
+</ul>
+<hr />
+<h2 id="3-vista-lógica-Árboles-de-decisión-y-explicación-en-prosa"><a class="header" href="#3-vista-lógica-Árboles-de-decisión-y-explicación-en-prosa">3. Vista Lógica: Árboles de Decisión y Explicación en Prosa</a></h2>
+<h3 id="31-Árbol-1-flujo-de-bloqueo-temporal-e-inicio-de-pago"><a class="header" href="#31-Árbol-1-flujo-de-bloqueo-temporal-e-inicio-de-pago">3.1. Árbol 1: Flujo de Bloqueo Temporal e Inicio de Pago</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    Start(["Transportista inicia checkout&lt;br/&gt;POST /loads/{id}/transporters/{tid}/lock"]) --&gt; Q1{"¿El transportista existe en el sistema?"}
+    
+    Q1 -- "NO" --&gt; E_404_T["❌ Responder 404 Not Found&lt;br/&gt;'transportista no existe'"]
+    Q1 -- "SÍ" --&gt; Lock["🔒 Ejecutar UPDATE Atómico en PostgreSQL:&lt;br/&gt;WHERE id=:id AND (status='activa' OR&lt;br/&gt;(status='bloqueada' AND reserved_until &lt; now) OR&lt;br/&gt;(status='bloqueada' AND transporter_id=:tid))&lt;br/&gt;RETURNING id"]
+    
+    Lock --&gt; Q2{"¿Se actualizó la tupla?"}
+    
+    Q2 -- "NO (0 filas)" --&gt; Q_Exist{"¿La carga existe en la BD?"}
+    Q_Exist -- "NO" --&gt; E_404_L["❌ Responder 404 Not Found&lt;br/&gt;'carga no encontrada'"]
+    Q_Exist -- "SÍ" --&gt; E_409["❌ Responder 409 Conflict&lt;br/&gt;'carga ocupada por otro transportista o ya reservada'"]
+    
+    Q2 -- "SÍ (1 fila)" --&gt; LockOK["Carga queda en estado 'bloqueada'&lt;br/&gt;transporter_id = tid&lt;br/&gt;reserved_until = NOW + 600s"]
+    
+    LockOK --&gt; PayReq["Crear pago:&lt;br/&gt;POST /payments { load_id }"]
+    
+    PayReq --&gt; Q_Pref{"¿Se crea la preferencia en MercadoPago SDK?"}
+    
+    Q_Pref -- "NO (Error Pasarela)" --&gt; Rollback["1. Payment pasa a 'CANCELLED'&lt;br/&gt;2. Liberar carga: release_if_locked_by"] --&gt; E_502["❌ Responder 502 Bad Gateway"]
+    
+    Q_Pref -- "SÍ (Preferencia OK)" --&gt; Res201["✅ Responder 201 Created:&lt;br/&gt;• checkout_url&lt;br/&gt;• status: PENDING"]
+    
+    Res201 --&gt; Action{"Acción del transportista durante los 10 minutos"}
+    
+    Action -- "Cierra modal / Cancela" --&gt; AbortLock["POST /loads/{id}/transporters/{tid}/abort-lock&lt;br/&gt;Liberar carga a 'activa'"]
+    Action -- "Abandona / Se agota tiempo" --&gt; LazyExpire["⏳ Expiración perezosa:&lt;br/&gt;La carga vuelve a estar disponible sola"]
+    Action -- "Paga en MercadoPago" --&gt; MP_WH(["MercadoPago envía Webhook"])
+</code></pre>
+<h4 id="explicación-en-prosa-del-Árbol-1"><a class="header" href="#explicación-en-prosa-del-Árbol-1">Explicación en Prosa del Árbol 1:</a></h4>
+<ol>
+<li><strong>Validación de Identidad</strong>: El controlador valida que el transportista autenticado exista en la base de datos.</li>
+<li><strong>Bloqueo Transaccional Atómico</strong>: Se ejecuta un <code>UPDATE</code> condicional que solo tiene éxito si la carga está <code>activa</code>, si su reserva anterior ya expiró (<code>reserved_until &lt; NOW()</code>), o si ya está bloqueada por el mismo chofer (renovando la ventana de tiempo).
+<ul>
+<li>Si no afecta filas, se verifica si la carga no existe (404) o si fue tomada por otro transportista (409 Conflict).</li>
+</ul>
+</li>
+<li><strong>Generación de Preferencia</strong>: Una vez asegurado el lock, se crea la preferencia de pago vinculando el <code>transporter_id</code> al registro de <code>Payment</code>. Si la pasarela externa falla, se cancela el pago, se libera el lock de la carga y se devuelve <code>502 Bad Gateway</code>.</li>
+<li><strong>Comportamiento durante la ventana</strong>: Si el transportista cancela, se invoca <code>abort-lock</code> y la carga vuelve a <code>activa</code> de inmediato. Si abandona, la reserva expira silenciosamente por tiempo.</li>
+</ol>
+<hr />
+<h3 id="32-Árbol-2-procesamiento-del-webhook-de-mercadopago-y-reembolso"><a class="header" href="#32-Árbol-2-procesamiento-del-webhook-de-mercadopago-y-reembolso">3.2. Árbol 2: Procesamiento del Webhook de MercadoPago y Reembolso</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    WH(["Llega Webhook de MercadoPago&lt;br/&gt;POST /payments/mercadopago/webhook"]) --&gt; Q_Sig{"¿La firma HMAC X-Signature es válida?"}
+    
+    Q_Sig -- "NO" --&gt; R_401["❌ Responder 401 Unauthorized"]
+    Q_Sig -- "SÍ" --&gt; Q_Type{"¿El tipo de evento es 'payment'?"}
+    
+    Q_Type -- "NO" --&gt; R_200_Ign["Responder 200 OK (Ignorar evento ajeno)"]
+    Q_Type -- "SÍ" --&gt; GetPayment["Consultar payment en SDK de MercadoPago"]
+    
+    GetPayment --&gt; Q_Term{"¿El Payment local ya está en estado terminal?&lt;br/&gt;(APPROVED o REFUNDED)"}
+    
+    Q_Term -- "SÍ" --&gt; R_200_Idem["✅ Responder 200 OK (Idempotencia)"]
+    Q_Term -- "NO" --&gt; Q_Status{"¿Cuál es el estado del pago reportado por MP?"}
+    
+    Q_Status -- "REJECTED o CANCELLED" --&gt; Rej["1. Marcar Payment = REJECTED / CANCELLED&lt;br/&gt;2. Liberar carga a 'activa' si sigue bloqueada por este chofer"] --&gt; R_200_Rej["Responder 200 OK"]
+    
+    Q_Status -- "PENDING" --&gt; Pend["Actualizar Payment a PENDING (reserva sigue corriendo)"] --&gt; R_200_Pend["Responder 200 OK"]
+    
+    Q_Status -- "APPROVED" --&gt; Q_Tamper{"¿El monto, moneda y external_reference coinciden?"}
+    
+    Q_Tamper -- "NO (Alteración de Monto)" --&gt; RefundTamper["1. Disparar sdk.refund().create()&lt;br/&gt;2. Marcar Payment = REFUNDED"] --&gt; R_200_Tamper["Responder 200 OK"]
+    
+    Q_Tamper -- "SÍ (Monto Correcto)" --&gt; Q_ReservedSame{"¿La carga ya está 'reservada' para este chofer?"}
+    
+    Q_ReservedSame -- "SÍ" --&gt; IdemApprove["Marcar Payment = APPROVED (No duplicar notificación)"] --&gt; R_200_OK["✅ Responder 200 OK"]
+    
+    Q_ReservedSame -- "NO" --&gt; AtomAssign["Ejecutar reserve_for_payer() en PostgreSQL:&lt;br/&gt;Asignar carga si está libre o bloqueada por este chofer"]
+    
+    AtomAssign --&gt; Q_AssignResult{"¿Se asignó la carga?"}
+    
+    Q_AssignResult -- "SÍ (1 fila)" --&gt; SuccessAssign["1. Carga pasa a 'reservada' (reserved_until=null)&lt;br/&gt;2. Payment pasa a 'APPROVED'&lt;br/&gt;3. Emitir Notification(type='reservada') al dador"] --&gt; R_200_Success["✅ Responder 200 OK"]
+    
+    Q_AssignResult -- "NO (Ocupada por otro chofer)" --&gt; AutoRefund["🚨 COLISIÓN TARDÍA DETECTADA:&lt;br/&gt;1. Llamar sdk.refund().create(provider_payment_id)&lt;br/&gt;2. Marcar Payment = 'REFUNDED'&lt;br/&gt;3. La carga del otro chofer queda intacta"] --&gt; R_200_Ref["✅ Responder 200 OK"]
+</code></pre>
+<h4 id="explicación-en-prosa-del-Árbol-2"><a class="header" href="#explicación-en-prosa-del-Árbol-2">Explicación en Prosa del Árbol 2:</a></h4>
+<ol>
+<li><strong>Autenticación e Idempotencia</strong>: Se valida la firma HMAC del webhook. Si el pago ya fue marcado como <code>APPROVED</code> o <code>REFUNDED</code>, se responde inmediatamente <code>200 OK</code> garantizando idempotencia estricta ante notificaciones duplicadas.</li>
+<li><strong>Rechazo o Cancelación</strong>: Se actualiza el pago a <code>REJECTED</code> o <code>CANCELLED</code> y se libera la carga inmediatamente a <code>activa</code> si todavía estaba bloqueada por ese mismo transportista.</li>
+<li><strong>Aprobación e Integridad de Monto</strong>: Se valida que el monto cobrado coincida exactamente con la tarifa requerida. Si hubo alteración (<em>tampering</em>), se reembolsa y no se asigna la carga.</li>
+<li><strong>Asignación o Auto-Refund</strong>:
+<ul>
+<li>Si la carga sigue bloqueada por el chofer o está libre, la consulta <code>reserve_for_payer</code> la pasa atómicamente a <code>reservada</code>, limpia el temporizador y emite la notificación al dador.</li>
+<li>Si la carga ya fue tomada por otro transportista (caso borde tardío), se dispara el reembolso automático del 100% mediante el SDK de MercadoPago y el pago queda registrado como <code>REFUNDED</code>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="33-Árbol-3-consulta-búsqueda-y-visibilidad-de-cargas"><a class="header" href="#33-Árbol-3-consulta-búsqueda-y-visibilidad-de-cargas">3.3. Árbol 3: Consulta, Búsqueda y Visibilidad de Cargas</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    Req(["Transportista busca cargas o abre listado&lt;br/&gt;GET /loads o GET /loads/{id}"]) --&gt; Q_State{"¿Cuál es el estado de la carga en la base de datos?"}
+    
+    Q_State -- "activa" --&gt; ShowActive["Mostrar como disponible con botón 'Pagar y Desbloquear'"]
+    
+    Q_State -- "reservada / en_camino / entregada" --&gt; ShowAssigned["Ocultar del mapa/listado general&lt;br/&gt;Visible solo en 'Mis Viajes' para el chofer asignado"]
+    
+    Q_State -- "bloqueada" --&gt; Q_Exp{"¿La ventana reserved_until ya venció?&lt;br/&gt;(reserved_until &lt; NOW())"}
+    
+    Q_Exp -- "SÍ (Reserva Vencida)" --&gt; TreatActive["Tratar dinámicamente como 'activa':&lt;br/&gt;• Aparece nuevamente en el mapa y listado&lt;br/&gt;• Estado expuesto al cliente: 'activa'&lt;br/&gt;• Lista para ser tomada por otro chofer"]
+    
+    Q_Exp -- "NO (Reserva Vigente)" --&gt; HideBlocked["Ocultar del listado y mapa general para otros choferes"]
+</code></pre>
+<h4 id="explicación-en-prosa-del-Árbol-3"><a class="header" href="#explicación-en-prosa-del-Árbol-3">Explicación en Prosa del Árbol 3:</a></h4>
+<ol>
+<li><strong>Expiración Transparente</strong>: La cláusula de disponibilidad en persistencia (<code>_available_clause</code>) incluye automáticamente tanto las cargas con estado <code>activa</code> como aquellas en estado <code>bloqueada</code> cuya ventana de reserva ya expiró (<code>reserved_until &lt; NOW()</code>).</li>
+<li><strong>Mapeo Limpio de Dominio</strong>: El método <code>Load.released_if_expired(now)</code> transforma en memoria cualquier carga vencida al estado <code>activa</code> (limpiando <code>transporter_id</code> y <code>reserved_until</code> caducos), de modo que los clientes web y móviles nunca reciben información inconsistente de bloqueos obsoletos.</li>
+</ol>
+<hr />
+<h3 id="34-diagrama-de-clases-del-dominio-ddd-táctico"><a class="header" href="#34-diagrama-de-clases-del-dominio-ddd-táctico">3.4. Diagrama de Clases del Dominio (DDD Táctico)</a></h3>
+<pre><code class="language-mermaid">classDiagram
+    class Load {
+        +int? id
+        +string description
+        +Location origin
+        +Location destination
+        +string cargo_type
+        +LoadStatus status
+        +int? offerer_id
+        +int? transporter_id
+        +datetime? reserved_until
+        +is_reservation_expired(now) bool
+        +is_locked_by(transporter_id, now) bool
+        +released() Load
+        +released_if_expired(now) Load
+    }
+
+    class Payment {
+        +int? id
+        +int load_id
+        +Decimal amount
+        +string currency
+        +string status
+        +string external_reference
+        +int? transporter_id
+        +string? checkout_url
+        +string? provider_preference_id
+        +string? provider_payment_id
+    }
+
+    class ReservationPolicy {
+        +int ttl_seconds
+        +reserved_until(now) datetime
+    }
+
+    class LoadStatus {
+        &lt;&lt;enumeration&gt;&gt;
+        ACTIVE: "activa"
+        BLOCKED: "bloqueada"
+        RESERVED: "reservada"
+        IN_TRANSIT: "en_camino"
+        DELIVERED: "entregada"
+    }
+
+    class PaymentStatusConstants {
+        &lt;&lt;constants&gt;&gt;
+        PENDING: "PENDING"
+        APPROVED: "APPROVED"
+        REJECTED: "REJECTED"
+        CANCELLED: "CANCELLED"
+        REFUNDED: "REFUNDED"
+    }
+
+    Load "1" o-- "1" LoadStatus
+    Load "1" &lt;-- "0..*" Payment : load_id
+</code></pre>
+<hr />
+<h2 id="4-vista-de-procesos-diagramas-de-secuencia-y-narrativa-técnica"><a class="header" href="#4-vista-de-procesos-diagramas-de-secuencia-y-narrativa-técnica">4. Vista de Procesos: Diagramas de Secuencia y Narrativa Técnica</a></h2>
+<h3 id="41-secuencia-del-caso-feliz-bloqueo-pago-y-desbloqueo--10-min"><a class="header" href="#41-secuencia-del-caso-feliz-bloqueo-pago-y-desbloqueo--10-min">4.1. Secuencia del Caso Feliz: Bloqueo, Pago y Desbloqueo (&lt; 10 min)</a></h3>
+<pre><code class="language-mermaid">sequenceDiagram
+    autonumber
+    actor T as Transportista
+    participant UI as Frontend Transportista
+    participant LC as LoadsController
+    participant PC as PaymentsController
+    participant Repo as PostgreSQLLoadRepository
+    participant DB as PostgreSQL
+    participant GW as MercadoPagoPaymentGateway
+    participant MP as MercadoPago API
+
+    T-&gt;&gt;UI: Clic en "Pagar con Mercado Pago"
+    UI-&gt;&gt;LC: POST /loads/1/transporters/42/lock
+    LC-&gt;&gt;Repo: lock_atomically(1, 42, now, reserved_until)
+    Repo-&gt;&gt;DB: UPDATE loads SET status='bloqueada', transporter_id=42, reserved_until=now()+600s WHERE ... RETURNING id
+    DB--&gt;&gt;Repo: id=1 (1 fila)
+    Repo--&gt;&gt;LC: Load(status='bloqueada')
+    LC--&gt;&gt;UI: 200 OK (Carga bloqueada)
+
+    UI-&gt;&gt;PC: POST /payments { load_id: 1 }
+    PC-&gt;&gt;GW: create_preference(amount=24255.00, ttl=600s)
+    GW-&gt;&gt;MP: POST /checkout/preferences (expires=true, ttl=600s)
+    MP--&gt;&gt;GW: { id: "pref_123", init_point: "https://mercadopago.com/..." }
+    GW--&gt;&gt;PC: CreatedPreference
+    PC--&gt;&gt;UI: 201 Created { checkout_url, status: "PENDING" }
+
+    Note over T,MP: El transportista abona en la pasarela de MercadoPago
+    MP-&gt;&gt;PC: POST /payments/mercadopago/webhook (data.id="pay_999")
+    PC-&gt;&gt;GW: get_payment("pay_999")
+    GW--&gt;&gt;PC: GatewayPaymentStatus(status="APPROVED", amount=24255.00)
+    PC-&gt;&gt;Repo: reserve_for_payer(1, 42, now)
+    Repo-&gt;&gt;DB: UPDATE loads SET status='reservada', reserved_until=null WHERE id=1 RETURNING id
+    DB--&gt;&gt;Repo: id=1
+    PC-&gt;&gt;DB: UPDATE payments SET status='APPROVED', provider_payment_id="pay_999"
+    PC--&gt;&gt;MP: 200 OK
+
+    Note over UI,PC: El frontend finaliza el polling y confirma el desbloqueo
+    UI-&gt;&gt;LC: POST /loads/1/transporters/42/unlock { payment_id: 10 }
+    LC--&gt;&gt;UI: 200 OK Load(status='reservada') (Idempotente)
+    UI--&gt;&gt;T: Muestra pantalla de éxito con datos de contacto del dador
+</code></pre>
+<hr />
+<h3 id="42-secuencia-del-caso-borde-crítico-webhook-tardío-con-reembolso-automático"><a class="header" href="#42-secuencia-del-caso-borde-crítico-webhook-tardío-con-reembolso-automático">4.2. Secuencia del Caso Borde Crítico: Webhook Tardío con Reembolso Automático</a></h3>
+<pre><code class="language-mermaid">sequenceDiagram
+    autonumber
+    actor T1 as Transportista A (Tardío)
+    actor T2 as Transportista B (Ganador)
+    participant API as Backend Smartruck
+    participant DB as PostgreSQL
+    participant GW as MercadoPagoPaymentGateway
+    participant MP as MercadoPago API
+
+    Note over T1,API: Minuto 0: Chofer A bloquea la carga #1 por 10 minutos
+    Note over T1,API: Minuto 10: La reserva de A expira por tiempo (lazy timeout)
+    
+    T2-&gt;&gt;API: Minuto 10:30: Chofer B solicita POST /loads/1/transporters/99/lock
+    API-&gt;&gt;DB: UPDATE loads SET transporter_id=99, reserved_until=now()+600s WHERE ...
+    DB--&gt;&gt;API: 1 fila actualizada (Lock ganado por B)
+
+    Note over T1,MP: Minuto 11:15: Llega webhook de MercadoPago por el pago demorado de A
+    MP-&gt;&gt;API: POST /payments/mercadopago/webhook (data.id="pay_A")
+    API-&gt;&gt;GW: get_payment("pay_A")
+    GW--&gt;&gt;API: Status APPROVED para Chofer A
+
+    API-&gt;&gt;DB: reserve_for_payer(load_id=1, transporter_id=A, now)
+    DB--&gt;&gt;API: 0 filas afectadas (La carga está bloqueada por Chofer B)
+
+    Note over API,GW: Colisión tardía: La carga ya no está disponible para A. Se dispara auto-reembolso.
+    API-&gt;&gt;GW: refund_payment("pay_A")
+    GW-&gt;&gt;MP: sdk.refund().create("pay_A")
+    MP--&gt;&gt;GW: 200 OK (Refund procesado en MercadoPago)
+    
+    API-&gt;&gt;DB: UPDATE payments SET status='REFUNDED' WHERE id=A
+    API--&gt;&gt;MP: 200 OK (Webhook completado)
+</code></pre>
+<hr />
+<h2 id="5-vista-de-desarrollo-arquitectura-hexagonal-capas-y-puertos"><a class="header" href="#5-vista-de-desarrollo-arquitectura-hexagonal-capas-y-puertos">5. Vista de Desarrollo (Arquitectura Hexagonal, Capas y Puertos)</a></h2>
+<p>Estructura de archivos real implementada en <code>smartruck-backend</code>:</p>
+<pre><code class="language-text">src/
+├── domain/                                                # Dominio puro sin dependencias de infraestructura
+│   ├── models/
+│   │   ├── load.py                                        # Entidad Load (is_reservation_expired, released_if_expired)
+│   │   ├── payment.py                                     # Entidad Payment (status, REFUNDED, transporter_id)
+│   │   └── notification.py                                # Entidad Notification (tipo 'reservada')
+│   ├── repositories/
+│   │   ├── load_repository.py                             # Puerto: lock_atomically(), reserve_for_payer(), release_if_locked_by()
+│   │   ├── payment_repository.py                          # Puerto: get_by_external_reference(), save()
+│   │   └── notification_repository.py                     # Puerto: save()
+│   ├── gateways/
+│   │   └── payment_gateway.py                             # Puerto: create_preference(), get_payment(), refund_payment()
+│   ├── reservation.py                                     # Value Object ReservationPolicy y helper as_aware
+│   ├── load_status.py                                     # Enum LoadStatus (activa, bloqueada, reservada)
+│   └── exceptions.py                                      # LoadAlreadyLockedError (409), PaymentGatewayError (502)
+│
+├── application/                                           # Orquestación de Casos de Uso
+│   └── use_cases/
+│       ├── loads/
+│       │   ├── lock_load_use_case.py                      # Orquesta el bloqueo atómico y aborto voluntario
+│       │   ├── unlock_load_use_case.py                    # Confirmación idempotente de desbloqueo
+│       │   └── get_unlock_fee_use_case.py                 # Cálculo de tarifa de desbloqueo
+│       └── payments/
+│           ├── create_payment_use_case.py                 # Valida disponibilidad, crea preferencia y Payment
+│           ├── process_payment_notification_use_case.py   # Webhook handler: idempotencia, asignación y auto-refund
+│           └── sync_payment_use_case.py                   # Sincronización manual de pago
+│
+├── infrastructure/                                        # Adaptadores Hexagonales
+│   ├── inbound/
+│   │   ├── http_controllers/
+│   │   │   ├── loads_controller.py                        # /loads/{id}/transporters/{tid}/lock | abort-lock | unlock
+│   │   │   └── payments_controller.py                     # /payments, /payments/mercadopago/webhook, /payments/{id}
+│   │   ├── dto/load/load_response.py                      # DTO con campo reserved_until opcional
+│   │   └── mappers/load_http_mapper.py                    # Mapeo a respuesta HTTP
+│   └── outbound/
+│       ├── gateways/
+│       │   └── mercadopago_payment_gateway.py             # SDK MercadoPago oficial: preference, payment, refund
+│       └── persistence/
+│           ├── models/
+│           │   ├── load.py                                # LoadRecord con columna reserved_until e índices
+│           │   └── payment.py                             # PaymentRecord con columna transporter_id
+│           └── repositories/
+│               ├── postgres_load_repository.py            # Implementación SQL atómica y cláusula de disponibilidad
+│               └── postgres_payment_repository.py         # Persistencia de pagos
+│
+└── config/
+    ├── mercadopago.py                                     # Variables de entorno y PREFERENCE_TTL_SECONDS (600s)
+    └── reservation.py                                     # Fábrica de ReservationPolicy
+</code></pre>
+<hr />
+<h2 id="6-vista-física-y-de-despliegue-en-la-nube"><a class="header" href="#6-vista-física-y-de-despliegue-en-la-nube">6. Vista Física y de Despliegue en la Nube</a></h2>
+<pre><code class="language-mermaid">flowchart LR
+    subgraph Cliente
+        AppMobile["App Web Transportista&lt;br/&gt;(React / TanStack Router)"]
+    end
+
+    subgraph Google Cloud Platform
+        GW["Cloud API Gateway"]
+        CR["Cloud Run&lt;br/&gt;FastAPI Container"]
+    end
+
+    subgraph Base de Datos
+        SUPA[("PostgreSQL 16 en Supabase&lt;br/&gt;Índices en status y reserved_until")]
+    end
+
+    subgraph Pasarela de Pagos
+        MP_API["MercadoPago Cloud API&lt;br/&gt;Preferences, Payments &amp; Refunds"]
+    end
+
+    AppMobile --&gt;|HTTPS / REST| GW
+    GW --&gt;|HTTP Interno| CR
+    CR --&gt;|Conexión psycopg| SUPA
+    CR --&gt;|HTTPS SDK Oficial| MP_API
+    MP_API --&gt;|Webhooks Asíncronos| GW
+</code></pre>
+<hr />
+<h2 id="7-mecanismos-de-persistencia-y-consulta-sql-atómica"><a class="header" href="#7-mecanismos-de-persistencia-y-consulta-sql-atómica">7. Mecanismos de Persistencia y Consulta SQL Atómica</a></h2>
+<h3 id="71-sentencia-de-bloqueo-atómico-lock_atomically"><a class="header" href="#71-sentencia-de-bloqueo-atómico-lock_atomically">7.1. Sentencia de Bloqueo Atómico (<code>lock_atomically</code>)</a></h3>
+<pre><code class="language-sql">UPDATE loads
+SET 
+    status = 'bloqueada',
+    transporter_id = :transporter_id,
+    reserved_until = :reserved_until
+WHERE 
+    id = :load_id 
+    AND (
+        status = 'activa' 
+        OR (status = 'bloqueada' AND reserved_until &lt; :now)
+        OR (status = 'bloqueada' AND transporter_id = :transporter_id)
+    )
+RETURNING id;
+</code></pre>
+<h3 id="72-sentencia-de-asignación-atómica-para-el-pagador-reserve_for_payer"><a class="header" href="#72-sentencia-de-asignación-atómica-para-el-pagador-reserve_for_payer">7.2. Sentencia de Asignación Atómica para el Pagador (<code>reserve_for_payer</code>)</a></h3>
+<pre><code class="language-sql">UPDATE loads
+SET 
+    status = 'reservada',
+    transporter_id = :transporter_id,
+    reserved_until = NULL
+WHERE 
+    id = :load_id 
+    AND (
+        status = 'activa' 
+        OR (
+            status = 'bloqueada' 
+            AND (transporter_id = :transporter_id OR reserved_until &lt; :now)
+        )
+    )
+RETURNING id;
+</code></pre>
+<h3 id="73-cláusula-de-disponibilidad-para-consultas-y-búsquedas-_available_clause"><a class="header" href="#73-cláusula-de-disponibilidad-para-consultas-y-búsquedas-_available_clause">7.3. Cláusula de Disponibilidad para Consultas y Búsquedas (<code>_available_clause</code>)</a></h3>
+<pre><code class="language-sql">-- Filtro aplicado en get_available(), búsquedas por área y recomendaciones
+status = 'activa' OR (status = 'bloqueada' AND reserved_until &lt; :now)
+</code></pre>
+<h3 id="74-migración-alembic-real-0035_add_load_reservation_windowpy"><a class="header" href="#74-migración-alembic-real-0035_add_load_reservation_windowpy">7.4. Migración Alembic Real (<code>0035_add_load_reservation_window.py</code>)</a></h3>
+<pre><code class="language-python">"""add reserved_until to loads and payer transporter_id to payments
+
+Revision ID: 0035
+Revises: 0034
+Create Date: 2026-10-28 12:00:00.000000
+
+"""
+from alembic import op
+import sqlalchemy as sa
+
+revision = "0035"
+down_revision = "0034"
+
+def upgrade() -&gt; None:
+    op.add_column("loads", sa.Column("reserved_until", sa.DateTime(timezone=True), nullable=True))
+    op.create_index("ix_loads_status_reserved_until", "loads", ["status", "reserved_until"])
+    op.add_column("payments", sa.Column("transporter_id", sa.Integer(), nullable=True))
+    op.create_foreign_key(
+        "fk_payments_transporter_id_transporters",
+        "payments",
+        "transporters",
+        ["transporter_id"],
+        ["id"],
+    )
+
+def downgrade() -&gt; None:
+    op.drop_constraint("fk_payments_transporter_id_transporters", "payments", type_="foreignkey")
+    op.drop_column("payments", "transporter_id")
+    op.drop_index("ix_loads_status_reserved_until", table_name="loads")
+    op.drop_column("loads", "reserved_until")
+</code></pre>
+<hr />
+<h2 id="8-matriz-de-riesgos-resiliencia-y-mitigaciones"><a class="header" href="#8-matriz-de-riesgos-resiliencia-y-mitigaciones">8. Matriz de Riesgos, Resiliencia y Mitigaciones</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Riesgo Técnico</th><th style="text-align: center">Impacto</th><th>Estrategia de Mitigación Implementada</th></tr></thead><tbody>
+<tr><td><strong>Doble asignación por Webhook tardío</strong></td><td style="text-align: center">Crítico</td><td>Verificación atómica en <code>reserve_for_payer</code>. Si la carga ya fue tomada por otro, se dispara <code>sdk.refund().create()</code> automáticamente y el pago queda en <code>REFUNDED</code>.</td></tr>
+<tr><td><strong>Colisión de concurrencia al reservar</strong></td><td style="text-align: center">Alto</td><td>Consulta atómica <code>UPDATE ... WHERE ... RETURNING id</code>. Retorna 0 filas si otro chofer ganó la tupla y el controlador responde <code>409 Conflict</code>.</td></tr>
+<tr><td><strong>Bloqueos huérfanos por abandono</strong></td><td style="text-align: center">Medio</td><td>Expiración perezosa (<em>lazy expiration</em>): toda consulta de cargas trata <code>reserved_until &lt; NOW()</code> como disponible, sin requerir crons periódicos.</td></tr>
+<tr><td><strong>Webhooks duplicados o fuera de orden</strong></td><td style="text-align: center">Medio</td><td>Guarda de estados terminales (<code>APPROVED</code>, <code>REFUNDED</code>) en <code>ProcessPaymentNotificationUseCase</code>. Un webhook tardío o duplicado es una operación no-op que responde <code>200 OK</code>.</td></tr>
+<tr><td><strong>Alteración de importe (<em>Tampering</em>)</strong></td><td style="text-align: center">Alto</td><td>Comparación estricta de <code>amount</code>, <code>currency</code> y <code>external_reference</code>. Ante discrepancias, se cancela la asignación y se ejecuta el reembolso total inmediato.</td></tr>
+<tr><td><strong>Falla de conexión con MercadoPago al crear preferencia</strong></td><td style="text-align: center">Medio</td><td>Fallo rápido con <code>PaymentGatewayError</code> (502 Bad Gateway), marcando el pago local como <code>CANCELLED</code> y liberando el bloqueo de la carga.</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="9-alcance-y-casos-diferidos"><a class="header" href="#9-alcance-y-casos-diferidos">9. Alcance y Casos Diferidos</a></h2>
+<ul>
+<li><strong>Fuera de Alcance Inmediato</strong>:
+<ul>
+<li>No se implementa un proceso cron en segundo plano que ejecute <em>polling</em> contra la base de datos para limpiar tuplas vencidas. La liberación perezosa en consultas de lectura y re-locks resuelve completamente la consistencia con menor sobrecarga de infraestructura.</li>
+<li>No se realiza reconciliación proactiva contra el API de pagos en caso de pérdida total de webhooks prolongada más allá de las 48 horas de reintentos de MercadoPago.</li>
+</ul>
+</li>
+<li><strong>Verificación de Calidad</strong>:
+<ul>
+<li>Se añadieron pruebas unitarias exhaustivas en Python (<code>pytest</code>) para todos los árboles de decisión y casos borde (845 tests pasando en <code>smartruck-backend</code>).</li>
+<li>Se verificaron 849 tests unitarios y de componentes pasando en el frontend de transportistas (<code>vitest</code> en <code>smartruck-transportista</code>).</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../repositories/smartruck-backend/arquitectura.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../repositories/smartruck-backend/links.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../repositories/smartruck-backend/arquitectura.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../repositories/smartruck-backend/links.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
