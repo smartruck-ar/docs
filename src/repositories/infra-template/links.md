@@ -4,4 +4,4 @@
 |---------|-----|
 | Repositorio Git | https://github.com/Mriat30/infra-template |
 | Estructura | https://github.com/Mriat30/infra-template/blob/main/docs/estructura.md |
-| Issues | *(completar)* |
+| Estado | Plantilla histórica inicial OCI/Nomad (reemplazada por [smartruck-infra](../smartruck-infra/README.md)) |
