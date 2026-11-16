@@ -18,7 +18,7 @@ La arquitectura de **Smartruck** combina portales web independientes orientados 
 
 | Componente | Tecnología principal | Alojamiento / Infraestructura | Responsabilidad |
 | :--- | :--- | :--- | :--- |
-| **Landing Page** (`landing-page`) | React 19 + Vite + Tailwind CSS v4 (JS) | Cloudflare Pages (`smartruck.com.ar` / `test.smartruck.com.ar`) | Presentación pública y derivación por rol hacia los portales. |
+| **Landing Page** (`landing-page`) | React 19 + Vite + Tailwind CSS v4 (JS) | Cloudflare Pages / Render (`smartruck.com.ar` o `smartruck.onrender.com` en prod; `smartruck-test.onrender.com` en test) | Presentación pública y derivación por rol hacia los portales. |
 | **Portal Dador** (`smartruck-dador`) | TanStack Start + React 19 + Nitro SSR + Leaflet/MapLibre + Recharts | Render (`dador.smartruck.tech` / `dador-test.smartruck.tech`) | Verificación documental, depósitos, cotización, publicación, seguimiento y métricas de ahorro. |
 | **Portal Transportista** (`smartruck-transportista`) | TanStack Start + React 19 + Nitro SSR + MapLibre GL + Recharts | Render (`transportista.smartruck.tech` / `transportista-test.smartruck.tech`) | Flota, calculadora de retorno vacío, mapa/matching de paso, reserva exclusiva, pago y viajes. |
 | **Portal Backoffice** (`smartruck-backoffice`) | TanStack Start + React 19 + Nitro SSR + Tailwind CSS v4 | Render (`smartruck-backoffice.onrender.com`) | Revisión documental de usuarios, habilitación de perfiles y administración de tarifarios y PDFs FADEEAC. |

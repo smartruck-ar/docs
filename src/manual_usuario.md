@@ -2,11 +2,13 @@
 
 Esta guía orientativa describe los flujos principales de uso en las cuatro interfaces web de **Smartruck**, siguiendo la navegación real de cada aplicación.
 
+> **Nota:** Es posible que al probar la plataforma no funcione de la manera más actualizada el ambiente de producción. En dicho caso, acceder mediante el ambiente de **test**.
+
 ---
 
 ## 1. Landing pública
 
-- **URLs:** `https://smartruck.com.ar` (producción) / `https://test.smartruck.com.ar` (testing).
+- **URLs:** `https://smartruck.com.ar` en producción (si no funciona, usar `https://smartruck.onrender.com/`) / `https://smartruck-test.onrender.com/` en testing.
 - **Propósito:** Presenta la propuesta de valor de Smartruck en tres etapas (**01 Publicá**, **02 Cotizá**, **03 Gestioná**), incluye una vista previa interactiva de los tableros de Dador y Transportista y permite acceder directamente al portal correspondiente según el perfil del usuario.
 
 ---

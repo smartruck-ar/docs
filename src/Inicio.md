@@ -2,6 +2,8 @@
 
 **Smartruck** es el Trabajo Profesional del **Grupo 179** (FIUBA): una plataforma digital B2B diseñada para conectar **dadores de carga** con **transportistas de carga pesada** en la República Argentina, con foco en reducir los kilómetros recorridos en vacío, mejorar la rentabilidad de cada viaje y disminuir las emisiones de CO2 asociadas.
 
+> **Nota:** Es posible que al probar la plataforma no funcione de la manera más actualizada el ambiente de producción. En dicho caso, acceder mediante el ambiente de **test** indicado en el [Manual de usuario](./manual_usuario.md).
+
 ## Qué resuelve la plataforma
 
 El ecosistema coordina la publicación, cotización, búsqueda geográfica, reserva exclusiva y seguimiento de cargas de larga distancia entre dos portales operativos dedicados y un panel de administración, respaldados por un backend hexagonal y un microservicio geográfico en el borde.

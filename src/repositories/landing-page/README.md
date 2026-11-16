@@ -19,7 +19,7 @@ Sitio web institucional de **Smartruck** (`v1.2.0`), desarrollado en **React 19*
 | **Lenguaje y UI** | JavaScript (`ES Modules`, `.jsx`), React 19.1, Tailwind CSS v4.1, Lucide |
 | **Bundler y pruebas** | Vite 7.1, Vitest, ESLint |
 | **Controles en CI** | `scripts/required-checks.js`, `scripts/security-check.js`, **Gitleaks** |
-| **Alojamiento** | **Cloudflare Pages** (`smartruck-landing-test` -> `test.smartruck.com.ar` / `smartruck-landing-prod` -> `smartruck.com.ar`) vía `wrangler pages deploy dist` |
+| **Alojamiento** | **Cloudflare Pages** (`smartruck.com.ar` en producción; alternativa `https://smartruck.onrender.com/`) y acceso `test` en `https://smartruck-test.onrender.com/` |
 
 ---
 
