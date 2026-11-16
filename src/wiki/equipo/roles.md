@@ -1,26 +1,34 @@
-# Roles del equipo
+# Roles y responsables
 
-Responsabilidades de alto nivel. Completá nombres y detalles según el equipo real.
+## Equipo de desarrollo — Grupo 179 (FIUBA)
 
-| Rol | Responsabilidad principal |
-|-----|---------------------------|
-| Product Owner / referente de producto | Prioriza épicas e historias; valida valor de negocio |
-| Desarrollador | Implementa historias en `main` del repo asignado y las libera a `test`; DoD |
-| Reviewer | Valida en `test` las historias en `In review` contra sus CA y los estándares del repo |
-| Tech lead (si aplica) | Criterios técnicos, arquitectura, desbloqueos |
+Trabajo Profesional de Ingeniería Informática (`TA053`):
 
-## Por producto
+| Rol | Integrantes / Referentes |
+| :--- | :--- |
+| **Equipo de desarrollo** | Martín Reimundo (`106716`), Mateo Riat Sapulia (`106031`), Franco Agustín Rodriguez (`108799`), Marcos Navarro Cafferata (`106974`) |
+| **Tutoría técnica** | Mg. Ing. Gabriel Piñeiro (Tutor), Ing. Agustín Perrotta (CoTutor) |
+| **Jefatura de Cátedra** | Mg. Ing. Carlos Fontela, Ing. Leandro Ferrigno |
 
-| Prefijo | Producto | Quién aporta requisitos (completar) |
-|---------|----------|-------------------------------------|
-| `D` | Dador | |
-| `T` | Transportista | |
+---
 
-## Checklist
+## Organización operativa y propiedad compartida
 
-- [ ] Cada historia tiene alguien que valida el Como / Quiero / Para
-- [ ] Cada historia del sprint tiene responsable y repo
+El equipo trabaja con **propiedad colectiva del código**, rotación de tareas por sprint en `smartruck-ar/roadmap` y revisión cruzada obligatoria de cambios sobre `main`. Los prefijos del tablero dividen el trabajo por dominio funcional:
 
-## Next step
+| Prefijo | Área de foco | Alcance principal |
+| :--- | :--- | :--- |
+| **`D`** | Portal Dador y dominio oferente | Registro, depósitos, publicación, cotización, cancelación y métricas de ahorro. |
+| **`T`** | Portal Transportista y matching | Flota, calculadora de retorno vacío, búsqueda PostGIS/corredor, bloqueo/pagos y viajes. |
+| **`B`** | Backoffice administrativo | Validación documental de cuentas y administración de tarifarios / PDFs FADEEAC. |
+| **`R`** | Servicio geográfico (`geo-service`) | Catálogo cerrado de localidades, cálculo de rutas interurbanas y caché en Cloudflare Workers. |
+| **`S`** | Plataforma, arquitectura e infra | API core, Terraform (`smartruck-infra`), CI/CD, seguridad JWKS/Gitleaks, observabilidad y `smartruck-ai`. |
 
-[Glosario](glosario.md)
+---
+
+## Referentes de validación en campo
+
+Para contrastar usabilidad, estructura tarifaria y flujo real de operación en Argentina, el equipo contó con instancias de validación con actores del sector:
+
+- **Productos Venier S.A.:** Validación desde la perspectiva de dador de cargas.
+- **Transporte Uliana:** Validación desde la perspectiva de empresa transportista.

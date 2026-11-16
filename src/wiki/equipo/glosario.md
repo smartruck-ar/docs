@@ -1,75 +1,60 @@
 # Glosario
 
-Términos del proceso y del dominio.
+Definiciones canónicas del dominio de **Smartruck** y límites entre servicios.
 
-## Proceso
+---
 
-| Término | Significado |
-|---------|-------------|
-| Épica | Milestone de `roadmap` que agrupa historias (`D.2 - Gestión de carga`); no se estima; Done = todas sus historias en productivo |
-| Historia (user story) | Issue de `roadmap` con label `user story`, título Como/Quiero/Para y número `<épica>.<n>` (`D.2.8`); Done = en productivo |
-| Historia de UI | Contraparte de pantalla de una historia de backend; mismo número con prefijo `UI-` (`UI-D.2.8`) |
-| Sub-historia | Sub-issue de una historia; hereda su número (`T.1.1.1`) |
-| Spike | Historia de investigación o decisión; milestone `SPIKES`, número `S.<n>`; sin Gherkins |
-| Board | Proyecto de GitHub de la organización con las historias del sprint y sus campos |
-| Status | Estado en el Board: `Backlog`, `Ready`, `In progress`, `In review` (en `test`), `Done` (en `prod`) |
-| US Points | Estimación relativa de una historia; requerida en DoR |
-| Priority | Prioridad de la historia en el Board |
-| Estimate (hs) | Horas hombre previstas; se cargan al pasar a `In progress` |
-| Spent (hs) | Horas hombre reales; se cargan al liberar a `test` (`In review`) |
-| Release a test | `./scripts/release_to_test patch\|minor\|major` al terminar una feature |
-| Release a prod | `./scripts/release_to_prod`, a mano, con el equipo, al final del sprint |
-| Logging | En controladores (entrada + errores) y repositorios (salida); ver [logging](../proceso/logging.md) |
-| Gherkin | BDD en español; **Cuando** contra la app; en `main` + link en el ticket si aplica; [gherkin](../proceso/gherkin.md) |
-| DoR | Definition of Ready |
-| DoD | Definition of Done (jerárquico; productivo) |
-| Prefijo `D` / `T` / `R` / `B` / `S` | Dador / Transportista / Servicio de rutas / Backoffice / Spikes |
+## Actores del sistema
 
-## Dominio / producto
+- **Dador de carga (Oferente):** Empresa verificada que publica cargas a transportar, define origen/destino, categoría y fechas, acepta cotizaciones dentro del piso mínimo vigente y confirma la entrega recibida.
+- **Transportista (PyME transportista):** Empresa de transporte automotor que administra su flota de camiones y remolques, busca cargas compatibles en ruta o cercanía, abona la tarifa de desbloqueo y ejecuta el viaje.
+- **Administrador de Backoffice:** Operador interno con permisos elevados encargado de auditar la documentación legal de los usuarios y gobernar las tablas de tarifas de referencia.
 
-| Término | Significado |
-|---------|-------------|
-| Dador (shipper) | Publica / gestiona demanda de carga |
-| Transportista | Opera / cotiza / gestiona el transporte |
-| Provincia | División administrativa de Argentina a la que pertenece una localidad |
-| Localidad (`Locality`) | La ciudad: un lugar con coordenadas que pertenece a una provincia. Es el origen y el destino de una ruta. "Ciudad" es su nombre coloquial |
-| Catálogo de localidades | Las localidades que Geoservice conoce hoy (las 150 ciudades de las rutas precargadas). Una localidad fuera del catálogo es "no soportada" |
-| Geoservice | Componente Cloudflare Worker dueño de provincias, localidades, direcciones, geocodificación y rutas. |
-| Ruta | Camino vial entre dos localidades (distancia, duración y geometría); se identifica por el par de ids de localidad, sin importar el sentido |
-| Estimación | Distancia en línea recta por un factor vial configurable; Geoservice la marca `is_estimation` y nunca la guarda |
-| Oferta de carga | *(completar con el lenguaje de dominio del equipo)* |
-| Viaje solicitado | El viaje que el transportista pide recomendar: una localidad de origen y una de destino (Buenos Aires → Córdoba) |
-| Tramo vacío de inicio | Lo que el camión recorre sin carga desde el origen del viaje solicitado hasta el origen de la carga |
-| Tramo cargado | Lo que el camión recorre con la carga, desde su origen hasta su destino |
-| Tramo vacío de fin | Lo que el camión recorre sin carga desde el destino de la carga hasta el destino del viaje solicitado |
-| Desvío neto | Los km de más por tomar la carga: tramo vacío de inicio + tramo cargado + tramo vacío de fin − viaje solicitado; nunca es negativo |
-| Km realizados | Todo lo que el camión recorre al tomar la carga: tramo vacío de inicio + tramo cargado + tramo vacío de fin |
-| Coincidencia exacta | Una carga que coincide con el viaje solicitado: el camión va cargado todo el recorrido, sin tramos vacíos y sin desvío neto |
-| Aprovechamiento | Qué parte de los km realizados el camión va con carga: km del tramo cargado / km realizados. Vale 1 cuando va cargado todo el recorrido; baja con los km vacíos |
-| Plata por km | Lo que paga la carga por cada km realizado: precio máximo / km realizados, tramos vacíos incluidos |
-| Puntaje | Qué tan conveniente es una carga para el viaje solicitado, de 0 a 100: 50 × aprovechamiento + 50 × plata por km comparada con la mejor de las recomendadas, redondeado a entero. 100 es una carga que va cargada todo el recorrido y paga por km lo mejor de las recomendadas. La lista trae como máximo 20 cargas; a igual puntaje va primero la de retiro más próximo, después la de mayor precio máximo y después la publicada primero |
-| Ventana de retiro | El rango de días en que el transportista puede retirar una carga: desde `pickup_from` hasta `pickup_to`, ambos incluidos. Sin `pickup_from` empieza ahora; nunca incluye cargas con retiro pasado |
-| Fecha máxima de entrega | El último día (incluido) en que el transportista puede entregar. Se compara con la fecha límite de entrega de la carga; una carga sin fecha límite no se recomienda |
-| Búsqueda cercana | La primera búsqueda de la recomendación: cargas con origen cerca del origen del viaje solicitado y destino cerca de su destino. _Evitar_: Tier 1 |
-| Búsqueda de paso | La búsqueda ampliada que corre cuando la búsqueda cercana deja menos de 3 recomendaciones: cargas en el camino del viaje solicitado que acercan al destino. _Evitar_: Tier 2, búsqueda ampliada |
-| Carga de paso | Una carga que no coincide con los extremos del viaje solicitado, pero está en su camino y lo acerca al destino (Zárate → Rosario en Buenos Aires → Córdoba). _Evitar_: carga parcial |
-| Aprovechamiento mínimo | El aprovechamiento por debajo del cual una carga no se recomienda (25%). _Evitar_: piso, umbral |
-| Carga cancelada | Carga que el dador o el transportista dio de baja antes de que arranque el viaje. Es un estado final: nunca vuelve a estar activa y registra quién canceló. _Evitar_: carga anulada, carga dada de baja |
-| Confirmación de reserva | El email y la notificación que recibe el transportista cuando reserva una carga, con los datos del viaje y la búsqueda de retorno |
-| Búsqueda de retorno | La búsqueda que se le deja armada al transportista con el viaje inverso al de la carga reservada (desde donde la entrega hasta donde la retiró), con retiro el día de entrega o el siguiente y el mismo tipo de remolque. _Evitar_: retorno automático |
-| | |
+---
 
-## Repositorios
+## Conceptos y entidades del dominio
 
-| Nombre | Rol breve |
-|--------|-----------|
-| smartruck-backend | API FastAPI hexagonal |
-| smartruck-dador | Frontend Dador (TanStack Start) |
-| smartruck-transportista | Frontend Transportista |
-| smartruck-audit | Logs / auditoría (Promtail → Loki → Grafana) |
-| cloud-template | Plataforma Nomad + Terraform OCI |
-| infra-template | Template de microservicio Docker/Nomad/GHCR |
+- **Oferta de carga (`Load`):** Publicación creada por un dador verificado que describe una necesidad de traslado: origen, destino, categoría (`CARGA_GENERAL`, `REFRIGERADO`, `PELIGROSA_REGULADA`, `GRANOS_Y_AGRICULTURA`, `AGROINDUSTRIA`, `GANADERIA_HACIENDA`), embalaje (7 tipos), magnitud (peso o volumen), ventana temporal (`pickup_date`, entrega), tarifas (`suggested_price`, `min_price`, `max_price`) y distancia vial.
+- **Estados de carga (`LoadStatus`):** Ciclo de vida oficial representado en backend:
+  - `activa`: disponible para recibir bloqueo/reserva.
+  - `bloqueada`: reservada temporalmente (`10 minutos`) durante un checkout de MercadoPago en curso.
+  - `reservada`: desbloqueo abonado y datos de contacto liberados; espera asignación operativa de unidades o inicio de viaje.
+  - `en_camino`: viaje iniciado por el transportista.
+  - `demorada`: viaje en curso con contingencia informada por el transportista.
+  - `entregada`: descarga declarada por el transportista, pendiente de confirmación del dador.
+  - `entrega_confirmada`: recepción confirmada por el dador; habilita calificaciones mutuas.
+  - `cancelada`: cierre definitivo por cancelación del dador o cierre tras vencimiento al cancelar el transportista.
+- **Depósito (`Depot`):** Ubicación recurrente registrada por un dador (provincia, localidad, dirección y pin validado) para agilizar futuras publicaciones.
+- **Camión y Remolque (`Truck` / `Trailer`):** Unidades de flota cargadas por el transportista. Para formalizar una reserva operativa (`/reserve`) es obligatorio asignar un camión y un remolque válidos para la carga (`/valid-units`).
+- **Tarifa de referencia, descuento de retorno y piso mínimo:** Valor orientativo calculado por `QuoteLoadUseCase` usando tarifas base por km o grillas externas FADEEAC/vehículo administradas en Backoffice. Aplica un descuento de retorno del **20%** (`0.8`) sobre la referencia cuando corresponde y fija un piso mínimo del **90%** sobre lo sugerido (mínimo absoluto `50.000 ARS`).
+- **Tarifa de desbloqueo (*Unlock fee*):** Comisión abonada por el transportista en MercadoPago para acceder al contacto del dador (`(5 + 0,04 * distancia_km) * 1500 ARS` en dominio backend). Si el dador cancela una carga ya reservada, se reembolsa automáticamente al 100%.
+- **Bloqueo exclusivo (*Lock*):** Reserva atómica en PostgreSQL (`reserved_until = NOW + 600 s`) que evita compras concurrentes de la misma carga mientras dura el pago.
+- **Matching inteligente (Tier 1 / Tier 2):** Búsqueda geoespacial en PostGIS. **Tier 1** filtra cargas cercanas al origen y destino (`max(0,20 * D_nominal, 15 km)`); si aporta menos de 3 resultados puntuables, **Tier 2** amplía al corredor vial real (`PassThroughZone`) entre origen y destino. `LoadScorer` exige un aprovechamiento cargado mínimo del **25%** y ordena según proporción cargada y tarifa por kilómetro.
+- **Calificación (`Rating`):** Puntuación de 1 a 5 estrellas emitida entre dador y transportista tras confirmarse la entrega, o asignada automáticamente con 1 estrella ante cancelación unilateral post-reserva.
+- **Notificación (`Notification`):** Registro persistido para campana in-app y disparador de correos transaccionales vía **Resend** ante eventos críticos (reserva, cancelación, entrega, verificación).
 
-## Next step
+---
 
-[Repositories](../../repositories/README.md)
+## Responsabilidades geográficas
+
+- **`geo-service` (`microservice-routes`):** Único dueño del catálogo cerrado oficial (24 provincias y 150 localidades), resolución de localidad más cercana (`50 km` por defecto) y cálculo de rutas interurbanas (11.175 pares OSRM/OSM precalculados, fallback a Mapbox Directions `no-store` y fallback Haversine `1,25` a `60 km/h`). **No** gestiona direcciones por calle ni geocodificación inversa.
+- **Direcciones urbanas (`smartruck-backend`):** El backend resuelve `/localizaciones/direcciones` y `/localizaciones/reversa` integrando **Geoapify** (primario) y **Georef** (fallback de autocompletado), validando pines manuales dentro de `20 km` respecto de la localidad.
+
+---
+
+## Mapa de repositorios en `smartruck-ar`
+
+| Repositorio | Rol actual |
+| :--- | :--- |
+| `smartruck-backend` | API REST FastAPI hexagonal, matching PostGIS, pagos, cancelaciones, métricas y tarifarios. |
+| `microservice-routes` (`geo-service`) | Microservicio Cloudflare Workers para catálogo cerrado de localidades y rutas interurbanas. |
+| `smartruck-dador` | Portal web TanStack Start + React para dadores de carga. |
+| `smartruck-transportista` | Portal web TanStack Start + React con mapa, calculadora de retorno y checkout. |
+| `smartruck-backoffice` | Consola web TanStack Start + React para auditoría de usuarios y tarifarios FADEEAC. |
+| `landing-page` | Sitio público React + Vite en Cloudflare Pages. |
+| `smartruck-infra` | Provisionamiento Terraform (GCP Cloud Run, API Gateway, Cloudflare DNS/WAF, Datadog). |
+| `smartruck-ai` | Workspace compartido, scripts multirepo, reglas y skills de ingeniería. |
+| `docs` | Documentación técnica publicada (mdBook), ADRs y especificaciones (`docs/specs/`). |
+| `roadmap` | Tablero ágil en GitHub Projects y plantillas de automatización de tickets. |
+| `smartruck-informe` | Fuentes LaTeX/Markdown del Informe Final, Ficha Ejecutiva y Long Paper. |
+| `smartruck-audit`, `cloud-template`, `infra-template` | Repositorios históricos / locales de etapas iniciales del proyecto. |
