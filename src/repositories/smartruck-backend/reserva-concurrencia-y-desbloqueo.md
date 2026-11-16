@@ -500,7 +500,7 @@ RETURNING id;
 status = 'activa' OR (status = 'bloqueada' AND reserved_until < :now)
 ```
 
-### 7.4. Migración Alembic Real (`0035_add_load_reservation_window.py`)
+### 7.4. Migración Alembic Real (`0039_add_load_reservation_window.py`)
 
 ```python
 """add reserved_until to loads and payer transporter_id to payments

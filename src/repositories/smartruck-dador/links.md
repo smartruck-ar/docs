@@ -1,8 +1,10 @@
-# Links — smartruck-dador
+# Links — `smartruck-dador`
 
-| Recurso | URL |
-|---------|-----|
-| Repositorio Git | https://github.com/smartruck-ar/smartruck-dador |
-| Issues / board | *(completar)* |
-| CI | *(completar workflow en Actions)* |
-| Deploy (Render / etc.) | *(completar)* |
+- **Repositorio:** [smartruck-ar/smartruck-dador](https://github.com/smartruck-ar/smartruck-dador)
+- **Portal en producción:** `https://dador.smartruck.tech`
+- **Portal en `test`:** `https://dador-test.smartruck.tech`
+- **Documentación interna relacionada:**
+  - [Arquitectura de `smartruck-dador`](./arquitectura.md)
+  - [Manual de usuario — Portal Dador](../../manual_usuario.md#2-portal-dador)
+  - [Handoff Portal Dador](../../wiki/ui/restyling-dador-handoff.md)
+  - [Backend API (`smartruck-backend`)](../smartruck-backend/README.md)
