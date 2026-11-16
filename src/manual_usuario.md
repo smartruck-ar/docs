@@ -32,9 +32,9 @@ Esta guía orientativa describe los flujos principales de uso en las cuatro inte
 
 ### Seguimiento, cancelación, entrega y métricas
 
-- **Mis cargas:** Permite filtrar y abrir el detalle de cada publicación en cualquiera de sus estados (`activa`, `bloqueada`, `reservada`, `en_camino`, `entregada`, `finalizada`, `cancelada`, `expirada`).
+- **Mis cargas:** Permite filtrar y abrir el detalle de cada publicación en cualquiera de sus estados (`activa`, `bloqueada`, `reservada`, `en_camino`, `demorada`, `entregada`, `entrega_confirmada`, `cancelada`).
 - **Edición o cancelación:** Una carga `activa` puede modificarse o cancelarse antes de ser tomada. Si ya fue `reservada`, el dador accede a los datos del transportista; si decide cancelar en esa instancia, el sistema reembolsa automáticamente el 100% de la comisión al transportista, cierra la carga en `cancelada` y registra una penalización de calificación (1 estrella).
-- **Cierre de entrega y calificación:** Cuando el transportista marca el viaje como `entregada`, el dador confirma la recepción en el detalle de la carga para llevarla a `finalizada` y califica al transportista (1 a 5 estrellas).
+- **Cierre de entrega y calificación:** Cuando el transportista marca el viaje como `entregada`, el dador confirma la recepción en el detalle de la carga para llevarla a `entrega_confirmada` y califica al transportista (1 a 5 estrellas).
 - **Panel:** Resume métricas operativas reales (ahorros logísticos conseguidos frente a tarifa plena, kilómetros movilizados y cumplimiento de entregas).
 
 ---
@@ -64,7 +64,7 @@ Esta guía orientativa describe los flujos principales de uso en las cuatro inte
 ### Asignación de flota, viaje y métricas
 
 - **Mis viajes:** En el detalle de una carga `reservada`, el transportista debe asignar un **camión** y un **remolque** válidos (`valid-units`) y confirmar la reserva operativa.
-- **Avance del traslado:** Actualizar estado a `en_camino` al iniciar el viaje y a `entregada` al completar la descarga. Una vez que el dador confirma la entrega (`finalizada`), queda habilitada la calificación hacia el dador.
+- **Avance del traslado:** Actualizar estado a `en_camino` al iniciar el viaje, informar `demorada` ante contingencias o marcar `entregada` al completar la descarga. Una vez que el dador confirma la entrega (`entrega_confirmada`), queda habilitada la calificación hacia el dador.
 - **Cancelación de reserva:** Si el transportista cancela una reserva, las unidades asignadas se liberan y la carga regresa a `activa` (si la fecha de retiro sigue vigente; caso contrario pasa a `cancelada`), sin reembolso de la tarifa de desbloqueo y con penalización de calificación (1 estrella).
 - **Panel:** Muestra kilómetros en vacío evitados, costo hundido rescatado, ingreso marginal neto por kilómetro, litros de gasoil ahorrados y emisiones de CO2 evitadas.
 
