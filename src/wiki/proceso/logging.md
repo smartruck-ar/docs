@@ -1,127 +1,40 @@
-# Convención de logging (arquitectura hexagonal)
+# Logging y observabilidad
 
-Dónde y qué loguear en los servicios SmartTruck (backend y fronts con capas hexagonales).
+El estándar de logging de **Smartruck** prioriza trazas estructuradas en JSON enviadas a `stdout` para que la infraestructura gestionada recolecte los eventos sin acoplar el código de dominio a un proveedor particular.
 
-Los logs se emiten con **LogManager** (`application/logger/`): JSON a **stdout**. La recolección (Datadog, Loki, etc.) es responsabilidad de la infraestructura, no de un provider en la app. Convención de carpetas: [Arquitectura backend](../../repositories/smartruck-backend/arquitectura.md).
+---
 
-En **smartruck-backend**, los controllers/repos de infrastructure **inyectan** `LogManager` (desde `application.logger`). Cada controller y cada repositorio lo recibe por `Depends` (por ejemplo `trucks_controller.py` y `PostgreSQLTruckRepository`); este módulo solo provee el mecanismo.
+## Implementación en `smartruck-backend`
 
-### API (sin secretos)
+### `LogManager` (`src/application/logger/log_manager.py`)
 
-```python
-LogManager(service="smartruck-backend", env="test").info("…")
-LogManager(service="smartruck-backend", env="test").error("…")
-```
+El backend define una única abstracción liviana inyectada en casos de uso y controladores:
 
-Niveles disponibles: **`fatal`**, **`error`**, **`warn`**, **`info`**, **`debug`**, **`trace`**.
+- **Salida:** `sys.stdout` en formato JSON de una línea por evento.
+- **Campos emitidos:**
+  - `level`: `fatal`, `error`, `warn`, `info`, `debug`, `trace`.
+  - `message`: texto descriptivo del evento (`str`).
+  - `service`: identificador del servicio (por ejemplo, `smartruck-backend`).
+  - `env`: entorno activo (`development`, `test`, `production`).
+  - `correlation_id` *(opcional)*: identificador de correlación de la petición cuando está disponible.
+- **Regla de seguridad:** la firma pública recibe únicamente `message: str` (nunca diccionarios libres ni credenciales), reduciendo la probabilidad de filtrar tokens, CUITs completos o claves en los logs.
 
-| Nivel | Uso |
-|-------|-----|
-| `info` | Qué se está haciendo en bordes (entrada/salida, datos salientes seguros) |
-| `error` / `warn` / `fatal` | Fallos y advertencias (p. ej. GlobalExceptionHandler) |
-| `debug` / `trace` | Solo para depurar; no para flujo de negocio habitual |
+### Manejo de excepciones
 
-Solo `message: str`. **No** hay parámetros `password`, `token` ni similares: no loguear secretos en el mensaje.
+No existe una clase monolítica `GlobalExceptionHandler`: las excepciones de dominio (`src/domain/exceptions.py`) se traducen en la capa de entrada HTTP a respuestas tipadas (`src/infrastructure/inbound/dto/error_response.py`), y la aplicación FastAPI registra manejadores dedicados donde corresponde, como `@app.exception_handler(GeoCatalogUnavailableError)` en `src/infrastructure/api.py` cuando el servicio geográfico no está disponible.
 
-### Correlation ID
+---
 
-- Header: `X-Correlation-Id`
-- Middleware: reutiliza el header o genera un UUID; lo refleja en la response.
-- `LogManager` lo incluye en el JSON cuando está disponible (`correlation_id`).
+## Recolección y envío hacia Datadog
 
-## Dónde loguear
+El monitoreo centralizado en **Datadog** (`us5`) se encuentra implementado de forma declarativa en `smartruck-infra` para el ambiente **`test`**:
 
-Solo en los **bordes** del hexágono: **entradas** y **salidas**.
+- **GCP Cloud Run -> Datadog (`modules/datadog_log_forwarding`):** Cloud Logging exporta entradas de Cloud Run vía Sink hacia **Pub/Sub**, y un job de **Dataflow** ejecuta la UDF `format_for_datadog.js` antes de enviarlas a Datadog.
+- **Portales en Render -> Datadog (`modules/render_datadog_log_stream`):** configura el stream de logs del workspace de Render hacia Datadog en `test`.
+- **Pendiente de producción:** ambos módulos están conectados en `environments/test/main.tf`; su habilitación en `environments/prod/main.tf` permanece registrada como pendiente técnico en [Riesgos](../../riesgos.md).
 
-| Lugar | Rol en el hexágono | Qué loguea |
-|-------|--------------------|------------|
-| **Controladores** (adapters de entrada / HTTP) | Entrada | `info` de lo que se está haciendo (request / caso, sin secretos) |
-| **Repositorios** (adapters de salida / persistencia u otros gateways) | Salida | `info` de operaciones hacia afuera |
-| **GlobalExceptionHandler** | Borde HTTP | `error`/`warning` de excepciones burbujeadas + response HTTP |
+---
 
-```text
-[HTTP] → Controlador ──info────────────┐
-              │                        │
-              ▼                        ├──> stdout → Datadog / audit
-         Caso de uso                   │
-              │                        │
-              ▼                        │
-         Repositorio ──info────────────┤
-              │                        │
-              └── excepciones ──► GlobalExceptionHandler ──error─┘
-```
+## Inspección local
 
-## Errores y excepciones
-
-- Las excepciones **burbujean** hasta un **GlobalExceptionHandler** (capa HTTP / inbound).
-- El handler centraliza: log `error`/`warning`, mapeo a response HTTP. Los controllers **no** atrapan para relanzar.
-- Controllers: solo `info` de entrada (y datos seguros). Repos: `info` de salida; propagan errores hacia arriba.
-- No duplicar el log de error en repo **y** controller **y** handler.
-
-## Info / “qué se está haciendo”
-
-- **Controlador:** entrada al caso (ej. “crear viaje”, IDs relevantes, sin secretos).
-- **Repositorio:** operación de salida (ej. “persistir load”, “buscar oferente por email”).
-- Preferir mensajes estructurados (JSON) con `service`, `env`, `level`, y contexto útil (`request_id` si existe).
-
-## Qué no loguear ahí
-
-| Evitar | Motivo |
-|--------|--------|
-| Loguear en cada línea del caso de uso / dominio | Ruido; el dominio queda limpio |
-| Loguear el mismo error en repo **y** controller **y** handler | Duplicado; el error se loguea una sola vez en el GlobalExceptionHandler |
-| Passwords, tokens, PII innecesaria | Seguridad |
-
-## Excepción: decisiones de negocio que el spec pide registrar
-
-Un caso de uso puede emitir un `warn` cuando el spec pide dejar registro de una decisión de negocio para poder investigarla después. Por ejemplo, el caso de uso de recomendaciones deja una línea por cada carga que descarta, con su id y el motivo. El caso de uso recibe `LogManager` por constructor, y el motivo lo describe el dominio (`DiscardedLoad`). Es un `warn` por decisión, no un log por línea: no es ruido.
-
-## Checklist
-
-- [ ] `info` en controlador (entrada) y repositorio (salida)
-- [ ] Errores/excepciones logueados en el **GlobalExceptionHandler** (no catch/rethrow en controllers)
-- [ ] Sin logs de negocio ruidosos en application/domain (salvo las decisiones que el spec pide registrar)
-- [ ] Salida a stdout (JSON vía LogManager)
-- [ ] Sin passwords/tokens en la API ni en el contenido del mensaje
-
-## Next step
-
-### Recolección local con Datadog (Student Pack)
-
-La app **no** envía a Datadog: solo escribe JSON a stdout. En local, el Agent lee el stdout del container `app`.
-
-1. En `.env` (no commitear): `DD_API_KEY=<tu-api-key>`, opcional `DD_SITE=us5.datadoghq.com`, y `DD_MIRROR_LOGS_TO_DOCKER=true`.
-2. Recrear `app` (para inyectar el flag) y levantar el Agent: `docker compose up -d --force-recreate app && docker compose --profile datadog up -d datadog-agent`.
-3. Dentro del container, `./scripts/run_app` (espeja stdout al log del container para que el Agent lo lea; JetBrains/exec no alcanza solo).
-4. Generar tráfico (p. ej. `POST /transporters` con header `X-Correlation-Id`).
-5. En [Log Explorer](https://us5.datadoghq.com/logs): filtro `service:smartruck-backend` y el `correlation_id`.
-
-El servicio `app` declara labels `com.datadoghq.ad.logs` / tags `service`+`env`.
-
-### Recolección en Cloud Run (test/prod) — `smartruck-infra`
-
-La app **no** usa Infisical para Datadog. En GCP, Cloud Run ya manda stdout a Cloud Logging; la infra reenvía esos logs a Datadog:
-
-`Cloud Run → Logging sink → Pub/Sub → Dataflow (Cloud_PubSub_to_Datadog) → us5`
-
-En `smartruck-infra` (entorno **test** primero):
-
-1. Agregar el secret de GitHub `DATADOG_API_KEY` en el repo `smartruck-infra` (**Repository secret**). No poner la key en `terraform.tfvars` (pisa `TF_VAR_*`).
-2. Tag/release para que el pipeline haga `terraform apply` en test (`TF_VAR_datadog_api_key`).
-3. Generar tráfico en la API de test y verificar en [Log Explorer](https://us5.datadoghq.com/logs).
-
-Módulo: `modules/datadog_log_forwarding`. Prod: mismo módulo cuando test esté validado. Si `DATADOG_API_KEY` está vacío, el módulo no se crea.
-
-### Recolección en Render (dador / transportista) — `smartruck-infra`
-
-Las apps solo escriben JSON a stdout. Render reenvía el default log stream del workspace a Datadog (IaC; no configurar en la UI):
-
-`Web Service → Render Log Stream → us5 (/api/v2/logs)`
-
-1. Repository secrets en `smartruck-infra`: `RENDER_API_KEY`, `RENDER_OWNER_ID` (`usr-…`/`tea-…`), además de `DATADOG_API_KEY`.
-2. Tag/release → `apply_test` crea `modules/render_datadog_log_stream` (`render_log_stream`).
-3. Generar tráfico en dador/transportista y filtrar en Datadog por `ddsource:render` (o el `service` que Render asigne).
-
-Si falta algún secret, el módulo no se crea. Preview instances: `drop` por defecto.
-
-Alternativa local: [smartruck-audit](../../repositories/smartruck-audit/README.md) (Loki/Grafana) · [Arquitectura backend](../../repositories/smartruck-backend/arquitectura.md)
+Para pruebas locales con agregación visual, el repositorio histórico [`smartruck-audit`](../../repositories/smartruck-audit/README.md) conserva una pila opcional basada en **Loki + Promtail + Grafana** ejecutada con Docker Compose.

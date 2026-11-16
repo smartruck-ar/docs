@@ -1,44 +1,19 @@
 # Desarrollo con agentes
 
-Cómo arrancar y llevar una feature con un agente de IA (Claude Code u OpenCode) usando el setup del repo `smartruck-ai`.
+El equipo utiliza asistentes de programación de forma estructurada y auditable a través del repositorio [`smartruck-ai`](https://github.com/smartruck-ar/smartruck-ai), garantizando que todo código generado respete la arquitectura hexagonal, el modelo de dominio y las pruebas del proyecto.
 
-## Quick path
+---
 
-1. Instalar el setup siguiendo la guía de instalación del README de [`smartruck-ai`](https://github.com/smartruck-ar/smartruck-ai).
-2. Abrir el agente con el wrapper de la carpeta de repos: `<carpeta>/bin/claude-smartruck` o `<carpeta>/bin/opencode-smartruck`.
-3. Pasarle la historia del Board:
+## Organización de `smartruck-ai`
 
-```text
-/nueva-feature roadmap#<N>
-```
+- **Orquestación multi-repositorio (`fetch-repos.sh`, `workspace.sh`, `install.sh`, `update.sh`, `orca-up.sh`):** Clona y sincroniza el espacio de trabajo completo de `smartruck-ar` e instala reglas y habilidades en el entorno local.
+- **Reglas base (`rules/` y `workspace/`):** Definen las invariantes no negociables (`AGENTS.md`, `domain.md`, `bdd-tdd-execution.mdc`, `conventional-commits.mdc`, `skills-solo-proyecto.mdc`).
+- **Habilidades de dominio e ingeniería (`skills/`):** El repositorio provee 23 skills propias (entre ellas `nueva-feature`, `bdd-aceptacion`, `arquitectura-hexagonal`, `fastapi-controllers`, `migraciones-datos`, `portales-frontend`, `pytest-unit`, `release-ambientes`, `verificacion-completa`, `actualizar-docs` y `documentar-smartruck`), complementadas con paquetes externos versionados en `vendor/` (`mattpocock-skills` y `ponytail`) y soporte MCP (`codebase-memory-mcp`).
 
-## Fases
+---
 
-| Fase | Qué hace el agente |
-|------|--------------------|
-| 1. Preparación | Actualiza todos los repos de la organización y `docs`. Lee la historia y asegura los criterios de aceptación. Actualiza los Gherkins en el `.feature` del repo (con `@wip`) y en el ticket. Pasa la historia a `In progress`. |
-| 2. Gate | Muestra el plan (escenarios, capas, archivos y decisiones abiertas) y espera la aprobación. Es la única pausa. |
-| 3. Ejecución | Escenario por escenario, en `main`: rojo, verde, commit y push, refactor, commit y push. |
-| 4. Cierre | Corre la suite completa, actualiza el README del repo y `docs`, libera a `test` con `release_to_test` y pasa la historia a `In review` con las horas insumidas. |
+## Principios de trabajo asistido
 
-La liberación a `prod` y el pase a `Done` no los hace el agente: los hace el equipo al final del sprint ([Workflow de entrega](workflow-entrega.md)).
-
-## Reglas del agente
-
-- Los criterios de aceptación son los escenarios Gherkin ([Gherkin](gherkin.md)).
-- Ciclos de TDD de un test por vez, de afuera hacia adentro, con un commit y un push por ciclo ([Conventional Commits](conventional-commits.md)).
-- Solo usa las skills del setup del proyecto, no las globales de cada persona.
-- Las horas insumidas las informa la persona; el agente no las estima.
-
-## Skills principales
-
-| Skill | Para qué |
-|-------|----------|
-| `nueva-feature` | Punto de entrada: preparación, gate, ejecución y cierre |
-| `criterios-aceptacion` | Reglas y escenarios de una historia |
-| `bdd-tdd-execution` | Ciclos BDD + TDD después del gate |
-| `release-ambientes` | Release a `test` |
-| `board-sprint` | Estados y horas en el Board |
-| `actualizar-docs` | Qué página de `docs` tocar después de una feature |
-
-El catálogo completo está en el README de `smartruck-ai`.
+1. **Conceptos y arquitectura primero:** El desarrollador define el diseño (ADR o especificación en `docs/specs/`) antes de delegar implementación.
+2. **TDD / BDD como red de seguridad:** Ningún cambio generado se acepta sin escenarios Gherkin y cobertura de pruebas automatizadas (`./scripts/run_all_tests` y `./scripts/run_lint`).
+3. **Commits limpios y autoría humana:** Todo commit pasa revisión humana y respeta [Conventional Commits](./conventional-commits.md), sin incluir etiquetas de coautoría automatizada.

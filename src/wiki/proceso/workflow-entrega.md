@@ -1,58 +1,30 @@
 # Workflow de entrega
 
-Cómo una historia pasa de `Ready` a producción. No hay ramas de feature ni pull requests: se trabaja en `main` y los ambientes se mueven con los scripts de release.
+Todos los repositorios de producto operan bajo **trunk-based development** sobre `main`, con separación entre los ambientes **`test`** y **`prod`** mediante etiquetas semánticas y scripts propios.
 
-## Quick path
+---
 
-1. Tomar una historia `Ready` del Board y pasarla a `In progress`.
-2. Implementar en `main`, con commits atómicos y un push por commit ([Conventional Commits](conventional-commits.md)).
-3. Con la feature terminada y la suite en verde, liberar a `test`: `./scripts/release_to_test patch|minor|major`.
-4. Con el pipeline de `test` en verde, pasar la historia a `In review` y cargar las horas insumidas.
-5. Al final del sprint, el equipo valida todo en `test` y libera a `prod`: `./scripts/release_to_prod`. Las historias liberadas pasan a `Done`.
+## Clasificación de repositorios
 
-## Ramas y ambientes
+| Tipo | Repositorios | Flujo de promoción |
+| :--- | :--- | :--- |
+| **Aplicaciones y servicios (`release_to_test` / `release_to_prod`)** | `smartruck-backend`, `microservice-routes`, `smartruck-dador`, `smartruck-transportista`, `smartruck-backoffice`, `landing-page` | Integración en `main` -> `./scripts/release_to_test` -> validación en `test` -> `./scripts/release_to_prod`. |
+| **Infraestructura (`scripts/check` / `scripts/release`)** | `smartruck-infra` | Validación (`terraform fmt`, `validate`, tests UDF) -> plan/apply controlado por ambiente (`test` / `prod`). |
+| **Documentación y soporte (`main`)** | `docs`, `roadmap`, `smartruck-ai` | Commits atómicos sobre `main`; `docs` compila mdBook en CI y publica a `gh-pages`. |
 
-| Rama | Para qué | Cómo se mueve |
-|------|----------|---------------|
-| `main` | Integración. Acá se trabaja | Push directo, un push por commit |
-| `test` | Ambiente de test | `./scripts/release_to_test patch\|minor\|major` |
-| `prod` | Ambiente productivo | `./scripts/release_to_prod`, a mano, con el equipo, al final del sprint |
+---
 
-Nunca se pushea a mano a `test` ni a `prod`. Los repos de documentación y soporte (`docs`, `roadmap`, `smartruck-ai`, `smartruck-infra`, `audit`) solo tienen `main` y no se liberan.
+## Despliegue por componente en CI/CD
 
-## Release a test
+1. **`smartruck-backend`:** GitHub Actions corre `Ruff`, `pytest` + `pytest-bdd` (`--cov-fail-under=85`), `test_routes_require_authentication.py`, Gitleaks y migraciones/build Docker. Autentica con **WIF (OIDC)** contra GCP, sube imagen a Artifact Registry y despliega en Cloud Run (`us-central1`).
+2. **`microservice-routes` (`geo-service`):** Ejecuta TypeScript, ESLint, Prettier, Vitest (`@amiceli/vitest-cucumber` + `@cloudflare/vitest-pool-workers`), Gitleaks y publica Worker en Cloudflare (`smartruck-routes-service-test` / `smartruck-routes-service-prod`) vía `wrangler`.
+3. **`smartruck-dador`, `smartruck-transportista`, `smartruck-backoffice`:** Ejecutan lint, `tsc`, Vitest y Gitleaks; construyen imagen de servidor Nitro, la publican en **GHCR** y disparan deploy hook en **Render**.
+4. **`landing-page`:** Ejecuta lint, Vitest y chequeo de seguridad (`security-check.js` + `required-checks.js` + Gitleaks) y despliega estáticos en **Cloudflare Pages** (`smartruck-landing-test` / `smartruck-landing-prod`) con `wrangler pages deploy dist`.
 
-`release_to_test` corre desde `main` limpio y al día:
+---
 
-1. Sube la versión (`patch`, `minor` o `major`).
-2. Commitea `tag:vX.Y.Z` y crea el tag.
-3. Pushea `main` y `test` de forma atómica. El pipeline de `test` despliega esa versión.
+## Checklist previo a promover a producción
 
-| Cambio desde la última versión | Nivel |
-|--------------------------------|-------|
-| Solo correcciones | `patch` |
-| Funcionalidad nueva compatible | `minor` |
-| Contrato roto (API o esquema incompatible) | `major` |
-
-## Release a prod
-
-`release_to_prod` no crea versión nueva: promueve lo que está en `test` a `prod`. Exige que `main` y `test` apunten al mismo commit. Lo corre el equipo al final del sprint, con todo validado en `test`.
-
-## Estados en el Board
-
-| Momento | Status | Horas |
-|---------|--------|-------|
-| Se empieza la historia | `In progress` | `Estimate (hs)` |
-| La versión está en `test` y el pipeline quedó verde | `In review` | `Spent (hs)` con las horas insumidas |
-| El equipo liberó a `prod` al final del sprint | `Done` | — |
-
-## Checklist antes de liberar a test
-
-- [ ] Escenarios de la historia en verde, sin `@wip`
-- [ ] `./scripts/run_all_tests` en verde
-- [ ] README del repo y `docs` actualizados si el cambio los afecta
-- [ ] Sin secretos ni configs locales en los commits
-
-## Next step
-
-Cuándo está terminado → [Definition of Done](definition-of-done.md)
+- Suite automatizada y escaneo **Gitleaks** en verde en GitHub Actions.
+- Variables de entorno, migraciones Alembic (`smartruck-backend`) y cambios en `smartruck-infra` aplicados previamente en `test`.
+- Verificación funcional manual del flujo afectado en `test` antes de ejecutar `./scripts/release_to_prod`.
