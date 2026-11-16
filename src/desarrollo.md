@@ -1,36 +1,65 @@
 # Guía de desarrollo
 
-## Requisitos previos
+Esta guía resume el mapa de repositorios, herramientas requeridas y convenciones operativas para levantar, probar y publicar cambios en **Smartruck**. Para el detalle técnico de cada módulo, consultar el índice en [Repositories](./repositories/README.md).
 
-Dependen del repo. Resumen:
+---
 
-| Repo | Stack principal |
-|------|-----------------|
-| [smartruck-backend](./repositories/smartruck-backend/README.md) | Python 3.12, FastAPI, Docker / Dev Containers |
-| [smartruck-dador](./repositories/smartruck-dador/README.md) | Node 22, TanStack Start, Vite |
-| [smartruck-transportista](./repositories/smartruck-transportista/README.md) | Node / Bun, Vite |
-| [smartruck-audit](./repositories/smartruck-audit/README.md) | Grafana + Loki + Promtail (Docker Compose) |
+## Repositorios y stack tecnológico vigente
 
-## Instalación
+| Repositorio | Propósito | Stack y herramientas principales |
+| :--- | :--- | :--- |
+| [**`smartruck-backend`**](./repositories/smartruck-backend/README.md) | API core, matching PostGIS, pagos y métricas | Python >= 3.12 (`uv`), FastAPI, SQLModel, Alembic, GeoAlchemy2, `pytest`, `pytest-bdd`, `ruff`. |
+| [**`microservice-routes`** (`geo-service`)](https://github.com/smartruck-ar/microservice-routes) | Servicio geográfico de borde | TypeScript, Cloudflare Workers (`wrangler`), `jose`, `@supabase/supabase-js`, Vitest + Cucumber, ESLint. |
+| [**`smartruck-dador`**](./repositories/smartruck-dador/README.md) | Portal web para dadores de carga | Node 22+, React 19, TypeScript, TanStack Start/Router/Query, Vite 8, Nitro, Tailwind v4, Leaflet, MapLibre GL, Recharts, Vitest. |
+| [**`smartruck-transportista`**](./repositories/smartruck-transportista/README.md) | Portal web para transportistas | Node 22+, React 19, TypeScript, TanStack Start/Router/Query, Vite 8, Nitro, Tailwind v4, MapLibre GL, Recharts, Vitest (`happy-dom`). |
+| [**`smartruck-backoffice`**](https://github.com/smartruck-ar/smartruck-backoffice) | Consola administrativa y tarifaria | Node 22+, React 19, TypeScript, TanStack Start/Router/Query, Vite 8, Nitro, Tailwind v4, Vitest. |
+| [**`landing-page`**](https://github.com/smartruck-ar/landing-page) | Sitio institucional y acceso por rol | Node 22+, React 19 (JavaScript), Vite 7, Tailwind CSS v4, Vitest, Cloudflare Pages (`wrangler`). |
+| [**`smartruck-infra`**](https://github.com/smartruck-ar/smartruck-infra) | Infraestructura declarativa en nube | Terraform >= 1.5 (GCP Cloud Run, API Gateway, WIF, Artifact Registry, Cloudflare DNS/WAF, Datadog). |
+| [**`smartruck-ai`**](https://github.com/smartruck-ar/smartruck-ai) | Espacio de trabajo, scripts y skills AI | Scripts Bash (`fetch-repos.sh`, `workspace.sh`, `orca-up.sh`), reglas y skills compartidas. |
+| [**`docs`**](https://github.com/smartruck-ar/docs) | Documentación técnica publicada | mdBook >= 0.4, especificaciones en Markdown y diagramas en `src/arquitectura/diagrams/`. |
+| *Soporte e históricos* | Tablero y legados de etapa inicial | [`roadmap`](https://github.com/smartruck-ar/roadmap), [`smartruck-audit`](./repositories/smartruck-audit/README.md), [`cloud-template`](./repositories/cloud-template/README.md), [`infra-template`](./repositories/infra-template/README.md). |
 
-Seguí el README de cada repositorio (comandos de setup, `dev_app`, tests y Dev Containers).
+---
 
-## Flujo de trabajo
+## Prerrequisitos locales
 
-1. Las historias viven en el Board de [`roadmap`](./wiki/tickets/automatizacion-historias.md), con sus criterios de aceptación como escenarios Gherkin ([Plantilla de ticket](./wiki/tickets/plantilla-ticket.md)).
-2. Antes de empezar, la historia cumple el [Definition of Ready](./wiki/proceso/definition-of-ready.md) y pasa a `In progress`.
-3. Se trabaja en `main`, sin ramas de feature ni pull requests, con commits atómicos y un push por commit ([Conventional Commits](./wiki/proceso/conventional-commits.md)).
-4. Con la feature terminada, se libera a `test` con `./scripts/release_to_test patch|minor|major` y la historia pasa a `In review` con las horas insumidas ([Workflow de entrega](./wiki/proceso/workflow-entrega.md)).
-5. Al final del sprint, el equipo libera a `prod` con `./scripts/release_to_prod` y las historias pasan a `Done` ([Definition of Done](./wiki/proceso/definition-of-done.md)).
+- **Git** y acceso SSH/HTTPS a la organización `smartruck-ar`.
+- **Docker** (con Docker Compose) para levantar PostgreSQL + PostGIS local y dependencias auxiliares.
+- **Python >= 3.12 + `uv`** para `smartruck-backend`.
+- **Node.js 22+ + `npm`** para portales TanStack Start, `microservice-routes` (`geo-service`) y `landing-page`.
+- **Terraform >= 1.5** para validar o planificar cambios en `smartruck-infra`.
+- **`mdbook` (>= 0.4)** para previsualizar localmente esta documentación (`mdbook serve --open`).
 
-Para hacerlo con un agente de IA, ver [Desarrollo con agentes](./wiki/proceso/desarrollo-con-agentes.md).
+---
 
-## Convenciones
+## Convención de scripts en `./scripts/`
 
-| Tema | Dónde está |
-|------|------------|
-| Plantillas de ticket | [wiki/tickets/plantilla-ticket.md](./wiki/tickets/plantilla-ticket.md) |
-| Estimación (story points) | [wiki/tickets/estimacion.md](./wiki/tickets/estimacion.md) |
-| Logging (hexagonal) | [wiki/proceso/logging.md](./wiki/proceso/logging.md) |
-| Gherkin (BDD) | [wiki/proceso/gherkin.md](./wiki/proceso/gherkin.md) |
-| Glosario | [wiki/equipo/glosario.md](./wiki/equipo/glosario.md) |
+Los repositorios de producto comparten una interfaz homogénea dentro de `./scripts/` para evitar memorizar comandos distintos por lenguaje:
+
+### 1. Entorno local y base de datos
+
+- `./scripts/start_dev_containers` y `./scripts/stop_dev_containers`: inician o detienen los contenedores locales (por ejemplo, Postgres + PostGIS).
+- `./scripts/start_app` o `./scripts/dev_app`: levantan el servicio o portal en modo desarrollo (`APP_MODE=development`).
+- `./scripts/dev_against_test` (disponible en `smartruck-dador` y `smartruck-transportista`): ejecuta el frontend local conectado contra los servicios desplegados en `test`.
+- En `microservice-routes`, además existen `./scripts/migrate`, `./scripts/load_geo` y `./scripts/compute_missing_routes` para poblar y mantener el catálogo cerrado y las rutas en base geoespacial.
+
+### 2. Verificación, pruebas y hooks
+
+- `./scripts/install_git_hooks` en `smartruck-backend` (y `npm run prepare` con Husky en repositorios Node) instala hooks locales previos al commit/push.
+- `./scripts/run_lint`: ejecuta análisis estático (`ruff` en Python; `eslint`, `prettier` y `tsc --noEmit` en TypeScript/JavaScript).
+- `./scripts/run_unit_tests` y `./scripts/run_all_tests`: corren pruebas unitarias, integración y BDD (`pytest` + `pytest-bdd` con mínimo **85%** de cobertura en backend; `Vitest` en frontales y `geo-service`).
+
+### 3. Versionado y promoción entre ambientes
+
+- `./scripts/bump_version`: actualiza la versión semántica siguiendo etiquetas y formato del proyecto.
+- `./scripts/release_to_test`: publica la versión hacia el ambiente `test`.
+- `./scripts/release_to_prod`: promueve el artefacto o etiqueta hacia producción.
+- En `smartruck-infra`, la validación y despliegue utilizan `./scripts/check` y `./scripts/release`.
+
+---
+
+## Configuración de ambientes (`APP_MODE`) y buenas prácticas
+
+- Todos los servicios distinguen comportamiento por `APP_MODE` (`development`, `test`, `production`) para validar orígenes CORS, activar o relajar autenticación local en desarrollo y apuntar al proyecto Supabase correspondiente.
+- Las variables de entorno sensibles permanecen fuera de Git (`.env` locales ignorados) y todos los repositorios ejecutan **Gitleaks** en CI/CD para detectar filtraciones accidentales.
+- Todo cambio destinado a `main` debe integrarse con historial limpio siguiendo [Conventional Commits](./wiki/proceso/conventional-commits.md) y respetar los criterios descritos en el [Workflow de entrega](./wiki/proceso/workflow-entrega.md).
