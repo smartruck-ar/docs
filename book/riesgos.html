@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html lang="es" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Riesgos - Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Inicio.html"><strong aria-hidden="true">1.</strong> Inicio</a></li><li class="chapter-item expanded "><a href="proyecto.html"><strong aria-hidden="true">2.</strong> Descripción del proyecto</a></li><li class="chapter-item expanded "><a href="arquitectura.html"><strong aria-hidden="true">3.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="riesgos.html" class="active"><strong aria-hidden="true">4.</strong> Riesgos</a></li><li class="chapter-item expanded "><a href="requerimientos.html"><strong aria-hidden="true">5.</strong> Requerimientos</a></li><li class="chapter-item expanded "><a href="metodologia.html"><strong aria-hidden="true">6.</strong> Metodología de trabajo aplicada</a></li><li class="chapter-item expanded "><a href="desarrollo.html"><strong aria-hidden="true">7.</strong> Guía de desarrollo</a></li><li class="chapter-item expanded "><a href="manual_usuario.html"><strong aria-hidden="true">8.</strong> Manual de usuario</a></li><li class="chapter-item expanded affix "><li class="part-title">Wiki del equipo</li><li class="chapter-item expanded "><a href="wiki/index.html"><strong aria-hidden="true">9.</strong> Wiki</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wiki/proceso/jerarquia.html"><strong aria-hidden="true">9.1.</strong> Jerarquía</a></li><li class="chapter-item expanded "><a href="wiki/proceso/definition-of-ready.html"><strong aria-hidden="true">9.2.</strong> Definition of Ready</a></li><li class="chapter-item expanded "><a href="wiki/proceso/definition-of-done.html"><strong aria-hidden="true">9.3.</strong> Definition of Done</a></li><li class="chapter-item expanded "><a href="wiki/proceso/workflow-entrega.html"><strong aria-hidden="true">9.4.</strong> Workflow de entrega</a></li><li class="chapter-item expanded "><a href="wiki/proceso/desarrollo-con-agentes.html"><strong aria-hidden="true">9.5.</strong> Desarrollo con agentes</a></li><li class="chapter-item expanded "><a href="wiki/proceso/conventional-commits.html"><strong aria-hidden="true">9.6.</strong> Conventional Commits</a></li><li class="chapter-item expanded "><a href="wiki/proceso/logging.html"><strong aria-hidden="true">9.7.</strong> Logging (hexagonal)</a></li><li class="chapter-item expanded "><a href="wiki/proceso/gherkin.html"><strong aria-hidden="true">9.8.</strong> Gherkin (BDD)</a></li><li class="chapter-item expanded "><a href="wiki/tickets/plantilla-ticket.html"><strong aria-hidden="true">9.9.</strong> Plantilla de ticket</a></li><li class="chapter-item expanded "><a href="wiki/tickets/tipos-de-ticket.html"><strong aria-hidden="true">9.10.</strong> Tipos de ticket</a></li><li class="chapter-item expanded "><a href="wiki/tickets/estimacion.html"><strong aria-hidden="true">9.11.</strong> Estimación</a></li><li class="chapter-item expanded "><a href="wiki/tickets/automatizacion-historias.html"><strong aria-hidden="true">9.12.</strong> Automatización de historias (roadmap)</a></li><li class="chapter-item expanded "><a href="wiki/equipo/roles.html"><strong aria-hidden="true">9.13.</strong> Roles</a></li><li class="chapter-item expanded "><a href="wiki/equipo/glosario.html"><strong aria-hidden="true">9.14.</strong> Glosario</a></li><li class="chapter-item expanded "><a href="wiki/ui/restyling.html"><strong aria-hidden="true">9.15.</strong> Restyling de UI</a></li><li class="chapter-item expanded "><a href="wiki/ui/restyling-dador-handoff.html"><strong aria-hidden="true">9.16.</strong> Handoff restyling del dador (D.X.2/D.X.3 + backend)</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Repositories</li><li class="chapter-item expanded "><a href="repositories/index.html"><strong aria-hidden="true">10.</strong> Repositories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-backend/index.html"><strong aria-hidden="true">10.1.</strong> smartruck-backend</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-backend/arquitectura.html"><strong aria-hidden="true">10.1.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backend/reserva-concurrencia-y-desbloqueo.html"><strong aria-hidden="true">10.1.2.</strong> Reserva y desbloqueo consistente</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backend/links.html"><strong aria-hidden="true">10.1.3.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/index.html"><strong aria-hidden="true">10.2.</strong> smartruck-dador</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-dador/arquitectura.html"><strong aria-hidden="true">10.2.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-dador/links.html"><strong aria-hidden="true">10.2.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/index.html"><strong aria-hidden="true">10.3.</strong> smartruck-transportista</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/arquitectura.html"><strong aria-hidden="true">10.3.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-transportista/links.html"><strong aria-hidden="true">10.3.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/geo-service/index.html"><strong aria-hidden="true">10.4.</strong> geo-service (microservice-routes)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/geo-service/arquitectura.html"><strong aria-hidden="true">10.4.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/geo-service/links.html"><strong aria-hidden="true">10.4.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/smartruck-backoffice/index.html"><strong aria-hidden="true">10.5.</strong> smartruck-backoffice</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-backoffice/arquitectura.html"><strong aria-hidden="true">10.5.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-backoffice/links.html"><strong aria-hidden="true">10.5.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/landing-page/index.html"><strong aria-hidden="true">10.6.</strong> landing-page</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/landing-page/arquitectura.html"><strong aria-hidden="true">10.6.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/landing-page/links.html"><strong aria-hidden="true">10.6.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/smartruck-infra/index.html"><strong aria-hidden="true">10.7.</strong> smartruck-infra</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-infra/arquitectura.html"><strong aria-hidden="true">10.7.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-infra/links.html"><strong aria-hidden="true">10.7.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/smartruck-ai/index.html"><strong aria-hidden="true">10.8.</strong> smartruck-ai</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-ai/arquitectura.html"><strong aria-hidden="true">10.8.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-ai/links.html"><strong aria-hidden="true">10.8.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/smartruck-audit/index.html"><strong aria-hidden="true">10.9.</strong> smartruck-audit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/smartruck-audit/arquitectura.html"><strong aria-hidden="true">10.9.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/smartruck-audit/links.html"><strong aria-hidden="true">10.9.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/cloud-template/index.html"><strong aria-hidden="true">10.10.</strong> cloud-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/cloud-template/arquitectura.html"><strong aria-hidden="true">10.10.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/cloud-template/links.html"><strong aria-hidden="true">10.10.2.</strong> Links</a></li></ol></li><li class="chapter-item expanded "><a href="repositories/infra-template/index.html"><strong aria-hidden="true">10.11.</strong> infra-template</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repositories/infra-template/arquitectura.html"><strong aria-hidden="true">10.11.1.</strong> Arquitectura</a></li><li class="chapter-item expanded "><a href="repositories/infra-template/links.html"><strong aria-hidden="true">10.11.2.</strong> Links</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Smartruck - Trabajo Profesional (Grupo 179) - FIUBA</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="riesgos"><a class="header" href="#riesgos">Riesgos</a></h1>
+<p>Este registro consolida el seguimiento histórico de riesgos técnicos, operativos, de seguridad y de negocio identificados durante el proyecto, diferenciando aquellos que fueron <strong>mitigados en el código vigente</strong> de los que <strong>permanecen abiertos o aceptados</strong> dentro del alcance actual del producto.</p>
+<hr />
+<h2 id="estado-consolidado-de-riesgos-técnicos-y-de-producto"><a class="header" href="#estado-consolidado-de-riesgos-técnicos-y-de-producto">Estado consolidado de riesgos técnicos y de producto</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">ID</th><th style="text-align: left">Riesgo</th><th style="text-align: left">Área</th><th style="text-align: left">Estado actual</th><th style="text-align: left">Evidencia y medidas vigentes / pendientes</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>R-04</strong></td><td style="text-align: left">Matching geográfico ingenuo en memoria y baja relevancia en rutas largas</td><td style="text-align: left">Backend / Matching</td><td style="text-align: left"><strong>Mitigado</strong></td><td style="text-align: left"><code>RecommendLoadsUseCase</code> ejecuta prefiltros en PostgreSQL + PostGIS (<code>ST_DWithin</code> con índices GiST) en Tier 1 y corredor vial Tier 2 (<code>PassThroughZone</code>), puntuando por aprovechamiento y precio/km (<code>LoadScorer</code>).</td></tr>
+<tr><td style="text-align: left"><strong>R-06</strong></td><td style="text-align: left">Indisponibilidad o latencia del proveedor de rutas externo</td><td style="text-align: left">Geo / Integración</td><td style="text-align: left"><strong>Parcialmente mitigado</strong></td><td style="text-align: left"><code>geo-service</code> usa caché en borde (<code>caches.default</code>), <code>stale-if-error</code>, 11.175 rutas precalculadas OSRM/OSM en PostgreSQL, fallback a Mapbox Directions (<code>no-store</code>) y estimación Haversine (<code>is_estimation: true</code>). El backend degrada Tier 2 a Tier 1 si <code>geo-service</code> falla; el timeout por lote sigue en <code>5 s</code> vía <code>urllib</code>.</td></tr>
+<tr><td style="text-align: left"><strong>R-07</strong></td><td style="text-align: left">Cobro de desbloqueo sin mecanismo de reembolso ante fallas o cancelaciones</td><td style="text-align: left">Pagos</td><td style="text-align: left"><strong>Mitigado</strong></td><td style="text-align: left">Implementado reembolso automático vía MercadoPago ante colisión tardía en webhook, manipulación de estado o cancelación de reserva iniciada por el dador.</td></tr>
+<tr><td style="text-align: left"><strong>R-11</strong></td><td style="text-align: left">Bloqueo indefinido de una carga si el transportista abandona el checkout</td><td style="text-align: left">Concurrencia</td><td style="text-align: left"><strong>Mitigado</strong></td><td style="text-align: left"><code>lock_atomically</code> fija <code>reserved_until = NOW + 600 s</code> (10 minutos), la consulta filtra locks expirados (<code>_available_clause</code> / <code>released_if_expired</code>) y existe <code>/abort-lock</code> explícito.</td></tr>
+<tr><td style="text-align: left"><strong>R-12</strong></td><td style="text-align: left">Acceso indebido a endpoints o suplantación de identificadores en ruta</td><td style="text-align: left">Seguridad</td><td style="text-align: left"><strong>Mitigado</strong></td><td style="text-align: left">Guardias de sesión JWT ES256 obligatorios en todas las rutas salvo <code>PUBLIC_ROUTES</code> verificados automáticamente por <code>test_routes_require_authentication.py</code>, junto a dependencias de pertenencia (<code>require_own_offerer</code>, <code>require_own_transporter</code>).</td></tr>
+<tr><td style="text-align: left"><strong>R-13</strong></td><td style="text-align: left">Ausencia de cancelación bilateral tras una reserva</td><td style="text-align: left">Dominio</td><td style="text-align: left"><strong>Mitigado</strong></td><td style="text-align: left">Casos de uso <code>CancelLoadByOffererUseCase</code> (reembolso automático, cierre definitivo <code>cancelada</code> y penalidad) y <code>CancelLoadReservationByTransporterUseCase</code> (sin reembolso, reapertura a <code>activa</code> si la fecha es vigente y penalidad).</td></tr>
+<tr><td style="text-align: left"><strong>R-16</strong></td><td style="text-align: left">Siniestros sobre la carga o impago del flete entre privados</td><td style="text-align: left">Negocio / Legal</td><td style="text-align: left"><strong>Abierto (aceptado)</strong></td><td style="text-align: left">Smartruck intermedia únicamente el contacto inicial; pólizas de seguro, carta de porte y pago del traslado quedan bajo acuerdo directo entre dador y transportista.</td></tr>
+<tr><td style="text-align: left"><strong>R-17</strong></td><td style="text-align: left">Cuello de botella por verificación manual de cuentas en Backoffice</td><td style="text-align: left">Operación</td><td style="text-align: left"><strong>Abierto</strong></td><td style="text-align: left">La revisión de constancias en <code>smartruck-backoffice</code> es manual (<code>admin_users</code> / <code>admin_documents</code>), sin validación automática contra padrones externos ni OCR.</td></tr>
+<tr><td style="text-align: left"><strong>R-20</strong></td><td style="text-align: left">Valores inconsistentes entre calculadora del portal y dominio backend</td><td style="text-align: left">Producto / UI</td><td style="text-align: left"><strong>Mitigado</strong></td><td style="text-align: left"><code>empty-return-cost.ts</code> en transportista y <code>FleetAssumptions</code> en backend comparten parámetros unificados (<code>28 L/100 km</code>, <code>2400 ARS/L</code>, <code>35.000 ARS</code> peaje, <code>2,68 kg CO2/L</code>).</td></tr>
+<tr><td style="text-align: left"><strong>R-25</strong></td><td style="text-align: left">Exposición de secretos en despliegue y ausencia de limpieza de archivos huérfanos</td><td style="text-align: left">Seguridad / Infra</td><td style="text-align: left"><strong>Parcialmente abierto</strong></td><td style="text-align: left">CI utiliza <strong>WIF (OIDC)</strong> para GCP y <strong>Gitleaks</strong> en todos los repositorios; sin embargo, <code>smartruck-backend</code> aún inyecta secretos mediante <code>--set-env-vars</code> desde Infisical en <code>pipeline.yml</code> y no existe un proceso automático para purgar documentos huérfanos en Supabase Storage.</td></tr>
+<tr><td style="text-align: left"><strong>R-26</strong></td><td style="text-align: left">Regla de rate-limiting en Cloudflare WAF desalineada de <code>/geo/*</code></td><td style="text-align: left">Infra / Edge</td><td style="text-align: left"><strong>Abierto</strong></td><td style="text-align: left"><code>smartruck-infra/modules/cloudflare_waf/main.tf</code> filtra el patrón <code>/routes*</code>, por lo que las rutas actuales bajo <code>/geo/*</code> no quedan cubiertas hasta unificar el prefijo en Terraform.</td></tr>
+<tr><td style="text-align: left"><strong>R-27</strong></td><td style="text-align: left">Dimensionamiento implícito de pool SQL y observabilidad Datadog incompleta en <code>prod</code></td><td style="text-align: left">Infra / Operación</td><td style="text-align: left"><strong>Abierto</strong></td><td style="text-align: left"><code>engine.py</code> crea conexiones SQL con <code>pool_pre_ping=True</code> sin límites explícitos de pool (<code>pool_size</code> / <code>max_overflow</code>), y los módulos de reenvío a Datadog (<code>datadog_log_forwarding</code> y <code>render_datadog_log_stream</code>) solo están cableados en <code>test</code>, no en <code>prod</code>.</td></tr>
+<tr><td style="text-align: left"><strong>R-28</strong></td><td style="text-align: left">Divergencia entre cálculo de <code>unlock_fee</code> y verificación superficial de smoke test</td><td style="text-align: left">Calidad / Dominio</td><td style="text-align: left"><strong>Abierto</strong></td><td style="text-align: left">El backend calcula <code>unlock_fee</code> con distancia Haversine (<code>(5 + 0,04 * km) * 1500 ARS</code>), el portal transportista conserva un cálculo de contingencia cliente con +21% IVA ante error de API y <code>smoke_test.sh</code> solo consulta <code>/version</code>.</td></tr>
+<tr><td style="text-align: left"><strong>R-30</strong></td><td style="text-align: left">Competencia concurrente ("el primero que desbloquea gana")</td><td style="text-align: left">Modelo operativo</td><td style="text-align: left"><strong>Abierto (aceptado)</strong></td><td style="text-align: left">Acotado mediante lock exclusivo de 10 minutos al iniciar el pago, sin esquema de licitación múltiple.</td></tr>
+<tr><td style="text-align: left"><strong>R-31</strong></td><td style="text-align: left">Falta de marco legal de aceptación en el registro</td><td style="text-align: left">Legal / UX</td><td style="text-align: left"><strong>Parcialmente mitigado</strong></td><td style="text-align: left">Tanto <code>smartruck-dador</code> como <code>smartruck-transportista</code> exigen aceptar <code>TermsAndConditionsDialog</code> al registrarse; resta consolidar flujos de actualización de políticas y retención de datos.</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="riesgos-de-negocio-adopción-y-contexto-argentino"><a class="header" href="#riesgos-de-negocio-adopción-y-contexto-argentino">Riesgos de negocio, adopción y contexto argentino</a></h2>
+<p>Además de los riesgos técnicos, el diseño del producto contempla cuatro riesgos propios del mercado de cargas en Argentina:</p>
+<ol>
+<li><strong>Desactualización tarifaria por contexto inflacionario:</strong> Un tarifario estático pierde validez rápidamente. Se mitigó incorporando historial de vigencia (<code>effective_from</code>), ajuste porcentual configurable en Backoffice e importación directa de grillas FADEEAC distancia-tonelaje desde PDF, aunque exige disciplina operativa para mantener las tablas al día.</li>
+<li><strong>Desintermediación luego del primer contacto (<em>bypass</em>):</strong> Una vez conectado un dador con un transportista, operaciones recurrentes futuras pueden realizarse fuera de la plataforma. Se contrarresta aportando valor continuo en métricas de ahorro real, seguimiento de viajes, historial de calificaciones y visibilidad de retornos diarios.</li>
+<li><strong>Fricción por pago previo al contacto:</strong> Transportistas PyME pueden desconfiar de abonar un desbloqueo antes de hablar con el dador. El reembolso automático si el dador cancela, el bloqueo exclusivo de 10 minutos y el cálculo transparente del ahorro esperado reducen esa barrera.</li>
+<li><strong>Calidad y consistencia de datos geográficos declarados:</strong> Direcciones informales en parques industriales o zonas rurales dificultan la geocodificación exacta. Se mitigó permitiendo selección manual de pin en mapa validada dentro de <code>20 km</code> del centroide de la localidad, combinando Geoapify y Georef.</li>
+</ol>
+<hr />
+<h2 id="prioridades-recomendadas-de-cierre-técnico"><a class="header" href="#prioridades-recomendadas-de-cierre-técnico">Prioridades recomendadas de cierre técnico</a></h2>
+<ol>
+<li>Actualizar la regla de <code>cloudflare_waf</code> para cubrir <code>/geo/*</code> junto al retiro definitivo del prefijo legado <code>/routes*</code>.</li>
+<li>Extender <code>datadog_log_forwarding</code> y <code>render_datadog_log_stream</code> al entorno <code>prod</code> en <code>smartruck-infra</code>, y definir límites explícitos de pool SQL en <code>engine.py</code>.</li>
+<li>Migrar variables sensibles de <code>--set-env-vars</code> en <code>smartruck-backend</code> a GCP Secret Manager montado en Cloud Run y sumar limpieza periódica de documentos huérfanos.</li>
+<li>Ampliar <code>smoke_test.sh</code> más allá de <code>/version</code> (conectividad básica autenticada y salud de base de datos) y unificar el criterio definitivo de distancia vial para el <code>unlock_fee</code>.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="arquitectura.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="requerimientos.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="arquitectura.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="requerimientos.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
