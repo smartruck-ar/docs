@@ -6,5 +6,5 @@
 - **Documentación interna relacionada:**
   - [Arquitectura de `smartruck-transportista`](./arquitectura.md)
   - [Reserva, concurrencia y desbloqueo consistente](../smartruck-backend/reserva-concurrencia-y-desbloqueo.md)
-  - [Manual de usuario — Portal Transportista](../../manual_usuario.md#3-portal-transportista)
+  - [Manual de usuario](../../manual_usuario.md)
   - [Restyling visual](../../wiki/ui/restyling.md)

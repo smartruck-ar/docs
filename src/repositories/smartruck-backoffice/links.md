@@ -4,5 +4,5 @@
 - **Aplicación desplegada:** `https://smartruck-backoffice.onrender.com/`
 - **Documentación interna relacionada:**
   - [Arquitectura de `smartruck-backoffice`](./arquitectura.md)
-  - [Manual de usuario — Portal Backoffice](../../manual_usuario.md#4-portal-backoffice)
+  - [Manual de usuario](../../manual_usuario.md)
   - [Backend API (`smartruck-backend`)](../smartruck-backend/README.md)

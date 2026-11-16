@@ -5,6 +5,6 @@
 - **Portal en `test`:** `https://dador-test.smartruck.tech`
 - **Documentación interna relacionada:**
   - [Arquitectura de `smartruck-dador`](./arquitectura.md)
-  - [Manual de usuario — Portal Dador](../../manual_usuario.md#2-portal-dador)
+  - [Manual de usuario](../../manual_usuario.md)
   - [Handoff Portal Dador](../../wiki/ui/restyling-dador-handoff.md)
   - [Backend API (`smartruck-backend`)](../smartruck-backend/README.md)

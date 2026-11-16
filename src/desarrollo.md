@@ -9,13 +9,13 @@ Esta guía resume el mapa de repositorios, herramientas requeridas y convencione
 | Repositorio | Propósito | Stack y herramientas principales |
 | :--- | :--- | :--- |
 | [**`smartruck-backend`**](./repositories/smartruck-backend/README.md) | API core, matching PostGIS, pagos y métricas | Python >= 3.12 (`uv`), FastAPI, SQLModel, Alembic, GeoAlchemy2, `pytest`, `pytest-bdd`, `ruff`. |
-| [**`microservice-routes`** (`geo-service`)](https://github.com/smartruck-ar/microservice-routes) | Servicio geográfico de borde | TypeScript, Cloudflare Workers (`wrangler`), `jose`, `@supabase/supabase-js`, Vitest + Cucumber, ESLint. |
+| [**`microservice-routes`** (`geo-service`)](./repositories/geo-service/README.md) | Servicio geográfico de borde | TypeScript, Cloudflare Workers (`wrangler`), `jose`, `@supabase/supabase-js`, Vitest + Cucumber, ESLint. |
 | [**`smartruck-dador`**](./repositories/smartruck-dador/README.md) | Portal web para dadores de carga | Node 22+, React 19, TypeScript, TanStack Start/Router/Query, Vite 8, Nitro, Tailwind v4, Leaflet, MapLibre GL, Recharts, Vitest. |
 | [**`smartruck-transportista`**](./repositories/smartruck-transportista/README.md) | Portal web para transportistas | Node 22+, React 19, TypeScript, TanStack Start/Router/Query, Vite 8, Nitro, Tailwind v4, MapLibre GL, Recharts, Vitest (`happy-dom`). |
-| [**`smartruck-backoffice`**](https://github.com/smartruck-ar/smartruck-backoffice) | Consola administrativa y tarifaria | Node 22+, React 19, TypeScript, TanStack Start/Router/Query, Vite 8, Nitro, Tailwind v4, Vitest. |
-| [**`landing-page`**](https://github.com/smartruck-ar/landing-page) | Sitio institucional y acceso por rol | Node 22+, React 19 (JavaScript), Vite 7, Tailwind CSS v4, Vitest, Cloudflare Pages (`wrangler`). |
-| [**`smartruck-infra`**](https://github.com/smartruck-ar/smartruck-infra) | Infraestructura declarativa en nube | Terraform >= 1.5 (GCP Cloud Run, API Gateway, WIF, Artifact Registry, Cloudflare DNS/WAF, Datadog). |
-| [**`smartruck-ai`**](https://github.com/smartruck-ar/smartruck-ai) | Espacio de trabajo, scripts y skills AI | Scripts Bash (`fetch-repos.sh`, `workspace.sh`, `orca-up.sh`), reglas y skills compartidas. |
+| [**`smartruck-backoffice`**](./repositories/smartruck-backoffice/README.md) | Consola administrativa y tarifaria | Node 22+, React 19, TypeScript, TanStack Start/Router/Query, Vite 8, Nitro, Tailwind v4, Vitest. |
+| [**`landing-page`**](./repositories/landing-page/README.md) | Sitio institucional y acceso por rol | Node 22+, React 19 (JavaScript), Vite 7, Tailwind CSS v4, Vitest, Cloudflare Pages (`wrangler`). |
+| [**`smartruck-infra`**](./repositories/smartruck-infra/README.md) | Infraestructura declarativa en nube | Terraform >= 1.5 (GCP Cloud Run, API Gateway, WIF, Artifact Registry, Cloudflare DNS/WAF, Datadog). |
+| [**`smartruck-ai`**](./repositories/smartruck-ai/README.md) | Espacio de trabajo, scripts y skills AI | Scripts Bash (`fetch-repos.sh`, `workspace.sh`, `orca-up.sh`), reglas y skills compartidas. |
 | [**`docs`**](https://github.com/smartruck-ar/docs) | Documentación técnica publicada | mdBook >= 0.4, especificaciones en Markdown y diagramas en `src/arquitectura/diagrams/`. |
 | *Soporte e históricos* | Tablero y legados de etapa inicial | [`roadmap`](https://github.com/smartruck-ar/roadmap), [`smartruck-audit`](./repositories/smartruck-audit/README.md), [`cloud-template`](./repositories/cloud-template/README.md), [`infra-template`](./repositories/infra-template/README.md). |
 
